@@ -1,1 +1,1 @@
-Team 12 - My Health App 
+Team 12 - MyHealthApp 
