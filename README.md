@@ -1,1 +1,1 @@
-"# COMP0067_2021_Team12" 
+Team 12 - My Health App 
