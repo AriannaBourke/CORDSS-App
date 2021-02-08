@@ -3,7 +3,7 @@ Team 12 - MyHealthApp
 Github Commands:
 
 To clone the repository, navigate to where you want the folder to be:
-git clone ""
+git clone "https://github.com/UCLComputerScience/COMP0067_2021_Team12.git"
 
 
 
@@ -15,7 +15,7 @@ To change to your branch:
 git checkout YourBranchName
 
 Before making any changes, make sure you are on your branch!
-To add any changes to gitHub from your branch
+To add any changes to gitHub from your branch:
 
 git add .
 git commit -m "type a short message of what you did"
