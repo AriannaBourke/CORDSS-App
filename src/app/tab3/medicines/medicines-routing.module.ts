@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: MedicinesPage
+  },
+  {
+    path: 'past-medicines',
+    loadChildren: () => import('./past-medicines/past-medicines.module').then( m => m.PastMedicinesPageModule)
+  },
+  {
+    path: 'current-medicines',
+    loadChildren: () => import('./current-medicines/current-medicines.module').then( m => m.CurrentMedicinesPageModule)
   }
 ];
 

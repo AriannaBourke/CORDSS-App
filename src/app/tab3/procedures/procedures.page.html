@@ -1,13 +1,16 @@
-<ion-header>
+<<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Procedures</ion-title>
-    <ion-button slot="end" size="small"><ion-icon slot="start" name="add"></ion-icon>Add Procedure</ion-button>
+    <ion-title>
+      Procedures
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-button routerLink="upcoming-procedures" expand="block">Upcoming Procedures</ion-button>
+  <ion-button routerLink="past-procedures" expand="block">Past Procedures</ion-button>
 
 </ion-content>
