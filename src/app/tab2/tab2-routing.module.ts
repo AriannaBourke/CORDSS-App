@@ -6,6 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
+  },
+  {
+    path: 'my-family',
+    loadChildren: () => import('./my-family/my-family.module').then( m => m.MyFamilyPageModule)
+  },
+  {
+    path: 'my-clinical-team',
+    loadChildren: () => import('./my-clinical-team/my-clinical-team.module').then( m => m.MyClinicalTeamPageModule)
   }
 ];
 

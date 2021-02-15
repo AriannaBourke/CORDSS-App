@@ -1,17 +1,18 @@
-<ion-header [translucent]="true">
+<<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      My Health
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button routerLink="basic-info" expand="block">Basic Info</ion-button>
+  <ion-button routerLink="medical-history" expand="block">Medical History</ion-button>
+  <ion-button routerLink="medicines" expand="block">Medicines</ion-button>
+  <ion-button routerLink="test-results" expand="block">Test Results</ion-button>
+  <ion-button routerLink="appointments" expand="block">Appointments</ion-button>
+  <ion-button routerLink="procedures" expand="block">Procedures</ion-button>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
 </ion-content>

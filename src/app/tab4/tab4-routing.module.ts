@@ -6,6 +6,18 @@ const routes: Routes = [
   {
     path: '',
     component: Tab4Page,
+  },
+  {
+    path: 'medical-notes',
+    loadChildren: () => import('./medical-notes/medical-notes.module').then( m => m.MedicalNotesPageModule)
+  },
+  {
+    path: 'thoughts-feelings',
+    loadChildren: () => import('./thoughts-feelings/thoughts-feelings.module').then( m => m.ThoughtsFeelingsPageModule)
+  },
+  {
+    path: 'mood',
+    loadChildren: () => import('./mood/mood.module').then( m => m.MoodPageModule)
   }
 ];
 
