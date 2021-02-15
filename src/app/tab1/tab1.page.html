@@ -7,12 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  <ion-input placeholder="Name"></ion-input>
-  <ion-input placeholder="Birthday"></ion-input>
-  <ion-input placeholder="A little bit about me"></ion-input>
-  
-  
-  <ion-input placeholder="Enter Input"></ion-input>
+  <ion-avatar (click)="selectImageSource()" class="profile-pic">
+    <ion-img [src]="myProfileImage"></ion-img>
+  </ion-avatar>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Basic Info</ion-card-title>
+      </ion-card-header>
+          <ion-card-content>
+            <ion-input placeholder="Name"></ion-input>
+            <ion-input placeholder="Birthday"></ion-input>
+            <ion-input placeholder="A little bit about me"></ion-input>
+          </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Private Info</ion-card-title>
+      </ion-card-header>
+          <ion-card-content>
+            <ion-input placeholder="NHS Number"></ion-input>
+            <ion-input placeholder="Email"></ion-input>
+            <ion-input placeholder="Telephone Number"></ion-input>
+          </ion-card-content>
+  </ion-card>
+
 
 </ion-content>
