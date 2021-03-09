@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Appointments </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col width-50 style="text-align: center">
+      <ion-button
+        color="light"
+        expand="block"
+        routerLink="upcoming-appointments"
+        class="button1"
+      >
+        <img
+          class="image1"
+          src="../../../assets/icon/band-aid-svgrepo-com.svg"
+        />
+        <span>Upcoming Appointments</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col width-50 style="text-align: center">
+      <ion-button
+        color="light"
+        routerLink="past-appointments"
+        expand="block"
+        class="button2"
+        ><img
+          class="image2"
+          src="../../../assets/icon/nurse-svgrepo-com (1).svg"
+        />
+        <span>Past Appointments</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

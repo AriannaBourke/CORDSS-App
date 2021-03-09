@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> My Notes </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col>
+      <ion-button
+        color="light"
+        routerLink="medical-notes"
+        expand="block"
+        class="button1"
+      >
+        <img
+          class="image1"
+          src="../../assets/icon/first-aid-kit-doctor-svgrepo-com.svg"
+        />
+        <span>Medical Notes</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button
+        color="light"
+        routerLink="thoughts-feelings"
+        expand="block"
+        class="button2"
+      >
+        <img
+          class="image2"
+          src="../../assets/icon/heart-doctor-svgrepo-com.svg"
+        />
+        <span>Thoughts & Feelings</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button
+        color="light"
+        routerLink="mood"
+        expand="block"
+        class="button3"
+      >
+        <img class="image3" src="../../assets/icon/brain-svgrepo-com.svg" />
+        <span>Mood</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

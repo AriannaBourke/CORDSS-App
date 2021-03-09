@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Procedures </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col width-50 style="text-align: center">
+      <ion-button
+        color="light"
+        expand="block"
+        routerLink="upcoming-procedures"
+        class="button1"
+      >
+        <img
+          class="image1"
+          src="../../../assets/icon/cardiogram-healthcare-and-medical-svgrepo-com.svg"
+        />
+        <span>Upcoming Procedures</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col width-50 style="text-align: center">
+      <ion-button
+        color="light"
+        routerLink="past-procedures"
+        expand="block"
+        class="button2"
+        ><img
+          class="image2"
+          src="../../../assets/icon/tag-price-tag-svgrepo-com.svg"
+        />
+        <span>Past Procedures</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

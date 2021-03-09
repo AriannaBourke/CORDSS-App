@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Current Medicines</ion-title>
+    <ion-button slot="end" size="small" (click)="addMedicine()"
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="medicineForm" #form="ngForm">
+    <ion-card
+      formArrayName="medicineInfo"
+      *ngFor="let family of getMedicineInfo().controls ; let i=index"
+    >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label class="medicine-header">Medicine</ion-label>
+            <ion-icon
+              style="float: right"
+              name="trash-outline"
+              size="large"
+              (click)="removeMedicine(index)"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item [formGroupName]="i">
+              <ion-icon
+                slot="start"
+                name="medkit-outline"
+                size="small"
+              ></ion-icon>
+              <ion-select
+                [interfaceOptions]="customPopoverOptions"
+                interface="popover"
+                placeholder="Medicine Name"
+                formControlName="medicinename"
+              >
+                <ion-select-option value="Prednisolone tablets"
+                  >Prednisolone tablets</ion-select-option
+                >
+                <ion-select-option value="Folic acid"
+                  >Folic acid</ion-select-option
+                >
+                <ion-select-option value="Naproxen">Naproxen</ion-select-option>
+                <ion-select-option value="Paracetamol"
+                  >Paracetamol</ion-select-option
+                >
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item [formGroupName]="i">
+              <ion-input
+                type="text"
+                placeholder="Instructions"
+                formControlName="instructions"
+              ></ion-input>
+              <ion-icon
+                slot="start"
+                name="information-outline"
+                size="small"
+              ></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item [formGroupName]="i">
+              <ion-input
+                type="text"
+                placeholder="Side-Effects"
+                formControlName="sideeffects"
+              ></ion-input>
+              <ion-icon slot="start" name="sad-outline" size="small"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item [formGroupName]="i">
+              <ion-icon
+                slot="start"
+                name="chatbox-ellipses-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                type="text"
+                placeholder="Notes"
+                formControlName="notes"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item [formGroupName]="i">
+              <ion-label>Have you completed this medicine?</ion-label>
+              <ion-icon
+                style="float: right"
+                name="checkbox-outline"
+                (click)="finishMedicine(index)"
+              ></ion-icon>
+            </ion-item>
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button
+                type="button"
+                fill="outline"
+                color="danger"
+                size="small"
+                (click)="medicineForm.reset(index)"
+              >
+                <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button
+              >
+              <ion-button type="button" size="small" (click)="onSubmit()">
+                <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+</ion-content>
