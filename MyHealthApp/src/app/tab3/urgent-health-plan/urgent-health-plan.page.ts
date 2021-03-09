@@ -3,20 +3,21 @@ import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@ang
 import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-upcoming-appointments',
-  templateUrl: './upcoming-appointments.page.html',
-  styleUrls: ['./upcoming-appointments.page.scss'],
+  selector: 'app-urgent-health-plan',
+  templateUrl: './urgent-health-plan.page.html',
+  styleUrls: ['./urgent-health-plan.page.scss'],
 })
-export class UpcomingAppointmentsPage implements OnInit {
+export class UrgentHealthPlanPage implements OnInit {
   pageForm: FormGroup;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private _alertController: AlertController) {
   }
 
   async removeEntry(index) {
     const alert = await this._alertController.create({
       header: "Delete this entry?",
-      message: "Would you like to delete this entry from your appointments?",
+      message: "Would you like to delete this entry from your urgent health plan?",
       buttons: [
         {
           text:"Cancel"
@@ -38,19 +39,15 @@ export class UpcomingAppointmentsPage implements OnInit {
   ngOnInit() {
    this.pageForm = this.fb.group( {
     pageInfo: this.fb.array([this.pageInfo( )])
-
-
-
    })
   }
 
   pageInfo(){
     return this.fb.group({
-      date:[''],
-      doctor:[''],
-      place:[''],
-      description:[''],
-      questions:['']
+      type:[''],
+      instructions:[''],
+      phonenumber:[''],
+      notes:[''],
 
     });
   }

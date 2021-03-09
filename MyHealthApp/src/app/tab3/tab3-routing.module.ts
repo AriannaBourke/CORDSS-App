@@ -30,7 +30,11 @@ const routes: Routes = [
   {
     path: 'procedures',
     loadChildren: () => import('./procedures/procedures.module').then( m => m.ProceduresPageModule)
+  },  {
+    path: 'urgent-health-plan',
+    loadChildren: () => import('./urgent-health-plan/urgent-health-plan.module').then( m => m.UrgentHealthPlanPageModule)
   }
+
 ];
 
 @NgModule({

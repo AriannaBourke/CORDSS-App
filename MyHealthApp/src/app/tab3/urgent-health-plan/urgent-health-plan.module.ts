@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UpcomingAppointmentsPageRoutingModule } from './upcoming-appointments-routing.module';
+import { UrgentHealthPlanPageRoutingModule } from './urgent-health-plan-routing.module';
 
-import { UpcomingAppointmentsPage } from './upcoming-appointments.page';
+import { UrgentHealthPlanPage } from './urgent-health-plan.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { UpcomingAppointmentsPage } from './upcoming-appointments.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    UpcomingAppointmentsPageRoutingModule
+    UrgentHealthPlanPageRoutingModule
   ],
-  declarations: [UpcomingAppointmentsPage]
+  declarations: [UrgentHealthPlanPage]
 })
-export class UpcomingAppointmentsPageModule {}
+export class UrgentHealthPlanPageModule {}
