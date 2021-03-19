@@ -14,7 +14,7 @@ import { MyFamilyPage } from './my-family.page';
     ReactiveFormsModule,
     IonicModule,
     FormsModule,
-    MyFamilyPageRoutingModule
+    MyFamilyPageRoutingModule,
   ],
   declarations: [MyFamilyPage]
 })
