@@ -24,7 +24,7 @@
               style="float: right"
               name="trash-outline"
               size="large"
-              (click)="removeClinical(index)"
+              (click)="removeClinical(i)"
             ></ion-icon>
           </ion-col>
         </ion-row>
@@ -63,7 +63,6 @@
                 size="small"
               ></ion-icon>
               <ion-select
-                [interfaceOptions]="customPopoverOptions"
                 interface="popover"
                 placeholder="Role"
                 formControlName="clinicalrole"
@@ -85,7 +84,6 @@
                 size="small"
               ></ion-icon>
               <ion-select
-                [interfaceOptions]="customPopoverOptions"
                 interface="popover"
                 placeholder="Clinic Name"
                 formControlName="clinicname"
@@ -134,7 +132,7 @@
                 fill="outline"
                 color="danger"
                 size="small"
-                (click)="clinicalForm.reset(index)"
+                (click)="clinicalForm.reset(i)"
               >
                 <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button
               >

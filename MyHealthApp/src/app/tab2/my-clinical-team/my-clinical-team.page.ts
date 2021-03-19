@@ -68,7 +68,7 @@ export class MyClinicalTeamPage implements OnInit {
 
   }
 
-  async removeClinical(index) {
+  async removeClinical(i) {
     const alert = await this._alertController.create({
       header: "Delete this person?",
       message: "Would you like to delete this person from your clinical team page?",
@@ -79,7 +79,7 @@ export class MyClinicalTeamPage implements OnInit {
         {
           text:"Delete",
           handler: ()=> {
-            this.getClinicalInfo().removeAt(index);
+            this.getClinicalInfo().removeAt(i);
 
           }
         }

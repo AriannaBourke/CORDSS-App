@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Platform, ToastController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-tab1',
@@ -14,8 +18,11 @@ export class Tab1Page {
   constructor(
     private _camera: Camera,
     private _alertController: AlertController,
-    private callNumber: CallNumber) {
-  }
+    private callNumber: CallNumber,
+    private _plat: Platform)
+    {
+
+    }
 
   async selectImageSource() {
     const cameraOptions: CameraOptions = {
@@ -73,5 +80,7 @@ export class Tab1Page {
     .then(res => console.log('Launched dialer!', res))
     .catch(err => console.log('Error launching dialer', err));
   }
+
+
 
 }
