@@ -34,7 +34,7 @@ export class MyFamilyPage {
       name: 'database.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
-      db.executeSql('CREATE TABLE IF NOT EXISTS family(rowid INTEGER PRIMARY KEY, name TEXT, birthday DATETIME, relation TEXT, email TEXT, phone INT)', <any>[])
+      db.executeSql('CREATE TABLE IF NOT EXISTS family(rowid INTEGER PRIMARY KEY, name TEXT, birthday DATE, relation TEXT, email TEXT, phone INT)', <any>[])
       .then(res => console.log('Executed SQL')) // alert works
       .catch(e => alert(e));
       db.executeSql('SELECT * FROM family ORDER BY rowid DESC', <any>[])
@@ -61,7 +61,7 @@ export class MyFamilyPage {
     }).then((db: SQLiteObject) => {
       db.executeSql('INSERT INTO family VALUES(NULL,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone])
       .then(res => {
-        alert("result:" + res);
+        console.log("result:" + res);
         this.getData();
       })
       .catch(e => alert("error 1" + e));
@@ -82,7 +82,7 @@ export class MyFamilyPage {
     }).then((db: SQLiteObject) => {
       db.executeSql('DELETE FROM family WHERE rowid=?', [rowid])
       .then(res => {
-        alert(res);
+        console.log(res);
         this.getData();
       })
       .catch(e => alert(e));
@@ -90,4 +90,28 @@ export class MyFamilyPage {
 
   }
 
+  async removeFamily(rowid) {
+    const alert = await this._alertController.create({
+      header: "Delete this person?",
+      message: "Would you like to delete this person from your family page?",
+      buttons: [
+        {
+          text:"Cancel"
+        },
+        {
+          text:"Delete",
+          handler: ()=> {
+            this.deleteData(rowid);
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
 }
+
+
