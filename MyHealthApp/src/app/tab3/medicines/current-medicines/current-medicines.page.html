@@ -4,44 +4,32 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Current Medicines</ion-title>
-    <ion-button slot="end" size="small" (click)="addMedicine()"
-      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
-    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="medicineForm" #form="ngForm">
-    <ion-card
-      formArrayName="medicineInfo"
-      *ngFor="let family of getMedicineInfo().controls ; let i=index"
-    >
+  <form #form="ngForm" (ngSubmit)="saveData(form)">
+    <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label class="medicine-header">Medicine</ion-label>
-            <ion-icon
-              style="float: right"
-              name="trash-outline"
-              size="large"
-              (click)="removeMedicine(index)"
-            ></ion-icon>
+            <ion-label class="entry-header">Medicine</ion-label>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <ion-item [formGroupName]="i">
+            <ion-item>
               <ion-icon
                 slot="start"
                 name="medkit-outline"
                 size="small"
               ></ion-icon>
-              <ion-select
-                [interfaceOptions]="customPopoverOptions"
+              <ion-select          
                 interface="popover"
                 placeholder="Medicine Name"
-                formControlName="medicinename"
+                [(ngModel)]="data.medicinename"
+                name="medicinename"
               >
                 <ion-select-option value="Prednisolone tablets"
                   >Prednisolone tablets</ion-select-option
@@ -61,12 +49,13 @@
 
         <ion-row>
           <ion-col>
-            <ion-item [formGroupName]="i">
-              <ion-input
+            <ion-item>
+              <ion-textarea
                 type="text"
                 placeholder="Instructions"
-                formControlName="instructions"
-              ></ion-input>
+                [(ngModel)]="data.instructions"
+                name="instructions"
+              ></ion-textarea>
               <ion-icon
                 slot="start"
                 name="information-outline"
@@ -78,11 +67,12 @@
 
         <ion-row>
           <ion-col>
-            <ion-item [formGroupName]="i">
+            <ion-item>
               <ion-input
                 type="text"
-                placeholder="Side-Effects"
-                formControlName="sideeffects"
+                placeholder="Side Effects"
+                [(ngModel)]="data.sideeffects"
+                name="sideeffects"
               ></ion-input>
               <ion-icon slot="start" name="sad-outline" size="small"></ion-icon>
             </ion-item>
@@ -91,24 +81,25 @@
 
         <ion-row>
           <ion-col>
-            <ion-item [formGroupName]="i">
+            <ion-item>
               <ion-icon
                 slot="start"
                 name="chatbox-ellipses-outline"
                 size="small"
               ></ion-icon>
-              <ion-input
+              <ion-textarea
                 type="text"
                 placeholder="Notes"
-                formControlName="notes"
-              ></ion-input>
+                [(ngModel)]="data.notes"
+                name="notes"
+              ></ion-textarea>
             </ion-item>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <ion-item [formGroupName]="i">
+            <ion-item>
               <ion-label>Have you completed this medicine?</ion-label>
               <ion-icon
                 style="float: right"
@@ -119,14 +110,11 @@
             <div class="ion-margin-vertical ion-text-right">
               <ion-button
                 type="button"
-                fill="outline"
-                color="danger"
                 size="small"
-                (click)="medicineForm.reset(index)"
+                type="submit"
+                value="submit"
+                id="submit"
               >
-                <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button
-              >
-              <ion-button type="button" size="small" (click)="onSubmit()">
                 <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
               >
             </div>
@@ -135,4 +123,82 @@
       </ion-grid>
     </ion-card>
   </form>
-</ion-content>
+
+  <ion-list *ngFor="let med of medicines; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label class="entry-header">Medicine</ion-label>
+            <ion-icon
+              style="float: right"
+              name="trash-outline"
+              size="large"
+              (click)="removeData(med.rowid)"
+            ></ion-icon>
+            <ion-icon
+              style="float: right"
+              name="paper"
+              size="large"
+              (click)="editData(med.rowid)"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="medkit-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{med.medicinename}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="information-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{med.instructions}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="sad-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{med.sideeffects}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <p>{{med.notes}}</p>
+              <ion-icon
+                slot="start"
+                name="pencil-outline"
+                size="small"
+              ></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+  </ion-content>
+  
