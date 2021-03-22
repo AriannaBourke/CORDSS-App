@@ -37,21 +37,19 @@ export class MedicalHistoryPage {
   public _createDatabase()
   {
     this._sql.create({
-      name: "myHealthApp.db",
+      name: "database.db",
       location: 'default'
     })
     .then((db: SQLiteObject) =>
     {
       this._db = db;
       this._createDatabaseTables();
-      alert("database and tables created");
     })
-    .catch(e => alert('create database error' + e));
+    .catch(e => alert('create tables error' + e));
   }
   
   async _createDatabaseTables() {
     await this._db.executeSql(this.MedicalHistoryTable, []);
-    alert("med history table created");
     this.getData()
   }
 
@@ -83,7 +81,6 @@ export class MedicalHistoryPage {
   public saveData() {
     this._db.executeSql('INSERT INTO medicalhistory VALUES(NULL,?,?,?,?)', [this.data.diagnosis, this.data.diagnosis_details, this.data.diagnosis_date, this.data.notes])
     .then(res => {
-        alert("successful result:" + res);
         this.getData();
       })
       .catch(e => alert("save data error" + e));
@@ -99,9 +96,30 @@ export class MedicalHistoryPage {
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM medicalhistory WHERE rowid=?', [rowid])
       .then(res => {
-        alert('delete data' + res);
         this.getData();
       })
       .catch(e => alert('delete data error' + e));
+    }
+
+    async removeData(rowid) {
+      const alert = await this._alertController.create({
+        header: "Delete this entry?",
+        message: "Would you like to delete this entry from your medical history?",
+        buttons: [
+          {
+            text:"Cancel"
+          },
+          {
+            text:"Delete",
+            handler: ()=> {
+              this.deleteData(rowid);
+  
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+  
     }
 }
