@@ -4,71 +4,176 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Medical History</ion-title>
-    <ion-button slot="end" size="small" (click)="addEntry()"><ion-icon slot="start" name="add" size="small"></ion-icon>Add</ion-button>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
-  <form [formGroup]="pageForm" #form="ngForm">
-    <ion-card
-      formArrayName="pageInfo"
-       *ngFor="let page of getPageInfo().controls ; let i=index">
-       <ion-grid>
+  <form #form="ngForm" (ngSubmit)="saveData(form)">
+    <ion-card>
+      <ion-grid>
         <ion-row>
           <ion-col>
-             <ion-icon style="float: right" name="trash-outline" size="small" (click)="removeEntry(index)"></ion-icon>
+            <ion-label class="family-member-header">Medical History</ion-label>
+            <!-- <ion-icon
+              style="float: right"
+              name="trash-outline"
+              size="large"
+              (click)="removeFamily(index)"
+            ></ion-icon> -->
           </ion-col>
         </ion-row>
 
        <ion-row>
          <ion-col>
-           <ion-item [formGroupName]="i">
+           <ion-item>
             <ion-icon slot="start" name="medkit-outline" size="small"></ion-icon>
-            <ion-select formControlName="diagnosis" slot="start" placeholder="Diagnosis" value="diagnosis">
-               <ion-select-option>Uveitis</ion-select-option>
-               <ion-select-option>Uveitis2</ion-select-option>
-               <ion-select-option>Uveitis3</ion-select-option>
-              <ion-select-option>Uveitis4</ion-select-option>
-             </ion-select>
-           </ion-item>
-         </ion-col>
-       </ion-row>
+              <ion-select
+                interface="popover"
+                placeholder="Diagnosis"
+                [(ngModel)]="data.diagnosis"
+                name="diagnosis"
+              >
+                <ion-select-option value="Uveitis">Uveitis</ion-select-option>
+                <ion-select-option value="Uveitis2">Uveitis2</ion-select-option>
+                <ion-select-option value="Uveitis3">Uveitis3</ion-select-option>
+                <ion-select-option value="Uveitis4">Uveitis4</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
        <ion-row>
          <ion-col>
-          <ion-item [formGroupName]="i">
-            <ion-textarea formControlName="details" placeholder=" Details About Diagnosis" type="text" row="1" cols="1"></ion-textarea>
+           <ion-item>
             <ion-icon slot="start" name="document-text-outline" size="small"></ion-icon>
-          </ion-item>
-        </ion-col>
-       </ion-row>
-
+            <ion-input
+            type="text"
+            placeholder="Details about diagnosis"
+            [(ngModel)]="data.diagnosis_details"
+            name="diagnosis_details"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
        <ion-row>
         <ion-col>
-          <ion-item [formGroupName]="i">
+          <ion-item>
             <ion-icon slot="start" name="calendar-number-outline" size="small"></ion-icon>
-            <ion-datetime formControlName="date" slot="start" placeholder="Select Diagnosis Date"></ion-datetime>
-          </ion-item>
-        </ion-col>
-       </ion-row>
+            <ion-datetime
+            displayFormat="DD MMMM YYYY"
+            placeholder="Diagnosis Date"
+            [(ngModel)]="data.diagnosis_date"
+            name="diagnosis_date"
+          ></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
 
        <ion-row>
         <ion-col>
-          <ion-item [formGroupName]="i">
-            <ion-textarea formControlName="notes" placeholder=" Notes" ></ion-textarea>
+          <ion-item>
             <ion-icon slot="start" name="pencil-outline" size="small"></ion-icon>
+            <ion-input
+            type="text"
+            placeholder="Notes"
+            [(ngModel)]="data.notes"
+            name="notes"
+          ></ion-input>
           </ion-item>
           <div class="ion-margin-vertical ion-text-right">
-            <ion-button type="button" fill="outline" color="danger" size="small" (click)="pageForm.reset()">
-              <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button>
-            <ion-button type="submit" size="small" (click)="onSubmit()">
-              <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button>
-            </div>
+            <ion-button
+              type="button"
+              size="small"
+              type="submit"
+              value="submit"
+              id="submit"
+            >
+              <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
+            >
+          </div>
         </ion-col>
-       </ion-row>
+      </ion-row>
     </ion-grid>
   </ion-card>
-  </form>
+</form>
+
+<ion-list *ngFor="let history of medicalhistory; let i = index">
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="family-member-header">Medical History</ion-label>
+          <ion-icon
+            style="float: right"
+            name="trash-outline"
+            size="large"
+            (click)="deleteData(history.rowid)"
+          ></ion-icon>
+          <ion-icon
+            style="float: right"
+            name="paper"
+            size="large"
+            (click)="editData(history.rowid)"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+              slot="start"
+              name="medkit-outline"
+              size="small"
+            ></ion-icon>
+            <p>{{history.diagnosis}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+              slot="start"
+              name="document-text-outline"
+              size="small"
+            ></ion-icon>
+            <p>{{history.diagnosis_details}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+              slot="start"
+              name="calendar-number-outline"
+              size="small"
+            ></ion-icon>
+            <p>{{history.diagnosis_date | date: 'dd MMMM y'}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <p>{{history.notes}}</p>
+            <ion-icon
+              slot="start"
+              name="pencil-outline"
+              size="small"
+            ></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+</ion-list>
 </ion-content>
