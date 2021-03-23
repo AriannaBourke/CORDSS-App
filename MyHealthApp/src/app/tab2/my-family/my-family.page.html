@@ -135,7 +135,7 @@
     </ion-card>
   </form>
 
-  <ion-list *ngFor="let family of myfamily; let i = index">
+  <ion-list *ngFor="let family of myfamily; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
@@ -145,7 +145,7 @@
               style="float: right"
               name="trash-outline"
               size="large"
-              (click)="deleteData(family.rowid)"
+              (click)="removeFamily(family.rowid)"
             ></ion-icon>
             <ion-icon
               style="float: right"
