@@ -4,11 +4,194 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Test Results</ion-title>
-    <ion-button slot="end" size="small"><ion-icon slot="start" name="add"></ion-icon>Add Result</ion-button>
   </ion-toolbar>
 </ion-header>
 
+<ion-content [fullscreen]="true">
+  <form #form="ngForm" (ngSubmit)="saveData(form)">
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="entry-header">Result</ion-label>
+        </ion-col>
+      </ion-row>
 
-<ion-content>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon slot="start" name="calendar-number-outline" size="small"></ion-icon>
+            <ion-datetime
+            displayFormat="DD MMMM YYYY"
+            placeholder="Date"
+            [(ngModel)]="data.date"
+            name="date"
+          ></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
+         <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon slot="start" name="medkit-outline" size="small"></ion-icon>
+              <ion-input 
+              type="text"
+              placeholder="Test Type"
+              [(ngModel)]="data.type"
+              name="type"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon slot="start" name="camera-outline" size="small"></ion-icon>
+              <ion-input 
+              type="text"
+              placeholder="Photo"
+              [(ngModel)]="data.photo"
+              name="photo"></ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row>
+          <ion-col>
+            <ion-item>
+             <ion-icon slot="start" name="document-outline" size="small"></ion-icon>
+             <ion-textarea 
+             type="text"
+             placeholder="Files"
+             [(ngModel)]="data.files"
+             name="files"
+             ></ion-textarea>
+            </ion-item>
+         </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+             <ion-icon slot="start" name="pencil-outline" size="small"></ion-icon>
+             <ion-textarea 
+             type="text"
+             placeholder="Notes"
+             [(ngModel)]="data.notes"
+             name="notes"
+            ></ion-textarea>
+            </ion-item>
+           <div class="ion-margin-vertical ion-text-right">
+            <ion-button
+              type="button"
+              size="small"
+              type="submit"
+              value="submit"
+              id="submit"
+            >
+              <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</form>
+
+<ion-list *ngFor="let result of testresults; let i = index" class="list">
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="entry-header">Result</ion-label>
+          <ion-icon
+            style="float: right"
+            name="trash-outline"
+            size="large"
+            (click)="removeData(result.rowid)"
+          ></ion-icon>
+          <ion-icon
+            style="float: right"
+            name="paper"
+            size="large"
+            (click)="editData(result.rowid)"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+              slot="start"
+              name="calendar-number-outline"
+              size="small"
+            ></ion-icon>
+            <p>{{result.date | date: 'dd MMMM y'}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+              slot="start"
+              name="medkit-outline"
+              size="small"
+            ></ion-icon>
+            <p>{{result.type}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+              slot="start"
+              name="camera-outline"
+              size="small"
+            ></ion-icon>
+            <p>{{result.photo}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+            slot="start"
+            name="document-outline"
+            size="small"
+          ></ion-icon>
+            <p>{{result.files}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon
+            slot="start"
+            name="pencil-outline"
+            size="small"
+          ></ion-icon>
+            <p>{{results.notes}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+</ion-list>
 </ion-content>
+
+
+
+
+
+

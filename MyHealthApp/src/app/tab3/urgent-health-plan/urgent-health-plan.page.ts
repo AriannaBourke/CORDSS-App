@@ -1,68 +1,123 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { Component } from '@angular/core';
+// import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { AlertController, Platform } from '@ionic/angular';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 @Component({
   selector: 'app-urgent-health-plan',
   templateUrl: './urgent-health-plan.page.html',
   styleUrls: ['./urgent-health-plan.page.scss'],
 })
-export class UrgentHealthPlanPage implements OnInit {
-  pageForm: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private _alertController: AlertController) {
+export class UrgentHealthPlanPage {
+  public urgentplan : Array<any> = [];
+  public isData          : boolean        = false;
+  public storedData      : any            = null;
+  private _db   : any;
+
+  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
+  data = {type: "", instructions: "", phone: "", notes: ""};
+
+  constructor(private _alertController: AlertController, 
+              public _plat: Platform, 
+              public _sql: SQLite)
+{
+  this.urgentplan = [];
+  this._plat
+  .ready()
+  .then(() => 
+
+    {
+      this._createDatabase();
+    })
+    .catch(e => alert('create database error' + e));
   }
 
-  async removeEntry(index) {
-    const alert = await this._alertController.create({
-      header: "Delete this entry?",
-      message: "Would you like to delete this entry from your urgent health plan?",
-      buttons: [
-        {
-          text:"Cancel"
-        },
-        {
-          text:"Delete",
-          handler: ()=> {
-            this.getPageInfo().removeAt(index);
+  public _createDatabase()
+  {
+    this._sql.create({
+      name: "database.db",
+      location: 'default'
+    })
+    .then((db: SQLiteObject) =>
+    {
+      this._db = db;
+      this._createDatabaseTables();
+    })
+    .catch(e => alert('create tables error' + e));
+  }
+  
+  async _createDatabaseTables() {
+    await this._db.executeSql(this.UrgentPlanTable, []);
+    this.getData()
+  }
 
+  ionViewDidLoad() {
+        this.getData();
+      }
+    
+      ionViewWillEnter() {
+        this.getData();
+      }
+    
+  public getData() {
+    this._db.executeSql('SELECT * FROM urgentplan ORDER BY rowid DESC', <any>[])
+    .then(res => {
+      this.urgentplan = [];
+      for(var i=0; i<res.rows.length; i++) {
+        this.urgentplan.push({
+          rowid:res.rows.item(i).rowid,
+          type:res.rows.item(i).type,
+          instructions:res.rows.item(i).instructions,
+          phone:res.rows.item(i).phone,
+          notes:res.rows.item(i).notes
+        })
+      }
+    })
+        .catch(e => alert('get data error' + e));
+      }
+    
+  public saveData() {
+    this._db.executeSql('INSERT INTO urgentplan VALUES(NULL,?,?,?,?)', [this.data.type, this.data.instructions, this.data.phone, this.data.notes ])
+    .then(res => {
+        this.getData();
+      })
+      .catch(e => alert("save data error" + e));
+    }
+      
+    
+  editData(rowid) {
+    console.log("added data"), {
+      rowid: rowid
+    }
+  }
+    
+  deleteData(rowid) {
+      this._db.executeSql('DELETE FROM urgentplan WHERE rowid=?', [rowid])
+      .then(res => {
+        this.getData();
+      })
+      .catch(e => alert('delete data error' + e));
+    }
+
+    async removeData(rowid) {
+      const alert = await this._alertController.create({
+        header: "Delete this entry?",
+        message: "Would you like to delete this entry from your urgentplan?",
+        buttons: [
+          {
+            text:"Cancel"
+          },
+          {
+            text:"Delete",
+            handler: ()=> {
+              this.deleteData(rowid);
+  
+            }
           }
-        }
-      ]
-    });
-
-    await alert.present();
-
-  }
-
-  ngOnInit() {
-   this.pageForm = this.fb.group( {
-    pageInfo: this.fb.array([this.pageInfo( )])
-   })
-  }
-
-  pageInfo(){
-    return this.fb.group({
-      type:[''],
-      instructions:[''],
-      phonenumber:[''],
-      notes:[''],
-
-    });
-  }
-
-  getPageInfo(): FormArray{
-    return this.pageForm.get('pageInfo') as FormArray;
-  }
-
-
-  addEntry() {
-    this.getPageInfo().push(this.pageInfo());
-  }
-
-  onSubmit(){
-    console.log("form submitted")
-  }
-
+        ]
+      });
+  
+      await alert.present();
+  
+    }
 }
