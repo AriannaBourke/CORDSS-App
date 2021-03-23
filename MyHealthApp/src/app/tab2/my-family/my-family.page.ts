@@ -34,7 +34,7 @@ export class MyFamilyPage {
       name: 'database.db',
       location: 'default'
     }).then((db: SQLiteObject) => {
-      db.executeSql('CREATE TABLE IF NOT EXISTS family(rowid INTEGER PRIMARY KEY, name TEXT, birthday DATE, relation TEXT, email TEXT, phone INT)', <any>[])
+      db.executeSql('CREATE TABLE IF NOT EXISTS family(rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)', <any>[])
       .then(res => console.log('Executed SQL')) // alert works
       .catch(e => alert(e));
       db.executeSql('SELECT * FROM family ORDER BY rowid DESC', <any>[])
