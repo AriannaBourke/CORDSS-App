@@ -1,38 +1,33 @@
-import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { ModalController } from '@ionic/angular';
-import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page';
-import {ViewEntryPage } from './view-entry/view-entry.page';
+// import { ThoughtsFeelingsPage } from 'src/app/tab4/thoughts-feelings/thoughts-feelings.page';
 
 @Component({
-  selector: 'app-upcoming-appointments',
-  templateUrl: './upcoming-appointments.page.html',
-  styleUrls: ['./upcoming-appointments.page.scss'],
+  selector: 'app-add-entry',
+  templateUrl: './add-entry.page.html',
+  styleUrls: ['./add-entry.page.scss'],
 })
-export class UpcomingAppointmentsPage {
+export class AddEntryPage {
   public appointments : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-  
-  viewData: any;
+
   modalTitle: string;
   modelId: number;
   dataReturned: any;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
 
-    constructor(
-                public modalController: ModalController,
-                private _alertController: AlertController, 
-                public _plat: Platform, 
-                public _sql: SQLite,
-              ) 
-
-{
+  constructor(private modalController: ModalController,
+              private navParams: NavParams,
+              private _alertController: AlertController, 
+              public _plat: Platform, 
+              public _sql: SQLite
+            ) 
+{            
   this.appointments = [];
   this._plat
   .ready()
@@ -92,38 +87,24 @@ export class UpcomingAppointmentsPage {
   public saveData() {
     this._db.executeSql('INSERT INTO appointments VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions])
     .then(res => {
-        this.getData();
+        this.closeModal()
+        // this.getData();
       })
       .catch(e => alert("save data error" + e));
     }
       
-    
-  editData(rowid) {
-    console.log("added data"), {
-      rowid: rowid
-    }
-  }
-    
-  deleteData(rowid) {
-      this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
-      .then(res => {
-        this.getData();
-      })
-      .catch(e => alert('delete data error' + e));
-    }
-
-    async removeData(rowid) {
+    async submitData(rowid) {
       const alert = await this._alertController.create({
-        header: "Delete this entry?",
-        message: "Would you like to delete this entry from your appointments?",
+        header: "Save this entry?",
+        message: "Would you like to save this entry in your appointments?",
         buttons: [
           {
             text:"Cancel"
           },
           {
-            text:"Delete",
+            text:"save",
             handler: ()=> {
-              this.deleteData(rowid);
+              this.saveData();
   
             }
           }
@@ -133,48 +114,16 @@ export class UpcomingAppointmentsPage {
       await alert.present();
   
     }
-
-
-    async openModal() {
-      const modal = await this.modalController.create({
-        component: AddEntryPage,
-        componentProps: {
-          "paramID": 123,
-          "paramTitle": "Test Title"
-        }
-      });
-  
-      modal.onDidDismiss().then((dataReturned) => {
-        this.getData();
-      });
-  
-      return await modal.present();
-    }
-
-
-    async viewModal(rowid) {
-      const modal = await this.modalController.create({
-        component: ViewEntryPage,
-        componentProps: { 'rowid': rowid
-        }
-      });
-      modal.onDidDismiss().then((dataReturned) => {
-        this.getData();
-      });
-  
-      return await modal.present();
-    }
-
-
-    async editModal(rowid) {
-      const modal = await this.modalController.create({
-        component: EditEntryPage,
-        componentProps: { 'rowid': rowid}
-      });
-      modal.onDidDismiss().then((dataReturned)=>{
-        this.getData();
-      });
-      return await modal.present();
-    }
-
+    
+  ngOnInit() {
+    console.table(this.navParams);
+    this.modelId = this.navParams.data.paramID;
+    this.modalTitle = this.navParams.data.paramTitle;
   }
+
+
+  async closeModal() {
+    await this.modalController.dismiss();
+    this.getData();
+  }
+}

@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Appointment</ion-title>
+    <ion-button slot="start" size="small" (click)="closeModal()"
+    ><ion-icon slot="start" name="arrow-back-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let app of appointments; let i = index" class="list">
+    <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="entry-header">Appointment</ion-label>
+        </ion-col>
+      </ion-row>
+
+      <form #form="ngForm" (ngSubmit)="update(rowid)">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Date</ion-label>
+                  <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
+                  <ion-datetime
+                  displayFormat="DD MMMM YYYY"
+                  placeholder="{{app.date | date: 'dd MMMM y'}}"
+                  [(ngModel)]="data.date"
+                  name="date"
+                ></ion-datetime>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+      
+               <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="stacked">Doctor</ion-label>
+                    <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
+                    <ion-input 
+                    type="text"
+                    placeholder="{{app.doctor}}"
+                    [(ngModel)]="data.doctor"
+                    name="doctor"
+                    ></ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+      
+               <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="stacked">Place</ion-label>
+                    <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
+                    <ion-input 
+                    type="text"
+                    placeholder="{{app.place}}"
+                    [(ngModel)]="data.place"
+                    name="place"></ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+      
+               <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="stacked">Description</ion-label>
+                   <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+                   <ion-textarea 
+                   type="text"
+                   placeholder="{{app.description}}"
+                   [(ngModel)]="data.description"
+                   name="description"
+                   ></ion-textarea>
+                  </ion-item>
+               </ion-col>
+              </ion-row>
+      
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="stacked">Questions?</ion-label>
+                   <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
+                   <ion-textarea 
+                   type="text"
+                   placeholder="{{app.questions}}"
+                   [(ngModel)]="data.questions"
+                   name="questions"
+                  ></ion-textarea>
+                  </ion-item>
+                 <div class="ion-margin-vertical ion-text-right">
+                  <ion-button
+                  type="button"
+                  fill="outline"
+                  color="danger"
+                  size="small"
+                  (click)="form.reset()"
+                >
+                  <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button>
+
+                  <ion-button
+                  type="button"
+                  size="small"
+                  type="submit"
+                  value="submit"
+                  id="submit"
+                  color="success"
+                >
+                  <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
+                >
+                </div>
+              </ion-col>
+            </ion-row>
+      </form>
+
+     </ion-grid> 
+  </ion-card> 
+</ion-list>
+</ion-content>
