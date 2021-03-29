@@ -29,10 +29,12 @@
         <p>{{app.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
       </ion-item>
       <ion-item>
-      <p>With Dr {{app.doctor}}</p>
+      <p>{{app.place}}</p>
     </ion-item>
     <ion-button color="light" style="float: right" (click)="removeData(app.rowid)"
     ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+    <ion-button color="light" style="float: right" (click)="editModal(app.rowid)">
+    <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
     <ion-button color="light" style="float: right" (click)="viewModal(app.rowid)"
     ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
     </ion-col>

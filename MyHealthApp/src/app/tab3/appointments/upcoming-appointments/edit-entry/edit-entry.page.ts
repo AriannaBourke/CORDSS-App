@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,18 +15,24 @@ export class EditEntryPage {
   public storedData      : any            = null;
   private _db   : any;
 
+
   rowid: any;
   modalTitle: string;
   modelId: number;
   dataReturned: any;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  
+
+
+
+
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite
+              public _sql: SQLite,
             ) 
             {
               this.rowid=navParams.get('rowid');        
@@ -58,6 +65,7 @@ export class EditEntryPage {
                 await this._db.executeSql(this.AppointmentsTable, []);
                 this.getData(this.rowid);
               }
+
                 
               public getData(rowid) {
                 this._db.executeSql('SELECT * FROM appointments WHERE rowid=?', [rowid])

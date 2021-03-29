@@ -23,15 +23,15 @@
                   <ion-label position="stacked">Date & Time</ion-label>
                   <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
                   <ion-datetime
-                  displayFormat="DD MMMM YYYY"
                   placeholder="{{app.date | date: 'dd MMMM y HH:mm'}}"
+                  displayFormat="DD MMMM YYYY"
                   [(ngModel)]="data.date"
                   name="date"
                 ></ion-datetime>
               </ion-item>
             </ion-col>
           </ion-row>
-      
+        
                <ion-row>
                 <ion-col>
                   <ion-item>
@@ -116,4 +116,3 @@
      </ion-grid> 
   </ion-card> 
 </ion-list>
-</ion-content>
