@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { MedicinesPageRoutingModule } from './medicines-routing.module';
-import { MedicinesPage } from './medicines.page';
 
+import { IonicModule } from '@ionic/angular';
+
+import { AddEntryPageRoutingModule } from './add-entry-routing.module';
+
+import { AddEntryPage } from './add-entry.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MedicinesPageRoutingModule,
+    AddEntryPageRoutingModule
   ],
-  declarations: [MedicinesPage]
+  declarations: [AddEntryPage]
 })
-export class MedicinesPageModule {}
+export class AddEntryPageModule {}
