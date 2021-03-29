@@ -13,19 +13,26 @@
       <ion-row>
         <ion-col>
           <ion-label class="entry-header">Appointment</ion-label>
+          <ion-icon
+          style="float: right"
+          name="trash-outline"
+          size="large"
+          color="danger"
+          (click)="removeData(app.rowid)"
+        ></ion-icon>
+          <ion-icon name="create" color="tertiary" style="float: right" size="large" (click)="editModal(app.rowid)"></ion-icon>
         </ion-col>
       </ion-row>
   <ion-row>
     <ion-col>
       <ion-item>
-        <ion-label  color="medium" position="stacked">Date</ion-label>
+        <ion-label  color="medium" position="stacked">Date & Time</ion-label>
         <ion-icon
           color="tertiary"
           slot="start"
           name="calendar-number-outline"
-          size="small"
         ></ion-icon>
-        <p>{{app.date | date: 'dd MMMM y'}}</p>
+        <p>{{app.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -38,7 +45,6 @@
           color="tertiary"
           slot="start"
           name="medkit-outline"
-          size="small"
         ></ion-icon>
         <p>{{app.doctor}}</p>
       </ion-item>
@@ -53,7 +59,6 @@
           color="tertiary"
           slot="start"
           name="business-outline"
-          size="small"
         ></ion-icon>
         <p>{{app.place}}</p>
       </ion-item>
@@ -69,7 +74,6 @@
             color="tertiary"
             slot="start"
             name="chatbubble-ellipses-outline"
-            size="small"
           ></ion-icon>
             <p>{{app.description}}</p>
           </ion-item>
@@ -84,7 +88,6 @@
             color="tertiary"
             slot="start"
             name="help-circle-outline"
-            size="small"
           ></ion-icon>
             <p>{{app.questions}}</p>
           </ion-item>

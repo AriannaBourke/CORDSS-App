@@ -17,7 +17,6 @@
     <ion-grid>  
       <ion-row>
     <ion-col>
-      <ion-label class="entry-header">Appointment</ion-label>
           <ion-icon
             style="float: right"
             name="trash-outline"
@@ -25,16 +24,41 @@
             color="danger"
             (click)="removeData(app.rowid)"
           ></ion-icon>
-          <ion-icon name="create" color="tertiary" style="float: right" size="large" (click)="editModal(app.rowid)"></ion-icon>
-          <ion-icon name="eye" color="success" style="float: right" size="large" (click)="viewModal(app.rowid)"></ion-icon>
       <ion-item>
+        <ion-label color="tertiary">Appointment</ion-label>
+        <ion-icon
+        color="tertiary"
+        slot="start"
+        name="calendar-number-outline"
+      ></ion-icon>
+      </ion-item>
+          <ion-item>
+        <p>{{app.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
+      </ion-item>
+      <ion-item>
+      <p>With Dr {{app.doctor}}</p>
+      <ion-button color="tertiary" slot="end" (click)="viewModal(app.rowid)"
+      ><ion-icon slot="start" name="eye"></ion-icon>View</ion-button>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+  </ion-card>
+</ion-list>
+</ion-content>
+
+
+
+
+
+      <!-- <ion-item>
         <ion-label color="medium" position="stacked">Date</ion-label>
         <ion-icon
           color="tertiary"
           slot="start"
           name="calendar-number-outline"
         ></ion-icon>
-        <p>{{app.date | date: 'dd MMMM y'}}</p>
+        <p>{{app.date | date: 'short'}}</p>
       </ion-item>
       <ion-item>
         <ion-label color="medium" position="stacked">Place</ion-label>
@@ -44,18 +68,5 @@
           name="business-outline"
         ></ion-icon>
         <p>{{app.place}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  </ion-grid>
-  </ion-card>
-  
-</ion-list>
-</ion-content>
-
-
-
-
-
-
+      </ion-item> -->
 

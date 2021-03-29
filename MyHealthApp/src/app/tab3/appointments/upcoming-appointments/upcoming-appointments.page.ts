@@ -72,7 +72,7 @@ export class UpcomingAppointmentsPage {
       }
     
   public getData() {
-    this._db.executeSql('SELECT * FROM appointments ORDER BY rowid DESC', <any>[])
+    this._db.executeSql('SELECT * FROM appointments ORDER BY date DESC', <any>[])
     .then(res => {
       this.appointments = [];
       for(var i=0; i<res.rows.length; i++) {
@@ -97,12 +97,7 @@ export class UpcomingAppointmentsPage {
       .catch(e => alert("save data error" + e));
     }
       
-    
-  editData(rowid) {
-    console.log("added data"), {
-      rowid: rowid
-    }
-  }
+  
     
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
@@ -133,7 +128,6 @@ export class UpcomingAppointmentsPage {
       await alert.present();
   
     }
-
 
     async openModal() {
       const modal = await this.modalController.create({

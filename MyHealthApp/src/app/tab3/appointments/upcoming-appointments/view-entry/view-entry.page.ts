@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import {EditEntryPage } from '..//edit-entry/edit-entry.page';
+
 
 @Component({
   selector: 'app-view-entry',
@@ -84,5 +86,47 @@ export class ViewEntryPage {
               async closeModal() {
                 await this.modalController.dismiss();
               }
+
+              deleteData(rowid) {
+                this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
+                .then(res => {
+                  this.closeModal();
+                  // this.getData(rowid);
+                })
+                .catch(e => alert('delete data error' + e));
+              }
+          
+              async removeData(rowid) {
+                const alert = await this._alertController.create({
+                  header: "Delete this entry?",
+                  message: "Would you like to delete this entry from your appointments?",
+                  buttons: [
+                    {
+                      text:"Cancel"
+                    },
+                    {
+                      text:"Delete",
+                      handler: ()=> {
+                        this.deleteData(rowid);
+                      }
+                    }
+                  ]
+                });
+            
+                await alert.present();
+            
+              }
+
+              async editModal(rowid) {
+                const modal = await this.modalController.create({
+                  component: EditEntryPage,
+                  componentProps: { 'rowid': rowid}
+                });
+                modal.onDidDismiss().then((dataReturned)=>{
+                  this.getData(rowid);
+                });
+                return await modal.present();
+              }
+              
             }
 

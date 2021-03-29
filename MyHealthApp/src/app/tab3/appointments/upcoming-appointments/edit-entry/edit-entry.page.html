@@ -20,11 +20,11 @@
             <ion-row>
               <ion-col>
                 <ion-item>
-                  <ion-label position="stacked">Date</ion-label>
+                  <ion-label position="stacked">Date & Time</ion-label>
                   <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
                   <ion-datetime
                   displayFormat="DD MMMM YYYY"
-                  placeholder="{{app.date | date: 'dd MMMM y'}}"
+                  placeholder="{{app.date | date: 'dd MMMM y HH:mm'}}"
                   [(ngModel)]="data.date"
                   name="date"
                 ></ion-datetime>
