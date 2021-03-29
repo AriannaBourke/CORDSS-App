@@ -4,193 +4,43 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Past Appointments</ion-title>
+    <ion-button color="success" slot="end" (click)="openModal()"
+    ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+  >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form #form="ngForm" (ngSubmit)="saveData(form)">
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Appointment</ion-label>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-icon slot="start" name="calendar-number-outline" size="small"></ion-icon>
-            <ion-datetime
-            displayFormat="DD MMMM YYYY"
-            placeholder="Date"
-            [(ngModel)]="data.date"
-            name="date"
-          ></ion-datetime>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-         <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon slot="start" name="medkit-outline" size="small"></ion-icon>
-              <ion-input 
-              type="text"
-              placeholder="Doctor"
-              [(ngModel)]="data.doctor"
-              name="doctor"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
-         </ion-row>
-
-         <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon slot="start" name="business-outline" size="small"></ion-icon>
-              <ion-input 
-              type="text"
-              placeholder="Place"
-              [(ngModel)]="data.place"
-              name="place"></ion-input>
-            </ion-item>
-          </ion-col>
-         </ion-row>
-
-         <ion-row>
-          <ion-col>
-            <ion-item>
-             <ion-icon slot="start" name="chatbubble-ellipses-outline" size="small"></ion-icon>
-             <ion-textarea 
-             type="text"
-             placeholder="Description"
-             [(ngModel)]="data.description"
-             name="description"
-             ></ion-textarea>
-            </ion-item>
-         </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-             <ion-icon slot="start" name="help-circle-outline" size="small"></ion-icon>
-             <ion-textarea 
-             type="text"
-             placeholder="Questions?"
-             [(ngModel)]="data.questions"
-             name="questions"
-            ></ion-textarea>
-            </ion-item>
-           <div class="ion-margin-vertical ion-text-right">
-            <ion-button
-              type="button"
-              size="small"
-              type="submit"
-              value="submit"
-              id="submit"
-            >
-              <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</form>
 
 <ion-list *ngFor="let app of appointments; let i = index" class="list">
   <ion-card>
-    <ion-grid>
+    <ion-grid>  
       <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Appointment</ion-label>
-          <ion-icon
-            style="float: right"
-            name="trash-outline"
-            size="large"
-            (click)="removeData(app.rowid)"
-          ></ion-icon>
-          <ion-icon
-            style="float: right"
-            name="paper"
-            size="large"
-            (click)="editData(app.rowid)"
-          ></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label color="tertiary">Appointment</ion-label>
+        <ion-icon
+        color="tertiary"
+        slot="start"
+        name="calendar-number-outline"
+      ></ion-icon>
+      </ion-item>
           <ion-item>
-            <ion-icon
-              slot="start"
-              name="calendar-number-outline"
-              size="small"
-            ></ion-icon>
-            <p>{{app.date | date: 'dd MMMM y'}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-icon
-              slot="start"
-              name="medkit-outline"
-              size="small"
-            ></ion-icon>
-            <p>{{app.doctor}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-icon
-              slot="start"
-              name="business-outline"
-              size="small"
-            ></ion-icon>
-            <p>{{app.place}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-icon
-            slot="start"
-            name="chatbubble-ellipses-outline"
-            size="small"
-          ></ion-icon>
-            <p>{{app.description}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-icon
-            slot="start"
-            name="help-circle-outline"
-            size="small"
-          ></ion-icon>
-            <p>{{app.questions}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
+        <p>{{app.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
+      </ion-item>
+      <ion-item>
+      <p>{{app.place}}</p>
+    </ion-item>
+    <ion-button color="light" style="float: right" (click)="removeData(app.rowid)"
+    ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+    <ion-button color="light" style="float: right" (click)="editModal(app.rowid)">
+    <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+    <ion-button color="light" style="float: right" (click)="viewModal(app.rowid)"
+    ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
   </ion-card>
 </ion-list>
 </ion-content>
-
-
-
-
 

@@ -1,35 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { ModalController } from '@ionic/angular';
-import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page';
-import {ViewEntryPage } from './view-entry/view-entry.page';
-
 
 @Component({
-  selector: 'app-past-appointments',
-  templateUrl: './past-appointments.page.html',
-  styleUrls: ['./past-appointments.page.scss'],
+  selector: 'app-add-entry',
+  templateUrl: './add-entry.page.html',
+  styleUrls: ['./add-entry.page.scss'],
 })
-export class PastAppointmentsPage {
+export class AddEntryPage {
   public appointments : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-  
 
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
 
-    constructor(
-                public modalController: ModalController,
-                private _alertController: AlertController, 
-                public _plat: Platform, 
-                public _sql: SQLite,
-              ) 
-
-{
+  constructor(private modalController: ModalController,
+              private navParams: NavParams,
+              private _alertController: AlertController, 
+              public _plat: Platform, 
+              public _sql: SQLite
+            ) 
+{            
   this.appointments = [];
   this._plat
   .ready()
@@ -69,7 +63,7 @@ export class PastAppointmentsPage {
       }
     
   public getData() {
-    this._db.executeSql('SELECT * FROM appointments ORDER BY date DESC', <any>[])
+    this._db.executeSql('SELECT * FROM appointments ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.appointments = [];
       for(var i=0; i<res.rows.length; i++) {
@@ -89,31 +83,23 @@ export class PastAppointmentsPage {
   public saveData() {
     this._db.executeSql('INSERT INTO appointments VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions])
     .then(res => {
-        this.getData();
+        this.closeModal()
       })
       .catch(e => alert("save data error" + e));
     }
-    
-  deleteData(rowid) {
-      this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
-      .then(res => {
-        this.getData();
-      })
-      .catch(e => alert('delete data error' + e));
-    }
-
-    async removeData(rowid) {
+      
+    async submitData(rowid) {
       const alert = await this._alertController.create({
-        header: "Delete this entry?",
-        message: "Would you like to delete this entry from your appointments?",
+        header: "Save this entry?",
+        message: "Would you like to save this entry in your appointments?",
         buttons: [
           {
             text:"Cancel"
           },
           {
-            text:"Delete",
+            text:"save",
             handler: ()=> {
-              this.deleteData(rowid);
+              this.saveData();
   
             }
           }
@@ -121,47 +107,10 @@ export class PastAppointmentsPage {
       });
   
       await alert.present();
-  
     }
-
-    async openModal() {
-      const modal = await this.modalController.create({
-        component: AddEntryPage,
-        componentProps: {
-        }
-      });
-  
-      modal.onDidDismiss().then((dataReturned) => {
-        this.getData();
-      });
-  
-      return await modal.present();
-    }
-
-
-    async viewModal(rowid) {
-      const modal = await this.modalController.create({
-        component: ViewEntryPage,
-        componentProps: { 'rowid': rowid
-        }
-      });
-      modal.onDidDismiss().then(() => {
-        this.getData();
-      });
-  
-      return await modal.present();
-    }
-
-
-    async editModal(rowid) {
-      const modal = await this.modalController.create({
-        component: EditEntryPage,
-        componentProps: { 'rowid': rowid}
-      });
-      modal.onDidDismiss().then(()=>{
-        this.getData();
-      });
-      return await modal.present();
-    }
-
+    
+  async closeModal() {
+    await this.modalController.dismiss();
+    this.getData();
   }
+}
