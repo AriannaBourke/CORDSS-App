@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Add Appointment</ion-title>
-    <ion-button slot="start" size="small" (click)="closeModal()"
-    ><ion-icon slot="start" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
+    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -87,19 +87,15 @@
             type="button"
             fill="outline"
             color="danger"
-            size="small"
             (click)="form.reset()"
-          >
-            <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button>
+          >Clear</ion-button>
             <ion-button
               type="button"
-              size="small"
               type="submit"
               value="submit"
               id="submit"
               color="success"
-            >
-              <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
+            >Submit</ion-button
             >
           </div>
         </ion-col>

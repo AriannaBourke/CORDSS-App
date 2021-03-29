@@ -17,13 +17,6 @@
     <ion-grid>  
       <ion-row>
     <ion-col>
-          <ion-icon
-            style="float: right"
-            name="trash-outline"
-            size="large"
-            color="danger"
-            (click)="removeData(app.rowid)"
-          ></ion-icon>
       <ion-item>
         <ion-label color="tertiary">Appointment</ion-label>
         <ion-icon
@@ -37,36 +30,15 @@
       </ion-item>
       <ion-item>
       <p>With Dr {{app.doctor}}</p>
-      <ion-button color="tertiary" slot="end" (click)="viewModal(app.rowid)"
-      ><ion-icon slot="start" name="eye"></ion-icon>View</ion-button>
     </ion-item>
+    <ion-button color="light" style="float: right" (click)="removeData(app.rowid)"
+    ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+    <ion-button color="light" style="float: right" (click)="viewModal(app.rowid)"
+    ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
     </ion-col>
   </ion-row>
   </ion-grid>
   </ion-card>
 </ion-list>
 </ion-content>
-
-
-
-
-
-      <!-- <ion-item>
-        <ion-label color="medium" position="stacked">Date</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="calendar-number-outline"
-        ></ion-icon>
-        <p>{{app.date | date: 'short'}}</p>
-      </ion-item>
-      <ion-item>
-        <ion-label color="medium" position="stacked">Place</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="business-outline"
-        ></ion-icon>
-        <p>{{app.place}}</p>
-      </ion-item> -->
 
