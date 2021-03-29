@@ -10,14 +10,14 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
   styleUrls: ['./edit-entry.page.scss'],
 })
 export class EditEntryPage {
-  public appointments : Array<any> = [];
+  public myfamily : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
   rowid: any;
-  AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  MyFamilyTable : string = 'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)'
+  data = {name: "", birthday: "", relation: "", email: "", phone: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -27,7 +27,7 @@ export class EditEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid');        
-              this.appointments = [];
+              this.myfamily = [];
               this._plat
               .ready()
               .then(() => 
@@ -53,23 +53,23 @@ export class EditEntryPage {
               }
               
               async _createDatabaseTables() {
-                await this._db.executeSql(this.AppointmentsTable, []);
+                await this._db.executeSql(this.MyFamilyTable, []);
                 this.getData(this.rowid);
               }
 
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM appointments WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM myfamily WHERE rowid=?', [rowid])
                 .then(res => {
-                  this.appointments = [];
+                  this.myfamily = [];
                   for(var i=0; i<res.rows.length; i++) {
-                    this.appointments.push({
+                    this.myfamily.push({
                       rowid:res.rows.item(i).rowid,
-                      date:res.rows.item(i).date,
-                      doctor:res.rows.item(i).doctor,
-                      place:res.rows.item(i).place,
-                      description:res.rows.item(i).description,
-                      questions:res.rows.item(i).questions,
+                      name:res.rows.item(i).name,
+                      birthday:res.rows.item(i).birthday,
+                      relation:res.rows.item(i).relation,
+                      email:res.rows.item(i).email,
+                      phone:res.rows.item(i).phone
                     })
                   }
                 })
@@ -85,7 +85,7 @@ export class EditEntryPage {
               async update(rowid) {
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
-                  message: "Would you like to update this entry in your appointments?",
+                  message: "Would you like to update this entry?",
                   buttons: [
                     {
                       text:"Cancel"
@@ -103,7 +103,7 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE appointments SET date=?, doctor=?, place=?, description=?, questions=? WHERE rowid=?', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions, rowid])
+                this._db.executeSql('UPDATE appointments SET name=?, birthday=?, relation=?, email=?, phone=? WHERE rowid=?', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone, rowid])
                 .then(res => {
                   this.closeModal();
                 })

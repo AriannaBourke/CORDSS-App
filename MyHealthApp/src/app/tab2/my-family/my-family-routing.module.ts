@@ -16,10 +16,10 @@ const routes: Routes = [
     path: 'edit-entry',
     loadChildren: () => import('./edit-entry/edit-entry.module').then( m => m.EditEntryPageModule)
   },
-  {
-    path: 'view-entry',
-    loadChildren: () => import('./view-entry/view-entry.module').then( m => m.ViewEntryPageModule)
-  }
+  // {
+  //   path: 'view-entry',
+  //   loadChildren: () => import('./view-entry/view-entry.module').then( m => m.ViewEntryPageModule)
+  // }
 ];
 
 @NgModule({
