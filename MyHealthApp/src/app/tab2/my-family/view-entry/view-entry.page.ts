@@ -11,14 +11,14 @@ import {EditEntryPage } from '..//edit-entry/edit-entry.page';
   styleUrls: ['./view-entry.page.scss'],
 })
 export class ViewEntryPage {
-  public appointments : Array<any> = [];
+  public myfamily : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
   rowid: any;
-  AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  MyFamilyTable : string = 'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)'
+  data = {name: "", birthday: "", relation: "", email: "", phone: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -28,7 +28,7 @@ export class ViewEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid')
-              this.appointments = [];
+              this.myfamily = [];
               this._plat
               .ready()
               .then(() =>           
@@ -53,22 +53,22 @@ export class ViewEntryPage {
               }
               
               async _createDatabaseTables() {
-                await this._db.executeSql(this.AppointmentsTable, []);
+                await this._db.executeSql(this.MyFamilyTable, []);
                 this.getData(this.rowid);
               }
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM appointments WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM myfamily WHERE rowid=?',[rowid])
                 .then(res => {
-                  this.appointments = [];
+                  this.myfamily = [];
                   for(var i=0; i<res.rows.length; i++) {
-                    this.appointments.push({
+                    this.myfamily.push({
                       rowid:res.rows.item(i).rowid,
-                      date:res.rows.item(i).date,
-                      doctor:res.rows.item(i).doctor,
-                      place:res.rows.item(i).place,
-                      description:res.rows.item(i).description,
-                      questions:res.rows.item(i).questions,
+                      name:res.rows.item(i).name,
+                      birthday:res.rows.item(i).birthday,
+                      relation:res.rows.item(i).relation,
+                      email:res.rows.item(i).email,
+                      phone:res.rows.item(i).phone
                     })
                   }
                 })
@@ -81,7 +81,7 @@ export class ViewEntryPage {
               }
 
               deleteData(rowid) {
-                this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
+                this._db.executeSql('DELETE FROM myfamily WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
                 })
@@ -91,7 +91,7 @@ export class ViewEntryPage {
               async removeData(rowid) {
                 const alert = await this._alertController.create({
                   header: "Delete this entry?",
-                  message: "Would you like to delete this entry from your appointments?",
+                  message: "Would you like to delete this entry?",
                   buttons: [
                     {
                       text:"Cancel"

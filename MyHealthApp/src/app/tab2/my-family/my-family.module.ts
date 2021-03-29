@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { MyFamilyPageRoutingModule } from './my-family-routing.module';
 import { MyFamilyPage } from './my-family.page';
 import { AddEntryPageModule } from './add-entry/add-entry.module';
-// import { ViewEntryPageModule } from './view-entry/view-entry.module';
+import { ViewEntryPageModule } from './view-entry/view-entry.module';
 import { EditEntryPageModule } from './edit-entry/edit-entry.module';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { EditEntryPageModule } from './edit-entry/edit-entry.module';
     FormsModule,
     MyFamilyPageRoutingModule,
     AddEntryPageModule,
-    // ViewEntryPageModule,
+    ViewEntryPageModule,
     EditEntryPageModule
   ],
   declarations: [MyFamilyPage]

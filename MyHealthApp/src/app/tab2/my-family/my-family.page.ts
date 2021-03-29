@@ -4,8 +4,8 @@ import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page';
-// import {ViewEntryPage } from './view-entry/view-entry.page';
+import {EditEntryPage } from './edit-entry/edit-entry.page'; 
+import {ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-my-family',
@@ -137,18 +137,18 @@ export class MyFamilyPage {
         }
     
     
-        // async viewModal(rowid) {
-        //   const modal = await this.modalController.create({
-        //     component: ViewEntryPage,
-        //     componentProps: { 'rowid': rowid
-        //     }
-        //   });
-        //   modal.onDidDismiss().then(() => {
-        //     this.getData();
-        //   });
+        async viewModal(rowid) {
+          const modal = await this.modalController.create({
+            component: ViewEntryPage,
+            componentProps: { 'rowid': rowid
+            }
+          });
+          modal.onDidDismiss().then(() => {
+            this.getData();
+          });
       
-        //   return await modal.present();
-        // }
+          return await modal.present();
+        }
     
     
         async editModal(rowid) {

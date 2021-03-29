@@ -16,7 +16,7 @@ export class EditEntryPage {
   private _db   : any;
 
   rowid: any;
-  ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
+  ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures(rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
 
   constructor(private modalController: ModalController,
@@ -59,7 +59,7 @@ export class EditEntryPage {
 
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM appointments WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM procedures WHERE rowid=?', [rowid])
                 .then(res => {
                   this.procedures = [];
                   for(var i=0; i<res.rows.length; i++) {

@@ -19,6 +19,7 @@ export class EditEntryPage {
   MyFamilyTable : string = 'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)'
   data = {name: "", birthday: "", relation: "", email: "", phone: ""};
 
+
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
@@ -59,7 +60,7 @@ export class EditEntryPage {
 
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM myfamily WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM myfamily WHERE rowid=?',[rowid])
                 .then(res => {
                   this.myfamily = [];
                   for(var i=0; i<res.rows.length; i++) {
@@ -103,7 +104,7 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE appointments SET name=?, birthday=?, relation=?, email=?, phone=? WHERE rowid=?', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone, rowid])
+                this._db.executeSql('UPDATE myfamily SET name=?, birthday=?, relation=?, email=?, phone=? WHERE rowid=?', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone, rowid])
                 .then(res => {
                   this.closeModal();
                 })
