@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
@@ -18,10 +17,7 @@ export class UpcomingAppointmentsPage {
   public storedData      : any            = null;
   private _db   : any;
   
-  viewData: any;
-  modalTitle: string;
-  modelId: number;
-  dataReturned: any;
+
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
 
@@ -96,8 +92,6 @@ export class UpcomingAppointmentsPage {
       })
       .catch(e => alert("save data error" + e));
     }
-      
-  
     
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
@@ -133,8 +127,6 @@ export class UpcomingAppointmentsPage {
       const modal = await this.modalController.create({
         component: AddEntryPage,
         componentProps: {
-          "paramID": 123,
-          "paramTitle": "Test Title"
         }
       });
   
@@ -152,7 +144,7 @@ export class UpcomingAppointmentsPage {
         componentProps: { 'rowid': rowid
         }
       });
-      modal.onDidDismiss().then((dataReturned) => {
+      modal.onDidDismiss().then(() => {
         this.getData();
       });
   
@@ -165,7 +157,7 @@ export class UpcomingAppointmentsPage {
         component: EditEntryPage,
         componentProps: { 'rowid': rowid}
       });
-      modal.onDidDismiss().then((dataReturned)=>{
+      modal.onDidDismiss().then(()=>{
         this.getData();
       });
       return await modal.present();

@@ -17,9 +17,6 @@ export class ViewEntryPage {
   private _db   : any;
 
   rowid: any;
-  modalTitle: string;
-  modelId: number;
-  dataReturned: any;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
 
@@ -31,14 +28,10 @@ export class ViewEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid')
-            
-
-                       
               this.appointments = [];
               this._plat
               .ready()
-              .then(() => 
-            
+              .then(() =>           
                 {
                   this._createDatabase();
                 })
@@ -91,7 +84,6 @@ export class ViewEntryPage {
                 this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
-                  // this.getData(rowid);
                 })
                 .catch(e => alert('delete data error' + e));
               }
@@ -122,7 +114,7 @@ export class ViewEntryPage {
                   component: EditEntryPage,
                   componentProps: { 'rowid': rowid}
                 });
-                modal.onDidDismiss().then((dataReturned)=>{
+                modal.onDidDismiss().then(()=>{
                   this.getData(rowid);
                 });
                 return await modal.present();

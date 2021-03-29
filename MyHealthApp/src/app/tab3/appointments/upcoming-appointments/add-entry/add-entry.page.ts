@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-// import { ThoughtsFeelingsPage } from 'src/app/tab4/thoughts-feelings/thoughts-feelings.page';
 
 @Component({
   selector: 'app-add-entry',
@@ -15,9 +14,6 @@ export class AddEntryPage {
   public storedData      : any            = null;
   private _db   : any;
 
-  modalTitle: string;
-  modelId: number;
-  dataReturned: any;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
 
@@ -88,7 +84,6 @@ export class AddEntryPage {
     this._db.executeSql('INSERT INTO appointments VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions])
     .then(res => {
         this.closeModal()
-        // this.getData();
       })
       .catch(e => alert("save data error" + e));
     }
@@ -112,16 +107,8 @@ export class AddEntryPage {
       });
   
       await alert.present();
-  
     }
     
-  ngOnInit() {
-    console.table(this.navParams);
-    this.modelId = this.navParams.data.paramID;
-    this.modalTitle = this.navParams.data.paramTitle;
-  }
-
-
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();

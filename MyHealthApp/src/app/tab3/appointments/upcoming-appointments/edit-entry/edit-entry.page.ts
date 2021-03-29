@@ -15,18 +15,9 @@ export class EditEntryPage {
   public storedData      : any            = null;
   private _db   : any;
 
-
   rowid: any;
-  modalTitle: string;
-  modelId: number;
-  dataReturned: any;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
-  
-
-
-
-
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
