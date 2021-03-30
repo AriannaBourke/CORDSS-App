@@ -1,21 +1,172 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
 import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
+import { AlertController, Platform } from '@ionic/angular';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { ModalController } from '@ionic/angular';
+import {AddEntryPage } from './add-entry/add-entry.page';
+import {EditEntryPage } from './edit-entry/edit-entry.page';
+import {ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-my-clinical-team',
   templateUrl: './my-clinical-team.page.html',
   styleUrls: ['./my-clinical-team.page.scss'],
 })
-export class MyClinicalTeamPage implements OnInit {
-  clinicalForm: FormGroup;
+export class MyClinicalTeamPage {
   myProfileImage;
+  public clinicalteam : Array<any> = [];
+  public isData          : boolean        = false;
+  public storedData      : any            = null;
+  private _db   : any;
+
+  ClinicalTeamTable : string = 'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)'
+  data = {name: "", role: "", clinic_name: "", email: "", phone: "", photo: ""};
 
   constructor(
     private fb: FormBuilder,
     private _camera: Camera,
-    private _alertController: AlertController) { }
+    private _alertController: AlertController,
+    public modalController: ModalController, 
+    public _plat: Platform, 
+    public _sql: SQLite,) 
+
+    {
+      this.clinicalteam = [];
+      this._plat
+      .ready()
+      .then(() => 
+    
+        {
+          this._createDatabase();
+        })
+        .catch(e => alert('create database error' + e));
+      }
+    
+      public _createDatabase()
+      {
+        this._sql.create({
+          name: "database.db",
+          location: 'default'
+        })
+        .then((db: SQLiteObject) =>
+        {
+          this._db = db;
+          this._createDatabaseTables();
+        })
+        .catch(e => alert('create tables error' + e));
+      }
+      
+      async _createDatabaseTables() {
+        await this._db.executeSql(this.ClinicalTeamTable, []);
+        this.getData()
+      }
+    
+      ionViewDidLoad() {
+            this.getData();
+          }
+        
+          ionViewWillEnter() {
+            this.getData();
+          }
+        
+      public getData() {
+        this._db.executeSql('SELECT * FROM clinicalteam', <any>[])
+        .then(res => {
+          this.clinicalteam = [];
+          for(var i=0; i<res.rows.length; i++) {
+            this.clinicalteam.push({
+              rowid:res.rows.item(i).rowid,
+              name:res.rows.item(i).name,
+              role:res.rows.item(i).role,
+              clinic_name:res.rows.item(i).clinic_name,
+              email:res.rows.item(i).email,
+              phone:res.rows.item(i).phone,
+              photo:res.rows.item(i).photo,
+            })
+          }
+        })
+            .catch(e => alert('get data error' + e));
+          }
+        
+      public saveData() {
+        this._db.executeSql('INSERT INTO clinicalteam VALUES(NULL,?,?,?,?,?,?)', [this.data.name, this.data.role, this.data.clinic_name, this.data.email, this.data.phone, this.data.photo])
+        .then(res => {
+            this.getData();
+          })
+          .catch(e => alert("save data error" + e));
+        }
+        
+      deleteData(rowid) {
+          this._db.executeSql('DELETE FROM clinicalteam WHERE rowid=?', [rowid])
+          .then(res => {
+            this.getData();
+          })
+          .catch(e => alert('delete data error' + e));
+        }
+    
+        async removeData(rowid) {
+          const alert = await this._alertController.create({
+            header: "Delete this entry?",
+            message: "Would you like to delete this entry from your clinical team?",
+            buttons: [
+              {
+                text:"Cancel"
+              },
+              {
+                text:"Delete",
+                handler: ()=> {
+                  this.deleteData(rowid);
+      
+                }
+              }
+            ]
+          });
+      
+          await alert.present();
+      
+        }
+    
+        async openModal() {
+          const modal = await this.modalController.create({
+            component: AddEntryPage,
+            componentProps: {
+            }
+          });
+      
+          modal.onDidDismiss().then((dataReturned) => {
+            this.getData();
+          });
+      
+          return await modal.present();
+        }
+    
+    
+        async viewModal(rowid) {
+          const modal = await this.modalController.create({
+            component: ViewEntryPage,
+            componentProps: { 'rowid': rowid
+            }
+          });
+          modal.onDidDismiss().then(() => {
+            this.getData();
+          });
+      
+          return await modal.present();
+        }
+    
+    
+        async editModal(rowid) {
+          const modal = await this.modalController.create({
+            component: EditEntryPage,
+            componentProps: { 'rowid': rowid}
+          });
+          modal.onDidDismiss().then(()=>{
+            this.getData();
+          });
+          return await modal.present();
+        }
+    
 
   async selectImageSource() {
     const cameraOptions: CameraOptions = {
@@ -67,64 +218,5 @@ export class MyClinicalTeamPage implements OnInit {
     await alert.present();
 
   }
-
-  async removeClinical(i) {
-    const alert = await this._alertController.create({
-      header: "Delete this person?",
-      message: "Would you like to delete this person from your clinical team page?",
-      buttons: [
-        {
-          text:"Cancel"
-        },
-        {
-          text:"Delete",
-          handler: ()=> {
-            this.getClinicalInfo().removeAt(i);
-
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-
-  }
-
-
-  ngOnInit() {
-    this.clinicalForm = this.fb.group ({
-      clinicalInfo: this.fb.array([this.clinicalInfo( )])
-
-
-    });
-  }
-
-  clinicalInfo(){
-    return this.fb.group({
-      clinicalname: [''],
-      clinicalrole: [''],
-      clinicname: [''],
-      clinicalemail: [''],
-      clinicalphone: ['']
-    });
-  }
-
-  getClinicalInfo(): FormArray{
-    return this.clinicalForm.get('clinicalInfo') as FormArray;
-  }
-
-
-  addClinical() {
-    this.getClinicalInfo().push(this.clinicalInfo());
-  }
-
-  onSubmit() {
-    console.log("submitted")
-  }
-
-  // removeClinical(index){
-  //   this.getClinicalInfo().removeAt(index);
-
-  // }
 
 }

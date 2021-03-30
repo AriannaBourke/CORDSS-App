@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 // import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { ModalController } from '@ionic/angular';
+import {AddEntryPage } from './add-entry/add-entry.page';
+import {EditEntryPage } from './edit-entry/edit-entry.page';
+import {ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-past-medicines',
@@ -17,7 +21,9 @@ export class PastMedicinesPage {
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
-  constructor(private _alertController: AlertController, 
+  constructor(
+              public modalController: ModalController,
+              private _alertController: AlertController, 
               public _plat: Platform, 
               public _sql: SQLite)
 {
@@ -85,12 +91,6 @@ export class PastMedicinesPage {
     }
       
     
-  editData(rowid) {
-    console.log("added data"), {
-      rowid: rowid
-    }
-  }
-    
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
       .then(res => {
@@ -120,4 +120,68 @@ export class PastMedicinesPage {
       await alert.present();
   
     }
+
+    
+  async finishMedicine(index) {
+    const alert = await this._alertController.create({
+      header: "Have you finished taking this medicine?",
+      message: "Would you like to move this medicine into your past medicines page?",
+      buttons: [
+        {
+          text:"No"
+        },
+        {
+          text:"Yes",
+          handler: ()=> {
+           console.log("Medicine put into past")
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: AddEntryPage,
+      componentProps: {
+      }
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.getData();
+    });
+
+    return await modal.present();
+  }
+
+
+  async viewModal(rowid) {
+    const modal = await this.modalController.create({
+      component: ViewEntryPage,
+      componentProps: { 'rowid': rowid
+      }
+    });
+    modal.onDidDismiss().then(() => {
+      this.getData();
+    });
+
+    return await modal.present();
+  }
+
+
+  async editModal(rowid) {
+    const modal = await this.modalController.create({
+      component: EditEntryPage,
+      componentProps: { 'rowid': rowid}
+    });
+    modal.onDidDismiss().then(()=>{
+      this.getData();
+    });
+    return await modal.present();
+  }
+
+
 }

@@ -4,223 +4,42 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>My Family</ion-title>
+    <ion-button color="success" slot="end" (click)="openModal()"
+    ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+  >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form #form="ngForm" (ngSubmit)="saveData(form)">
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label class="family-member-header">Family Member</ion-label>
-            <!-- <ion-icon
-              style="float: right"
-              name="trash-outline"
-              size="large"
-              (click)="removeFamily(index)"
-            ></ion-icon> -->
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="person-outline"
-                size="small"
-              ></ion-icon>
-              <ion-input
-                type="text"
-                placeholder="Name"
-                [(ngModel)]="data.name"
-                name="name"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="gift-outline"
-                size="small"
-              ></ion-icon>
-              <ion-datetime
-                displayFormat="DD MMMM"
-                placeholder="Birthday"
-                [(ngModel)]="data.birthday"
-                name="birthday"
-              ></ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="heart-outline"
-                size="small"
-              ></ion-icon>
-              <ion-select
-                interface="popover"
-                placeholder="Relation"
-                [(ngModel)]="data.relation"
-                name="relation"
-              >
-                <ion-select-option value="Parent">Parent</ion-select-option>
-                <ion-select-option value="Guardian">Guardian</ion-select-option>
-                <ion-select-option value="Sibling">Sibling</ion-select-option>
-                <ion-select-option value="Grandparent"
-                  >Grandparent</ion-select-option
-                >
-                <ion-select-option value="Other">Other</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-input
-                type="text"
-                placeholder="Email"
-                [(ngModel)]="data.email"
-                name="email"
-              ></ion-input>
-              <ion-icon
-                slot="start"
-                name="mail-outline"
-                size="small"
-              ></ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="call-outline"
-                size="small"
-              ></ion-icon>
-              <ion-input
-                type="text"
-                placeholder="Phone Number"
-                [(ngModel)]="data.phone"
-                name="phone"
-              ></ion-input>
-            </ion-item>
-            <div class="ion-margin-vertical ion-text-right">
-              <ion-button
-                type="button"
-                size="small"
-                type="submit"
-                value="submit"
-                id="submit"
-              >
-                <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
-              >
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-  </form>
-
   <ion-list *ngFor="let family of myfamily; let i = index" class="list">
     <ion-card>
-      <ion-grid>
+      <ion-grid>  
         <ion-row>
-          <ion-col>
-            <ion-label class="family-member-header">Family Member</ion-label>
-            <ion-icon
-              style="float: right"
-              name="trash-outline"
-              size="large"
-              (click)="removeFamily(family.rowid)"
-            ></ion-icon>
-            <ion-icon
-              style="float: right"
-              name="paper"
-              size="large"
-              (click)="editData(family.rowid)"
-            ></ion-icon>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="person-outline"
-                size="small"
-              ></ion-icon>
-              <p>{{family.name}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="gift-outline"
-                size="small"
-              ></ion-icon>
-              <p>{{family.date}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="heart-outline"
-                size="small"
-              ></ion-icon>
-              <p>{{family.relation}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <p>{{family.email}}</p>
-              <ion-icon
-                slot="start"
-                name="mail-outline"
-                size="small"
-              ></ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="call-outline"
-                size="small"
-              ></ion-icon>
-              <p>{{family.phone}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-  </ion-list>
+      <ion-col>
+        <ion-item>
+          <ion-label color="tertiary">Family Member</ion-label>
+          <ion-icon
+          color="tertiary"
+          slot="start"
+          name="person-outline"
+        ></ion-icon>
+      </ion-item>
+      <ion-item>
+    <p>{{family.name}}</p>
+  </ion-item>
+  <!-- <ion-item>
+  <p>{{family.relation}}</p>
+</ion-item> -->
+<ion-button color="light" style="float: right" (click)="removeData(family.rowid)"
+><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+<ion-button color="light" style="float: right" (click)="editModal(family.rowid)">
+<ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+<ion-button color="light" style="float: right" (click)="viewModal(family.rowid)"
+><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
+</ion-col>
+</ion-row>
+</ion-grid>
+</ion-card>
+</ion-list>
 </ion-content>
+     
