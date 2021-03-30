@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { AlertController, Platform } from '@ionic/angular';
-// import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms'
-// import { DatabaseService } from '../../services/database.service'
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { ModalController } from '@ionic/angular';
+import {AddEntryPage } from './add-entry/add-entry.page';
+import {EditEntryPage } from './edit-entry/edit-entry.page'; 
+import {ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-my-family',
@@ -10,108 +13,154 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
   styleUrls: ['./my-family.page.scss'],
 })
 export class MyFamilyPage {
-  public myfamily: any = [];
+  public myfamily : Array<any> = [];
+  public isData          : boolean        = false;
+  public storedData      : any            = null;
+  private _db   : any;
 
+  MyFamilyTable : string = 'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)'
   data = {name: "", birthday: "", relation: "", email: "", phone: ""};
 
+  constructor(
+    private _alertController: AlertController,
+    public modalController: ModalController, 
+    public _plat: Platform, 
+    public _sql: SQLite) 
 
-  constructor(private _alertController: AlertController, private _plat: Platform, private _sql: SQLite) {
-    this._plat.ready().then(() => {
-      this.getData();
-    }).catch(e => console.log(e));
-  }
-
-  ionViewDidLoad() {
-    this.getData();
-  }
-
-  ionViewWillEnter() {
-    this.getData();
-  }
-
-  getData() {
-    this._sql.create({
-      name: 'database.db',
-      location: 'default'
-    }).then((db: SQLiteObject) => {
-      db.executeSql('CREATE TABLE IF NOT EXISTS family(rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)', <any>[])
-      .then(res => console.log('Executed SQL')) // alert works
-      .catch(e => alert(e));
-      db.executeSql('SELECT * FROM family ORDER BY rowid DESC', <any>[])
-      .then(res => {
-        this.myfamily = [];
-        for(var i=0; i<res.rows.length; i++) {
-          this.myfamily.push({
-            rowid:res.rows.item(i).rowid,
-            name:res.rows.item(i).name,
-            birthday:res.rows.item(i).birthday,
-            relation:res.rows.item(i).relation,
-            email:res.rows.item(i).email,
-            phone:res.rows.item(i).phone
-          })
-        }
-      })
-    }).catch(e => console.log(e));
-  }
-
-  saveData() {
-    this._sql.create({
-      name: "database.db",
-      location: 'default'
-    }).then((db: SQLiteObject) => {
-      db.executeSql('INSERT INTO family VALUES(NULL,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone])
-      .then(res => {
-        console.log("result:" + res);
-        this.getData();
-      })
-      .catch(e => alert("error 1" + e));
-    })
-    .catch(e => alert("error 2" + e));
-  }
-
-  editData(rowid) {
-    console.log("added data"), {
-      rowid: rowid
-    }
-  }
-
-  deleteData(rowid) {
-    this._sql.create({
-      name: 'database.db',
-      location: 'default'
-    }).then((db: SQLiteObject) => {
-      db.executeSql('DELETE FROM family WHERE rowid=?', [rowid])
-      .then(res => {
-        console.log(res);
-        this.getData();
-      })
-      .catch(e => alert(e));
-    }).catch(e => alert(e));
-
-  }
-
-  async removeFamily(rowid) {
-    const alert = await this._alertController.create({
-      header: "Delete this person?",
-      message: "Would you like to delete this person from your family page?",
-      buttons: [
+    {
+      this.myfamily = [];
+      this._plat
+      .ready()
+      .then(() => 
+    
         {
-          text:"Cancel"
-        },
+          this._createDatabase();
+        })
+        .catch(e => alert('create database error' + e));
+      }
+    
+      public _createDatabase()
+      {
+        this._sql.create({
+          name: "database.db",
+          location: 'default'
+        })
+        .then((db: SQLiteObject) =>
         {
-          text:"Delete",
-          handler: ()=> {
-            this.deleteData(rowid);
-
+          this._db = db;
+          this._createDatabaseTables();
+        })
+        .catch(e => alert('create tables error' + e));
+      }
+      
+      async _createDatabaseTables() {
+        await this._db.executeSql(this.MyFamilyTable, []);
+        this.getData()
+      }
+    
+      ionViewDidLoad() {
+            this.getData();
           }
+        
+          ionViewWillEnter() {
+            this.getData();
+          }
+        
+      public getData() {
+        this._db.executeSql('SELECT * FROM myfamily', <any>[])
+        .then(res => {
+          this.myfamily = [];
+          for(var i=0; i<res.rows.length; i++) {
+            this.myfamily.push({
+              rowid:res.rows.item(i).rowid,
+              name:res.rows.item(i).name,
+              birthday:res.rows.item(i).birthday,
+              relation:res.rows.item(i).relation,
+              email:res.rows.item(i).email,
+              phone:res.rows.item(i).phone
+            })
+          }
+        })
+            .catch(e => alert('get data error' + e));
+          }
+        
+      public saveData() {
+        this._db.executeSql('INSERT INTO myfamily VALUES(NULL,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone])
+        .then(res => {
+            this.getData();
+          })
+          .catch(e => alert("save data error" + e));
         }
-      ]
-    });
-
-    await alert.present();
-
-  }
+        
+      deleteData(rowid) {
+          this._db.executeSql('DELETE FROM myfamily WHERE rowid=?', [rowid])
+          .then(res => {
+            this.getData();
+          })
+          .catch(e => alert('delete data error' + e));
+        }
+    
+        async removeData(rowid) {
+          const alert = await this._alertController.create({
+            header: "Delete this entry?",
+            message: "Would you like to delete this entry?",
+            buttons: [
+              {
+                text:"Cancel"
+              },
+              {
+                text:"Delete",
+                handler: ()=> {
+                  this.deleteData(rowid);
+      
+                }
+              }
+            ]
+          });
+      
+          await alert.present();
+      
+        }
+    
+        async openModal() {
+          const modal = await this.modalController.create({
+            component: AddEntryPage,
+            componentProps: {
+            }
+          });
+      
+          modal.onDidDismiss().then((dataReturned) => {
+            this.getData();
+          });
+      
+          return await modal.present();
+        }
+    
+    
+        async viewModal(rowid) {
+          const modal = await this.modalController.create({
+            component: ViewEntryPage,
+            componentProps: { 'rowid': rowid
+            }
+          });
+          modal.onDidDismiss().then(() => {
+            this.getData();
+          });
+      
+          return await modal.present();
+        }
+    
+    
+        async editModal(rowid) {
+          const modal = await this.modalController.create({
+            component: EditEntryPage,
+            componentProps: { 'rowid': rowid}
+          });
+          modal.onDidDismiss().then(()=>{
+            this.getData();
+          });
+          return await modal.present();
+        }
 
 }
-
 

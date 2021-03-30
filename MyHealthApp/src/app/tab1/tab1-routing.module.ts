@@ -6,7 +6,20 @@ const routes: Routes = [
   {
     path: '',
     component: Tab1Page,
+  },
+  {
+    path: 'add-entry',
+    loadChildren: () => import('./add-entry/add-entry.module').then( m => m.AddEntryPageModule)
+  },
+  {
+    path: 'edit-entry',
+    loadChildren: () => import('./edit-entry/edit-entry.module').then( m => m.EditEntryPageModule)
+  },
+  {
+    path: 'view-entry',
+    loadChildren: () => import('./view-entry/view-entry.module').then( m => m.ViewEntryPageModule)
   }
+
 ];
 
 @NgModule({
