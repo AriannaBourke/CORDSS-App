@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { EditEntryPage } from '..//edit-entry/edit-entry.page';
+import {EditEntryPage } from '..//edit-entry/edit-entry.page';
 
 
 @Component({
@@ -11,14 +11,14 @@ import { EditEntryPage } from '..//edit-entry/edit-entry.page';
   styleUrls: ['./view-entry.page.scss'],
 })
 export class ViewEntryPage {
-  public appointments : Array<any> = [];
+  public medicines : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
   rowid: any;
-  AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -28,7 +28,7 @@ export class ViewEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid')
-              this.appointments = [];
+              this.medicines = [];
               this._plat
               .ready()
               .then(() =>           
@@ -53,27 +53,27 @@ export class ViewEntryPage {
               }
               
               async _createDatabaseTables() {
-                await this._db.executeSql(this.AppointmentsTable, []);
+                await this._db.executeSql(this.MedicinesTable, []);
                 this.getData(this.rowid);
               }
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM appointments WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
                 .then(res => {
-                  this.appointments = [];
+                  this.medicines = [];
                   for(var i=0; i<res.rows.length; i++) {
-                    this.appointments.push({
+                    this.medicines.push({
                       rowid:res.rows.item(i).rowid,
-                      date:res.rows.item(i).date,
-                      doctor:res.rows.item(i).doctor,
-                      place:res.rows.item(i).place,
-                      description:res.rows.item(i).description,
-                      questions:res.rows.item(i).questions,
+                      medicinename:res.rows.item(i).medicinename,
+                      instructions:res.rows.item(i).instructions,
+                      sideeffects:res.rows.item(i).sideeffects,
+                      notes:res.rows.item(i).notes
                     })
                   }
                 })
                     .catch(e => alert('get data error' + e));
                   }
+                
                  
             
               async closeModal() {
@@ -81,7 +81,7 @@ export class ViewEntryPage {
               }
 
               deleteData(rowid) {
-                this._db.executeSql('DELETE FROM appointments WHERE rowid=?', [rowid])
+                this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
                 })
@@ -91,7 +91,7 @@ export class ViewEntryPage {
               async removeData(rowid) {
                 const alert = await this._alertController.create({
                   header: "Delete this entry?",
-                  message: "Would you like to delete this entry from your appointments?",
+                  message: "Would you like to delete this entry from your medicines?",
                   buttons: [
                     {
                       text:"Cancel"

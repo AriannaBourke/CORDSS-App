@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Plan</ion-title>
+    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
+    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label color="tertiary">Urgent Plan</ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label color="medium" position="stacked">Type of Emergency</ion-label>
+            <ion-icon  color="tertiary" slot="start" name="medkit-outline"></ion-icon>
+            <ion-input 
+            type="text"
+            placeholder="Type of Emergency"
+            [(ngModel)]="data.type"
+            name="type"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+         <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Instructions</ion-label>
+              <ion-icon color="tertiary" slot="start" name="book-outline"></ion-icon>
+              <ion-input 
+              type="text"
+              placeholder="Instructions"
+              [(ngModel)]="data.instructions"
+              name="instructions"
+            ></ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Telephone</ion-label>
+              <ion-icon color="tertiary" slot="start" name="call-outline"></ion-icon>
+              <ion-input 
+              type="text"
+              placeholder="Phone Number"
+              [(ngModel)]="data.phone"
+              name="phone"
+            ></ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Notes</ion-label>
+              <ion-icon color="tertiary" slot="start" name="pencil-outline"></ion-icon>
+              <ion-textarea 
+              type="text"
+              placeholder="Notes"
+              [(ngModel)]="data.notes"
+              name="notes"
+              ></ion-textarea>
+            </ion-item>
+           <div class="ion-margin-vertical ion-text-right">
+            <ion-button
+            type="button"
+            fill="outline"
+            color="danger"
+            (click)="form.reset()"
+          >Clear</ion-button>
+            <ion-button
+              type="button"
+              type="submit"
+              value="submit"
+              id="submit"
+              color="success"
+            >Submit</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</form>
+</ion-content>
