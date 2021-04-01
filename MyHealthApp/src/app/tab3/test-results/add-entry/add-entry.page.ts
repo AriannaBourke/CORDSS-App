@@ -1,18 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { ModalController } from '@ionic/angular';
-import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page';
-import {ViewEntryPage } from './view-entry/view-entry.page';
-
 
 @Component({
-  selector: 'app-test-results',
-  templateUrl: './test-results.page.html',
-  styleUrls: ['./test-results.page.scss'],
+  selector: 'app-add-entry',
+  templateUrl: './add-entry.page.html',
+  styleUrls: ['./add-entry.page.scss'],
 })
-export class TestResultsPage {
+export class AddEntryPage {
   public testresults : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -21,11 +17,14 @@ export class TestResultsPage {
   TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, files TEXT, notes TEXT)'
   data = {date: "", type: "", photo: "", files: "", notes: ""};
 
-  constructor(private _alertController: AlertController, 
-              public modalController: ModalController,
+
+  constructor(private modalController: ModalController,
+              private navParams: NavParams,
+              private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite)
-{
+              public _sql: SQLite
+            ) 
+{            
   this.testresults = [];
   this._plat
   .ready()
@@ -85,38 +84,23 @@ export class TestResultsPage {
   public saveData() {
     this._db.executeSql('INSERT INTO testresults VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.type, this.data.photo, this.data.files, this.data.notes])
     .then(res => {
-        this.getData();
+        this.closeModal()
       })
       .catch(e => alert("save data error" + e));
     }
       
-    
-  editData(rowid) {
-    console.log("added data"), {
-      rowid: rowid
-    }
-  }
-    
-  deleteData(rowid) {
-      this._db.executeSql('DELETE FROM testresults WHERE rowid=?', [rowid])
-      .then(res => {
-        this.getData();
-      })
-      .catch(e => alert('delete data error' + e));
-    }
-
-    async removeData(rowid) {
+    async submitData(rowid) {
       const alert = await this._alertController.create({
-        header: "Delete this entry?",
-        message: "Would you like to delete this entry from your test results?",
+        header: "Save this entry?",
+        message: "Would you like to save this entry in your test results?",
         buttons: [
           {
             text:"Cancel"
           },
           {
-            text:"Delete",
+            text:"save",
             handler: ()=> {
-              this.deleteData(rowid);
+              this.saveData();
   
             }
           }
@@ -124,47 +108,10 @@ export class TestResultsPage {
       });
   
       await alert.present();
-  
     }
-
-    async openModal() {
-      const modal = await this.modalController.create({
-        component: AddEntryPage,
-        componentProps: {
-        }
-      });
-  
-      modal.onDidDismiss().then((dataReturned) => {
-        this.getData();
-      });
-  
-      return await modal.present();
-    }
-
-
-    async viewModal(rowid) {
-      const modal = await this.modalController.create({
-        component: ViewEntryPage,
-        componentProps: { 'rowid': rowid
-        }
-      });
-      modal.onDidDismiss().then(() => {
-        this.getData();
-      });
-  
-      return await modal.present();
-    }
-
-
-    async editModal(rowid) {
-      const modal = await this.modalController.create({
-        component: EditEntryPage,
-        componentProps: { 'rowid': rowid}
-      });
-      modal.onDidDismiss().then(()=>{
-        this.getData();
-      });
-      return await modal.present();
-    }
-
+    
+  async closeModal() {
+    await this.modalController.dismiss();
+    this.getData();
+  }
 }
