@@ -3,11 +3,44 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Medical History</ion-title>
+    <ion-title>My Conditions</ion-title>
+    <ion-button color="success" slot="end" (click)="openModal()"
+    ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+  >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-list *ngFor="let history of medicalhistory; let i = index" class="list">
+    <ion-card>
+      <ion-grid>  
+        <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label color="tertiary">Condition</ion-label>
+          <ion-icon
+          color="tertiary"
+          slot="start"
+          name="medkit-outline"
+        ></ion-icon>
+        </ion-item>
+            <ion-item>
+          <p>{{history.diagnosis}}</p>
+        </ion-item>
+      <ion-button color="light" style="float: right" (click)="removeData(history.rowid)"
+      ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+      <ion-button color="light" style="float: right" (click)="editModal(history.rowid)">
+      <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+      <ion-button color="light" style="float: right" (click)="viewModal(history.rowid)"
+      ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-card>
+  </ion-list>
+  </ion-content>
+
+<!-- <ion-content [fullscreen]="true">
   <form #form="ngForm" (ngSubmit)="saveData(form)">
     <ion-card>
       <ion-grid>
@@ -170,4 +203,4 @@
     </ion-grid>
   </ion-card>
 </ion-list>
-</ion-content>
+</ion-content> -->

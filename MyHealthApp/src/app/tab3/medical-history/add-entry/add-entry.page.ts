@@ -9,13 +9,13 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
   styleUrls: ['./add-entry.page.scss'],
 })
 export class AddEntryPage {
-  public medicines : Array<any> = [];
+  public medicalhistory : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  MedicalHistoryTable : string = 'CREATE TABLE IF NOT EXISTS medicalhistory (rowid INTEGER PRIMARY KEY AUTOINCREMENT, diagnosis TEXT, diagnosis_details TEXT, diagnosis_date TEXT, notes TEXT)'
+  data = {diagnosis: "", diagnosis_details: "", diagnosis_date: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -24,7 +24,7 @@ export class AddEntryPage {
               public _sql: SQLite
             ) 
 {            
-  this.medicines = [];
+  this.medicalhistory = [];
   this._plat
   .ready()
   .then(() => 
@@ -50,7 +50,7 @@ export class AddEntryPage {
   }
   
   async _createDatabaseTables() {
-    await this._db.executeSql(this.MedicinesTable, []);
+    await this._db.executeSql(this.MedicalHistoryTable, []);
     this.getData()
   }
 
@@ -63,15 +63,15 @@ export class AddEntryPage {
       }
     
       public getData() {
-        this._db.executeSql('SELECT * FROM medicines ORDER BY rowid DESC', <any>[])
+        this._db.executeSql('SELECT * FROM medicalhistory ORDER BY rowid DESC', <any>[])
         .then(res => {
-          this.medicines = [];
+          this.medicalhistory = [];
           for(var i=0; i<res.rows.length; i++) {
-            this.medicines.push({
+            this.medicalhistory.push({
               rowid:res.rows.item(i).rowid,
-              medicinename:res.rows.item(i).medicinename,
-              instructions:res.rows.item(i).instructions,
-              sideeffects:res.rows.item(i).sideeffects,
+              diagnosis:res.rows.item(i).diagnosis,
+              diagnosis_details:res.rows.item(i).diagnosis_details,
+              diagnosis_date:res.rows.item(i).diagnosis_date,
               notes:res.rows.item(i).notes
             })
           }
@@ -80,7 +80,7 @@ export class AddEntryPage {
           }
     
   public saveData() {
-    this._db.executeSql('INSERT INTO medicines VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
+    this._db.executeSql('INSERT INTO medicalhistory VALUES(NULL,?,?,?,?)', [this.data.diagnosis, this.data.diagnosis_details, this.data.diagnosis_date, this.data.notes])
     .then(res => {
         this.closeModal()
       })
@@ -90,7 +90,7 @@ export class AddEntryPage {
     async submitData(rowid) {
       const alert = await this._alertController.create({
         header: "Save this entry?",
-        message: "Would you like to save this entry in your medicines?",
+        message: "Would you like to save this entry?",
         buttons: [
           {
             text:"Cancel"

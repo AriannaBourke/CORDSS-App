@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Medicine</ion-title>
+    <ion-title>Add Condition</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
     ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
   </ion-toolbar>
@@ -12,35 +12,29 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-label color="tertiary">Medicine</ion-label>
+          <ion-label color="tertiary">Condition</ion-label>
         </ion-col>
       </ion-row>
 
       <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="stacked">Medicine Name</ion-label>
+              <ion-label color="tertiary" position="stacked">Diagnosis</ion-label>
               <ion-icon
               color="tertiary"
                 slot="start"
                 name="medkit-outline"
               ></ion-icon>
-              <ion-select          
+              <ion-select
                 interface="popover"
-                placeholder="Medicine Name"
-                [(ngModel)]="data.medicinename"
-                name="medicinename"
+                placeholder="Diagnosis"
+                [(ngModel)]="data.diagnosis"
+                name="diagnosis"
               >
-                <ion-select-option value="Prednisolone tablets"
-                  >Prednisolone tablets</ion-select-option
-                >
-                <ion-select-option value="Folic acid"
-                  >Folic acid</ion-select-option
-                >
-                <ion-select-option value="Naproxen">Naproxen</ion-select-option>
-                <ion-select-option value="Paracetamol"
-                  >Paracetamol</ion-select-option
-                >
+                <ion-select-option value="Uveitis">Uveitis</ion-select-option>
+                <ion-select-option value="Uveitis2">Uveitis2</ion-select-option>
+                <ion-select-option value="Uveitis3">Uveitis3</ion-select-option>
+                <ion-select-option value="Uveitis4">Uveitis4</ion-select-option>
                 <ion-select-option value="Other">Other</ion-select-option>
               </ion-select>
             </ion-item>
@@ -50,18 +44,14 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="stacked">Instructions</ion-label>
+              <ion-label color="tertiary" position="stacked">Diagnosis Details</ion-label>
+              <ion-icon slot="start" name="document-text-outline" color="tertiary"></ion-icon>
               <ion-textarea
-                type="text"
-                placeholder="Instructions"
-                [(ngModel)]="data.instructions"
-                name="instructions"
-              ></ion-textarea>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="information-outline"
-              ></ion-icon>
+              type="text"
+              placeholder="Details about diagnosis"
+              [(ngModel)]="data.diagnosis_details"
+              name="diagnosis_details"
+            ></ion-textarea>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -69,14 +59,14 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="stacked">Side Effects</ion-label>
-              <ion-input
-                type="text"
-                placeholder="Side Effects"
-                [(ngModel)]="data.sideeffects"
-                name="sideeffects"
-              ></ion-input>
-              <ion-icon color="tertiary" slot="start" name="sad-outline"></ion-icon>
+              <ion-label color="tertiary" position="stacked">Side Effects</ion-label>
+              <ion-icon slot="start" name="calendar-number-outline" color="tertiary"></ion-icon>
+              <ion-datetime
+              displayFormat="DD MMMM YYYY"
+              placeholder="Diagnosis Date"
+              [(ngModel)]="data.diagnosis_date"
+              name="diagnosis_date"
+            ></ion-datetime>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -84,18 +74,14 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="stacked">Notes</ion-label>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="chatbox-ellipses-outline"
-              ></ion-icon>
+              <ion-label color="tertiary"  position="stacked">Notes</ion-label>
+              <ion-icon slot="start" name="pencil-outline" color="tertiary"></ion-icon>
               <ion-textarea
-                type="text"
-                placeholder="Notes"
-                [(ngModel)]="data.notes"
-                name="notes"
-              ></ion-textarea>
+              type="text"
+              placeholder="Notes"
+              [(ngModel)]="data.notes"
+              name="notes"
+            ></ion-textarea>
             </ion-item>
             <div class="ion-margin-vertical ion-text-right">
               <ion-button

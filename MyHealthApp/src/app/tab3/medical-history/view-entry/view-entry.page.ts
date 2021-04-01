@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import {EditEntryPage } from '..//edit-entry/edit-entry.page';
+import { EditEntryPage } from '..//edit-entry/edit-entry.page';
 
 
 @Component({
@@ -11,14 +11,14 @@ import {EditEntryPage } from '..//edit-entry/edit-entry.page';
   styleUrls: ['./view-entry.page.scss'],
 })
 export class ViewEntryPage {
-  public medicines : Array<any> = [];
+  public medicalhistory : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  MedicalHistoryTable : string = 'CREATE TABLE IF NOT EXISTS medicalhistory (rowid INTEGER PRIMARY KEY AUTOINCREMENT, diagnosis TEXT, diagnosis_details TEXT, diagnosis_date TEXT, notes TEXT)'
+  data = {diagnosis: "", diagnosis_details: "", diagnosis_date: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -28,7 +28,7 @@ export class ViewEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid')
-              this.medicines = [];
+              this.medicalhistory = [];
               this._plat
               .ready()
               .then(() =>           
@@ -53,20 +53,20 @@ export class ViewEntryPage {
               }
               
               async _createDatabaseTables() {
-                await this._db.executeSql(this.MedicinesTable, []);
+                await this._db.executeSql(this.MedicalHistoryTable, []);
                 this.getData(this.rowid);
               }
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM medicalhistory WHERE rowid=?', [rowid])
                 .then(res => {
-                  this.medicines = [];
+                  this.medicalhistory = [];
                   for(var i=0; i<res.rows.length; i++) {
-                    this.medicines.push({
+                    this.medicalhistory.push({
                       rowid:res.rows.item(i).rowid,
-                      medicinename:res.rows.item(i).medicinename,
-                      instructions:res.rows.item(i).instructions,
-                      sideeffects:res.rows.item(i).sideeffects,
+                      diagnosis:res.rows.item(i).diagnosis,
+                      diagnosis_details:res.rows.item(i).diagnosis_details,
+                      diagnosis_date:res.rows.item(i).diagnosis_date,
                       notes:res.rows.item(i).notes
                     })
                   }
@@ -81,7 +81,7 @@ export class ViewEntryPage {
               }
 
               deleteData(rowid) {
-                this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('DELETE FROM medicalhistory WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
                 })
@@ -91,7 +91,7 @@ export class ViewEntryPage {
               async removeData(rowid) {
                 const alert = await this._alertController.create({
                   header: "Delete this entry?",
-                  message: "Would you like to delete this entry from your medicines?",
+                  message: "Would you like to delete this entry?",
                   buttons: [
                     {
                       text:"Cancel"
