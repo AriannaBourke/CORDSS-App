@@ -1,31 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>View Medicine</ion-title>
+    <ion-title>View Thoughts & Feelings</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
     ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor="let med of medicines; let i = index" class="list">
+  <ion-list *ngFor="let note of thoughtsfeelings; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label color="tertiary" class="entry-header">Medicine</ion-label>
+            <ion-label color="tertiary">Note</ion-label>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Medicine Name</ion-label>
+              <ion-label  color="medium" position="stacked">Note Name</ion-label>
               <ion-icon
               color="tertiary"
                 slot="start"
-                name="medkit-outline"
+                name="document-outline"
               ></ion-icon>
-              <p>{{med.medicinename}}</p>
+              <p>{{note.note_name}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -33,13 +33,13 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Instructions</ion-label>
+              <ion-label color="medium" position="stacked">Photo</ion-label>
               <ion-icon
               color="tertiary"
                 slot="start"
-                name="information-outline"
+                name="camera-outline"
               ></ion-icon>
-              <p>{{med.instructions}}</p>
+              <p>{{note.photo}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -47,13 +47,13 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Side Effects</ion-label>
+              <ion-label  color="medium" position="stacked">File</ion-label>
               <ion-icon
               color="tertiary"
                 slot="start"
-                name="sad-outline"
+                name="copy-outline"
               ></ion-icon>
-              <p>{{med.sideeffects}}</p>
+              <p>{{note.file}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -69,9 +69,9 @@
                 name="pencil-outline"
               ></ion-icon>
             </ion-item>
-            <ion-button color="light" style="float: right" (click)="removeData(med.rowid)"
+            <ion-button color="light" style="float: right" (click)="removeData(note.rowid)"
             ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(med.rowid)">
+            <ion-button color="light" style="float: right" (click)="editModal(note.rowid)">
             <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
           </ion-col>
         </ion-row>

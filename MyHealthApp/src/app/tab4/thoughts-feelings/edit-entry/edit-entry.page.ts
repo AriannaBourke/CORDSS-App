@@ -10,14 +10,14 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
   styleUrls: ['./edit-entry.page.scss'],
 })
 export class EditEntryPage {
-  public medicines : Array<any> = [];
+  public thoughtsfeelings : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", file: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -27,7 +27,7 @@ export class EditEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid');        
-              this.medicines = [];
+              this.thoughtsfeelings = [];
               this._plat
               .ready()
               .then(() => 
@@ -53,21 +53,20 @@ export class EditEntryPage {
               }
               
               async _createDatabaseTables() {
-                await this._db.executeSql(this.MedicinesTable, []);
+                await this._db.executeSql(this.ThoughtsFeelingsTable, []);
                 this.getData(this.rowid);
               }
 
-                
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM thoughtsfeelings WHERE rowid=?', [rowid])
                 .then(res => {
-                  this.medicines = [];
+                  this.thoughtsfeelings = [];
                   for(var i=0; i<res.rows.length; i++) {
-                    this.medicines.push({
+                    this.thoughtsfeelings.push({
                       rowid:res.rows.item(i).rowid,
-                      medicinename:res.rows.item(i).medicinename,
-                      instructions:res.rows.item(i).instructions,
-                      sideeffects:res.rows.item(i).sideeffects,
+                      note_name:res.rows.item(i).note_name,
+                      photo:res.rows.item(i).photo,
+                      file:res.rows.item(i).file,
                       notes:res.rows.item(i).notes
                     })
                   }
@@ -84,7 +83,7 @@ export class EditEntryPage {
               async update(rowid) {
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
-                  message: "Would you like to update this entry in your medicines?",
+                  message: "Would you like to update this entry?",
                   buttons: [
                     {
                       text:"Cancel"
@@ -102,33 +101,12 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE appointments SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid]) 
+                this._db.executeSql('UPDATE thoughtsfeelings SET note_name=?, photo=?, file=?, notes=? WHERE rowid=?',[this.data.note_name, this.data.photo, this.data.file, this.data.notes, rowid])
                 .then(res => {
                   this.closeModal();
                 })
                 .catch(e => alert('update error' + e));
               
-            }
-
-            async finishMedicine(rowid) {
-              const alert = await this._alertController.create({
-                header: "Have you finished taking this medicine?",
-                message: "Would you like to move this medicine into your past medicines page?",
-                buttons: [
-                  {
-                    text:"No"
-                  },
-                  {
-                    text:"Yes",
-                    handler: ()=> {
-                     console.log("Medicine put into past")
-                    }
-                  }
-                ]
-              });
-          
-              await alert.present();
-          
             }
           
 }

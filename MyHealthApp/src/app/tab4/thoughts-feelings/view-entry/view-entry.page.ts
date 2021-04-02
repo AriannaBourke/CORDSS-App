@@ -11,14 +11,14 @@ import {EditEntryPage } from '..//edit-entry/edit-entry.page';
   styleUrls: ['./view-entry.page.scss'],
 })
 export class ViewEntryPage {
-  public medicines : Array<any> = [];
+  public thoughtsfeelings : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", file: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -28,7 +28,7 @@ export class ViewEntryPage {
             ) 
             {
               this.rowid=navParams.get('rowid')
-              this.medicines = [];
+              this.thoughtsfeelings = [];
               this._plat
               .ready()
               .then(() =>           
@@ -53,20 +53,20 @@ export class ViewEntryPage {
               }
               
               async _createDatabaseTables() {
-                await this._db.executeSql(this.MedicinesTable, []);
+                await this._db.executeSql(this.ThoughtsFeelingsTable, []);
                 this.getData(this.rowid);
               }
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM thoughtsfeelings WHERE rowid=?', [rowid])
                 .then(res => {
-                  this.medicines = [];
+                  this.thoughtsfeelings = [];
                   for(var i=0; i<res.rows.length; i++) {
-                    this.medicines.push({
+                    this.thoughtsfeelings.push({
                       rowid:res.rows.item(i).rowid,
-                      medicinename:res.rows.item(i).medicinename,
-                      instructions:res.rows.item(i).instructions,
-                      sideeffects:res.rows.item(i).sideeffects,
+                      note_name:res.rows.item(i).note_name,
+                      photo:res.rows.item(i).photo,
+                      file:res.rows.item(i).file,
                       notes:res.rows.item(i).notes
                     })
                   }
@@ -81,7 +81,7 @@ export class ViewEntryPage {
               }
 
               deleteData(rowid) {
-                this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('DELETE FROM thoughtsfeelings WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
                 })
@@ -91,7 +91,7 @@ export class ViewEntryPage {
               async removeData(rowid) {
                 const alert = await this._alertController.create({
                   header: "Delete this entry?",
-                  message: "Would you like to delete this entry from your medicines?",
+                  message: "Would you like to delete this entry?",
                   buttons: [
                     {
                       text:"Cancel"
