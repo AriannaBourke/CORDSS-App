@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>View Mood</ion-title>
+    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
+    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngFor="let m of mood; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item></ion-item>
+            <ion-label color="tertiary">Mood</ion-label>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Date</ion-label>
+              <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
+              <p>{{m.date | date: 'dd MMMM y'}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <!-- <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label  color="medium" position="stacked">Happy</ion-label>
+              <ion-icon
+              color="tertiary"
+                slot="start"
+                name="happy-outline"
+              ></ion-icon>
+              <p>{{m.happy}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label  color="medium" position="stacked">Independent</ion-label>
+              <ion-icon
+              color="tertiary"
+                slot="start"
+                name="happy-outline"
+              ></ion-icon>
+              <p>{{m.independent}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label  color="medium" position="stacked">Tired</ion-label>
+              <ion-icon
+              color="tertiary"
+                slot="start"
+                name="happy-outline"
+              ></ion-icon>
+              <p>{{m.tired}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label  color="medium" position="stacked">Productive</ion-label>
+              <ion-icon
+              color="tertiary"
+                slot="start"
+                name="happy-outline"
+              ></ion-icon>
+              <p>{{m.productive}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row> -->
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Notes</ion-label>
+              <ion-icon
+              color="tertiary"
+                slot="start"
+                name="pencil-outline"
+              ></ion-icon>
+              <p>{{m.notes}}</p>
+            </ion-item>
+            <ion-button color="light" style="float: right" (click)="removeData(m.rowid)"
+            ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+            <ion-button color="light" style="float: right" (click)="editModal(m.rowid)">
+            <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+  </ion-content>
+        
