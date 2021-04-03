@@ -17,27 +17,27 @@ export class ViewEntryPage {
   private _db   : any;
 
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)';
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
+              private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite
-            ) 
+            )
             {
               this.rowid=navParams.get('rowid')
               this.medicines = [];
               this._plat
               .ready()
-              .then(() =>           
+              .then(() =>
                 {
                   this._createDatabase();
                 })
                 .catch(e => alert('create database error' + e));
               }
-            
+
               public _createDatabase()
               {
                 this._sql.create({
@@ -51,14 +51,14 @@ export class ViewEntryPage {
                 })
                 .catch(e => alert('create tables error' + e));
               }
-              
+
               async _createDatabaseTables() {
                 await this._db.executeSql(this.MedicinesTable, []);
                 this.getData(this.rowid);
               }
-                
+
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.medicines = [];
                   for(var i=0; i<res.rows.length; i++) {
@@ -67,27 +67,28 @@ export class ViewEntryPage {
                       medicinename:res.rows.item(i).medicinename,
                       instructions:res.rows.item(i).instructions,
                       sideeffects:res.rows.item(i).sideeffects,
-                      notes:res.rows.item(i).notes
+                      notes:res.rows.item(i).notes,
+                      activeflag:res.rows.item(i).activeflag
                     })
                   }
                 })
                     .catch(e => alert('get data error' + e));
                   }
-                
-                 
-            
+
+
+
               async closeModal() {
                 await this.modalController.dismiss();
               }
 
               deleteData(rowid) {
-                this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('DELETE FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
                 })
                 .catch(e => alert('delete data error' + e));
               }
-          
+
               async removeData(rowid) {
                 const alert = await this._alertController.create({
                   header: "Delete this entry?",
@@ -104,9 +105,9 @@ export class ViewEntryPage {
                     }
                   ]
                 });
-            
+
                 await alert.present();
-            
+
               }
 
               async editModal(rowid) {
@@ -119,6 +120,6 @@ export class ViewEntryPage {
                 });
                 return await modal.present();
               }
-              
+
             }
 

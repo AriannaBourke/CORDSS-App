@@ -14,20 +14,20 @@ export class AddEntryPage {
   public storedData      : any            = null;
   private _db   : any;
 
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)';
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
+              private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite
-            ) 
-{            
+            )
+{
   this.medicines = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -48,7 +48,7 @@ export class AddEntryPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.MedicinesTable, []);
     this.getData()
@@ -57,13 +57,13 @@ export class AddEntryPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
       public getData() {
-        this._db.executeSql('SELECT * FROM medicines ORDER BY rowid DESC', <any>[])
+        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="Yes" ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.medicines = [];
           for(var i=0; i<res.rows.length; i++) {
@@ -72,21 +72,22 @@ export class AddEntryPage {
               medicinename:res.rows.item(i).medicinename,
               instructions:res.rows.item(i).instructions,
               sideeffects:res.rows.item(i).sideeffects,
-              notes:res.rows.item(i).notes
+              notes:res.rows.item(i).notes,
+              activeflag:res.rows.item(i).activeflag
             })
           }
         })
             .catch(e => alert('get data error' + e));
           }
-    
+
   public saveData() {
-    this._db.executeSql('INSERT INTO medicines VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
+    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, "Yes"])
     .then(res => {
-        this.closeModal()
+      this.closeModal();
       })
-      .catch(e => alert("save data error" + e));
+      .catch(e => alert("save data error" + JSON.stringify(e)));
     }
-      
+
     async submitData(rowid) {
       const alert = await this._alertController.create({
         header: "Save this entry?",
@@ -99,15 +100,15 @@ export class AddEntryPage {
             text:"save",
             handler: ()=> {
               this.saveData();
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
     }
-    
+
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();

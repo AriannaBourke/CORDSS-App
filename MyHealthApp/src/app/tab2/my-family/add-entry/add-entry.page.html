@@ -1,8 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Appointment</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>Add Family Member</ion-title>
+    <ion-button
+      color="black"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -12,16 +18,18 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label color="tertiary">Family Member</ion-label>
-           </ion-col>
+            <ion-label color="tertiary" class="card-header"
+              >Family Member</ion-label
+            >
+          </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium"  position="stacked">Name</ion-label>
+              <ion-label color="medium" position="stacked">Name</ion-label>
               <ion-icon
-              color="tertiary"
+                color="tertiary"
                 slot="start"
                 name="person-outline"
               ></ion-icon>
@@ -38,9 +46,9 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium"  position="stacked">Birthday</ion-label>
+              <ion-label color="medium" position="stacked">Birthday</ion-label>
               <ion-icon
-              color="tertiary"
+                color="tertiary"
                 slot="start"
                 name="gift-outline"
               ></ion-icon>
@@ -57,9 +65,9 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium"  position="stacked">Relation</ion-label>
+              <ion-label color="medium" position="stacked">Relation</ion-label>
               <ion-icon
-              color="tertiary"
+                color="tertiary"
                 slot="start"
                 name="heart-outline"
               ></ion-icon>
@@ -84,7 +92,7 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium"  position="stacked">Email</ion-label>
+              <ion-label color="medium" position="stacked">Email</ion-label>
               <ion-input
                 type="text"
                 placeholder="Email"
@@ -92,7 +100,7 @@
                 name="email"
               ></ion-input>
               <ion-icon
-              color="tertiary"
+                color="tertiary"
                 slot="start"
                 name="mail-outline"
               ></ion-icon>
@@ -103,9 +111,9 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium"  position="stacked">Telephone</ion-label>
+              <ion-label color="medium" position="stacked">Telephone</ion-label>
               <ion-icon
-              color="tertiary"
+                color="tertiary"
                 slot="start"
                 name="call-outline"
               ></ion-icon>
@@ -118,23 +126,24 @@
             </ion-item>
             <div class="ion-margin-vertical ion-text-right">
               <ion-button
-              type="button"
-              fill="outline"
-              color="danger"
-              (click)="form.reset()"
-            >Clear</ion-button>
+                type="button"
+                fill="outline"
+                color="danger"
+                (click)="form.reset()"
+                >Clear</ion-button
+              >
               <ion-button
                 type="button"
                 type="submit"
                 value="submit"
                 id="submit"
                 color="success"
-              >Submit</ion-button
+                >Submit</ion-button
               >
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
-  </form> 
+  </form>
 </ion-content>
