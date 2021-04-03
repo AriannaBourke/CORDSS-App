@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -28,9 +28,13 @@
               <ion-input          
                 placeholder="Note Name"
                 [(ngModel)]="data.note_name"
-                name="note_name"
+                name="note_name" required
+                #note_nameCtrl="ngModel"
               >
               </ion-input>
+            </ion-item>
+            <ion-item *ngIf="!note_nameCtrl.valid && note_nameCtrl.touched">
+              <ion-text color="danger">*Note name is required</ion-text>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -83,7 +87,12 @@
                 placeholder="Notes"
                 [(ngModel)]="data.notes"
                 name="notes"
+                required
+                #notesCtrl="ngModel"
               ></ion-textarea>
+            </ion-item>
+            <ion-item *ngIf="!notesCtrl.valid && notesCtrl.touched">
+              <ion-text color="danger">*Notes are required</ion-text>
             </ion-item>
             <div class="ion-margin-vertical ion-text-right">
               <ion-button
@@ -98,6 +107,7 @@
                 value="submit"
                 id="submit"
                 color="success"
+                [disabled]="!form.valid"
               >Submit</ion-button
               >
             </div>
