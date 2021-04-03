@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-entry',
@@ -13,17 +14,18 @@ export class AddEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  data: any;
+  isSubmitted = false;
   ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
-
+  
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
               public _sql: SQLite
             ) 
-{            
+{ 
+  this.data = {date: "", doctor: "", place: "", description: "", questions: ""};           
   this.procedures = [];
   this._plat
   .ready()
@@ -88,7 +90,8 @@ export class AddEntryPage {
       .catch(e => alert("save data error" + e));
     }
       
-    async submitData(rowid) {
+    async submitData(myForm: NgForm) {
+      this.isSubmitted = true;
       const alert = await this._alertController.create({
         header: "Save this entry?",
         message: "Would you like to save this entry in your procedures?",
@@ -109,6 +112,10 @@ export class AddEntryPage {
       await alert.present();
     }
     
+    noSubmit(e) {
+      e.preventDefault();
+    }
+
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();

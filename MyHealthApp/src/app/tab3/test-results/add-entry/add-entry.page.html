@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -23,10 +23,14 @@
             <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
             <ion-datetime
             displayFormat="DD MMMM YYYY"
-            placeholder="Date"
+            placeholder="Date (*Required)"
             [(ngModel)]="data.date"
-            name="date"
+            name="date" required
+            #dateCtrl="ngModel"
           ></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
+          <ion-text color="danger">*Date is required</ion-text>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -36,12 +40,16 @@
             <ion-item>
               <ion-label color="medium" position="stacked">Test Type</ion-label>
               <ion-icon slot="start" name="medkit-outline" color="tertiary"></ion-icon>
-              <ion-input 
+              <ion-input
               type="text"
-              placeholder="Test Type"
+              placeholder="Test Type (*Required)"
               [(ngModel)]="data.type"
-              name="type"
-              ></ion-input>
+              name="type" required
+              #typeCtrl="ngModel"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
+            <ion-text color="danger">*Test type is required</ion-text>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -100,6 +108,7 @@
               value="submit"
               id="submit"
               color="success"
+              [disabled]="!form.valid"
             >Submit</ion-button
             >
           </div>

@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -27,9 +27,11 @@
               ></ion-icon>
               <ion-select          
                 interface="popover"
-                placeholder="Medicine Name"
+                placeholder="Medicine Name (*Required)"
                 [(ngModel)]="data.medicinename"
                 name="medicinename"
+                required
+                #medicinenameCtrl="ngModel"
               >
                 <ion-select-option value="Prednisolone tablets"
                   >Prednisolone tablets</ion-select-option
@@ -43,6 +45,9 @@
                 >
                 <ion-select-option value="Other">Other</ion-select-option>
               </ion-select>
+            </ion-item>
+            <ion-item *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched">
+              <ion-text color="danger">*Medicine name is required</ion-text>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -110,6 +115,7 @@
                 value="submit"
                 id="submit"
                 color="success"
+                [disabled]="!form.valid"
               >Submit</ion-button
               >
             </div>

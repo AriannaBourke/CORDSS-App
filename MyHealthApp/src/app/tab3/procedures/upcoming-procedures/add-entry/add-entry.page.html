@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -19,13 +19,18 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="medium" position="floating">Date & Time</ion-label>
+            <ion-label color="medium" position="stacked">Date & Time</ion-label>
             <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
             <ion-datetime
+            placeholder="Date & Time (*Required)"
             displayFormat="DD MMMM YYYY HH:mm"
             [(ngModel)]="data.date"
-            name="date"
+            name="date" required
+            #dateCtrl="ngModel"
           ></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
+          <ion-text color="danger">*Date is required</ion-text>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -33,9 +38,10 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Doctor</ion-label>
+              <ion-label color="medium" position="stacked">Doctor</ion-label>
               <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
               <ion-input 
+              placeholder="Doctor"
               type="text"
               [(ngModel)]="data.doctor"
               name="doctor"
@@ -47,9 +53,10 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Place</ion-label>
+              <ion-label color="medium" position="stacked">Place</ion-label>
               <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
               <ion-input 
+              placeholder="Place"
               type="text"
               [(ngModel)]="data.place"
               name="place"></ion-input>
@@ -60,9 +67,10 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Description</ion-label>
+              <ion-label color="medium" position="stacked">Description</ion-label>
              <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
              <ion-textarea 
+             placeholder="Description"
              rows="3"
              type="text"
              [(ngModel)]="data.description"
@@ -75,9 +83,10 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Questions?</ion-label>
+              <ion-label color="medium" position="stacked">Questions?</ion-label>
              <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
              <ion-textarea 
+             placeholder="Questions"
              rows="3"
              type="text"
              [(ngModel)]="data.questions"
@@ -97,6 +106,7 @@
               value="submit"
               id="submit"
               color="success"
+              [disabled]="!form.valid"
             >Submit</ion-button
             >
           </div>

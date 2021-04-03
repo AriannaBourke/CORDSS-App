@@ -28,7 +28,7 @@ export class AddEntryPage {
             ) 
 
 {  
-  this.data = {note_name: "", photo: "", file: "", notes: "", tos: false};          
+  this.data = {note_name: "", photo: "", file: "", notes: ""};          
   this.mednotes = [];
   this._plat
   .ready()

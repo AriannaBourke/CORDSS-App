@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -23,10 +23,14 @@
             <ion-icon  color="tertiary" slot="start" name="medkit-outline"></ion-icon>
             <ion-input 
             type="text"
-            placeholder="Type of Emergency"
+            placeholder="Type of Emergency (*Required)"
             [(ngModel)]="data.type"
-            name="type"
+            name="type" required
+            #typeCtrl="ngModel"
           ></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
+          <ion-text color="danger">*Type of emergency is required</ion-text>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -38,10 +42,14 @@
               <ion-icon color="tertiary" slot="start" name="book-outline"></ion-icon>
               <ion-input 
               type="text"
-              placeholder="Instructions"
+              placeholder="Instructions (*Required)"
               [(ngModel)]="data.instructions"
-              name="instructions"
+              name="instructions" required
+              #instructionsCtrl="ngModel"
             ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!instructionsCtrl.valid && instructionsCtrl.touched">
+              <ion-text color="danger">*Instructions are required</ion-text>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -86,6 +94,7 @@
               value="submit"
               id="submit"
               color="success"
+              [disabled]="!form.valid"
             >Submit</ion-button
             >
           </div>

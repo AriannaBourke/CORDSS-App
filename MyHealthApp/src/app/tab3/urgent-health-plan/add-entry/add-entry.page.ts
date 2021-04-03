@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-entry',
@@ -13,18 +14,18 @@ export class AddEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  data: any;
+  isSubmitted = false;
   UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
-  data = {type: "", instructions: "", phone: "", notes: ""};
-
-
+  
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
               public _sql: SQLite
             ) 
-{            
+{ 
+  this.data = {type: "", instructions: "", phone: "", notes: ""};           
   this.urgentplan = [];
   this._plat
   .ready()
@@ -88,7 +89,8 @@ export class AddEntryPage {
       .catch(e => alert("save data error" + e));
     }
       
-    async submitData(rowid) {
+    async submitData(myForm: NgForm) {
+      this.isSubmitted = true;
       const alert = await this._alertController.create({
         header: "Save this entry?",
         message: "Would you like to save this entry?",
@@ -107,6 +109,10 @@ export class AddEntryPage {
       });
   
       await alert.present();
+    }
+
+    noSubmit(e) {
+      e.preventDefault();
     }
     
   async closeModal() {

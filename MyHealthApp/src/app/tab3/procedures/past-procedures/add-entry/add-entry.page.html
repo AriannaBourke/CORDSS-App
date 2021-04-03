@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -19,13 +19,18 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="medium" position="floating">Date & Time</ion-label>
+            <ion-label color="medium" position="stacked">Date & Time</ion-label>
             <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
             <ion-datetime
             displayFormat="DD MMMM YYYY HH:mm"
             [(ngModel)]="data.date"
-            name="date"
+            name="date" required
+            #dateCtrl="ngModel"
+            placeholder="Date & Time (*Required)"
           ></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
+          <ion-text color="danger">*Date is required</ion-text>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -33,12 +38,13 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Doctor</ion-label>
+              <ion-label color="medium" position="stacked">Doctor</ion-label>
               <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
               <ion-input 
               type="text"
               [(ngModel)]="data.doctor"
               name="doctor"
+              placeholder="Doctor"
               ></ion-input>
             </ion-item>
           </ion-col>
@@ -47,12 +53,13 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Place</ion-label>
+              <ion-label color="medium" position="stacked">Place</ion-label>
               <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
               <ion-input 
               type="text"
               [(ngModel)]="data.place"
-              name="place"></ion-input>
+              name="place"
+              placeholder="Place"></ion-input>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -60,13 +67,14 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Description</ion-label>
+              <ion-label color="medium" position="stacked">Description</ion-label>
              <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
              <ion-textarea 
              rows="3"
              type="text"
              [(ngModel)]="data.description"
              name="description"
+             placeholder="Description"
              ></ion-textarea>
             </ion-item>
          </ion-col>
@@ -75,13 +83,14 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Questions?</ion-label>
+              <ion-label color="medium" position="stacked">Questions?</ion-label>
              <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
              <ion-textarea 
              rows="3"
              type="text"
              [(ngModel)]="data.questions"
              name="questions"
+             placeholder="Questions"
             ></ion-textarea>
             </ion-item>
            <div class="ion-margin-vertical ion-text-right">
@@ -97,6 +106,7 @@
               value="submit"
               id="submit"
               color="success"
+              [disabled]="!form.valid"
             >Submit</ion-button
             >
           </div>
