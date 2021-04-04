@@ -35,14 +35,14 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Happy</ion-label>
-              <ion-range min="20" max="80" step="2" [(ngModel)]="data.happy" name="happy">
+              <ion-range color="tertiary" min="20" max="80" step="2" [(ngModel)]="data.happy" name="happy">
                 <ion-icon
-                color="tertiary"
+                color="danger"
                   slot="start"
                   name="sad-outline"
                 ></ion-icon>
                 <ion-icon
-                color="tertiary"
+                color="success"
                   slot="end"
                   name="happy-outline"
                 ></ion-icon>
@@ -55,14 +55,14 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">independent</ion-label>
-              <ion-range min="20" max="80" step="2" [(ngModel)]="data.independent" name="independent">
+              <ion-range color="tertiary" min="20" max="80" step="2" [(ngModel)]="data.independent" name="independent">
                 <ion-icon
-                color="tertiary"
+                color="danger"
                   slot="start"
                   name="sad-outline"
                 ></ion-icon>
                 <ion-icon
-                color="tertiary"
+                color="success"
                   slot="end"
                   name="happy-outline"
                 ></ion-icon>
@@ -75,14 +75,14 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Tired</ion-label>
-              <ion-range min="20" max="80" step="2" [(ngModel)]="data.tired" name="tired">
+              <ion-range color="tertiary" min="20" max="80" step="2" [(ngModel)]="data.tired" name="tired">
                 <ion-icon
-                color="tertiary"
+                color="danger"
                   slot="start"
                   name="sad-outline"
                 ></ion-icon>
                 <ion-icon
-                color="tertiary"
+                color="success"
                   slot="end"
                   name="happy-outline"
                 ></ion-icon>
@@ -95,14 +95,16 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Productive</ion-label>
-              <ion-range min="20" max="80" step="2" [(ngModel)]="data.productive" name="productive">
+              <ion-range color="tertiary" min="20" max="80" step="2"
+              [(ngModel)]="data.productive" 
+              name="productive">
                 <ion-icon
-                color="tertiary"
+                color="danger"
                   slot="start"
                   name="sad-outline"
                 ></ion-icon>
                 <ion-icon
-                color="tertiary"
+                color="success"
                   slot="end"
                   name="happy-outline"
                 ></ion-icon>

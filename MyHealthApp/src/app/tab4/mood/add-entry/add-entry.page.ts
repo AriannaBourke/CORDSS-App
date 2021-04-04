@@ -12,7 +12,7 @@ export class AddEntryPage {
   public mood : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
-  private _db   : any;
+  private _db   : any; 
 
   MoodTable : string = 'CREATE TABLE IF NOT EXISTS mood (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, happy INTEGER, independent INTEGER, tired INTEGER, productive INTEGER, notes TEXT)'
   data = {date: "", happy: "", independent: "", tired: "", productive: "", notes: ""};
