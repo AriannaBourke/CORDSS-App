@@ -4,7 +4,6 @@ import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import {EditEntryPage } from '..//edit-entry/edit-entry.page';
 
-
 @Component({
   selector: 'app-view-entry',
   templateUrl: './view-entry.page.html',
@@ -19,7 +18,6 @@ export class ViewEntryPage {
   rowid: any;
   MoodTable : string = 'CREATE TABLE IF NOT EXISTS mood (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, happy INTEGER, independent INTEGER, tired INTEGER, productive INTEGER, notes TEXT)'
   data = {date: "", happy: "", independent: "", tired: "", productive: "", notes: ""};
-
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -107,7 +105,9 @@ export class ViewEntryPage {
                     }
                   ]
                 });
+            
                 await alert.present();
+            
               }
 
               async editModal(rowid) {

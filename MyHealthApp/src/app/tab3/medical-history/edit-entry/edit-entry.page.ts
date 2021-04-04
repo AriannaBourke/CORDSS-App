@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,7 +15,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   MedicalHistoryTable : string = 'CREATE TABLE IF NOT EXISTS medicalhistory (rowid INTEGER PRIMARY KEY AUTOINCREMENT, diagnosis TEXT, diagnosis_details TEXT, diagnosis_date TEXT, notes TEXT)'
   data = {diagnosis: "", diagnosis_details: "", diagnosis_date: "", notes: ""};
@@ -82,6 +83,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry?",
@@ -99,6 +101,10 @@ export class EditEntryPage {
                   ]
                 });
                 await alert.present()
+              }
+
+              noSubmit(e) {
+                e.preventDefault();
               }
 
               async updateSQL(rowid) {

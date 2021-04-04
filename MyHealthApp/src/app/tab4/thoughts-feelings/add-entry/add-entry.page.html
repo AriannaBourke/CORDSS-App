@@ -26,7 +26,7 @@
                 name="document-outline"
               ></ion-icon>
               <ion-input          
-                placeholder="Note Name"
+                placeholder="Note Name (*required)"
                 [(ngModel)]="data.note_name"
                 name="note_name" required
                 #note_nameCtrl="ngModel"
@@ -84,7 +84,7 @@
               ></ion-icon>
               <ion-textarea
                 type="text"
-                placeholder="Notes"
+                placeholder="Notes (*required)"
                 [(ngModel)]="data.notes"
                 name="notes"
                 required

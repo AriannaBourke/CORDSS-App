@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 })
 export class Tab5Page {
 
-  constructor(private callNumber: CallNumber) {}
+  constructor(private callNumber: CallNumber,
+    ) {}
 
   callNow(number) {
     this.callNumber.callNumber(number, true)

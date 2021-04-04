@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>View Mood</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
@@ -12,78 +12,119 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item></ion-item>
+            <ion-item>
             <ion-label color="tertiary">Mood</ion-label>
+            
+            <ion-icon
+              color="tertiary"
+                slot="start"
+                name="calendar-outline"
+                ></ion-icon>
+              </ion-item>
+              <ion-item>
+            <p>{{m.date | date: "dd MMMM YYYY"}}</p>
           </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label color="medium" position="stacked">Date</ion-label>
-              <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
-              <p>{{m.date | date: 'dd MMMM y'}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-  
-        <!-- <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label  color="medium" position="stacked">Happy</ion-label>
+          <ion-item>
+            <ion-range min="20" max="80" step="2" 
+            value={{m.happy}} name="happy" disabled="true">
               <ion-icon
               color="tertiary"
                 slot="start"
-                name="happy-outline"
+                name="sad-outline"
               ></ion-icon>
-              <p>{{m.happy}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label  color="medium" position="stacked">Independent</ion-label>
               <ion-icon
               color="tertiary"
-                slot="start"
+                slot="end"
                 name="happy-outline"
               ></ion-icon>
-              <p>{{m.independent}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label  color="medium" position="stacked">Tired</ion-label>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="happy-outline"
-              ></ion-icon>
-              <p>{{m.tired}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label  color="medium" position="stacked">Productive</ion-label>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="happy-outline"
-              ></ion-icon>
-              <p>{{m.productive}}</p>
+            </ion-range>
             </ion-item>
           </ion-col>
         </ion-row> -->
-  
+
+        <!-- <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Happy</ion-label>
+              <ion-range min="20" max="80" step="2" value={{m.happy}} name="happy" disabled="true">
+                <ion-icon
+                color="tertiary"
+                  slot="start"
+                  name="sad-outline"
+                ></ion-icon>
+                <ion-icon
+                color="tertiary"
+                  slot="end"
+                  name="happy-outline"
+                ></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row> 
+
+        
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Independent</ion-label>
+              <ion-range min="20" max="80" step="2" value={{m.independent}} name="independent" disabled="true">
+                <ion-icon
+                color="tertiary"
+                  slot="start"
+                  name="sad-outline"
+                ></ion-icon>
+                <ion-icon
+                color="tertiary"
+                  slot="end"
+                  name="happy-outline"
+                ></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row> 
+
+        
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Tired</ion-label>
+              <ion-range min="20" max="80" step="2" value={{m.tired}} name="tired" disabled="true">
+                <ion-icon
+                color="tertiary"
+                  slot="start"
+                  name="sad-outline"
+                ></ion-icon>
+                <ion-icon
+                color="tertiary"
+                  slot="end"
+                  name="happy-outline"
+                ></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row> 
+
+        
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Productive</ion-label>
+              <ion-range min="20" max="80" step="2" value={{m.productive}} name="productive" disabled="true">
+                <ion-icon
+                color="tertiary"
+                  slot="start"
+                  name="sad-outline"
+                ></ion-icon>
+                <ion-icon
+                color="tertiary"
+                  slot="end"
+                  name="happy-outline"
+                ></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row> 
+
         <ion-row>
           <ion-col>
             <ion-item>
@@ -100,9 +141,66 @@
             <ion-button color="light" style="float: right" (click)="editModal(m.rowid)">
             <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
           </ion-col>
-        </ion-row>
-      </ion-grid>
+        </ion-row> -->
+      <!-- </ion-grid>
     </ion-card>
   </ion-list>
   </ion-content>
+         -->
+
+         <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title>Mood</ion-title>
+            <ion-button color="success" slot="end" (click)="openModal()"
+            ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+          >
+          </ion-toolbar>
+        </ion-header>
         
+        <ion-content [fullscreen]="true">
+          <ion-list *ngFor="let m of mood; let i = index" class="list">
+            <ion-card>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                    <ion-label color="tertiary">Mood</ion-label>
+                    
+                    <ion-icon
+                      color="tertiary"
+                        slot="start"
+                        name="calendar-outline"
+                        ></ion-icon>
+                      </ion-item>
+                      <ion-item>
+                    <p>{{m.date | date: "dd MMMM YYYY"}}</p>
+                  </ion-item>
+                  <ion-item>
+                    <ion-range min="20" max="80" step="2" value={{m.happy}} name="happy" disabled="true">
+                      <ion-icon
+                      color="tertiary"
+                        slot="start"
+                        name="sad-outline"
+                      ></ion-icon>
+                      <ion-icon
+                      color="tertiary"
+                        slot="end"
+                        name="happy-outline"
+                      ></ion-icon>
+                    </ion-range>
+                    </ion-item>
+                  <ion-button color="light" style="float: right" (click)="removeData(m.rowid)"
+                    ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
+                    <ion-button color="light" style="float: right" (click)="editModal(m.rowid)">
+                    <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+                    <ion-button color="light" style="float: right" (click)="viewModal(m.rowid)"
+                    ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+          </ion-list>
+          </ion-content>

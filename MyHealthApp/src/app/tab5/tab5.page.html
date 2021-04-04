@@ -15,14 +15,154 @@
     <ion-card-header>
       <ion-card-title>Helpful Links</ion-card-title>
     </ion-card-header>
-    <ion-item lines="none">
-      <ion-icon slot="start" name="search-outline" size="small"></ion-icon>
-      <ion-label>GOSH Website</ion-label>
+    <ion-item>
+    <ion-icon  color="tertiary" slot="start" name="globe-outline"></ion-icon>
+    <ion-label color="tertiary">Patient Support Networks & Charities</ion-label>
+  </ion-item>
+    <ion-select #links ngModel name="estate" interface="popover" 
+    placeholder="Select Option" [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
+      <ion-select-option value='1'>Ophthalmology disorders</ion-select-option>
+      <ion-select-option value='2'>Rheumatology disorders</ion-select-option>
+      <ion-select-option value='3'>Gastroenterology disorders</ion-select-option>
+      <ion-select-option value='4'>Dermatology disorders</ion-select-option>
+      <ion-select-option value='5'>Nephrology disorders</ion-select-option>
+      <ion-select-option value='6'>Medications</ion-select-option>
+    </ion-select>
+    <div *ngIf="links.value === '1'">
+      <ion-item>
+        <ul>
+          <li>
+        <a href="#" onclick="window.open('https://www.nhs.uk/conditions/childhood-cataracts/',
+     '_system', 'location=yes'); return false;">Childhood cataract, aphakia and pseudophakia</a>
+        </li>
+        <li>
+        <a href="#" onclick="window.open('https://www.blf.org.uk/support-for-you/sarcoidosis-in-children',
+        '_system', 'location=yes'); return false;">Sarcoidosis</a>
+         </li>
+         <li>
+         <a href="#" onclick="window.open('https://www.nhs.uk/conditions/lazy-eye/',
+         '_system', 'location=yes'); return false;">Amblyopia</a>
+          </li>
+          <li>
+          <a href="#" onclick="window.open('https://www.youtube.com/watch?v=1vBzqS_HD_E',
+          '_system', 'location=yes'); return false;">Uveitis patient video</a>
+           </li>
+           <li>
+           <a href="#" onclick="window.open('https://www.blf.org.uk/support-for-you/sarcoidosis-in-children',
+           '_system', 'location=yes'); return false;">Uveitis treatment video</a>
+            </li>
+            <li>
+            <a href="#" onclick="window.open('https://www.moorfields.nhs.uk/content/childrens-glaucoma',
+            '_system', 'location=yes'); return false;">Moorfields page on childhood glaucoma</a>
+          </li>
+      </ul>
     </ion-item>
-    <ion-item lines="none">
-      <ion-icon slot="start" name="search-outline" size="small"></ion-icon>
-      <ion-label>Medicines Information</ion-label>
+    </div>
+    <div *ngIf="links.value === '2'">
+      <ion-item>
+        <ul>
+          <li>
+        <a href="#" onclick="window.open('https://www.vasculitis.org.uk',
+     '_system', 'location=yes'); return false;">Vasculitis UK</a>
+        </li>
+        <li>
+        <a href="#" onclick="window.open('https://www.thelaurencurrietwilightfoundation.org',
+        '_system', 'location=yes'); return false;">Lauren Currie Twilight Foundation </a>
+         </li>
+         <li>
+         <a href="#" onclick="window.open('https://www.versusarthritis.org/about-arthritis/conditions/',
+         '_system', 'location=yes'); return false;">Versus Arthritis</a>
+          </li>
+          <li>
+          <a href="#" onclick="window.open('https://www.ccaa.org.uk/',
+          '_system', 'location=yes'); return false;">CCAA – children with arthritis</a>
+           </li>
+           <li>
+           <a href="#" onclick="window.open('https://www.nhs.uk/conditions/sarcoidosis/',
+           '_system', 'location=yes'); return false;">Sarcoid – NHS information</a>
+            </li>
+            <li>
+            <a href="#" onclick="window.open('https://www.amyloidosis.org.uk/fever-syndromes/inherited-fever-syndromes/',
+            '_system', 'location=yes'); return false;">Periodic fever syndromes</a>
+          </li>
+          <li>
+            <a href="#" onclick="window.open('https://www.blf.org.uk/support-for-you/sarcoidosis-in-children/',
+            '_system', 'location=yes'); return false;">Sarcoidosis</a>
+          </li>
+          <li>
+            <a href="#" onclick="window.open('https://www.behcets.org.uk',
+            '_system', 'location=yes'); return false;">Behcets</a>
+          </li>
+      </ul>
     </ion-item>
+    </div>
+
+    <div *ngIf="links.value === '3'">
+      <ion-item>
+        <ul>
+          <li>
+        <a href="#" onclick="window.open('https://www.crohnsandcolitis.org.uk/',
+     '_system', 'location=yes'); return false;">Crohns and Colitis UK</a>
+        </li>
+        <li>
+        <a href="#" onclick="window.open('https://www.nhs.uk/conditions/inflammatory-bowel-disease/',
+        '_system', 'location=yes'); return false;">NHS IBD</a>
+         </li>
+         <li>
+         <a href="#" onclick="window.open('https://gutscharity.org.uk/advice-and-information/conditions/eosinophilic-diseases/',
+         '_system', 'location=yes'); return false;">Gastro disorders: Guts UK</a>
+          </li>
+      </ul>
+    </ion-item>
+    </div>
+    <div *ngIf="links.value === '4'">
+      <ion-item>
+        <ul>
+          <li>
+        <a href="#" onclick="window.open('https://www.lupusuk.org.uk/medical/nurses-guide/what-is-lupus/',
+     '_system', 'location=yes'); return false;">Lupus UK</a>
+        </li>
+        <li>
+        <a href="#" onclick="window.open('https://www.eos.org.uk',
+        '_system', 'location=yes'); return false;">Eczema Outreach Support</a>
+         </li>
+         <li>
+         <a href="#" onclick="window.open('https://www.psoriasis-association.org.uk',
+         '_system', 'location=yes'); return false;">Psoriasis Association</a>
+          </li>
+          <li>
+          <a href="#" onclick="window.open('https://www.sruk.co.uk/',
+          '_system', 'location=yes'); return false;">Scleroderma and Raynaud’s UK</a>
+           </li>
+           <li>
+           <a href="#" onclick="window.open(' https://www.myositis.org.uk/myositis-info/conditions/dermatomyositis/',
+           '_system', 'location=yes'); return false;">Myosistis support</a>
+            </li>
+      </ul>
+    </ion-item>
+    </div>
+
+    <div *ngIf="links.value === '5'">
+      <ion-item>
+        <ul>
+          <li>
+        <a href="#" onclick="window.open('https://www.infokid.org.uk/conditions',
+     '_system', 'location=yes'); return false;">Infokids</a>
+        </li>
+      </ul>
+    </ion-item>
+    </div>
+    <div *ngIf="links.value === '6'">
+      <ion-item>
+        <ul>
+          <li>
+        <a href="#" onclick="window.open('https://www.versusarthritis.org/about-arthritis/treatments/drugs/',
+     '_system', 'location=yes'); return false;">Versus Arthritis</a>
+        </li>
+      </ul>
+    </ion-item>
+    </div>
+
   </ion-card>
   <ion-card>
     <ion-card-header>

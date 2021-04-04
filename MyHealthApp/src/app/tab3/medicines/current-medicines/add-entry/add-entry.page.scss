@@ -7,3 +7,15 @@
   .list {
     background-color: #96bdc6;
   }
+
+  ion-select {
+    color: black;
+  --placeholder-opacity: 1;
+    max-width: 95%;
+    }
+
+    ::ng-deep .mycomponent-wider-popover
+    {
+      --width: 95%;
+      --max-width: 400px;
+    }

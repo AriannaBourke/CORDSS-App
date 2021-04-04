@@ -17,8 +17,8 @@ export class ViewEntryPage {
   private _db   : any;
 
   rowid: any;
-  ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
+  data = {date: "", doctor: "", place: "", type:"", description: "", questions: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -67,6 +67,7 @@ export class ViewEntryPage {
                       date:res.rows.item(i).date,
                       doctor:res.rows.item(i).doctor,
                       place:res.rows.item(i).place,
+                      type:res.rows.item(i).type,
                       description:res.rows.item(i).description,
                       questions:res.rows.item(i).questions,
                     })

@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,10 +15,10 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
-  ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures(rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures(rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
+  data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -68,6 +69,7 @@ export class EditEntryPage {
                       date:res.rows.item(i).date,
                       doctor:res.rows.item(i).doctor,
                       place:res.rows.item(i).place,
+                      type:res.rows.item(i).type,
                       description:res.rows.item(i).description,
                       questions:res.rows.item(i).questions,
                     })
@@ -83,6 +85,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry in your procedures?",
@@ -101,9 +104,12 @@ export class EditEntryPage {
                 });
                 await alert.present()
               }
+              noSubmit(e) {
+                e.preventDefault();
+              }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE procedures SET date=?, doctor=?, place=?, description=?, questions=? WHERE rowid=?', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions, rowid])
+                this._db.executeSql('UPDATE procedures SET date=?, doctor=?, place=?, type=?, description=?, questions=? WHERE rowid=?', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions, rowid])
                 .then(res => {
                   this.closeModal();
                 })

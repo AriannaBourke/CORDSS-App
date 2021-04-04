@@ -7,3 +7,9 @@
   .list {
     background-color: #96bdc6;
   }
+
+  ::ng-deep .mycomponent-wider-popover
+  {
+    --width: 95%;
+    --max-width: 400px;
+  }

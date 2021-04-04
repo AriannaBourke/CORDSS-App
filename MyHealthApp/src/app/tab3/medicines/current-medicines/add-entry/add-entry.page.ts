@@ -22,7 +22,7 @@ export class AddEntryPage {
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite
+              public _sql: SQLite              
             ) 
 { 
   this.data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};           
@@ -119,4 +119,5 @@ export class AddEntryPage {
     await this.modalController.dismiss();
     this.getData();
   }
+
 }

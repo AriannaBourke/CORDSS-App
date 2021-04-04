@@ -18,8 +18,8 @@ export class UpcomingProceduresPage {
   private _db   : any;
   
 
-  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
+  data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
 
     constructor(
                 public modalController: ModalController,
@@ -77,6 +77,7 @@ export class UpcomingProceduresPage {
           date:res.rows.item(i).date,
           doctor:res.rows.item(i).doctor,
           place:res.rows.item(i).place,
+          type:res.rows.item(i).type,
           description:res.rows.item(i).description,
           questions:res.rows.item(i).questions,
         })
@@ -86,7 +87,7 @@ export class UpcomingProceduresPage {
       }
     
   public saveData() {
-    this._db.executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions])
+    this._db.executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions])
     .then(res => {
         this.getData();
       })
