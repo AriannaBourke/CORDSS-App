@@ -18,7 +18,7 @@ export class EditEntryPage {
   data: any;
   isSubmitted = false;
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
   
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -61,7 +61,7 @@ export class EditEntryPage {
 
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.medicines = [];
                   for(var i=0; i<res.rows.length; i++) {
@@ -109,7 +109,7 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE appointments SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid]) 
+                this._db.executeSql('UPDATE medicine SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid]) 
                 .then(res => {
                   this.closeModal();
                 })

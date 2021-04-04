@@ -74,7 +74,7 @@
                   #links ngModel 
                   name="estate" 
                   interface="popover" 
-                  placeholder="Select Option"
+                  placeholder="{{pro.type}}"
                   [(ngModel)]="data.type"
                   [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
                     <ion-select-option value='Cataract surgery'>Cataract surgery</ion-select-option>
@@ -144,7 +144,6 @@
                   value="submit"
                   id="submit"
                   color="success"
-                  [disabled]="!form.valid"
                 >
                   <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
                 >

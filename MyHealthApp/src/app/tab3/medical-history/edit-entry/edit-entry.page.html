@@ -26,7 +26,7 @@
             #links ngModel 
             name="estate" 
             interface="popover" 
-            placeholder="Select Option (*Required)"
+            placeholder="{{history.diagnosis}}"
             required
             #diagnosisCtrl="ngModel"
             [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
@@ -266,7 +266,6 @@
             value="submit"
             id="submit"
             color="success"
-            [disabled]="!form.valid"
           >
             <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
           >

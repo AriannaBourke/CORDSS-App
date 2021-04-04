@@ -20,7 +20,7 @@
         <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="stacked">Medicine Type</ion-label>
+            <ion-label position="stacked">Medicine</ion-label>
             <ion-icon
             color="tertiary"
               slot="start"
@@ -30,7 +30,7 @@
             #links ngModel 
             name="estate" 
             interface="popover" 
-            placeholder="Select Option"
+            placeholder="{{med.medicinename}}"
             required
             #medicinenameCtrl="ngModel"
             [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
@@ -286,7 +286,6 @@
             value="submit"
             id="submit"
             color="success"
-            [disabled]="!form.valid"
           >
             <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
           >

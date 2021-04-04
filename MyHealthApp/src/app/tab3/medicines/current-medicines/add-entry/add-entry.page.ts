@@ -16,7 +16,7 @@ export class AddEntryPage {
   private _db   : any;
   data: any;
   isSubmitted = false;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
   
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -65,7 +65,7 @@ export class AddEntryPage {
       }
     
       public getData() {
-        this._db.executeSql('SELECT * FROM medicines ORDER BY rowid DESC', <any>[])
+        this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.medicines = [];
           for(var i=0; i<res.rows.length; i++) {
@@ -82,7 +82,7 @@ export class AddEntryPage {
           }
     
   public saveData() {
-    this._db.executeSql('INSERT INTO medicines VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
+    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
     .then(res => {
         this.closeModal()
       })

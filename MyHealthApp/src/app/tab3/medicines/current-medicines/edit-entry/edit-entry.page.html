@@ -30,7 +30,7 @@
             #links ngModel 
             name="estate" 
             interface="popover" 
-            placeholder="Select Option"
+            placeholder="{{med.medicinename}}"
             required
             #medicinenameCtrl="ngModel"
             [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
@@ -54,7 +54,7 @@
             name="medkit-outline"
           ></ion-icon>
             <ion-select [(ngModel)]="data.medicinename" name="medicinename" 
-                        interface="popover" placeholder="Select Option" required
+                        interface="popover" placeholder="{{med.medicinename}}" required
                         #medicinenameCtrl="ngModel" [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
             <ion-select-option value='Prednisolone tablets'>Prednisolone tablets</ion-select-option>
             <ion-select-option value='Folic acid'>Folic acid</ion-select-option>
@@ -285,8 +285,7 @@
             type="submit"
             value="submit"
             id="submit"
-            color="success"
-            [disabled]="!form.valid"
+            color="success"          
           >
             <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
           >
