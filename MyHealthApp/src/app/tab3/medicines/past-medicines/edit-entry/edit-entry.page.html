@@ -2,13 +2,22 @@
   <ion-toolbar>
     <ion-title>Edit Medicine</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list *ngFor="let med of medicines; let i = index" class="list">
     <ion-card>
+<<<<<<< HEAD
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label class="entry-header">Medicine</ion-label>
+          </ion-col>
+        </ion-row>
+=======
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -223,79 +232,129 @@
           </ion-item>
         </ion-col>
       </ion-row>
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Side Effects</ion-label>
-            <ion-input
-              type="text"
-              placeholder="{{med.sideeffects}}"
-              [(ngModel)]="data.sideeffects"
-              name="sideeffects"
-            ></ion-input>
-            <ion-icon  color="tertiary" slot="start" name="sad-outline"
-            ></ion-icon>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Notes</ion-label>
-            <ion-icon
-            color="tertiary"
-              slot="start"
-              name="chatbox-ellipses-outline"
-            ></ion-icon>
-            <ion-textarea
-              type="text"
-              placeholder="{{med.notes}}"
-              [(ngModel)]="data.notes"
-              name="notes"
-            ></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Have you completed this medicine?</ion-label>
-            <ion-icon
-              style="float: right"
-              name="checkbox-outline"
-              (click)="finishMedicine(rowid)"
-            ></ion-icon>
-          </ion-item>
-          <div class="ion-margin-vertical ion-text-right">
-            <ion-button
-            type="button"
-            fill="outline"
-            color="danger"
-            size="small"
-            (click)="form.reset()"
-          >
-            <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button>
-
-            <ion-button
-            type="button"
-            size="small"
-            type="submit"
-            value="submit"
-            id="submit"
-            color="success"
-          >
-            <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
-          >
-          </div>
-              </ion-col>
+        <form #form="ngForm" (ngSubmit)="update(rowid)">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Medicine Name</ion-label>
+                <ion-icon
+                  color="tertiary"
+                  slot="start"
+                  name="medkit-outline"
+                ></ion-icon>
+                <ion-select
+                  interface="popover"
+                  placeholder="{{med.medicinename}}"
+                  [(ngModel)]="data.medicinename"
+                  name="medicinename"
+                >
+                  <ion-select-option value="Prednisolone tablets"
+                    >Prednisolone tablets</ion-select-option
+                  >
+                  <ion-select-option value="Folic acid"
+                    >Folic acid</ion-select-option
+                  >
+                  <ion-select-option value="Naproxen"
+                    >Naproxen</ion-select-option
+                  >
+                  <ion-select-option value="Paracetamol"
+                    >Paracetamol</ion-select-option
+                  >
+                  <ion-select-option value="Other">Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
           </ion-row>
-    </form>
 
-   </ion-grid> 
-</ion-card> 
-</ion-list>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Instructions</ion-label>
+                <ion-textarea
+                  type="text"
+                  placeholder="{{med.instructions}}"
+                  [(ngModel)]="data.instructions"
+                  name="instructions"
+                ></ion-textarea>
+                <ion-icon
+                  color="tertiary"
+                  slot="start"
+                  name="information-outline"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Side Effects</ion-label>
+                <ion-input
+                  type="text"
+                  placeholder="{{med.sideeffects}}"
+                  [(ngModel)]="data.sideeffects"
+                  name="sideeffects"
+                ></ion-input>
+                <ion-icon
+                  color="tertiary"
+                  slot="start"
+                  name="sad-outline"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Notes</ion-label>
+                <ion-icon
+                  color="tertiary"
+                  slot="start"
+                  name="chatbox-ellipses-outline"
+                ></ion-icon>
+                <ion-textarea
+                  type="text"
+                  placeholder="{{med.notes}}"
+                  [(ngModel)]="data.notes"
+                  name="notes"
+                ></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div class="ion-margin-vertical ion-text-right">
+                <ion-button
+                  type="button"
+                  fill="outline"
+                  color="danger"
+                  size="small"
+                  (click)="form.reset()"
+                >
+                  <ion-icon slot="start" name="close"></ion-icon
+                  >Clear</ion-button
+                >
+
+                <ion-button
+                  type="button"
+                  size="small"
+                  type="submit"
+                  value="submit"
+                  id="submit"
+                  color="success"
+                >
+                  <ion-icon slot="start" name="add"></ion-icon
+                  >Update</ion-button
+                >
+              </div>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>
-
