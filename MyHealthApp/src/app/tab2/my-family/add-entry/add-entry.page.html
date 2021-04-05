@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form #form="ngForm" (ngSubmit)="saveData(form)">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
     <ion-card>
       <ion-grid>
         <ion-row>
@@ -35,10 +35,15 @@
               ></ion-icon>
               <ion-input
                 type="text"
-                placeholder="Name"
+                placeholder="Name (*Required)"
                 [(ngModel)]="data.name"
                 name="name"
+                required
+                #nameCtrl="ngModel"
               ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+              <ion-text color="danger">*Name is required</ion-text>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -94,16 +99,21 @@
             <ion-item>
               <ion-label color="medium" position="stacked">Email</ion-label>
               <ion-input
-                type="text"
+                type="email"
                 placeholder="Email"
                 [(ngModel)]="data.email"
                 name="email"
+                #emailCtrl="ngModel"
+                email
               ></ion-input>
               <ion-icon
                 color="tertiary"
                 slot="start"
                 name="mail-outline"
               ></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
+              <ion-text color="danger">Email is not valid</ion-text>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -138,6 +148,7 @@
                 value="submit"
                 id="submit"
                 color="success"
+                [disabled]="!form.valid"
                 >Submit</ion-button
               >
             </div>

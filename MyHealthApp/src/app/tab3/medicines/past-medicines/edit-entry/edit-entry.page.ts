@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,9 +15,13 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
+<<<<<<< HEAD
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)'
+=======
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
@@ -83,6 +88,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry in your medicines?",
@@ -102,8 +108,16 @@ export class EditEntryPage {
                 await alert.present()
               }
 
+              noSubmit(e) {
+                e.preventDefault();
+              }
+
               async updateSQL(rowid) {
+<<<<<<< HEAD
                 this._db.executeSql('UPDATE medicine SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid])
+=======
+                this._db.executeSql('UPDATE medicine SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid]) 
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
                 .then(res => {
                   this.closeModal();
                 })

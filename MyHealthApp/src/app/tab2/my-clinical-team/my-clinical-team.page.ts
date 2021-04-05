@@ -71,7 +71,7 @@ export class MyClinicalTeamPage {
           }
         
       public getData() {
-        this._db.executeSql('SELECT * FROM clinicalteam', <any>[])
+        this._db.executeSql('SELECT * FROM clinicalteam  ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.clinicalteam = [];
           for(var i=0; i<res.rows.length; i++) {
