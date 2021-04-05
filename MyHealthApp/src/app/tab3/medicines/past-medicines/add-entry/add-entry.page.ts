@@ -14,18 +14,17 @@ export class AddEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-  data: any;
   isSubmitted = false;
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  
+  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""}; 
+
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
               public _sql: SQLite
             ) 
-{ 
-  this.data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};           
+{           
   this.medicines = [];
   this._plat
   .ready()
