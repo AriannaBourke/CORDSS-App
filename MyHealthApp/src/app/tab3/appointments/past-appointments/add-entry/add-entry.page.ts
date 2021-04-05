@@ -16,19 +16,30 @@ export class AddEntryPage {
   private _db   : any;
   isSubmitted = false;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
+<<<<<<< HEAD
+  data = {date: "", doctor: "", place: "", description: "", questions: ""};
+  now = new Date();
+  today = this.now.toISOString();
+=======
   data = {date: "", doctor: "", place: "", description: "", questions: ""};  
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
+              private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite
+<<<<<<< HEAD
+            )
+{
+=======
             ) 
 {          
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   this.appointments = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -49,7 +60,7 @@ export class AddEntryPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.AppointmentsTable, []);
     this.getData()
@@ -58,13 +69,13 @@ export class AddEntryPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
-    this._db.executeSql('SELECT * FROM appointments ORDER BY rowid DESC', <any>[])
+    this._db.executeSql('SELECT * FROM appointments WHERE date < ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.appointments = [];
       for(var i=0; i<res.rows.length; i++) {
@@ -80,7 +91,7 @@ export class AddEntryPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
   public saveData() {
     this._db.executeSql('INSERT INTO appointments VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions])
     .then(res => {
@@ -88,9 +99,14 @@ export class AddEntryPage {
       })
       .catch(e => alert("save data error" + e));
     }
+<<<<<<< HEAD
+
+    async submitData(rowid) {
+=======
       
     async submitData(myForm: NgForm) {
       this.isSubmitted = true;
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
       const alert = await this._alertController.create({
         header: "Save this entry?",
         message: "Would you like to save this entry in your appointments?",
@@ -102,19 +118,22 @@ export class AddEntryPage {
             text:"save",
             handler: ()=> {
               this.saveData();
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
     }
 
+<<<<<<< HEAD
+=======
     noSubmit(e) {
       e.preventDefault();
     }
     
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();

@@ -18,19 +18,23 @@ export class PastMedicinesPage {
   public storedData      : any            = null;
   private _db   : any;
 
+<<<<<<< HEAD
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)'
+=======
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(
               public modalController: ModalController,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
+              private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite)
 {
   this.medicines = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -51,7 +55,7 @@ export class PastMedicinesPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.MedicinesTable, []);
     this.getData()
@@ -60,13 +64,17 @@ export class PastMedicinesPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+<<<<<<< HEAD
+    this._db.executeSql('SELECT * FROM medicine WHERE activeflag="No" ORDER BY rowid DESC', <any>[])
+=======
     this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
     .then(res => {
       this.medicines = [];
       for(var i=0; i<res.rows.length; i++) {
@@ -75,22 +83,27 @@ export class PastMedicinesPage {
           medicinename:res.rows.item(i).medicinename,
           instructions:res.rows.item(i).instructions,
           sideeffects:res.rows.item(i).sideeffects,
-          notes:res.rows.item(i).notes
+          notes:res.rows.item(i).notes,
+          activeflag:res.rows.item(i).activeflag
         })
       }
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
   public saveData() {
+<<<<<<< HEAD
+    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, "No"])
+=======
     this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
+>>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
     .then(res => {
         this.getData();
       })
       .catch(e => alert("save data error" + e));
     }
-      
-    
+
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM medicine WHERE rowid=?', [rowid])
       .then(res => {
@@ -111,21 +124,21 @@ export class PastMedicinesPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
-    
-  async finishMedicine(index) {
+
+  async stillTaking(rowid) {
     const alert = await this._alertController.create({
-      header: "Have you finished taking this medicine?",
-      message: "Would you like to move this medicine into your past medicines page?",
+      header: "Are you now taking this medicine?",
+      message: "Would you like to move this medicine into your current medicines page?",
       buttons: [
         {
           text:"No"
@@ -133,7 +146,7 @@ export class PastMedicinesPage {
         {
           text:"Yes",
           handler: ()=> {
-           console.log("Medicine put into past")
+           this.moveToCurrent(rowid)
           }
         }
       ]
@@ -142,6 +155,14 @@ export class PastMedicinesPage {
     await alert.present();
 
   }
+
+  public moveToCurrent(rowid) {
+    this._db.executeSql('UPDATE medicine SET activeflag=? where rowid=?', ["Yes", rowid])
+    this.getData();
+  }
+
+
+
 
   async openModal() {
     const modal = await this.modalController.create({

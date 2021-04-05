@@ -23,19 +23,19 @@ export class Tab1Page {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-  
+
   default: any;
-  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, notes TEXT, emergency_name TEXT, emergency_phone INT)'
-  data = {name: "", birthday: "", email: "", phone: "", address: "", 
-  nhs_number: "", notes: "", emergency_name: "", emergency_phone: ""};
+  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, notes TEXT, emergency_1_name TEXT, emergency_1_number INT, emergency_2_name TEXT, emergency_2_number INT, emergency_3_name TEXT, emergency_3_number INT)'
+  data = {name: "", birthday: "", about: "", email: "", phone: "", address: "",
+  nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
 
 
   constructor(
     private _camera: Camera,
     private callNumber: CallNumber,
     public modalController: ModalController,
-    private _alertController: AlertController, 
-    public _plat: Platform, 
+    private _alertController: AlertController,
+    public _plat: Platform,
     public _sql: SQLite,)
 
 {
@@ -43,7 +43,7 @@ export class Tab1Page {
   this.aboutme = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -64,7 +64,7 @@ export class Tab1Page {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.AboutMeTable, []);
     this.getData()
@@ -73,43 +73,48 @@ export class Tab1Page {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
     this._db.executeSql('SELECT * FROM aboutme', <any>[])
     .then(res => {
       this.aboutme = [];
-      for(var i=0; i<res.rows.length; i++) {
+      if(res.rows.length > 0) {
         this.aboutme.push({
-          rowid:res.rows.item(i).rowid,
-          name:res.rows.item(i).name,
-          birthday:res.rows.item(i).birthday,
-          email:res.rows.item(i).email,
-          phone:res.rows.item(i).phone,
-          address:res.rows.item(i).address,
-          nhs_number:res.rows.item(i).nhs_number,
-          notes:res.rows.item(i).notes,
-          emergency_name:res.rows.item(i).emergency_name,
-          emergency_phone:res.rows.item(i).emergency_phone,
+          rowid:res.rows.item(0).rowid,
+          name:res.rows.item(1).name,
+          about:res.rows.item(2).about,
+          birthday:res.rows.item(3).birthday,
+          email:res.rows.item(4).email,
+          phone:res.rows.item(5).phone,
+          address:res.rows.item(6).address,
+          nhs_number:res.rows.item(7).nhs_number,
+          notes:res.rows.item(8).notes,
+          emergency_1_name:res.rows.item(9).emergency_1_name,
+          emergency_1_number:res.rows.item(10).emergency_1_number,
+          emergency_2_name:res.rows.item(11).emergency_2_name,
+          emergency_2_number:res.rows.item(12).emergency_2_number,
+          emergency_3_name:res.rows.item(13).emergency_3_name,
+          emergency_3_number:res.rows.item(14).emergency_3_number
 
         })
       }
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
   public saveData() {
-    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,?,?,?,?,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.email,
-       this.data.phone, this.data.address, this.data.nhs_number, this.data.notes, this.data.emergency_name, this.data.emergency_phone ])
+    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
+       this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number ])
     .then(res => {
         this.getData();
       })
       .catch(e => alert("save data error" + e));
     }
-    
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM aboutme WHERE rowid=?', [rowid])
       .then(res => {
@@ -130,14 +135,14 @@ export class Tab1Page {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
     async openModal() {
@@ -146,11 +151,11 @@ export class Tab1Page {
         componentProps: {
         }
       });
-  
+
       modal.onDidDismiss().then((dataReturned) => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
@@ -164,7 +169,7 @@ export class Tab1Page {
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 

@@ -12,33 +12,34 @@ import { NgForm } from '@angular/forms';
 })
 export class EditEntryPage {
   public medicines : Array<any> = [];
+  public medicines_copy : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
   isSubmitted = false;
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)';
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
+              private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite,
-            ) 
-            {          
-              this.rowid=navParams.get('rowid');        
+            )
+            {
+              this.rowid=navParams.get('rowid');
               this.medicines = [];
               this._plat
               .ready()
-              .then(() => 
-            
+              .then(() =>
+
                 {
                   this._createDatabase();
                 })
                 .catch(e => alert('create database error' + e));
               }
-            
+
               public _createDatabase()
               {
                 this._sql.create({
@@ -52,31 +53,33 @@ export class EditEntryPage {
                 })
                 .catch(e => alert('create tables error' + e));
               }
-              
+
               async _createDatabaseTables() {
                 await this._db.executeSql(this.MedicinesTable, []);
                 this.getData(this.rowid);
               }
 
-                
+
               public getData(rowid) {
                 this._db.executeSql('SELECT * FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.medicines = [];
+                  this.medicines_copy = [];
                   for(var i=0; i<res.rows.length; i++) {
                     this.medicines.push({
                       rowid:res.rows.item(i).rowid,
                       medicinename:res.rows.item(i).medicinename,
                       instructions:res.rows.item(i).instructions,
                       sideeffects:res.rows.item(i).sideeffects,
-                      notes:res.rows.item(i).notes
+                      notes:res.rows.item(i).notes,
+                      activeflag:res.rows.item(i).activeflag
                     })
                   }
                 })
                     .catch(e => alert('get data error' + e));
                   }
-                 
-            
+
+
               async closeModal() {
                 await this.modalController.dismiss();
               }
@@ -95,7 +98,7 @@ export class EditEntryPage {
                       text:"Save",
                       handler: ()=> {
                         this.updateSQL(rowid);
-            
+
                       }
                     }
                   ]
@@ -134,7 +137,7 @@ export class EditEntryPage {
                   })
                 }
                 this.closeModal();
-              
+
             }
 
             async finishMedicine(rowid) {
@@ -153,9 +156,9 @@ export class EditEntryPage {
                   }
                 ]
               });
-          
+
               await alert.present();
-          
+
             }
-          
+
 }
