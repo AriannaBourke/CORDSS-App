@@ -27,9 +27,6 @@
           <ion-item>
         <p>{{pro.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
       </ion-item>
-      <ion-item>
-      <p>{{pro.place}}</p>
-    </ion-item>
     <ion-button color="light" style="float: right" (click)="removeData(pro.rowid)"
     ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
     <ion-button color="light" style="float: right" (click)="editModal(pro.rowid)">

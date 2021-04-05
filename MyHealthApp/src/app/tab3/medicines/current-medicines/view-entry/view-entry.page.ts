@@ -17,7 +17,7 @@ export class ViewEntryPage {
   private _db   : any;
 
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
@@ -58,7 +58,7 @@ export class ViewEntryPage {
               }
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.medicines = [];
                   for(var i=0; i<res.rows.length; i++) {
@@ -81,7 +81,7 @@ export class ViewEntryPage {
               }
 
               deleteData(rowid) {
-                this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('DELETE FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.closeModal();
                 })

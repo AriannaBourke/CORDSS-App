@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 // import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { ModalController } from '@ionic/angular';
+import {AddEntryPage } from './add-entry/add-entry.page';
+import {EditEntryPage } from './edit-entry/edit-entry.page';
+import {ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-urgent-health-plan',
@@ -19,7 +23,8 @@ export class UrgentHealthPlanPage {
 
   constructor(private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite)
+              public _sql: SQLite,
+              public modalController: ModalController)
 {
   this.urgentplan = [];
   this._plat
@@ -84,12 +89,7 @@ export class UrgentHealthPlanPage {
       .catch(e => alert("save data error" + e));
     }
       
-    
-  editData(rowid) {
-    console.log("added data"), {
-      rowid: rowid
-    }
-  }
+
     
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM urgentplan WHERE rowid=?', [rowid])
@@ -102,7 +102,7 @@ export class UrgentHealthPlanPage {
     async removeData(rowid) {
       const alert = await this._alertController.create({
         header: "Delete this entry?",
-        message: "Would you like to delete this entry from your urgentplan?",
+        message: "Would you like to delete this entry from your urgent health plan?",
         buttons: [
           {
             text:"Cancel"
@@ -120,4 +120,45 @@ export class UrgentHealthPlanPage {
       await alert.present();
   
     }
+
+    async openModal() {
+      const modal = await this.modalController.create({
+        component: AddEntryPage,
+        componentProps: {
+        }
+      });
+  
+      modal.onDidDismiss().then((dataReturned) => {
+        this.getData();
+      });
+  
+      return await modal.present();
+    }
+
+
+    async viewModal(rowid) {
+      const modal = await this.modalController.create({
+        component: ViewEntryPage,
+        componentProps: { 'rowid': rowid
+        }
+      });
+      modal.onDidDismiss().then(() => {
+        this.getData();
+      });
+  
+      return await modal.present();
+    }
+
+
+    async editModal(rowid) {
+      const modal = await this.modalController.create({
+        component: EditEntryPage,
+        componentProps: { 'rowid': rowid}
+      });
+      modal.onDidDismiss().then(()=>{
+        this.getData();
+      });
+      return await modal.present();
+    }
+
 }

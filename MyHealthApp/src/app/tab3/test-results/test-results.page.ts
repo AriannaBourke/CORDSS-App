@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { ModalController } from '@ionic/angular';
+import {AddEntryPage } from './add-entry/add-entry.page';
+import {EditEntryPage } from './edit-entry/edit-entry.page';
+import {ViewEntryPage } from './view-entry/view-entry.page';
+
 
 @Component({
   selector: 'app-test-results',
@@ -18,6 +22,7 @@ export class TestResultsPage {
   data = {date: "", type: "", photo: "", files: "", notes: ""};
 
   constructor(private _alertController: AlertController, 
+              public modalController: ModalController,
               public _plat: Platform, 
               public _sql: SQLite)
 {
@@ -121,4 +126,45 @@ export class TestResultsPage {
       await alert.present();
   
     }
+
+    async openModal() {
+      const modal = await this.modalController.create({
+        component: AddEntryPage,
+        componentProps: {
+        }
+      });
+  
+      modal.onDidDismiss().then((dataReturned) => {
+        this.getData();
+      });
+  
+      return await modal.present();
+    }
+
+
+    async viewModal(rowid) {
+      const modal = await this.modalController.create({
+        component: ViewEntryPage,
+        componentProps: { 'rowid': rowid
+        }
+      });
+      modal.onDidDismiss().then(() => {
+        this.getData();
+      });
+  
+      return await modal.present();
+    }
+
+
+    async editModal(rowid) {
+      const modal = await this.modalController.create({
+        component: EditEntryPage,
+        componentProps: { 'rowid': rowid}
+      });
+      modal.onDidDismiss().then(()=>{
+        this.getData();
+      });
+      return await modal.present();
+    }
+
 }

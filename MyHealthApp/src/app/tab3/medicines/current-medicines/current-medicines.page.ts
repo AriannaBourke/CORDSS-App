@@ -18,7 +18,7 @@ export class CurrentMedicinesPage {
   public storedData      : any            = null;
   private _db   : any;
 
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(
@@ -66,7 +66,7 @@ export class CurrentMedicinesPage {
       }
     
   public getData() {
-    this._db.executeSql('SELECT * FROM medicines ORDER BY rowid DESC', <any>[])
+    this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.medicines = [];
       for(var i=0; i<res.rows.length; i++) {
@@ -83,7 +83,7 @@ export class CurrentMedicinesPage {
       }
     
   public saveData() {
-    this._db.executeSql('INSERT INTO medicines VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
+    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
     .then(res => {
         this.getData();
       })
@@ -92,7 +92,7 @@ export class CurrentMedicinesPage {
       
     
   deleteData(rowid) {
-      this._db.executeSql('DELETE FROM medicines WHERE rowid=?', [rowid])
+      this._db.executeSql('DELETE FROM medicine WHERE rowid=?', [rowid])
       .then(res => {
         this.getData();
       })

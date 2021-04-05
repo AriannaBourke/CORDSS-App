@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-entry',
@@ -13,17 +14,17 @@ export class AddEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  isSubmitted = false;
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""}; 
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite
+              public _sql: SQLite              
             ) 
-{            
+{        
   this.medicines = [];
   this._plat
   .ready()
@@ -63,7 +64,7 @@ export class AddEntryPage {
       }
     
       public getData() {
-        this._db.executeSql('SELECT * FROM medicines ORDER BY rowid DESC', <any>[])
+        this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.medicines = [];
           for(var i=0; i<res.rows.length; i++) {
@@ -80,14 +81,15 @@ export class AddEntryPage {
           }
     
   public saveData() {
-    this._db.executeSql('INSERT INTO medicines VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
+    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
     .then(res => {
         this.closeModal()
       })
       .catch(e => alert("save data error" + e));
     }
       
-    async submitData(rowid) {
+    async submitData(myForm: NgForm) {
+      this.isSubmitted = true;
       const alert = await this._alertController.create({
         header: "Save this entry?",
         message: "Would you like to save this entry in your medicines?",
@@ -108,8 +110,13 @@ export class AddEntryPage {
       await alert.present();
     }
     
+    noSubmit(e) {
+      e.preventDefault();
+    }
+    
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();
   }
+
 }

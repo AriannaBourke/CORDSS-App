@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,9 +15,9 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicines (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
+  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
   constructor(private modalController: ModalController,
@@ -25,7 +26,7 @@ export class EditEntryPage {
               public _plat: Platform, 
               public _sql: SQLite,
             ) 
-            {
+            {          
               this.rowid=navParams.get('rowid');        
               this.medicines = [];
               this._plat
@@ -59,7 +60,7 @@ export class EditEntryPage {
 
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM medicines WHERE rowid=?', [rowid])
+                this._db.executeSql('SELECT * FROM medicine WHERE rowid=?', [rowid])
                 .then(res => {
                   this.medicines = [];
                   for(var i=0; i<res.rows.length; i++) {
@@ -82,6 +83,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry in your medicines?",
@@ -101,12 +103,37 @@ export class EditEntryPage {
                 await alert.present()
               }
 
+              noSubmit(e) {
+                e.preventDefault();
+              }
+
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE appointments SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid]) 
-                .then(res => {
-                  this.closeModal();
-                })
+                if(this.data.medicinename != "") {
+                  this._db.executeSql('UPDATE medicine SET medicinename=? WHERE rowid=?',[this.data.medicinename, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
                 .catch(e => alert('update error' + e));
+                }
+                if(this.data.instructions != ""){
+                  this._db.executeSql('UPDATE medicine SET instructions=? WHERE rowid=?', [this.data.instructions, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.sideeffects != ""){
+                  this._db.executeSql('UPDATE medicine SET sideeffects=? WHERE rowid=?', [this.data.sideeffects, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.notes != ""){
+                  this._db.executeSql('UPDATE medicine SET notes=? WHERE rowid=?', [this.data.notes, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                this.closeModal();
               
             }
 
