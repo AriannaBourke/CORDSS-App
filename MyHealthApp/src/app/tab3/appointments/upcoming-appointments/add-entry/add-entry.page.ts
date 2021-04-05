@@ -16,26 +16,17 @@ export class AddEntryPage {
   private _db   : any;
   isSubmitted = false;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
-<<<<<<< HEAD
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
   now = new Date();
   today = this.now.toISOString();
-=======
-  data = {date: "", doctor: "", place: "", description: "", questions: ""};   
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController,
               public _plat: Platform,
               public _sql: SQLite
-<<<<<<< HEAD
             )
 {
-=======
-            ) 
-{         
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   this.appointments = [];
   this._plat
   .ready()
@@ -100,14 +91,9 @@ export class AddEntryPage {
       })
       .catch(e => alert("save data error" + e));
     }
-<<<<<<< HEAD
-
-    async submitData(rowid) {
-=======
       
     async submitData(myForm: NgForm) {
       this.isSubmitted = true;
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
       const alert = await this._alertController.create({
         header: "Save this entry?",
         message: "Would you like to save this entry in your appointments?",
@@ -128,13 +114,10 @@ export class AddEntryPage {
       await alert.present();
     }
 
-<<<<<<< HEAD
-=======
     noSubmit(e) {
       e.preventDefault();
     }
     
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();

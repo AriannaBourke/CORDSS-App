@@ -14,28 +14,17 @@ export class AddEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-<<<<<<< HEAD
-
+  isSubmitted = false;
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
-=======
-  isSubmitted = false;
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""}; 
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController,
               public _plat: Platform,
               public _sql: SQLite
-<<<<<<< HEAD
             )
 {
-=======
-            ) 
-{           
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   this.medicines = [];
   this._plat
   .ready()
@@ -75,11 +64,7 @@ export class AddEntryPage {
       }
 
       public getData() {
-<<<<<<< HEAD
         this._db.executeSql('SELECT * FROM medicine WHERE activeflag="No" ORDER BY rowid DESC', <any>[])
-=======
-        this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
         .then(res => {
           this.medicines = [];
           for(var i=0; i<res.rows.length; i++) {
@@ -97,24 +82,15 @@ export class AddEntryPage {
           }
 
   public saveData() {
-<<<<<<< HEAD
     this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, "No"])
-=======
-    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes]) 
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
     .then(res => {
         this.closeModal()
       })
       .catch(e => alert("save data error" + e));
     }
-<<<<<<< HEAD
-
-    async submitData(rowid) {
-=======
       
     async submitData(myForm: NgForm) {
       this.isSubmitted = true;
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
       const alert = await this._alertController.create({
         header: "Save this entry?",
         message: "Would you like to save this entry in your medicines?",
@@ -135,13 +111,10 @@ export class AddEntryPage {
       await alert.present();
     }
 
-<<<<<<< HEAD
-=======
     noSubmit(e) {
       e.preventDefault();
     }
     
->>>>>>> d91e6bf90a62059270a2a17453e5af7974c61579
   async closeModal() {
     await this.modalController.dismiss();
     this.getData();
