@@ -15,7 +15,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   AppointmentsTable : string = 'CREATE TABLE IF NOT EXISTS appointments (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
@@ -84,6 +84,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry in your appointments?",
@@ -104,12 +105,38 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE appointments SET date=?, doctor=?, place=?, description=?, questions=? WHERE rowid=?', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions, rowid])
-                .then(res => {
-                  this.closeModal();
-                })
+                if(this.data.date != "") {
+                  this._db.executeSql('UPDATE appointments SET date=? WHERE rowid=?',[this.data.date, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
                 .catch(e => alert('update error' + e));
-              
+                }
+                if(this.data.doctor != ""){
+                  this._db.executeSql('UPDATE appointments SET doctor=? WHERE rowid=?', [this.data.doctor, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.place != ""){
+                  this._db.executeSql('UPDATE appointments SET place=? WHERE rowid=?', [this.data.place, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.description != ""){
+                  this._db.executeSql('UPDATE appointments SET description=? WHERE rowid=?', [this.data.description, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.questions != ""){
+                  this._db.executeSql('UPDATE appointments SET questions=? WHERE rowid=?', [this.data.questions, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                this.closeModal();
             }
           
 }

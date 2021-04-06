@@ -107,13 +107,34 @@ export class EditEntryPage {
                 e.preventDefault();
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE medicalhistory SET diagnosis=?, diagnosis_details=?, diagnosis_date=?, notes=? WHERE rowid=?',[this.data.diagnosis, this.data.diagnosis_details, this.data.diagnosis_date, this.data.notes, rowid])
+
+            async updateSQL(rowid) {
+              if(this.data.diagnosis != "") {
+                this._db.executeSql('UPDATE medicalhistory SET date=? WHERE rowid=?',[this.data.diagnosis, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.diagnosis_details != ""){
+                this._db.executeSql('UPDATE medicalhistory SET diagnosis_details=? WHERE rowid=?', [this.data.diagnosis_details, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.diagnosis_date != ""){
+                this._db.executeSql('UPDATE medicalhistory SET diagnosis_date=? WHERE rowid=?', [this.data.diagnosis_date, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.notes != ""){
+                this._db.executeSql('UPDATE medicalhistory SET notes=? WHERE rowid=?', [this.data.notes, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
           
 }

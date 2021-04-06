@@ -16,7 +16,7 @@
         </ion-col>
       </ion-row>
 
-      <form #form="ngForm" (ngSubmit)="update(rowid)">
+      <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
             <ion-row>
               <ion-col>
                 <ion-item>
@@ -26,8 +26,12 @@
                   placeholder="{{app.date | date: 'dd MMMM y HH:mm'}}"
                   displayFormat="DD MMMM YYYY"
                   [(ngModel)]="data.date"
-                  name="date"
+                  name="date" required
+                  #dateCtrl="ngModel"
                 ></ion-datetime>
+              </ion-item>
+              <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
+                <ion-text color="danger">*Date is required</ion-text>
               </ion-item>
             </ion-col>
           </ion-row>

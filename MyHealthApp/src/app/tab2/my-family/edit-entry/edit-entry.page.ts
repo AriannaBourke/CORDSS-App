@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,7 +15,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   MyFamilyTable : string = 'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)'
   data = {name: "", birthday: "", relation: "", email: "", phone: ""};
@@ -84,6 +85,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry?",
@@ -103,13 +105,39 @@ export class EditEntryPage {
                 await alert.present()
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE myfamily SET name=?, birthday=?, relation=?, email=?, phone=? WHERE rowid=?', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone, rowid])
+            async updateSQL(rowid) {
+              if(this.data.name != "") {
+                this._db.executeSql('UPDATE myfamily SET name=? WHERE rowid=?',[this.data.name, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.birthday != ""){
+                this._db.executeSql('UPDATE myfamily SET birthday=? WHERE rowid=?', [this.data.birthday, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.relation != ""){
+                this._db.executeSql('UPDATE myfamily SET relation=? WHERE rowid=?', [this.data.relation, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.email != ""){
+                this._db.executeSql('UPDATE myfamily SET email=? WHERE rowid=?', [this.data.email, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.phone != ""){
+                this._db.executeSql('UPDATE myfamily SET phone=? WHERE rowid=?', [this.data.phone, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
           
 }

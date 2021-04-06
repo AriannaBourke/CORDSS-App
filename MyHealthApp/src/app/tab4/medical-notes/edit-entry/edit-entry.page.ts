@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,7 +15,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
   data = {note_name: "", photo: "", file: "", notes: ""};
@@ -81,6 +82,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry?",
@@ -100,13 +102,34 @@ export class EditEntryPage {
                 await alert.present()
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE mednotes SET note_name=?, photo=?, file=?, notes=? WHERE rowid=?',[this.data.note_name, this.data.photo, this.data.file, this.data.notes, rowid])
+
+            async updateSQL(rowid) {
+              if(this.data.note_name != "") {
+                this._db.executeSql('UPDATE mednotes SET note_name=? WHERE rowid=?',[this.data.note_name, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.photo != ""){
+                this._db.executeSql('UPDATE mednotes SET photo=? WHERE rowid=?', [this.data.photo, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.file != ""){
+                this._db.executeSql('UPDATE mednotes SET file=? WHERE rowid=?', [this.data.file, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.notes != ""){
+                this._db.executeSql('UPDATE mednotes SET notes=? WHERE rowid=?', [this.data.notes, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
           
 }

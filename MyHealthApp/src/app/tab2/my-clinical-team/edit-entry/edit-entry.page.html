@@ -16,7 +16,7 @@
         </ion-col>
       </ion-row>
 
-      <form #form="ngForm" (ngSubmit)="update(rowid)">
+      <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
         <ion-row>
           <ion-col>
             <ion-avatar (click)="selectImageSource()" class="profile-pic">
@@ -35,7 +35,12 @@
              [(ngModel)]="data.name"
              name="name"
              placeholder="{{team.name}}"
+             required
+            #nameCtrl="ngModel"
              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+              <ion-text color="danger">*Name is required</ion-text>
             </ion-item>
          </ion-col>
         </ion-row>

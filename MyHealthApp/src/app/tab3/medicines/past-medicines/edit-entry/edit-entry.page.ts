@@ -109,11 +109,32 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE medicine SET medicinename=?, instructions=?, sideeffects=?, notes=? WHERE rowid=?',[this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, rowid]) 
-                .then(res => {
-                  this.closeModal();
-                })
+                if(this.data.medicinename != "") {
+                  this._db.executeSql('UPDATE medicine SET medicinename=? WHERE rowid=?',[this.data.medicinename, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
                 .catch(e => alert('update error' + e));
+                }
+                if(this.data.instructions != ""){
+                  this._db.executeSql('UPDATE medicine SET instructions=? WHERE rowid=?', [this.data.instructions, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.sideeffects != ""){
+                  this._db.executeSql('UPDATE medicine SET sideeffects=? WHERE rowid=?', [this.data.sideeffects, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.notes != ""){
+                  this._db.executeSql('UPDATE medicine SET notes=? WHERE rowid=?', [this.data.notes, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                this.closeModal();
 
             }
 

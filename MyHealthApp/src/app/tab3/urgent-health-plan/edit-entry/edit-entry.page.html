@@ -16,7 +16,7 @@
         </ion-col>
       </ion-row>
 
-      <form #form="ngForm" (ngSubmit)="update(rowid)">
+      <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
             <ion-row>
               <ion-col>
                 <ion-item>
@@ -26,8 +26,12 @@
                   type="text"
                   placeholder="{{plan.type}}"
                   [(ngModel)]="data.type"
-                  name="type"
+                  name="type" required
+                  #typeCtrl="ngModel"
                 ></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
+                <ion-text color="danger">*Type is required</ion-text>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -41,8 +45,12 @@
                     type="text"
                     placeholder="{{plan.instructions}}"
                     [(ngModel)]="data.instructions"
-                    name="instructions"
+                    name="instructions" required
+                    #instructionsCtrl="ngModel"
                   ></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!instructionsCtrl.valid && instructionsCtrl.touched">
+                    <ion-text color="danger">*Instructions are required</ion-text>
                   </ion-item>
                 </ion-col>
                </ion-row>
@@ -58,6 +66,7 @@
                     [(ngModel)]="data.phone"
                     name="phone"
                   ></ion-input>
+                  </ion-item>
                 </ion-col>
                </ion-row>
       
@@ -72,7 +81,6 @@
                     [(ngModel)]="data.notes"
                     name="notes"
                     ></ion-textarea>
-                   ></ion-textarea>
                   </ion-item>
                  <div class="ion-margin-vertical ion-text-right">
                   <ion-button
