@@ -64,7 +64,8 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "cordova-plugin-camera": "5.31.1"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -82,7 +83,8 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-telerik-imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "App wants to access your gallery"
-      }
+      },
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "ios"

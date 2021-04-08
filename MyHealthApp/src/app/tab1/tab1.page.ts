@@ -187,13 +187,13 @@ export class Tab1Page {
 
   async selectImageSource() {
     const cameraOptions: CameraOptions = {
-        quality: 100,
-        destinationType: this._camera.DestinationType.FILE_URI,
-        encodingType: this._camera.EncodingType.JPEG,
-        mediaType: this._camera.MediaType.PICTURE,
-        targetHeight: 200,
-        correctOrientation: true,
-        sourceType: this._camera.PictureSourceType.CAMERA
+      quality: 100,
+      destinationType: this._camera.DestinationType.FILE_URI,
+      encodingType: this._camera.EncodingType.JPEG,
+      mediaType: this._camera.MediaType.PICTURE,
+      targetHeight: 200,
+      correctOrientation: true,
+      sourceType: this._camera.PictureSourceType.CAMERA
     };
 
     const galleryOptions: CameraOptions = {
@@ -214,7 +214,7 @@ export class Tab1Page {
           handler: ()=> {
             this._camera.getPicture(cameraOptions)
             .then((ImageData)=> {
-              this.myProfileImage = "data:image/jpeg;base64," + ImageData;
+              this.myProfileImage = ImageData;
             })
 
           }

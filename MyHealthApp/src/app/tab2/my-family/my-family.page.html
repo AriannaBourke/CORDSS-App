@@ -18,7 +18,7 @@
   </ion-fab>
   <ion-grid *ngIf="images.length != 0">
     <ion-col *ngFor="let image of images">
-        <img src="{{image}}" style="height: 150px;width:150px" />
+        <img [src]="image" style="height: 150px;width:150px" />
     </ion-col>
 </ion-grid>
   <ion-list *ngFor="let family of myfamily; let i = index" class="list">

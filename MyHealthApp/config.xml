@@ -106,5 +106,9 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-camera" spec="^5.31.1">
+        <variable name="CAMERA_USAGE_DESCRIPTION" values="For review pics." />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" values="For review pics." />
+    </plugin>
     <allow-navigation href="http://localhost:8100" sessionid="3af41672" />
 </widget>
