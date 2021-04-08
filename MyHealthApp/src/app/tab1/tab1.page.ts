@@ -188,7 +188,7 @@ export class Tab1Page {
   async selectImageSource() {
     const cameraOptions: CameraOptions = {
         quality: 100,
-        destinationType: this._camera.DestinationType.DATA_URL,
+        destinationType: this._camera.DestinationType.FILE_URI,
         encodingType: this._camera.EncodingType.JPEG,
         mediaType: this._camera.MediaType.PICTURE,
         targetHeight: 200,

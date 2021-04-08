@@ -22,11 +22,13 @@
     "@ionic-native/call-number": "^5.31.1",
     "@ionic-native/camera": "^5.31.1",
     "@ionic-native/core": "^5.31.1",
+    "@ionic-native/image-picker": "^5.32.0",
     "@ionic-native/in-app-browser": "^5.31.1",
     "@ionic-native/sqlite": "^5.31.1",
     "@ionic-native/toast": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "rxjs": "~6.6.0",
+    "simple-plist": "^1.1.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
@@ -41,7 +43,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
-    "cordova-android": "9.0.0",
+    "cordova-ios": "^6.2.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
@@ -77,10 +79,13 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-x-toast": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-telerik-imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "App wants to access your gallery"
+      }
     },
     "platforms": [
-      "android"
+      "ios"
     ]
   }
 }

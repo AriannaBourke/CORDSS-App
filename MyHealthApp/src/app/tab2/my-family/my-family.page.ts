@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
 import {EditEntryPage } from './edit-entry/edit-entry.page'; 
 import {ViewEntryPage } from './view-entry/view-entry.page';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-my-family',
@@ -13,6 +14,7 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./my-family.page.scss'],
 })
 export class MyFamilyPage {
+  images;
   public myfamily : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -22,6 +24,7 @@ export class MyFamilyPage {
   data = {name: "", birthday: "", relation: "", email: "", phone: ""};
 
   constructor(
+    private imagePicker: ImagePicker,
     private _alertController: AlertController,
     public modalController: ModalController, 
     public _plat: Platform, 
@@ -160,6 +163,15 @@ export class MyFamilyPage {
             this.getData();
           });
           return await modal.present();
+        }
+
+        getPictures() {
+          this.imagePicker.getPictures({
+            maximumImagesCount: 5,
+            outputType: 1
+          }).then(selectedImg => {
+            selectedImg.forEach(i => this.images.push("data:image/jpeg;base64," + i));
+          })
         }
 
 }
