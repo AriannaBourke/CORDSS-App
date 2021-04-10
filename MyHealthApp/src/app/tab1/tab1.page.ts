@@ -214,7 +214,7 @@ export class Tab1Page {
           handler: ()=> {
             this._camera.getPicture(cameraOptions)
             .then((ImageData)=> {
-              this.myProfileImage = ImageData;
+              this.myProfileImage = "data:image/jpeg;base64," + ImageData;
             })
 
           }

@@ -9,6 +9,7 @@ import { Camera } from "@ionic-native/camera/ngx";
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx'
 
 
 
@@ -16,7 +17,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [ Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ImagePicker],
+  providers: [ Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ImagePicker, File],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -11,6 +11,43 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- <div class="ion-padding">
+    <ion-button (click)="getPictures()">Pick multiple images</ion-button>
+    <ion-list *ngFor = "let image of images">
+      <ion-item>
+        <img src={{image}}/>
+      </ion-item>
+    </ion-list>
+  </div> -->
+
+
+
+
+
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h3>Image Picker</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-button (click)="getPictures()">Choose Images</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col> -->
+        <!-- More Pinterest floating gallery style -->
+          <!-- <div class="images">
+          <div class="one-image" *ngFor="let img of imageResponse">
+            <img src="{{img}}" alt="" srcset="">
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="getPictures()">
         <ion-icon name="add"></ion-icon>
@@ -21,7 +58,7 @@
         <img [src]="image" style="height: 150px;width:150px" />
     </ion-col>
 </ion-grid>
-  <ion-list *ngFor="let family of myfamily; let i = index" class="list">
+  <!-- <ion-list *ngFor="let family of myfamily; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
@@ -42,7 +79,7 @@
             <!-- <ion-item>
   <p>{{family.relation}}</p>
 </ion-item> -->
-            <ion-button
+            <!-- <ion-button
               color="danger"
               fill="outline"
               style="float: right"
@@ -79,5 +116,5 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-  </ion-list>
+  </ion-list> -->
 </ion-content>
