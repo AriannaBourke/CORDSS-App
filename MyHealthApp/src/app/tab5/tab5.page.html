@@ -175,7 +175,7 @@
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
       <ion-label>111</ion-label>
-      <ion-button (click)="callNow(number)">Call</ion-button>
+      <ion-button (click)="launchDialer('00 00 00 00')">Call 00 00 00 00</ion-button>
     </ion-item>
     <ion-card-header
       >Emergency Number (Ambulance, Police, Fire)</ion-card-header
@@ -183,7 +183,7 @@
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
       <ion-label>999</ion-label>
-      <ion-button (click)="callNow(number)">Call</ion-button>
+      <ion-button (click)="launchDialer('00 00 00 00')">Call 00 00 00 00</ion-button>
     </ion-item>
   </ion-card>
 </ion-content>

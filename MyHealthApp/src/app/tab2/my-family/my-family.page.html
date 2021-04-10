@@ -47,15 +47,10 @@
     </ion-row>
   </ion-grid> -->
 
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="getPictures()">
-        <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-grid *ngIf="images.length != 0">
-    <ion-col *ngFor="let image of images">
-        <img [src]="image" style="height: 150px;width:150px" />
+  <ion-button (click)="getPictures()">Choose Images</ion-button>
+  <ion-grid *ngIf="imageResponse.length != 0">
+    <ion-col *ngFor="let image of imageResponse">
+        <ion-img [src]="image" style="height: 150px;width:150px"></ion-img>
     </ion-col>
 </ion-grid>
   <!-- <ion-list *ngFor="let family of myfamily; let i = index" class="list">
