@@ -9,13 +9,16 @@ import { Camera } from "@ionic-native/camera/ngx";
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [ SplashScreen, Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [ SplashScreen, File, FileOpener, Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

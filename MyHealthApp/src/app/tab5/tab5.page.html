@@ -5,11 +5,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Manage Your Condition</ion-card-title>
+    <ion-card> 
+      <ion-card-header>
+      <ion-card-title>Create PDFs</ion-card-title>
     </ion-card-header>
-    <ion-card-content> </ion-card-content>
+      <ion-item>
+      <ion-label color="tertiary">Click to download a PDF of your information</ion-label>
+    </ion-item>
+      <ion-item>
+        <ion-label >Urgent Plan</ion-label>
+        <ion-button (click)="openUPModal()" size="medium"><ion-icon slot="start" name="download-outline"></ion-icon>Urgent Plan</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Medicines</ion-label>
+        <ion-button (click)="openMedModal()"size="medium"><ion-icon slot="start" name="download-outline"></ion-icon>Medicines</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>My Conditions</ion-label>
+        <ion-button (click)="openCondModal()" size="medium"><ion-icon slot="start" name="download-outline"></ion-icon>My Conditions</ion-button>
+      </ion-item>
   </ion-card>
   <ion-card>
     <ion-card-header>
