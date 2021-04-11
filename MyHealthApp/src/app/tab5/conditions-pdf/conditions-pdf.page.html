@@ -1,6 +1,6 @@
 <style>
   #pdfcontent p {
-    margin-left: 00px;
+    margin-left: 15px;
     margin-right: 00px;
   }
 
@@ -28,7 +28,7 @@
   <ion-card>
     <ion-item>
       <ion-label>Click To Download PDF</ion-label>
-      <ion-fab-button slot="end" (click)="createPDF()" [disabled]="createButtonDisable"
+      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="createButtonDisable"
         ><ion-icon name="download-outline"></ion-icon
       ></ion-fab-button>
     </ion-item>
