@@ -8,28 +8,28 @@
 }
 
 .image-container {
-  min-height: 200px;
   background-size: cover;
+  min-height: 220px;
 }
 
 @media (min-width: 0px) {
-  .images {
+  .images-wrapper {
     column-count: 2;
   }
 }
 
 @media (min-width: 420px) {
-  .images {
+  .images-wrapper {
     column-count: 3;
   }
 }
 
 @media (min-width: 720px) {
-  .images {
-    column-count: 4;
+  .images-wrapper {
+    column-count: 3;
   }
 }
 
-.one-image {
-  margin: 2px;
+.pick-single-image {
+  margin: 4px;
 }

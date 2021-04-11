@@ -46,13 +46,29 @@
       </ion-col>
     </ion-row>
   </ion-grid> -->
-
-  <ion-button (click)="getPictures()">Choose Images</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <ion-button (click)="getPictures()">Select Images</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="images-wrapper">
+          <div class="pick-single-image" *ngFor="let image of images">
+            <img src="{{image}}" alt="" srcset="">
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <!-- <ion-button (click)="getPictures()">Choose Images</ion-button>
   <ion-grid *ngIf="imageResponse.length != 0">
     <ion-col *ngFor="let image of imageResponse">
         <ion-img [src]="image" style="height: 150px;width:150px"></ion-img>
     </ion-col>
-</ion-grid>
+</ion-grid> -->
   <!-- <ion-list *ngFor="let family of myfamily; let i = index" class="list">
     <ion-card>
       <ion-grid>

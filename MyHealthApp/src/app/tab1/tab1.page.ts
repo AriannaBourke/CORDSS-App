@@ -18,7 +18,7 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  myProfileImage;
+  myProfileImage : string;
   public aboutme : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -214,7 +214,7 @@ export class Tab1Page {
           handler: ()=> {
             this._camera.getPicture(cameraOptions)
             .then((ImageData)=> {
-              this.myProfileImage = ImageData;
+              this.myProfileImage = "data:image/jpeg;base64," + ImageData;
             })
 
           }
