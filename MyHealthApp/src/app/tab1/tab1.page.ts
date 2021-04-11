@@ -97,7 +97,7 @@ export class Tab1Page {
   }
 
   noContent() {
-    return this.isEnabled;
+    return !this.isEnabled;
   }
 
 
