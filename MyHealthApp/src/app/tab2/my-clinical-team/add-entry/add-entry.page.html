@@ -27,7 +27,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="medium" position="stacked">*Name</ion-label>
+            <ion-label position="stacked">Name</ion-label>
             <ion-icon color="tertiary" slot="start" name="person-outline"></ion-icon>
             <ion-input
             placeholder="Name (*Required)"
@@ -47,18 +47,14 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Role</ion-label>
+              <ion-label position="stacked">Role</ion-label>
               <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-              <ion-select
+              <ion-input
               placeholder="Role"
               interface="popover"
               name="clinicalrole"
               [(ngModel)]="data.role"
-            >
-              <ion-select-option value="Doctor">Doctor</ion-select-option>
-              <ion-select-option value="Nurse">Nurse</ion-select-option>
-              <ion-select-option value="Other">Other</ion-select-option>
-            </ion-select>
+            ></ion-input>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -66,7 +62,7 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Clinic Name</ion-label>
+              <ion-label position="stacked">Clinic Name</ion-label>
               <ion-icon color="tertiary" slot="start" name="location-outline"></ion-icon>
               <ion-input placeholder="Clinic Name"
               type="text"
@@ -79,10 +75,10 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Email</ion-label>
+              <ion-label position="stacked">Email</ion-label>
              <ion-icon color="tertiary" slot="start" name="mail-outline"></ion-icon>
              <ion-input
-             placeholder="Email"
+             placeholder="Email Address"
              type="email"
              [(ngModel)]="data.email"
              name="email" 
@@ -99,10 +95,10 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Telephone</ion-label>
+              <ion-label position="stacked">Telephone</ion-label>
              <ion-icon color="tertiary" slot="start" name="call-outline"></ion-icon>
              <ion-input
-             placeholder="Telephone"
+             placeholder="Phone Number"
              type="text"
              [(ngModel)]="data.phone"
              name="phone"

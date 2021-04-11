@@ -25,7 +25,8 @@ export class MyFamilyPage {
     private _alertController: AlertController,
     public modalController: ModalController, 
     public _plat: Platform, 
-    public _sql: SQLite) 
+    public _sql: SQLite,
+    ) 
 
     {
       this.myfamily = [];
@@ -161,6 +162,7 @@ export class MyFamilyPage {
           });
           return await modal.present();
         }
+
 
 }
 

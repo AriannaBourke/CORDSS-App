@@ -20,14 +20,14 @@
             <ion-row>
               <ion-col>
                   <ion-item>
-                    <ion-label position="stacked">Note Name</ion-label>
+                    <ion-label color="medium" position="stacked">Note Name</ion-label>
                     <ion-icon
                     color="tertiary"
                       slot="start"
                       name="document-outline"
                     ></ion-icon>
                     <ion-input          
-                      placeholder="Note Name"
+                      placeholder="{{note.note_name}}"
                       [(ngModel)]="data.note_name"
                       name="note_name" required
                       #note_nameCtrl="ngModel"
@@ -43,10 +43,10 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-label position="stacked">Photo</ion-label>
+                    <ion-label color="medium" position="stacked">Photo</ion-label>
                     <ion-input
                       type="text"
-                      placeholder="Upload Photo"
+                      placeholder="{{note.photo}}"
                       [(ngModel)]="data.photo"
                       name="photo"
                     ></ion-input>
@@ -62,10 +62,10 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-label position="stacked">Files</ion-label>
+                    <ion-label color="medium" position="stacked">Files</ion-label>
                     <ion-input
                       type="text"
-                      placeholder="Upload Files"
+                      placeholder="{{note.file}}"
                       [(ngModel)]="data.file"
                       name="file"
                     ></ion-input>
@@ -77,7 +77,7 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-label position="stacked">Notes</ion-label>
+                    <ion-label color="medium" position="stacked">Notes</ion-label>
                     <ion-icon
                     color="tertiary"
                       slot="start"
@@ -85,7 +85,7 @@
                     ></ion-icon>
                     <ion-textarea
                       type="text"
-                      placeholder="Notes"
+                      placeholder="{{note.notes}}"
                       [(ngModel)]="data.notes"
                       name="notes" required
                       #notesCtrl="ngModel"
