@@ -10,7 +10,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  <ion-content [fullscreen]="true"> 
+    <button ion-button full (click)="takePhoto()" >
+      <ion-icon name="camera"></ion-icon> &nbsp;&nbsp; Take Photo</button>
+    
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 *ngFor="let photo of photos; let id = index">
+            <ion-card class="block">
+              <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+              <img [src]="photo" *ngIf="photo" />
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>
+
+<!-- <ion-content [fullscreen]="true">
   <ion-list *ngFor="let team of clinicalteam; let i = index" class="list">
     <ion-card>
       <ion-grid>  
@@ -41,5 +58,5 @@
     </ion-grid>
     </ion-card>
   </ion-list>
-  </ion-content>
+  </ion-content> -->
   

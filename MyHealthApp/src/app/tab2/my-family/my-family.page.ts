@@ -170,8 +170,9 @@ export class MyFamilyPage {
 
         getPictures() {
           this.options = {
+            targetHeight: 200,
+            correctOrientation: true,
             width: 200,
-            height: 300,
             quality: 100,
             outputType: 1
           };
