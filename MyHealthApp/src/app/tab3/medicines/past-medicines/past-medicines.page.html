@@ -11,6 +11,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">
+        Click 'Add' to add any previous medication you have taken!
+      </p>
+      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+    </ion-item>
+  </ion-card>
   <ion-list *ngFor="let med of medicines; let i = index" class="list">
     <ion-card>
       <ion-grid>

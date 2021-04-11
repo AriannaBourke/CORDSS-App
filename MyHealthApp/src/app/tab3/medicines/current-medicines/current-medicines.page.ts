@@ -20,6 +20,7 @@ export class CurrentMedicinesPage {
 
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  isEnabled: any;
 
   constructor(
               public modalController: ModalController,
@@ -66,6 +67,7 @@ export class CurrentMedicinesPage {
       }
 
   public getData() {
+    this.verifyDatabasePopulated();
     this._db.executeSql('SELECT * FROM medicine WHERE activeflag="Yes" ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.medicines = [];
@@ -81,6 +83,23 @@ export class CurrentMedicinesPage {
       }
     })
         .catch(e => alert('get data error' + e));
+      }
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="YES"', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
       }
 
   public saveData() {

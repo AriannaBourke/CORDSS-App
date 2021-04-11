@@ -16,23 +16,24 @@ export class PastProceduresPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-  
+
 
   ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
+  isEnabled: any;
 
     constructor(
                 public modalController: ModalController,
-                private _alertController: AlertController, 
-                public _plat: Platform, 
+                private _alertController: AlertController,
+                public _plat: Platform,
                 public _sql: SQLite,
-              ) 
+              )
 
 {
   this.procedures = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -53,7 +54,7 @@ export class PastProceduresPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.ProceduresTable, []);
     this.getData()
@@ -62,12 +63,13 @@ export class PastProceduresPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+    this.verifyDatabasePopulated()
     this._db.executeSql('SELECT * FROM procedures ORDER BY date DESC', <any>[])
     .then(res => {
       this.procedures = [];
@@ -85,7 +87,24 @@ export class PastProceduresPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM procedures', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
+      }
+
   public saveData() {
     this._db.executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions])
     .then(res => {
@@ -93,7 +112,7 @@ export class PastProceduresPage {
       })
       .catch(e => alert("save data error" + e));
     }
-    
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM procedures WHERE rowid=?', [rowid])
       .then(res => {
@@ -114,14 +133,14 @@ export class PastProceduresPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
     async openModal() {
@@ -130,11 +149,11 @@ export class PastProceduresPage {
         componentProps: {
         }
       });
-  
+
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
@@ -148,7 +167,7 @@ export class PastProceduresPage {
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
