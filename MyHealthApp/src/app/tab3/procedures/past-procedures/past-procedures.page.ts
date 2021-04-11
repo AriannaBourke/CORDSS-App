@@ -20,6 +20,8 @@ export class PastProceduresPage {
 
   ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
+  now = new Date();
+  today = this.now.toISOString();
   isEnabled: any;
 
     constructor(
@@ -70,7 +72,7 @@ export class PastProceduresPage {
 
   public getData() {
     this.verifyDatabasePopulated()
-    this._db.executeSql('SELECT * FROM procedures ORDER BY date DESC', <any>[])
+    this._db.executeSql('SELECT * FROM procedures WHERE date < ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.procedures = [];
       for(var i=0; i<res.rows.length; i++) {
@@ -89,7 +91,7 @@ export class PastProceduresPage {
       }
 
       verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM procedures', <any>[])
+        this._db.executeSql('SELECT * FROM procedures WHERE date < ?', [this.today])
         .then(res => {
           if(res.rows.length == 0) {
             this.isEnabled = true;
