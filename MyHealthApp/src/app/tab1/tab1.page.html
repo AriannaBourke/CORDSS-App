@@ -1,8 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title> About Me </ion-title>
-    <ion-button color="success" slot="end" (click)="editModal()"
-      ><ion-icon slot="start" name="create"></ion-icon>Edit</ion-button
+    <ion-button
+      color="success"
+      slot="end"
+      [disabled]="checkIsEnabled()"
+      (click)="openModal()"
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
     >
   </ion-toolbar>
 </ion-header>
@@ -11,99 +15,184 @@
   <ion-avatar (click)="selectImageSource()" class="profile-pic">
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
-  <ion-list *ngFor="let about of aboutme" class="list">
+  <ion-card *ngIf="noContent()">
+    <ion-card-content>
+      <ion-item>
+        <p>ADD INFO</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-list *ngFor="let about of aboutme; let i = index" class="list">
     <ion-card>
       <ion-card-header>
         <ion-card-title>Basic Info </ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-icon slot="start" name="person-outline" size="small"></ion-icon>
-          <p>{{about.name}}</p>
-        </ion-item>
-        <ion-item
-          ><ion-icon slot="start" name="gift-outline" size="small"></ion-icon>
-          <ion-datetime
-            displayFormat="DD MMMM YYYY"
-            placeholder="Date of Birth"
-          ></ion-datetime>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-icon
-            slot="start"
-            name="information-circle-outline"
-            size="small"
-          ></ion-icon>
-          <ion-textarea
-            rows="2"
-            placeholder="A little bit about me"
-          ></ion-textarea>
-        </ion-item>
-      </ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.name}}</p>
+            </ion-item>
+            <ion-item
+              ><ion-icon
+                slot="start"
+                name="gift-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.birthday | date: "dd MMMM YYYY"}}</p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                name="information-circle-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.about}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card>
 
     <ion-card>
       <ion-card-header>
         <ion-card-title>Private Info</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-icon slot="start" name="mail-outline" size="small"></ion-icon>
-          <ion-input placeholder="Email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
-          <ion-input placeholder="Phone Number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="home-outline" size="small"></ion-icon>
-          <ion-textarea placeholder="Address"></ion-textarea>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-icon
-            slot="start"
-            name="newspaper-outline"
-            size="small"
-          ></ion-icon>
-          <ion-input placeholder="NHS Number"></ion-input>
-        </ion-item>
-      </ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="mail-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.email}}</p>
+            </ion-item>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.phone}}</p>
+            </ion-item>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="home-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.address}}</p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                name="newspaper-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.nhs_number}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card>
 
     <ion-card>
       <ion-card-header>
         <ion-card-title>Emergency Contacts</ion-card-title>
       </ion-card-header>
-      <ion-card-header> Emergency Contact 1 </ion-card-header>
-      <ion-item>
-        <ion-icon slot="start" name="person-outline" size="small"></ion-icon>
-        <ion-input placeholder="Name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
-        <ion-input placeholder="Phone Number"></ion-input>
-        <ion-button>Call</ion-button>
-      </ion-item>
-      <ion-card-header> Emergency Contact 2 </ion-card-header>
-      <ion-item>
-        <ion-icon slot="start" name="person-outline" size="small"></ion-icon>
-        <ion-input placeholder="Name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
-        <ion-input placeholder="Phone Number"></ion-input>
-        <ion-button>Call</ion-button>
-      </ion-item>
-      <ion-card-header> Emergency Contact 3 </ion-card-header>
-      <ion-item>
-        <ion-icon slot="start" name="person-outline" size="small"></ion-icon>
-        <ion-input placeholder="Name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
-        <ion-input placeholder="Phone Number"></ion-input>
-        <ion-button>Call</ion-button>
-      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-header> Emergency Contact 1 </ion-card-header>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.emergency_1_name}}</p>
+            </ion-item>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.emergency_1_number}}</p>
+              <ion-button>Call</ion-button>
+            </ion-item>
+            <ion-card-header> Emergency Contact 2 </ion-card-header>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.emergency_2_name}}</p>
+            </ion-item>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.emergency_2_number}}</p>
+              <ion-button>Call</ion-button>
+            </ion-item>
+            <ion-card-header> Emergency Contact 3 </ion-card-header>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.emergency_3_name}}</p>
+            </ion-item>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <p>{{about.emergency_3_number}}</p>
+              <ion-button>Call</ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <div>
+          <ion-button
+            color="light"
+            style="float: right"
+            (click)="removeData(about.rowid)"
+            ><ion-icon
+              size="large"
+              color="danger"
+              name="trash-outline"
+            ></ion-icon
+          ></ion-button>
+          <ion-button
+            color="light"
+            style="float: right"
+            (click)="editModal(about.rowid)"
+          >
+            <ion-icon
+              size="large"
+              color="success"
+              slot="start"
+              name="create"
+            ></ion-icon
+            >Edit</ion-button
+          >
+        </div>
+      </ion-grid>
     </ion-card>
   </ion-list>
 </ion-content>
