@@ -108,13 +108,40 @@ export class EditEntryPage {
                 e.preventDefault();
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE testresults SET date=?, type=?, photo=?, files=?, notes=? WHERE rowid=?', [this.data.date, this.data.type, this.data.photo, this.data.files, this.data.notes, rowid])
+
+            async updateSQL(rowid) {
+              if(this.data.date != "") {
+                this._db.executeSql('UPDATE testresults SET date=? WHERE rowid=?',[this.data.date, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.type != ""){
+                this._db.executeSql('UPDATE testresults SET doctor=? WHERE rowid=?', [this.data.type, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.photo != ""){
+                this._db.executeSql('UPDATE testresults SET place=? WHERE rowid=?', [this.data.photo, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.files != ""){
+                this._db.executeSql('UPDATE testresults SET description=? WHERE rowid=?', [this.data.files, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.notes != ""){
+                this._db.executeSql('UPDATE testresults SET questions=? WHERE rowid=?', [this.data.notes, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
           
 }

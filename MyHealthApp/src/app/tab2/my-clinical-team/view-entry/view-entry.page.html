@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let team of clinicalteam; let i = index" class="list">
     <ion-card>
     <ion-grid>
@@ -92,9 +92,9 @@
           ></ion-icon>
             <p>{{team.phone}}</p>
           </ion-item>
-          <ion-button color="light" style="float: right" (click)="removeData(app.rowid)"
+          <ion-button color="light" style="float: right" (click)="removeData(team.rowid)"
           ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(app.rowid)"
+            <ion-button color="light" style="float: right" (click)="editModal(team.rowid)"
             ><ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
         </ion-col>
       </ion-row>

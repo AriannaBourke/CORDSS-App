@@ -27,7 +27,7 @@
               ></ion-icon>
               <ion-select 
               #links ngModel 
-              name="estate" 
+              name="medicinename" 
               interface="popover" 
               placeholder="Select Option"
               required
@@ -44,7 +44,8 @@
           <ion-item *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched">
             <ion-text color="danger">*Medicine is required</ion-text>
           </ion-item>       
-            <div *ngIf="links.value === '1'">
+            
+          <div *ngIf="links.value === '1'">
               <ion-item>
                 <ion-label position="stacked">Medicine Name</ion-label> 
             <ion-icon
@@ -64,6 +65,7 @@
               <ion-text color="danger">*Medicine is required</ion-text>
             </ion-item>
             </div>
+
             <div *ngIf="links.value === '2'">
               <ion-item>
                 <ion-label position="stacked">Medicine Name</ion-label> 
@@ -96,6 +98,7 @@
               <ion-text color="danger">*Medicine is required</ion-text>
             </ion-item>
             </div>
+
             <div *ngIf="links.value === '3'">
               <ion-item>
               <ion-label position="stacked">Medicine Name</ion-label> 
@@ -117,6 +120,7 @@
               <ion-text color="danger">*Medicine is required</ion-text>
             </ion-item>
             </div>
+
             <div *ngIf="links.value === '4'">
               <ion-item>
             <ion-label position="stacked">Medicine Name</ion-label> 
@@ -149,6 +153,7 @@
               <ion-text color="danger">*Medicine is required</ion-text>
             </ion-item>
             </div>
+
             <div *ngIf="links.value === '5'">
               <ion-item>
             <ion-label position="stacked">Medicine Name</ion-label> 
@@ -186,6 +191,7 @@
             <ion-text color="danger">*Medicine is required</ion-text>
             </ion-item>
           </div>  
+          
           <div *ngIf="links.value === '6'">
             <ion-item>
             <ion-label position="stacked">Medicine Name</ion-label>

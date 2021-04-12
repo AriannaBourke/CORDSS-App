@@ -24,9 +24,16 @@ export class MyFamilyPage {
 
   constructor(
     private _alertController: AlertController,
+<<<<<<< HEAD
+    public modalController: ModalController, 
+    public _plat: Platform, 
+    public _sql: SQLite,
+    ) 
+=======
     public modalController: ModalController,
     public _plat: Platform,
     public _sql: SQLite)
+>>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
 
     {
       this.myfamily = [];
@@ -180,6 +187,7 @@ export class MyFamilyPage {
           });
           return await modal.present();
         }
+
 
 }
 

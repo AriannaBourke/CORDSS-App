@@ -17,6 +17,8 @@ export class AddEntryPage {
   isSubmitted = false;
   ProceduresTable : string = 'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""}; 
+  now = new Date();
+  today = this.now.toISOString();
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -64,7 +66,7 @@ export class AddEntryPage {
       }
     
   public getData() {
-    this._db.executeSql('SELECT * FROM procedures ORDER BY rowid DESC', <any>[])
+    this._db.executeSql('SELECT * FROM procedures WHERE date < ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.procedures = [];
       for(var i=0; i<res.rows.length; i++) {

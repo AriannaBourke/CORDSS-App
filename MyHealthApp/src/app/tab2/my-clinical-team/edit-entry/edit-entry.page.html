@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let team of clinicalteam; let i = index" class="list">
     <ion-card>
     <ion-grid>
@@ -16,7 +16,7 @@
         </ion-col>
       </ion-row>
 
-      <form #form="ngForm" (ngSubmit)="update(rowid)">
+      <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
         <ion-row>
           <ion-col>
             <ion-avatar (click)="selectImageSource()" class="profile-pic">
@@ -28,14 +28,19 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Name</ion-label>
+              <ion-label color="medium" position="stacked">Name</ion-label>
              <ion-icon color="tertiary" slot="start" name="person-outline"></ion-icon>
              <ion-input
              type="text"
              [(ngModel)]="data.name"
              name="name"
              placeholder="{{team.name}}"
+             required
+            #nameCtrl="ngModel"
              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+              <ion-text color="danger">*Name is required</ion-text>
             </ion-item>
          </ion-col>
         </ion-row>
@@ -43,18 +48,14 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Role</ion-label>
+              <ion-label color="medium" position="stacked">Role</ion-label>
               <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-              <ion-select
+              <ion-input
               interface="popover"
               name="clinicalrole"
               placeholder="{{team.role}}"
               [(ngModel)]="data.role"
-            >
-              <ion-select-option value="Doctor">Doctor</ion-select-option>
-              <ion-select-option value="Nurse">Nurse</ion-select-option>
-              <ion-select-option value="Other">Other</ion-select-option>
-            </ion-select>
+            ></ion-input>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -62,17 +63,14 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Clinic Name</ion-label>
+              <ion-label color="medium" position="stacked">Clinic Name</ion-label>
               <ion-icon color="tertiary" slot="start" name="location-outline"></ion-icon>
-              <ion-select
+              <ion-input
               interface="popover"
               [(ngModel)]="data.clinic_name"
               placeholder="{{team.clinic_name}}"
               name="clinic_name"
-            >
-              <ion-select-option value="GOSH">GOSH</ion-select-option>
-              <ion-select-option value="Other">Other</ion-select-option>
-            </ion-select>
+            ></ion-input>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -80,7 +78,7 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Email</ion-label>
+              <ion-label color="medium" position="stacked">Email</ion-label>
              <ion-icon color="tertiary" slot="start" name="mail-outline"></ion-icon>
              <ion-input
              type="text"
@@ -95,7 +93,7 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Telephone</ion-label>
+              <ion-label color="medium" position="stacked">Telephone</ion-label>
              <ion-icon color="tertiary" slot="start" name="call-outline"></ion-icon>
              <ion-input
              type="text"

@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -14,7 +15,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
   data = {type: "", instructions: "", phone: "", notes: ""};
@@ -82,6 +83,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry in your urgent health plan?",
@@ -101,13 +103,39 @@ export class EditEntryPage {
                 await alert.present()
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE urgentplan SET type=?, instructions=?, phone=?, notes=? WHERE rowid=?',[this.data.type, this.data.instructions, this.data.phone, this.data.notes, rowid])
+              noSubmit(e) {
+                e.preventDefault();
+              }
+
+            async updateSQL(rowid) {
+              if(this.data.type != "") {
+                this._db.executeSql('UPDATE urgentplan SET type=? WHERE rowid=?',[this.data.type, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.instructions != ""){
+                this._db.executeSql('UPDATE urgentplan SET instructions=? WHERE rowid=?', [this.data.instructions, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.phone != ""){
+                this._db.executeSql('UPDATE urgentplan SET phone=? WHERE rowid=?', [this.data.phone, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.notes != ""){
+                this._db.executeSql('UPDATE urgentplan SET notes=? WHERE rowid=?', [this.data.notes, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
+
+            
           
 }

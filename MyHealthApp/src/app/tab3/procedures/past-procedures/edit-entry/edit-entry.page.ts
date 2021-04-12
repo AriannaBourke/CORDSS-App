@@ -109,12 +109,38 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE procedures SET date=?, doctor=?, place=?, type=?, description=?, questions=? WHERE rowid=?', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions, rowid])
-                .then(res => {
-                  this.closeModal();
-                })
+                if(this.data.date != "") {
+                  this._db.executeSql('UPDATE procedures SET date=? WHERE rowid=?',[this.data.date, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
                 .catch(e => alert('update error' + e));
-              
+                }
+                if(this.data.doctor != ""){
+                  this._db.executeSql('UPDATE procedures SET doctor=? WHERE rowid=?', [this.data.doctor, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.place != ""){
+                  this._db.executeSql('UPDATE procedures SET place=? WHERE rowid=?', [this.data.place, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.description != ""){
+                  this._db.executeSql('UPDATE procedures SET description=? WHERE rowid=?', [this.data.description, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.questions != ""){
+                  this._db.executeSql('UPDATE procedures SET questions=? WHERE rowid=?', [this.data.questions, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                this.closeModal();
             }
           
 }
