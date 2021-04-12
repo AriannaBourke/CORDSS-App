@@ -20,16 +20,10 @@ export class UpcomingProceduresPage {
 
   ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
-<<<<<<< HEAD
-  now = new Date();
-  today = this.now.toISOString();
-  
-=======
   isEnabled: any;
   now = new Date();
   today = this.now.toISOString();
 
->>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
     constructor(
                 public modalController: ModalController,
                 private _alertController: AlertController,
@@ -77,10 +71,7 @@ export class UpcomingProceduresPage {
       }
 
   public getData() {
-<<<<<<< HEAD
-=======
     this.verifyDatabasePopulated()
->>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
     this._db.executeSql('SELECT * FROM procedures WHERE date > ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.procedures = [];
