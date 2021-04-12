@@ -13,5 +13,21 @@ ion-select {
       --width: 95%;
       --max-width: 400px;
     }
+    ion-content {
+      --ion-background-color: linear-gradient(#5cb9dd, white);
+    }
+    ion-icon {
+      color: #e7de56;
+    }
 
+    ion-card-title {
+      color: #041a97;
+      
+    }
+
+    ion-button {
+      --background: #05c072;
+    }
+
+    
 
