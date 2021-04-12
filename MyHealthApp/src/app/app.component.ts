@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 
 
@@ -9,6 +12,33 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
-}
+
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar
+  ){
+    this.initializeApp();
+  }
+
+  initializeApp(){
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+
+    }
+  }
+
+  // constructor( private _plat: Platform, private splashScreen: SplashScreen) {
+    
+  //   this._plat.ready().then(() => {
+  //     setTimeout(() => {
+  //         this.splashScreen.hide();
+  
+  //     }, 800);
+  // });
+    
+  
+  // }}
 
