@@ -22,12 +22,8 @@ export class PastProceduresPage {
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
   now = new Date();
   today = this.now.toISOString();
-<<<<<<< HEAD
-  
-=======
   isEnabled: any;
 
->>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
     constructor(
                 public modalController: ModalController,
                 private _alertController: AlertController,
@@ -75,10 +71,7 @@ export class PastProceduresPage {
       }
 
   public getData() {
-<<<<<<< HEAD
-=======
     this.verifyDatabasePopulated()
->>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
     this._db.executeSql('SELECT * FROM procedures WHERE date < ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.procedures = [];
