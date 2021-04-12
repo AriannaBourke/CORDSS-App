@@ -1,108 +1,283 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Appointment</ion-title>
+    <ion-title>Edit About Me Page</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form #form="ngForm" (ngSubmit)="submitData(form)">
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Appointment</ion-label>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label color="medium" position="floating">Date & Time</ion-label>
-            <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
-            <ion-datetime
-            displayFormat="DD MMMM YYYY HH:mm"
-            [(ngModel)]="data.date"
-            name="date"
-          ></ion-datetime>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-         <ion-row>
+<ion-content [fullscreen]="true">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Basic Info </ion-card-title>
+      </ion-card-header>
+      <ion-grid>
+        <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Doctor</ion-label>
-              <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-              <ion-input 
-              type="text"
-              [(ngModel)]="data.doctor"
-              name="doctor"
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                placeholder="Name (*required)"
+                name="name"
+                required
+                [(ngModel)]="data.name"
+                #nameCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+              <ion-text color="danger">*Name is required</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item
+              ><ion-icon
+                slot="start"
+                name="gift-outline"
+                size="small"
+              ></ion-icon>
+              <ion-datetime
+                displayFormat="DD MMMM YYYY"
+                placeholder="Date of Birth"
+                name="birthday"
+                [(ngModel)]="data.birthday"
+              ></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                name="information-circle-outline"
+                size="small"
+              ></ion-icon>
+              <ion-textarea
+                rows="2"
+                placeholder="A little bit about me"
+                name="about"
+                [(ngModel)]="data.about"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Private Info</ion-card-title>
+      </ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="mail-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                placeholder="Email"
+                name="email"
+                [(ngModel)]="data.email"
               ></ion-input>
             </ion-item>
           </ion-col>
-         </ion-row>
-
-         <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label color="medium" position="floating">Place</ion-label>
-              <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
-              <ion-input 
-              type="text"
-              [(ngModel)]="data.place"
-              name="place"></ion-input>
-            </ion-item>
-          </ion-col>
-         </ion-row>
-
-         <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label color="medium" position="floating">Description</ion-label>
-             <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
-             <ion-textarea 
-             rows="3"
-             type="text"
-             [(ngModel)]="data.description"
-             name="description"
-             ></ion-textarea>
-            </ion-item>
-         </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="floating">Questions?</ion-label>
-             <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
-             <ion-textarea 
-             rows="3"
-             type="text"
-             [(ngModel)]="data.questions"
-             name="questions"
-            ></ion-textarea>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                placeholder="Phone Number"
+                name="phone"
+                [(ngModel)]="data.phone"
+              ></ion-input>
             </ion-item>
-           <div class="ion-margin-vertical ion-text-right">
-            <ion-button
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="home-outline"
+                size="small"
+              ></ion-icon>
+              <ion-textarea
+                placeholder="Address"
+                name="address"
+                [(ngModel)]="data.address"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                name="newspaper-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                placeholder="NHS Number"
+                name="nhs_number"
+                [(ngModel)]="data.nhs_number"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Emergency Contacts</ion-card-title>
+      </ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-header> Emergency Contact 1 </ion-card-header>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="data.emergency_1_name"
+                name="emergency_1_name"
+                placeholder="Name"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="data.emergency_1_number"
+                name="emergency_1_number"
+                placeholder="Phone Number"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-card-header> Emergency Contact 2 </ion-card-header>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="data.emergency_2_name"
+                name="emergency_2_name"
+                placeholder="Name"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="data.emergency_2_number"
+                name="emergency_2_number"
+                placeholder="Phone Number"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-card-header> Emergency Contact 3 </ion-card-header>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="person-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="data.emergency_3_name"
+                name="emergency_3_name"
+                placeholder="Name"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon
+                slot="start"
+                name="call-outline"
+                size="small"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="data.emergency_3_number"
+                name="emergency_3_number"
+                placeholder="Phone Number"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <div class="ion-margin-vertical ion-text-right">
+          <ion-button
             type="button"
             fill="outline"
             color="danger"
             (click)="form.reset()"
-          >Clear</ion-button>
-            <ion-button
-              type="button"
-              type="submit"
-              value="submit"
-              id="submit"
-              color="success"
+            >Clear</ion-button
+          >
+          <ion-button
+            type="button"
+            type="submit"
+            value="submit"
+            id="submit"
+            color="success"
+            [disabled]="!form.valid"
             >Submit</ion-button
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</form>
+          >
+        </div>
+      </ion-grid>
+    </ion-card>
+  </form>
 </ion-content>

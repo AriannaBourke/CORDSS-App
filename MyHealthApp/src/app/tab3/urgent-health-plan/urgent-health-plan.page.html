@@ -5,38 +5,67 @@
     </ion-buttons>
     <ion-title>Urgent Health Plan</ion-title>
     <ion-button color="success" slot="end" (click)="openModal()"
-    ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
-  >
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">Click 'Add' to add any Urgent Health Plans!</p>
+      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+    </ion-item>
+  </ion-card>
   <ion-list *ngFor="let plan of urgentplan; let i = index" class="list">
     <ion-card>
-      <ion-grid>  
+      <ion-grid>
         <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label color="tertiary">Plan</ion-label>
-          <ion-icon
-          color="tertiary"
-          slot="start"
-          name="medkit-outline"
-        ></ion-icon>
-      </ion-item>
-      <ion-item>
-    <p>{{plan.type}}</p>
-  </ion-item>
-<ion-button color="light" style="float: right" (click)="removeData(plan.rowid)"
-><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-<ion-button color="light" style="float: right" (click)="editModal(plan.rowid)">
-<ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
-<ion-button color="light" style="float: right" (click)="viewModal(plan.rowid)"
-><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
-</ion-col>
-</ion-row>
-</ion-grid>
-</ion-card>
-</ion-list>
+          <ion-col>
+            <ion-item>
+              <ion-label color="tertiary">Plan</ion-label>
+              <ion-icon
+                color="tertiary"
+                slot="start"
+                name="medkit-outline"
+              ></ion-icon>
+            </ion-item>
+            <ion-item>
+              <p>{{plan.type}}</p>
+            </ion-item>
+            <ion-button
+              color="light"
+              style="float: right"
+              (click)="removeData(plan.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="light"
+              style="float: right"
+              (click)="editModal(plan.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+            <ion-button
+              color="light"
+              style="float: right"
+              (click)="viewModal(plan.rowid)"
+              ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon
+              >View</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>
-     

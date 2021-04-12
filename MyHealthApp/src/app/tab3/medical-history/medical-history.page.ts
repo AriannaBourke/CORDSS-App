@@ -21,16 +21,17 @@ export class MedicalHistoryPage {
 
   MedicalHistoryTable : string = 'CREATE TABLE IF NOT EXISTS medicalhistory (rowid INTEGER PRIMARY KEY AUTOINCREMENT, diagnosis TEXT, diagnosis_details TEXT, diagnosis_date TEXT, notes TEXT)'
   data = {diagnosis: "", diagnosis_details: "", diagnosis_date: "", notes: ""};
+  isEnabled: any;
 
-  constructor(private _alertController: AlertController, 
+  constructor(private _alertController: AlertController,
               public modalController: ModalController,
-              public _plat: Platform, 
+              public _plat: Platform,
               public _sql: SQLite)
 {
   this.medicalhistory = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -51,7 +52,7 @@ export class MedicalHistoryPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.MedicalHistoryTable, []);
     this.getData()
@@ -60,12 +61,13 @@ export class MedicalHistoryPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+    this.verifyDatabasePopulated()
     this._db.executeSql('SELECT * FROM medicalhistory ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.medicalhistory = [];
@@ -81,7 +83,24 @@ export class MedicalHistoryPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM medicalhistory', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
+      }
+
   public saveData() {
     this._db.executeSql('INSERT INTO medicalhistory VALUES(NULL,?,?,?,?)', [this.data.diagnosis, this.data.diagnosis_details, this.data.diagnosis_date, this.data.notes])
     .then(res => {
@@ -89,8 +108,8 @@ export class MedicalHistoryPage {
       })
       .catch(e => alert("save data error" + e));
     }
-      
-    
+
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM medicalhistory WHERE rowid=?', [rowid])
       .then(res => {
@@ -111,14 +130,14 @@ export class MedicalHistoryPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
     async openModal() {
@@ -127,11 +146,11 @@ export class MedicalHistoryPage {
         componentProps: {
         }
       });
-  
+
       modal.onDidDismiss().then((dataReturned) => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
@@ -145,7 +164,7 @@ export class MedicalHistoryPage {
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 

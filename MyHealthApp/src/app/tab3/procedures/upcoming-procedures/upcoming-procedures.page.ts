@@ -16,25 +16,32 @@ export class UpcomingProceduresPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-  
+
 
   ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
+<<<<<<< HEAD
   now = new Date();
   today = this.now.toISOString();
   
+=======
+  isEnabled: any;
+  now = new Date();
+  today = this.now.toISOString();
+
+>>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
     constructor(
                 public modalController: ModalController,
-                private _alertController: AlertController, 
-                public _plat: Platform, 
+                private _alertController: AlertController,
+                public _plat: Platform,
                 public _sql: SQLite,
-              ) 
+              )
 
 {
   this.procedures = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -55,7 +62,7 @@ export class UpcomingProceduresPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.ProceduresTable, []);
     this.getData()
@@ -64,12 +71,16 @@ export class UpcomingProceduresPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+<<<<<<< HEAD
+=======
+    this.verifyDatabasePopulated()
+>>>>>>> 1ef8e202372ce8d505c2454026e1299bd422d33f
     this._db.executeSql('SELECT * FROM procedures WHERE date > ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.procedures = [];
@@ -87,7 +98,24 @@ export class UpcomingProceduresPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM procedures WHERE date > ?', [this.today])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
+      }
+
   public saveData() {
     this._db.executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions])
     .then(res => {
@@ -95,7 +123,7 @@ export class UpcomingProceduresPage {
       })
       .catch(e => alert("save data error" + e));
     }
-    
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM procedures WHERE rowid=?', [rowid])
       .then(res => {
@@ -116,14 +144,14 @@ export class UpcomingProceduresPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
     async openModal() {
@@ -132,11 +160,11 @@ export class UpcomingProceduresPage {
         componentProps: {
         }
       });
-  
+
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
@@ -150,7 +178,7 @@ export class UpcomingProceduresPage {
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
