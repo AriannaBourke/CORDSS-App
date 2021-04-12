@@ -1,0 +1,67 @@
+<style>
+  #pdfcontent p {
+    margin-left: 15px;
+    margin-right: 00px;
+  }
+
+  #pdfcontent > h2,
+  #pdfcontent > h3 {
+    margin-top: 20px;
+    margin-left: 50px;
+  }
+
+  #pdfcontent {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+</style>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create PDF</ion-title>
+    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
+    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-item>
+      <ion-label>Click To Download PDF</ion-label>
+      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="createButtonDisable"
+        ><ion-icon name="download-outline"></ion-icon
+      ></ion-fab-button>
+    </ion-item>
+  </ion-card>
+  
+  <div id="pdfcontent">
+
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>   
+    <ion-list *ngFor="let med of medicines; let i = index">
+      <ion-item>
+      <h3>Medication</h3>
+    </ion-item>
+      <ion-item>
+      <p>Medicine Name: {{med.medicinename}}</p>
+      </ion-item>
+      <ion-item>
+      <p>Instructions: {{med.instructions}}</p>
+    </ion-item>
+    <ion-item>
+      <p>Side Effects: {{med.sideeffects}}</p>
+    </ion-item>
+    <ion-item>
+      <p>Notes: {{med.notes}}</p>
+    </ion-item>
+    </ion-list> 
+
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+  </ion-card>
+
+  </div>
+</ion-content>

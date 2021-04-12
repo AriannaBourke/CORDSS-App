@@ -20,16 +20,17 @@ export class UrgentHealthPlanPage {
 
   UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
   data = {type: "", instructions: "", phone: "", notes: ""};
+  isEnabled: any;
 
-  constructor(private _alertController: AlertController, 
-              public _plat: Platform, 
+  constructor(private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite,
               public modalController: ModalController)
 {
   this.urgentplan = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -50,7 +51,7 @@ export class UrgentHealthPlanPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.UrgentPlanTable, []);
     this.getData()
@@ -59,12 +60,13 @@ export class UrgentHealthPlanPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+    this.verifyDatabasePopulated()
     this._db.executeSql('SELECT * FROM urgentplan ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.urgentplan = [];
@@ -80,7 +82,24 @@ export class UrgentHealthPlanPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM urgentplan', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
+      }
+
   public saveData() {
     this._db.executeSql('INSERT INTO urgentplan VALUES(NULL,?,?,?,?)', [this.data.type, this.data.instructions, this.data.phone, this.data.notes ])
     .then(res => {
@@ -88,9 +107,9 @@ export class UrgentHealthPlanPage {
       })
       .catch(e => alert("save data error" + e));
     }
-      
 
-    
+
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM urgentplan WHERE rowid=?', [rowid])
       .then(res => {
@@ -111,14 +130,14 @@ export class UrgentHealthPlanPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
     async openModal() {
@@ -127,11 +146,11 @@ export class UrgentHealthPlanPage {
         componentProps: {
         }
       });
-  
+
       modal.onDidDismiss().then((dataReturned) => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
@@ -145,7 +164,7 @@ export class UrgentHealthPlanPage {
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 

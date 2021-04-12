@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Team Member</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
+    <ion-title style="text-align: center">Add a person to your team!</ion-title>
+    <ion-button color="clear" slot="start" size="small" (click)="closeModal()"
     ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-label class="entry-header">Team Member</ion-label>
+          <ion-title color="dark" style="text-align: center">Clinical Team Member</ion-title>
         </ion-col>
       </ion-row>
 
@@ -27,8 +27,8 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="medium" position="stacked">*Name</ion-label>
-            <ion-icon color="tertiary" slot="start" name="person-outline"></ion-icon>
+            <ion-label position="stacked">Name</ion-label>
+            <ion-icon slot="start" name="person"></ion-icon>
             <ion-input
             placeholder="Name (*Required)"
             type="text"
@@ -47,18 +47,14 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Role</ion-label>
-              <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-              <ion-select
+              <ion-label position="stacked">Role</ion-label>
+              <ion-icon color="tertiary" slot="start" name="medkit"></ion-icon>
+              <ion-input
               placeholder="Role"
               interface="popover"
               name="clinicalrole"
               [(ngModel)]="data.role"
-            >
-              <ion-select-option value="Doctor">Doctor</ion-select-option>
-              <ion-select-option value="Nurse">Nurse</ion-select-option>
-              <ion-select-option value="Other">Other</ion-select-option>
-            </ion-select>
+            ></ion-input>
             </ion-item>
           </ion-col>
          </ion-row>
@@ -66,8 +62,8 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Clinic Name</ion-label>
-              <ion-icon color="tertiary" slot="start" name="location-outline"></ion-icon>
+              <ion-label position="stacked">Clinic Name</ion-label>
+              <ion-icon color="warning" slot="start" name="location"></ion-icon>
               <ion-input placeholder="Clinic Name"
               type="text"
               [(ngModel)]="data.clinic_name"
@@ -79,10 +75,10 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Email</ion-label>
-             <ion-icon color="tertiary" slot="start" name="mail-outline"></ion-icon>
+              <ion-label position="stacked">Email</ion-label>
+             <ion-icon  color="danger" slot="start" name="mail"></ion-icon>
              <ion-input
-             placeholder="Email"
+             placeholder="Email Address"
              type="email"
              [(ngModel)]="data.email"
              name="email" 
@@ -99,10 +95,10 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Telephone</ion-label>
-             <ion-icon color="tertiary" slot="start" name="call-outline"></ion-icon>
+              <ion-label position="stacked">Telephone</ion-label>
+             <ion-icon slot="start" name="call"></ion-icon>
              <ion-input
-             placeholder="Telephone"
+             placeholder="Phone Number"
              type="text"
              [(ngModel)]="data.phone"
              name="phone"
@@ -111,17 +107,19 @@
             
            <div class="ion-margin-vertical ion-text-right">
             <ion-button
+            shape="round"
             type="button"
             fill="outline"
             color="danger"
             (click)="form.reset()"
           >Clear</ion-button>
-            <ion-button
+            <ion-button 
+              shape="round"
               type="button"
               type="submit"
               value="submit"
-              id="submit"
               color="success"
+              id="submit"
               [disabled]="!form.valid"
             >Submit</ion-button
             >
@@ -132,3 +130,4 @@
   </ion-card>
 </form>
 </ion-content>
+

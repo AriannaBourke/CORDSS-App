@@ -59,7 +59,7 @@ export class ViewEntryPage {
               }
                 
               public getData(rowid) {
-                this._db.executeSql('SELECT * FROM clinicalteam', <any>[])
+                this._db.executeSql('SELECT * FROM clinicalteam WHERE rowid=?', [rowid])
                 .then(res => {
                   this.clinicalteam = [];
                   for(var i=0; i<res.rows.length; i++) {

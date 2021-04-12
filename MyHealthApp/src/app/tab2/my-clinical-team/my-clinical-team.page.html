@@ -5,8 +5,8 @@
     </ion-buttons>
     <ion-title>My Clinical Team</ion-title>
     <ion-button color="success" slot="end" (click)="openModal()"
-    ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
-  >
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -31,22 +31,22 @@
 <!-- <ion-content [fullscreen]="true">
   <ion-list *ngFor="let team of clinicalteam; let i = index" class="list">
     <ion-card>
-      <ion-grid>  
+      <ion-grid>
         <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label color="tertiary">Team Member</ion-label>
+          <ion-label color="tertiary">Team Member Info</ion-label>
           <ion-icon
-          color="tertiary"
+          color="warning"
           slot="start"
-          name="calendar-number-outline"
+          name="person-outline"
         ></ion-icon>
         </ion-item>
             <ion-item>
-          <p>{{team.name}}</p>
+          <p>Name: {{team.name}}</p>
         </ion-item>
         <ion-item>
-        <p>At {{team.clinic_name}}</p>
+        <p>Clinic Name: {{team.clinic_name}}</p>
       </ion-item>
       <ion-button color="light" style="float: right" (click)="removeData(team.rowid)"
       ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>

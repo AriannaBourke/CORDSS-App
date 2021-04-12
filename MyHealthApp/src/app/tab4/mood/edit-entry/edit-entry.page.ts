@@ -14,7 +14,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   MoodTable : string = 'CREATE TABLE IF NOT EXISTS mood (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, happy INTEGER, independent INTEGER, tired INTEGER, productive INTEGER, notes TEXT)'
   data = {date: "", happy: "", independent: "", tired: "", productive: "", notes: ""};
@@ -104,13 +104,45 @@ export class EditEntryPage {
                 await alert.present()
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE mood SET date=?, happy=?, independent=?, tired=?, productive=?, notes=? WHERE rowid=?', [this.data.date, this.data.happy, this.data.independent, this.data.tired, this.data.productive, this.data.notes, rowid]) 
+            async updateSQL(rowid) {
+              if(this.data.date != "") {
+                this._db.executeSql('UPDATE mood SET date=? WHERE rowid=?',[this.data.date, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.happy != ""){
+                this._db.executeSql('UPDATE mood SET happy=? WHERE rowid=?', [this.data.happy, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.independent != ""){
+                this._db.executeSql('UPDATE mood SET independent=? WHERE rowid=?', [this.data.independent, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.tired != ""){
+                this._db.executeSql('UPDATE mood SET tired=? WHERE rowid=?', [this.data.tired, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.productive != ""){
+                this._db.executeSql('UPDATE mood SET productive=? WHERE rowid=?', [this.data.productive, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.notes != ""){
+                this._db.executeSql('UPDATE mood SET notes=? WHERE rowid=?', [this.data.notes, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
 
 }

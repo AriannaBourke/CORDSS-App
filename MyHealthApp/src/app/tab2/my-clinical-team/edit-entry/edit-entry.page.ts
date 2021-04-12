@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-entry',
@@ -15,7 +16,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
-
+  isSubmitted = false;
   rowid: any;
   ClinicalTeamTable : string = 'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)'
   data = {name: "", role: "", clinic_name: "", email: "", phone: "", photo: ""};
@@ -86,6 +87,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
                   message: "Would you like to update this entry in your clinical team?",
@@ -105,13 +107,45 @@ export class EditEntryPage {
                 await alert.present()
               }
 
-              async updateSQL(rowid) {
-                this._db.executeSql('UPDATE clinicalteam SET name=?, role=?, clinic_name=?, email=?, phone=?, photo=? WHERE rowid=?', [this.data.name, this.data.role, this.data.clinic_name, this.data.email, this.data.phone, this.data.photo, rowid])
+            async updateSQL(rowid) {
+              if(this.data.name != "") {
+                this._db.executeSql('UPDATE clinicalteam SET name=? WHERE rowid=?',[this.data.name, rowid])
                 .then(res => {
                   this.closeModal();
                 })
-                .catch(e => alert('update error' + e));
-              
-            }
+              .catch(e => alert('update error' + e));
+              }
+              if(this.data.role != ""){
+                this._db.executeSql('UPDATE clinicalteam SET role=? WHERE rowid=?', [this.data.role, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.clinic_name != ""){
+                this._db.executeSql('UPDATE clinicalteam SET clinic_name=? WHERE rowid=?', [this.data.clinic_name, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.email != ""){
+                this._db.executeSql('UPDATE clinicalteam SET email=? WHERE rowid=?', [this.data.email, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.phone != ""){
+                this._db.executeSql('UPDATE clinicalteam SET phone=? WHERE rowid=?', [this.data.phone, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              if(this.data.photo != ""){
+                this._db.executeSql('UPDATE clinicalteam SET photo=? WHERE rowid=?', [this.data.photo, rowid])
+                .then(res => {
+                  this.closeModal();
+                })
+              }
+              this.closeModal();
+          }
           
 }

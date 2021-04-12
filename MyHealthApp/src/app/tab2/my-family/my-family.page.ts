@@ -4,7 +4,7 @@ import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page'; 
+import {EditEntryPage } from './edit-entry/edit-entry.page';
 import {ViewEntryPage } from './view-entry/view-entry.page';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx'
@@ -25,26 +25,28 @@ export class MyFamilyPage {
 
   MyFamilyTable : string = 'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)'
   data = {name: "", birthday: "", relation: "", email: "", phone: ""};
+  isEnabled: any;
 
   constructor(
     private imagePicker: ImagePicker,
     private _alertController: AlertController,
-    public modalController: ModalController, 
-    public _plat: Platform, 
-    public _sql: SQLite) 
+    public modalController: ModalController,
+    public _plat: Platform,
+    public _sql: SQLite,
+    )
 
     {
       this.myfamily = [];
       this._plat
       .ready()
-      .then(() => 
-    
+      .then(() =>
+
         {
           this._createDatabase();
         })
         .catch(e => alert('create database error' + e));
       }
-    
+
       public _createDatabase()
       {
         this._sql.create({
@@ -58,21 +60,22 @@ export class MyFamilyPage {
         })
         .catch(e => alert('create tables error' + e));
       }
-      
+
       async _createDatabaseTables() {
         await this._db.executeSql(this.MyFamilyTable, []);
         this.getData()
       }
-    
+
       ionViewDidLoad() {
             this.getData();
           }
-        
+
           ionViewWillEnter() {
             this.getData();
           }
-        
+
       public getData() {
+        this.verifyDatabasePopulated()
         this._db.executeSql('SELECT * FROM myfamily', <any>[])
         .then(res => {
           this.myfamily = [];
@@ -89,7 +92,24 @@ export class MyFamilyPage {
         })
             .catch(e => alert('get data error' + e));
           }
-        
+
+          verifyDatabasePopulated() {
+            this._db.executeSql('SELECT * FROM myfamily', <any>[])
+            .then(res => {
+              if(res.rows.length == 0) {
+                this.isEnabled = true;
+              }
+              else {
+                this.isEnabled = false;
+              }
+            })
+
+          }
+
+          noContent() {
+            return !this.isEnabled;
+          }
+
       public saveData() {
         this._db.executeSql('INSERT INTO myfamily VALUES(NULL,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.relation, this.data.email, this.data.phone])
         .then(res => {
@@ -97,7 +117,7 @@ export class MyFamilyPage {
           })
           .catch(e => alert("save data error" + e));
         }
-        
+
       deleteData(rowid) {
           this._db.executeSql('DELETE FROM myfamily WHERE rowid=?', [rowid])
           .then(res => {
@@ -105,7 +125,7 @@ export class MyFamilyPage {
           })
           .catch(e => alert('delete data error' + e));
         }
-    
+
         async removeData(rowid) {
           const alert = await this._alertController.create({
             header: "Delete this entry?",
@@ -118,31 +138,31 @@ export class MyFamilyPage {
                 text:"Delete",
                 handler: ()=> {
                   this.deleteData(rowid);
-      
+
                 }
               }
             ]
           });
-      
+
           await alert.present();
-      
+
         }
-    
+
         async openModal() {
           const modal = await this.modalController.create({
             component: AddEntryPage,
             componentProps: {
             }
           });
-      
+
           modal.onDidDismiss().then((dataReturned) => {
             this.getData();
           });
-      
+
           return await modal.present();
         }
-    
-    
+
+
         async viewModal(rowid) {
           const modal = await this.modalController.create({
             component: ViewEntryPage,
@@ -152,11 +172,11 @@ export class MyFamilyPage {
           modal.onDidDismiss().then(() => {
             this.getData();
           });
-      
+
           return await modal.present();
         }
-    
-    
+
+
         async editModal(rowid) {
           const modal = await this.modalController.create({
             component: EditEntryPage,

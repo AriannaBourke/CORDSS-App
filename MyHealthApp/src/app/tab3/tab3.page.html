@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> My Health </ion-title>
+    <ion-title width-50 style="text-align: center"> My Health </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-grid>
   <ion-row>
     <ion-col width-50 style="text-align: center">
       <ion-button
@@ -17,7 +18,7 @@
           class="image1"
           src="../../assets/icon/smartphone-mobile-phone-svgrepo-com.svg"
         />
-        <span class="basicinfo">Basic Info</span>
+        <span class="basicinfo" style="font-size: 20px">Basic Info</span>
       </ion-button>
     </ion-col>
   </ion-row>
@@ -34,7 +35,9 @@
           class="image2"
           src="../../assets/icon/folder-files-and-folders-svgrepo-com.svg"
         />
-        <span class="basicinfo">Urgent Health Plan</span>
+        <span class="basicinfo" style="font-size: 20px"
+          >Urgent Health Plan</span
+        >
       </ion-button>
     </ion-col>
   </ion-row>
@@ -51,7 +54,9 @@
           class="image2"
           src="../../assets/icon/hospital-svgrepo-com (1).svg"
         />
-        <span class="medicalhistory">My Conditions</span>
+        <span class="medicalhistory" style="font-size: 20px"
+          >My Conditions</span
+        >
       </ion-button>
     </ion-col>
   </ion-row>
@@ -65,7 +70,7 @@
         expand="block"
       >
         <img class="image3" src="../../assets/icon/medicine-svgrepo-com.svg" />
-        <span>Medicines</span>
+        <span style="font-size: 20px">Medicines</span>
       </ion-button>
     </ion-col>
   </ion-row>
@@ -82,7 +87,7 @@
           class="image4"
           src="../../assets/icon/computer-healthcare-and-medical-svgrepo-com.svg"
         />
-        <span>Test Results</span>
+        <span style="font-size: 20px">Test Results</span>
       </ion-button>
     </ion-col>
   </ion-row>
@@ -99,7 +104,7 @@
           class="image5"
           src="../../assets/icon/stethoscope-svgrepo-com.svg"
         />
-        <span>Appointments</span>
+        <span style="font-size: 20px">Appointments</span>
       </ion-button>
     </ion-col>
   </ion-row>
@@ -116,8 +121,9 @@
           class="image6"
           src="../../assets/icon/hospital-bed-svgrepo-com.svg"
         />
-        <span>Procedures</span>
+        <span style="font-size: 20px">Procedures</span>
       </ion-button>
     </ion-col>
   </ion-row>
+</ion-grid>
 </ion-content>

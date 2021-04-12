@@ -23,6 +23,7 @@ export class PastAppointmentsPage {
   data = {date: "", doctor: "", place: "", description: "", questions: ""};
   now = new Date();
   today = this.now.toISOString();
+  isEnabled: any;
 
     constructor(
                 public modalController: ModalController,
@@ -71,6 +72,7 @@ export class PastAppointmentsPage {
       }
 
   public getData() {
+    this.verifyDatabasePopulated()
     this._db.executeSql('SELECT * FROM appointments WHERE date < ? ORDER BY date DESC', [this.today])
     .then(res => {
       this.appointments = [];
@@ -86,6 +88,23 @@ export class PastAppointmentsPage {
       }
     })
         .catch(e => alert('get data error' + e));
+      }
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM appointments WHERE data < ?', [this.today])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
       }
 
   public saveData() {

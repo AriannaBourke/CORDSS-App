@@ -19,7 +19,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="medium" position="stacked">Date & Time</ion-label>
+            <ion-label position="stacked">Date & Time</ion-label>
             <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
             <ion-datetime
             placeholder="Date & time (*Required)"
@@ -38,10 +38,10 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Doctor</ion-label>
+              <ion-label position="stacked">Doctor</ion-label>
               <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
               <ion-input 
-              placeholder="Doctor"
+              placeholder="Doctor's Name"
               type="text"
               [(ngModel)]="data.doctor"
               name="doctor"
@@ -53,7 +53,7 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Place</ion-label>
+              <ion-label position="stacked">Place</ion-label>
               <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
               <ion-input 
               placeholder="Place"
@@ -67,7 +67,7 @@
          <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Description</ion-label>
+              <ion-label position="stacked">Description</ion-label>
              <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
              <ion-textarea 
              placeholder="Description"
@@ -83,10 +83,10 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="medium" position="stacked">Questions?</ion-label>
+              <ion-label position="stacked">Questions?</ion-label>
              <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
              <ion-textarea 
-             placeholder="Questions"
+             placeholder="Questions to ask at the appointment"
              rows="3"
              type="text"
              [(ngModel)]="data.questions"

@@ -5,42 +5,71 @@
     </ion-buttons>
     <ion-title>Upcoming Procedures</ion-title>
     <ion-button color="success" slot="end" (click)="openModal()"
-    ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
-  >
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-<ion-list *ngFor="let pro of procedures; let i = index" class="list">
-  <ion-card>
-    <ion-grid>  
-      <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label color="tertiary">Procedure</ion-label>
-        <ion-icon
-        color="tertiary"
-        slot="start"
-        name="calendar-number-outline"
-      ></ion-icon>
-      </ion-item>
-          <ion-item>
-        <p>{{pro.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
-      </ion-item>
-      <ion-item>
-      <p>{{pro.place}}</p>
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">Click 'Add' to start adding Procedures!</p>
+      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
     </ion-item>
-    <ion-button color="light" style="float: right" (click)="removeData(pro.rowid)"
-    ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-    <ion-button color="light" style="float: right" (click)="editModal(pro.rowid)">
-    <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
-    <ion-button color="light" style="float: right" (click)="viewModal(pro.rowid)"
-    ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
-    </ion-col>
-  </ion-row>
-  </ion-grid>
   </ion-card>
-</ion-list>
-</ion-content>
 
+  <ion-list *ngFor="let pro of procedures; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="tertiary">Procedure</ion-label>
+              <ion-icon
+                color="tertiary"
+                slot="start"
+                name="calendar-number-outline"
+              ></ion-icon>
+            </ion-item>
+            <ion-item>
+              <p>{{pro.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
+            </ion-item>
+            <ion-item>
+              <p>{{pro.place}}</p>
+            </ion-item>
+            <ion-button
+              color="light"
+              style="float: right"
+              (click)="removeData(pro.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="light"
+              style="float: right"
+              (click)="editModal(pro.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+            <ion-button
+              color="light"
+              style="float: right"
+              (click)="viewModal(pro.rowid)"
+              ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon
+              >View</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+</ion-content>
