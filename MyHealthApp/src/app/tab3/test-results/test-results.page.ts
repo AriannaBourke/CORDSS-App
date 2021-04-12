@@ -20,16 +20,17 @@ export class TestResultsPage {
 
   TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, files TEXT, notes TEXT)'
   data = {date: "", type: "", photo: "", files: "", notes: ""};
+  isEnabled: any;
 
-  constructor(private _alertController: AlertController, 
+  constructor(private _alertController: AlertController,
               public modalController: ModalController,
-              public _plat: Platform, 
+              public _plat: Platform,
               public _sql: SQLite)
 {
   this.testresults = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -50,7 +51,7 @@ export class TestResultsPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.TestResultsTable, []);
     this.getData()
@@ -59,12 +60,13 @@ export class TestResultsPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+    this.verifyDatabasePopulated()
     this._db.executeSql('SELECT * FROM testresults ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.testresults = [];
@@ -81,7 +83,24 @@ export class TestResultsPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM testresults', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
+      }
+
   public saveData() {
     this._db.executeSql('INSERT INTO testresults VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.type, this.data.photo, this.data.files, this.data.notes])
     .then(res => {
@@ -89,14 +108,14 @@ export class TestResultsPage {
       })
       .catch(e => alert("save data error" + e));
     }
-      
-    
+
+
   editData(rowid) {
     console.log("added data"), {
       rowid: rowid
     }
   }
-    
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM testresults WHERE rowid=?', [rowid])
       .then(res => {
@@ -117,14 +136,14 @@ export class TestResultsPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]
       });
-  
+
       await alert.present();
-  
+
     }
 
     async openModal() {
@@ -133,11 +152,11 @@ export class TestResultsPage {
         componentProps: {
         }
       });
-  
+
       modal.onDidDismiss().then((dataReturned) => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 
@@ -151,7 +170,7 @@ export class TestResultsPage {
       modal.onDidDismiss().then(() => {
         this.getData();
       });
-  
+
       return await modal.present();
     }
 

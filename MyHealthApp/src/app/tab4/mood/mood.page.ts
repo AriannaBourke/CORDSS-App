@@ -20,17 +20,18 @@ export class MoodPage {
 
   MoodTable : string = 'CREATE TABLE IF NOT EXISTS mood (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, happy INTEGER, independent INTEGER, tired INTEGER, productive INTEGER, notes TEXT)'
   data = {date: "", happy: "", independent: "", tired: "", productive: "", notes: ""};
+  isEnabled: any;
 
   constructor(
               public modalController: ModalController,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
+              private _alertController: AlertController,
+              public _plat: Platform,
               public _sql: SQLite)
 {
   this.mood = [];
   this._plat
   .ready()
-  .then(() => 
+  .then(() =>
 
     {
       this._createDatabase();
@@ -51,7 +52,7 @@ export class MoodPage {
     })
     .catch(e => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.MoodTable, []);
     this.getData()
@@ -60,12 +61,13 @@ export class MoodPage {
   ionViewDidLoad() {
         this.getData();
       }
-    
+
       ionViewWillEnter() {
         this.getData();
       }
-    
+
   public getData() {
+    this.verifyDatabasePopulated()
     this._db.executeSql('SELECT * FROM mood ORDER BY date DESC', <any>[])
     .then(res => {
       this.mood = [];
@@ -83,16 +85,33 @@ export class MoodPage {
     })
         .catch(e => alert('get data error' + e));
       }
-    
+
+      verifyDatabasePopulated() {
+        this._db.executeSql('SELECT * FROM mood', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
+
+      }
+
+      noContent() {
+        return !this.isEnabled;
+      }
+
   public saveData() {
-    this._db.executeSql('INSERT INTO mood VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.happy, this.data.independent, this.data.tired, this.data.productive, this.data.notes]) 
+    this._db.executeSql('INSERT INTO mood VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.happy, this.data.independent, this.data.tired, this.data.productive, this.data.notes])
     .then(res => {
         this.getData();
       })
       .catch(e => alert("save data error" + e));
     }
-      
-    
+
+
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM mood WHERE rowid=?', [rowid])
       .then(res => {
@@ -113,7 +132,7 @@ export class MoodPage {
             text:"Delete",
             handler: ()=> {
               this.deleteData(rowid);
-  
+
             }
           }
         ]

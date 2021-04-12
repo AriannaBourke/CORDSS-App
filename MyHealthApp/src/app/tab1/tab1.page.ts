@@ -26,9 +26,8 @@ export class Tab1Page {
 
   default: any;
   AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, notes TEXT, emergency_1_name TEXT, emergency_1_number INT, emergency_2_name TEXT, emergency_2_number INT, emergency_3_name TEXT, emergency_3_number INT)'
-  data = {name: "", birthday: "", about: "", email: "", phone: "", address: "",
-  nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
-
+  data = {name: "", birthday: "", about: "", email: "", phone: "", address: "", nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
+  isEnabled: any;
 
   constructor(
     private _camera: Camera,
@@ -72,38 +71,66 @@ export class Tab1Page {
 
   ionViewDidLoad() {
         this.getData();
+        this.verifyDatabasePopulated();
       }
 
       ionViewWillEnter() {
         this.getData();
+        this.verifyDatabasePopulated();
       }
 
-  public getData() {
+  verifyDatabasePopulated() {
     this._db.executeSql('SELECT * FROM aboutme', <any>[])
     .then(res => {
+      if(res.rows.length == 0) {
+        this.isEnabled = true;
+      }
+      else {
+        this.isEnabled = false;
+      }
+    })
+
+  }
+
+  checkIsEnabled() {
+    return !this.isEnabled;
+  }
+
+  noContent() {
+    return !this.isEnabled;
+  }
+
+
+
+
+
+  public getData() {
+    this._db.executeSql('SELECT * FROM aboutme ORDER BY rowid DESC', <any>[])
+    .then(res => {
       this.aboutme = [];
-      if(res.rows.length > 0) {
+      for(var i=0; i<res.rows.length; i++) {
         this.aboutme.push({
-          rowid:res.rows.item(0).rowid,
-          name:res.rows.item(1).name,
-          about:res.rows.item(2).about,
-          birthday:res.rows.item(3).birthday,
-          email:res.rows.item(4).email,
-          phone:res.rows.item(5).phone,
-          address:res.rows.item(6).address,
-          nhs_number:res.rows.item(7).nhs_number,
-          notes:res.rows.item(8).notes,
-          emergency_1_name:res.rows.item(9).emergency_1_name,
-          emergency_1_number:res.rows.item(10).emergency_1_number,
-          emergency_2_name:res.rows.item(11).emergency_2_name,
-          emergency_2_number:res.rows.item(12).emergency_2_number,
-          emergency_3_name:res.rows.item(13).emergency_3_name,
-          emergency_3_number:res.rows.item(14).emergency_3_number
+          rowid:res.rows.item(i).rowid,
+          name:res.rows.item(i).name,
+          about:res.rows.item(i).about,
+          birthday:res.rows.item(i).birthday,
+          email:res.rows.item(i).email,
+          phone:res.rows.item(i).phone,
+          address:res.rows.item(i).address,
+          nhs_number:res.rows.item(i).nhs_number,
+          notes:res.rows.item(i).notes,
+          emergency_1_name:res.rows.item(i).emergency_1_name,
+          emergency_1_number:res.rows.item(i).emergency_1_number,
+          emergency_2_name:res.rows.item(i).emergency_2_name,
+          emergency_2_number:res.rows.item(i).emergency_2_number,
+          emergency_3_name:res.rows.item(i).emergency_3_name,
+          emergency_3_number:res.rows.item(i).emergency_3_number
 
         })
       }
     })
         .catch(e => alert('get data error' + e));
+        this.verifyDatabasePopulated();
       }
 
   public saveData() {
