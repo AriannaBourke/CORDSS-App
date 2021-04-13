@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">
@@ -27,20 +27,21 @@
           <ion-col>
             <ion-item lines="none">
               <ion-card-title>Upcoming Appointment</ion-card-title>
+            </ion-item>
+            <ion-item lines="none">
               <ion-icon
-                color="warning"
+                class="red"
                 slot="start"
                 name="calendar-number"
               ></ion-icon>
-            </ion-item>
-            <ion-item lines="none">
               <p>
                 I have an appointment on {{app.date | date: "dd MMMM YYYY 'at'
                 HH:mm a"}}
               </p>
             </ion-item>
             <ion-item lines="none">
-              <p>Location: {{app.place}}</p>
+              <ion-icon class="orange" slot="start" name="business"></ion-icon>
+              <p>This appointment will take place at: {{app.place}}</p>
             </ion-item>
             <ion-button
               color="danger"

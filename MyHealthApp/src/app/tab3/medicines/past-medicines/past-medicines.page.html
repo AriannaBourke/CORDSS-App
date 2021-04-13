@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">
@@ -28,21 +28,17 @@
               color="warning"
               fill="outline"
               style="float: right"
+              size="small"
               shape="round"
               (click)="stillTaking(med.rowid)"
-              ><ion-icon
-                size="large"
-                color="warning"
-                name="time-outline"
-              ></ion-icon
+              ><ion-icon color="warning" name="time-outline"></ion-icon
             ></ion-button>
             <ion-item lines="none">
               <ion-card-title>Medicine Info</ion-card-title>
-
-              <ion-icon color="warning" slot="start" name="medkit"></ion-icon>
             </ion-item>
             <ion-item lines="none">
-              <p>{{med.medicinename}}</p>
+              <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+              <p>I have previously taken {{med.medicinename}}</p>
             </ion-item>
             <ion-button
               color="danger"
