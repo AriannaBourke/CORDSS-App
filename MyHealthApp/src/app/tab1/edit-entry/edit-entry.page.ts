@@ -14,6 +14,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
+  isSubmitted = false;
 
   rowid: any;
   AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone TEXT, address TEXT, nhs_number TEXT, emergency_1_name, emergency_1_number, emergency_2_name, emergency_2_number, emergency_3_name, emergency_3_number)'
@@ -91,6 +92,7 @@ export class EditEntryPage {
 
 
               async update(rowid) {
+                this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update About Me?",
                   message: "Would you like to update your About Me page?",
