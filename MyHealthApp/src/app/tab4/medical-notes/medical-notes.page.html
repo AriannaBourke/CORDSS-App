@@ -22,19 +22,17 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Note</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="document-outline"
-              ></ion-icon>
+            <ion-item lines="none">
+              <ion-card-title>Medical Note Info</ion-card-title>
+              <ion-icon color="warning" slot="start" name="document"></ion-icon>
             </ion-item>
-            <ion-item>
-              <p>{{note.note_name}}</p>
+            <ion-item lines="none">
+              <p>Note name: {{note.note_name}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(note.rowid)"
               ><ion-icon
@@ -44,7 +42,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="editModal(note.rowid)"
             >
@@ -57,7 +57,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="viewModal(note.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit About Me Page</ion-title>
+    <ion-title>Add info about yourself!</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
       ><ion-icon size="large" name="arrow-back-outline"></ion-icon
     ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
     <ion-card>
       <ion-card-header>
@@ -17,10 +17,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Name</ion-label>
               <ion-icon
+                class="red"
                 slot="start"
-                name="person-outline"
-                size="small"
+                name="person"
+                size="medium"
               ></ion-icon>
               <ion-input
                 placeholder="Name (*required)"
@@ -38,11 +40,13 @@
 
         <ion-row>
           <ion-col>
-            <ion-item
-              ><ion-icon
+            <ion-item>
+              <ion-label position="stacked">Date of Birth</ion-label>
+              <ion-icon
                 slot="start"
-                name="gift-outline"
-                size="small"
+                name="gift"
+                class="orange"
+                size="medium"
               ></ion-icon>
               <ion-datetime
                 displayFormat="DD MMMM YYYY"
@@ -57,10 +61,12 @@
         <ion-row>
           <ion-col>
             <ion-item lines="none">
+              <ion-label position="stacked">A little bit about me</ion-label>
               <ion-icon
                 slot="start"
-                name="information-circle-outline"
-                size="small"
+                name="information-circle"
+                size="medium"
+                class="yellow"
               ></ion-icon>
               <ion-textarea
                 rows="2"
@@ -82,10 +88,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Email</ion-label>
               <ion-icon
                 slot="start"
-                name="mail-outline"
-                size="small"
+                class="green"
+                name="mail"
+                size="medium"
               ></ion-icon>
               <ion-input
                 placeholder="Email"
@@ -99,10 +107,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Phone Number</ion-label>
               <ion-icon
                 slot="start"
-                name="call-outline"
-                size="small"
+                name="call"
+                size="medium"
+                class="teal"
               ></ion-icon>
               <ion-input
                 placeholder="Phone Number"
@@ -116,10 +126,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Address</ion-label>
               <ion-icon
                 slot="start"
-                name="home-outline"
-                size="small"
+                name="home"
+                size="medium"
+                class="lightblue"
               ></ion-icon>
               <ion-textarea
                 placeholder="Address"
@@ -133,10 +145,12 @@
         <ion-row>
           <ion-col>
             <ion-item lines="none">
+              <ion-label position="stacked">NHS Number</ion-label>
               <ion-icon
                 slot="start"
-                name="newspaper-outline"
-                size="small"
+                name="newspaper"
+                size="medium"
+                class="blue"
               ></ion-icon>
               <ion-input
                 placeholder="NHS Number"
@@ -156,12 +170,14 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-card-header> Emergency Contact 1 </ion-card-header>
+            <ion-label color="primary"> Emergency Contact 1 </ion-label>
             <ion-item>
+              <ion-label position="stacked">Name</ion-label>
               <ion-icon
                 slot="start"
-                name="person-outline"
-                size="small"
+                name="person"
+                size="medium"
+                class="darkblue"
               ></ion-icon>
               <ion-input
                 [(ngModel)]="data.emergency_1_name"
@@ -175,10 +191,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Phone Number</ion-label>
               <ion-icon
                 slot="start"
-                name="call-outline"
-                size="small"
+                name="call"
+                size="medium"
+                class="purple"
               ></ion-icon>
               <ion-input
                 [(ngModel)]="data.emergency_1_number"
@@ -191,12 +209,14 @@
 
         <ion-row>
           <ion-col>
-            <ion-card-header> Emergency Contact 2 </ion-card-header>
+            <ion-label color="primary"> Emergency Contact 2 </ion-label>
             <ion-item>
+              <ion-label position="stacked">Name</ion-label>
               <ion-icon
                 slot="start"
-                name="person-outline"
-                size="small"
+                name="person"
+                size="medium"
+                class="magenta"
               ></ion-icon>
               <ion-input
                 [(ngModel)]="data.emergency_2_name"
@@ -210,10 +230,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Phone Number</ion-label>
               <ion-icon
                 slot="start"
-                name="call-outline"
-                size="small"
+                name="call"
+                size="medium"
+                class="pink"
               ></ion-icon>
               <ion-input
                 [(ngModel)]="data.emergency_2_number"
@@ -226,12 +248,14 @@
 
         <ion-row>
           <ion-col>
-            <ion-card-header> Emergency Contact 3 </ion-card-header>
+            <ion-label color="primary"> Emergency Contact 3 </ion-label>
             <ion-item>
+              <ion-label position="stacked">Name</ion-label>
               <ion-icon
                 slot="start"
-                name="person-outline"
-                size="small"
+                name="person"
+                class="brightpink"
+                size="medium"
               ></ion-icon>
               <ion-input
                 [(ngModel)]="data.emergency_3_name"
@@ -245,10 +269,12 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Phone Number</ion-label>
               <ion-icon
                 slot="start"
-                name="call-outline"
-                size="small"
+                name="call"
+                size="medium"
+                class="redpink"
               ></ion-icon>
               <ion-input
                 [(ngModel)]="data.emergency_3_number"
@@ -263,12 +289,14 @@
           <ion-button
             type="button"
             fill="outline"
+            shape="round"
             color="danger"
             (click)="form.reset()"
             >Clear</ion-button
           >
           <ion-button
             type="button"
+            shape="round"
             type="submit"
             value="submit"
             id="submit"

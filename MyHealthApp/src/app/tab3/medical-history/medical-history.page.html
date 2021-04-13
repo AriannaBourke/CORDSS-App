@@ -13,7 +13,7 @@
 <ion-content [fullscreen]="true">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
-      <p style="font-size: 30px">Click 'Add' to add any Conditions!</p>
+      <p style="font-size: 30px">Click 'Add' to add any Medical Conditions!</p>
       <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
     </ion-item>
   </ion-card>
@@ -22,19 +22,17 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Condition</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="medkit-outline"
-              ></ion-icon>
+            <ion-item lines="none">
+              <ion-card-title>Condition Info</ion-card-title>
+              <ion-icon color="warning" slot="start" name="medkit"></ion-icon>
             </ion-item>
-            <ion-item>
+            <ion-item lines="none">
               <p>{{history.diagnosis}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(history.rowid)"
               ><ion-icon
@@ -44,7 +42,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="editModal(history.rowid)"
             >
@@ -57,7 +57,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="viewModal(history.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

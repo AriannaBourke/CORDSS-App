@@ -86,7 +86,7 @@ export class CurrentMedicinesPage {
       }
 
       verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="YES"', <any>[])
+        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="Yes"', <any>[])
         .then(res => {
           if(res.rows.length == 0) {
             this.isEnabled = true;
