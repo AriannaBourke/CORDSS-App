@@ -1,38 +1,101 @@
 .entry-header {
-    // font-weight: bold;
-    font-size: large;
-    color: black;
-  }
-  
-  .list {
-    background-color: #96bdc6;
-  }
+  // font-weight: bold;
+  font-size: large;
+  color: black;
+}
 
-  ion-select {
-    color: black;
+ion-select {
+  color: black;
   --placeholder-opacity: 1;
-    max-width: 95%;
-    }
+  max-width: 95%;
+}
 
-    ::ng-deep .mycomponent-wider-popover
-    {
-      --width: 95%;
-      --max-width: 400px;
-    }
+::ng-deep .mycomponent-wider-popover {
+  --width: 95%;
+  --max-width: 400px;
+}
 
-    ion-input {
-      color: black;
-    --placeholder-opacity: 1;
-      }
-  
-      ion-textarea {
-        color: black;
-      --placeholder-opacity: 1;
-        }
+ion-input {
+  color: black;
+  --placeholder-opacity: 1;
+}
 
-        ion-datetime {
-          color: black;
-        --placeholder-opacity: 1;
-          }
-    
-    
+ion-textarea {
+  color: black;
+  --placeholder-opacity: 1;
+}
+
+ion-datetime {
+  color: black;
+  --placeholder-opacity: 1;
+}
+
+ion-card-title {
+  color: #041a97;
+}
+
+.hiddencard {
+  margin-top: 5vh;
+}
+
+.arrow {
+  margin-top: 1vh;
+  height: 80px;
+  margin-right: 0px;
+}
+
+.list {
+  background-color: #72c1e1;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: rgb(255, 174, 0);
+}
+
+.yellow {
+  color: rgb(223, 223, 27);
+}
+
+.green {
+  color: rgb(63, 155, 44);
+}
+
+.teal {
+  color: rgb(22, 177, 164);
+}
+
+.lightblue {
+  color: lightskyblue;
+}
+
+.blue {
+  color: rgb(22, 153, 240);
+}
+
+.darkblue {
+  color: blue;
+}
+
+.purple {
+  color: rgb(66, 0, 128);
+}
+
+.magenta {
+  color: purple;
+}
+
+.pink {
+  color: rgb(195, 0, 255);
+}
+
+.brightpink {
+  color: magenta;
+}
+
+.redpink {
+  color: rgb(218, 69, 94);
+}

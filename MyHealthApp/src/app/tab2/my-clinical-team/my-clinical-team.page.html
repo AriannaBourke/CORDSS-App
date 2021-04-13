@@ -26,12 +26,18 @@
           <ion-col>
             <ion-item lines="none">
               <ion-card-title>Team Member Info</ion-card-title>
-              <ion-icon color="warning" slot="start" name="person"></ion-icon>
             </ion-item>
             <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                size="medium"
+                name="person"
+                class="red"
+              ></ion-icon>
               <p>Name: {{team.name}}</p>
             </ion-item>
             <ion-item lines="none">
+              <ion-icon slot="start" name="location" class="orange"></ion-icon>
               <p>Clinic Name: {{team.clinic_name}}</p>
             </ion-item>
             <ion-button

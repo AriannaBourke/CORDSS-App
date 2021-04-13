@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Family Member</ion-title>
+    <ion-title>Add a person to your family!</ion-title>
     <ion-button
       color="black"
       fill="clear"
@@ -12,15 +12,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label color="tertiary" class="card-header"
-              >Family Member</ion-label
-            >
+            <ion-card-title>Family Member</ion-card-title>
           </ion-col>
         </ion-row>
 
@@ -28,11 +26,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Name</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="person-outline"
-              ></ion-icon>
+              <ion-icon class="red" slot="start" name="person"></ion-icon>
               <ion-input
                 type="text"
                 placeholder="Name (*Required)"
@@ -52,11 +46,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Birthday</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="gift-outline"
-              ></ion-icon>
+              <ion-icon class="orange" slot="start" name="gift"></ion-icon>
               <ion-datetime
                 displayFormat="DD MMMM"
                 placeholder="Birthday"
@@ -71,11 +61,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Relation</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="heart-outline"
-              ></ion-icon>
+              <ion-icon class="yellow" slot="start" name="heart"></ion-icon>
               <ion-select
                 interface="popover"
                 placeholder="Relation"
@@ -106,11 +92,7 @@
                 #emailCtrl="ngModel"
                 email
               ></ion-input>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="mail-outline"
-              ></ion-icon>
+              <ion-icon class="green" slot="start" name="mail"></ion-icon>
             </ion-item>
             <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
               <ion-text color="danger">Email is not valid</ion-text>
@@ -122,11 +104,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Telephone</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="call-outline"
-              ></ion-icon>
+              <ion-icon class="teal" slot="start" name="call"></ion-icon>
               <ion-input
                 type="text"
                 placeholder="Phone Number"
@@ -137,6 +115,7 @@
             <div class="ion-margin-vertical ion-text-right">
               <ion-button
                 type="button"
+                shape="round"
                 fill="outline"
                 color="danger"
                 (click)="form.reset()"
@@ -144,6 +123,7 @@
               >
               <ion-button
                 type="button"
+                shape="round"
                 type="submit"
                 value="submit"
                 id="submit"

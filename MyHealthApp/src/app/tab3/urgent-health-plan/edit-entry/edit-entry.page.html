@@ -1,32 +1,41 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Edit Plan</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let plan of urgentplan; let i = index" class="list">
     <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label color="tertiary">Plan</ion-label>
-        </ion-col>
-      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Plan</ion-card-title>
+          </ion-col>
+        </ion-row>
 
-      <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
-            <ion-row>
-              <ion-col>
-                <ion-item>
-                  <ion-label color="medium" position="stacked">Type of Emergency</ion-label>
-                  <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-                  <ion-input 
+        <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Type of Emergency</ion-label
+                >
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-input
                   type="text"
                   placeholder="{{plan.type}}"
                   [(ngModel)]="data.type"
-                  name="type" required
+                  name="type"
+                  required
                   #typeCtrl="ngModel"
                 ></ion-input>
               </ion-item>
@@ -35,79 +44,88 @@
               </ion-item>
             </ion-col>
           </ion-row>
-        
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Instructions</ion-label>
-                    <ion-icon color="tertiary" slot="start" name="book-outline"></ion-icon>
-                    <ion-input 
-                    type="text"
-                    placeholder="{{plan.instructions}}"
-                    [(ngModel)]="data.instructions"
-                    name="instructions" required
-                    #instructionsCtrl="ngModel"
-                  ></ion-input>
-                  </ion-item>
-                  <ion-item *ngIf="!instructionsCtrl.valid && instructionsCtrl.touched">
-                    <ion-text color="danger">*Instructions are required</ion-text>
-                  </ion-item>
-                </ion-col>
-               </ion-row>
-               
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Telephone</ion-label>
-                    <ion-icon color="tertiary" slot="start" name="call-outline"></ion-icon>
-                    <ion-input 
-                    type="text"
-                    placeholder="{{plan.phone}}"
-                    [(ngModel)]="data.phone"
-                    name="phone"
-                  ></ion-input>
-                  </ion-item>
-                </ion-col>
-               </ion-row>
-      
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Notes</ion-label>
-                    <ion-icon color="tertiary" slot="start" name="pencil-outline"></ion-icon>
-                    <ion-textarea 
-                    type="text"
-                    placeholder="{{plan.notes}}"
-                    [(ngModel)]="data.notes"
-                    name="notes"
-                    ></ion-textarea>
-                  </ion-item>
-                 <div class="ion-margin-vertical ion-text-right">
-                  <ion-button
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Instructions</ion-label
+                >
+                <ion-icon class="orange" slot="start" name="book"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{plan.instructions}}"
+                  [(ngModel)]="data.instructions"
+                  name="instructions"
+                  required
+                  #instructionsCtrl="ngModel"
+                ></ion-input>
+              </ion-item>
+              <ion-item
+                *ngIf="!instructionsCtrl.valid && instructionsCtrl.touched"
+              >
+                <ion-text color="danger">*Instructions are required</ion-text>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Telephone</ion-label
+                >
+                <ion-icon class="yellow" slot="start" name="call"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{plan.phone}}"
+                  [(ngModel)]="data.phone"
+                  name="phone"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Notes</ion-label>
+                <ion-icon class="green" slot="start" name="pencil"></ion-icon>
+                <ion-textarea
+                  type="text"
+                  placeholder="{{plan.notes}}"
+                  [(ngModel)]="data.notes"
+                  name="notes"
+                ></ion-textarea>
+              </ion-item>
+              <div class="ion-margin-vertical ion-text-right">
+                <ion-button
                   type="button"
                   fill="outline"
                   color="danger"
-                  size="small"
+                  shape="round"
                   (click)="form.reset()"
                 >
-                  <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button>
+                  <ion-icon slot="start" name="close"></ion-icon
+                  >Clear</ion-button
+                >
 
-                  <ion-button
+                <ion-button
                   type="button"
-                  size="small"
+                  shape="round"
                   type="submit"
                   value="submit"
                   id="submit"
                   color="success"
                 >
-                  <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
+                  <ion-icon slot="start" name="add"></ion-icon
+                  >Update</ion-button
                 >
-                </div>
-              </ion-col>
-            </ion-row>
-      </form>
-
-     </ion-grid> 
-  </ion-card> 
-</ion-list>
+              </div>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>

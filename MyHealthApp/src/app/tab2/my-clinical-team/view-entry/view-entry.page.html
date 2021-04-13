@@ -1,105 +1,113 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>View Team Member</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>View Team Member's details</ion-title>
+    <ion-button
+      fill="clear"
+      color="black"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-list *ngFor="let team of clinicalteam; let i = index" class="list">
     <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Team Member</ion-label>
-        </ion-col>
-      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Team Member</ion-card-title>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-avatar (click)="selectImageSource()" class="profile-pic">
-            <ion-img [src]="myProfileImage"></ion-img>
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-avatar (click)="selectImageSource()" class="profile-pic">
+              <ion-img [src]="myProfileImage"></ion-img>
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Name</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="person-outline"
-        ></ion-icon>
-        <p>{{team.name}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Name</ion-label>
+              <ion-icon class="red" slot="start" name="person"></ion-icon>
+              <p>{{team.name}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Role</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="medkit-outline"
-        ></ion-icon>
-        <p>{{team.role}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Clinic Name</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="location-outline"
-        ></ion-icon>
-        <p>{{team.clinic_name}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Role</ion-label>
+              <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
+              <p>{{team.role}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked"
+                >Clinic Name</ion-label
+              >
+              <ion-icon class="yellow" slot="start" name="location"></ion-icon>
+              <p>{{team.clinic_name}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label color="medium"  position="stacked">Email</ion-label>
-            <ion-icon
-            color="tertiary"
-            slot="start"
-            name="mail-outline"
-          ></ion-icon>
-            <p>{{team.email}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Email</ion-label>
+              <ion-icon class="green" slot="start" name="mail"></ion-icon>
+              <p>{{team.email}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label  color="medium" position="stacked">Telephone</ion-label>
-            <ion-icon
-            color="tertiary"
-            slot="start"
-            name="call-outline"
-          ></ion-icon>
-            <p>{{team.phone}}</p>
-          </ion-item>
-          <ion-button color="light" style="float: right" (click)="removeData(team.rowid)"
-          ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(team.rowid)"
-            ><ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card> 
-</ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Telephone</ion-label>
+              <ion-icon class="teal" slot="start" name="call"></ion-icon>
+              <p>{{team.phone}}</p>
+            </ion-item>
+            <ion-button
+              color="danger"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="removeData(team.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="editModal(team.rowid)"
+              ><ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>
-
