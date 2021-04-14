@@ -23,19 +23,25 @@
   </ion-card>
   <ion-list *ngFor="let about of aboutme; let i = index" class="list">
     <ion-card>
-      <ion-card-header>
-        <ion-button
-          color="success"
-          shape="round"
-          fill="outline"
-          style="float: right"
-          (click)="editModal(about.rowid)"
-        >
-          <ion-icon slot="start" name="create"></ion-icon>Edit Info</ion-button
-        >
-        <ion-card-title>Basic Info </ion-card-title>
-      </ion-card-header>
       <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              color="success"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="editModal(about.rowid)"
+            >
+              <ion-icon slot="start" name="create" size="large"></ion-icon>Edit
+              Info</ion-button
+            >
+            <ion-item lines="none">
+              <ion-card-title>Basic Info </ion-card-title>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
         <ion-row>
           <ion-col>
             <ion-item>

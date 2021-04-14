@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit About Me</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
+    <ion-title>Edit your information!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
       ><ion-icon size="large" name="arrow-back-outline"></ion-icon
     ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list *ngFor="let about of aboutme; let i = index">
-    <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
+  <ion-list *ngFor="let about of aboutme; let i=index" class="list">
+    <form #form="ngForm" (ngSubmit)="update(rowid)">
       <ion-card>
         <ion-card-header>
           <ion-card-title>Basic Info </ion-card-title>
@@ -33,9 +38,6 @@
                   #nameCtrl="ngModel"
                 ></ion-input>
               </ion-item>
-              <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
-                <ion-text color="danger">*Name is required</ion-text>
-              </ion-item>
             </ion-col>
           </ion-row>
 
@@ -51,7 +53,7 @@
                 ></ion-icon>
                 <ion-datetime
                   displayFormat="DD MMMM YYYY"
-                  placeholder="{{about.birthday}}"
+                  placeholder="{{about.birthday | date: 'dd MMMM YYYY'}}"
                   name="birthday"
                   [(ngModel)]="data.birthday"
                 ></ion-datetime>
@@ -302,7 +304,6 @@
               value="submit"
               id="submit"
               color="success"
-              [disabled]="!form.valid"
               >Update</ion-button
             >
           </div>

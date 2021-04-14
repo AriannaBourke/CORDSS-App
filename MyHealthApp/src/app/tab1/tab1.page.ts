@@ -71,12 +71,10 @@ export class Tab1Page {
 
   ionViewDidLoad() {
         this.getData();
-        this.verifyDatabasePopulated();
       }
 
       ionViewWillEnter() {
         this.getData();
-        this.verifyDatabasePopulated();
       }
 
   verifyDatabasePopulated() {
@@ -105,6 +103,7 @@ export class Tab1Page {
 
 
   public getData() {
+    this.verifyDatabasePopulated();
     this._db.executeSql('SELECT * FROM aboutme ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.aboutme = [];
@@ -130,7 +129,6 @@ export class Tab1Page {
       }
     })
         .catch(e => alert('get data error' + e));
-        this.verifyDatabasePopulated();
       }
 
   public saveData() {
