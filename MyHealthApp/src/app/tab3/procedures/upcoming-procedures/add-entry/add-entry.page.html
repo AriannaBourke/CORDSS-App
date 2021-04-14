@@ -85,17 +85,13 @@
               <ion-select-option value='Ozurdex implant'>Injection of steroid implant into eye (Ozurdex implant)</ion-select-option>
               <ion-select-option value='Orbital floor steroid'>Injection of steroids around the eye (Orbital floor steroid)</ion-select-option>
               <ion-select-option value='Injection of steroid into joint'>Injection of steroid into joint</ion-select-option>
+              <ion-select-option value='Endoscopy'>Endoscopy</ion-select-option>
+              <ion-select-option value='Gastroscopy'>Gastroscopy</ion-select-option>
+              <ion-select-option value='Kidney transplant'>Kidney transplant</ion-select-option>
               <ion-select-option value='Biopsy'>Biopsy</ion-select-option>
-              <ion-select-option value='6'>Other</ion-select-option>
+              <ion-select-option value='Other'>Other Operation</ion-select-option>
             </ion-select>
           </ion-item>
-            <div *ngIf="links.value === '6'">
-              <ion-item>
-                <ion-icon color="tertiary" slot="start" name="pencil-outline"></ion-icon>
-              <ion-input placeholder="Write Prodecure Type" [(ngModel)]="data.type">
-              </ion-input>
-            </ion-item>
-            </div>
          </ion-col>
         </ion-row>
 
