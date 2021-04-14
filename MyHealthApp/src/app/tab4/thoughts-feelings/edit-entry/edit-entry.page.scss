@@ -1,31 +1,25 @@
 .entry-header {
-    // font-weight: bold;
-    font-size: large;
-    color: black;
-  }
-  
-  .list {
-    background-color: #96bdc6;
-  }
+  // font-weight: bold;
+  font-size: large;
+  color: black;
+}
 
-  ion-input {
-    color: black;
+ion-input {
+  color: black;
   --placeholder-opacity: 1;
-    }
+}
 
-    ion-textarea {
-      color: black;
-    --placeholder-opacity: 1;
-      }
-  
-      ion-select {
-        color: black;
-      --placeholder-opacity: 1;
-        }
+ion-textarea {
+  color: black;
+  --placeholder-opacity: 1;
+}
 
-        ion-datetime {
-          color: black;
-        --placeholder-opacity: 1;
-          }
-    
-    
+ion-select {
+  color: black;
+  --placeholder-opacity: 1;
+}
+
+ion-datetime {
+  color: black;
+  --placeholder-opacity: 1;
+}

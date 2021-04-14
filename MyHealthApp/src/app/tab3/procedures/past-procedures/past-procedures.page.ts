@@ -18,7 +18,7 @@ export class PastProceduresPage {
   private _db   : any;
 
 
-  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
+  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
   now = new Date();
   today = this.now.toISOString();

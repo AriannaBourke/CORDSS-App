@@ -1,109 +1,132 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>View Procedure</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list *ngFor="let pro of procedures; let i = index" class="list">
     <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Procedure</ion-label>
-        </ion-col>
-      </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Date & Time</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="calendar-number-outline"
-        ></ion-icon>
-        <p>{{pro.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Upcoming Procedure</ion-card-title>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked"
+                >Date & Time</ion-label
+              >
+              <ion-icon
+                class="red"
+                slot="start"
+                name="calendar-number"
+              ></ion-icon>
+              <p>{{pro.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Doctor</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="medkit-outline"
-        ></ion-icon>
-        <p>{{pro.doctor}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Place</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="business-outline"
-        ></ion-icon>
-        <p>{{pro.place}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Doctor</ion-label>
+              <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
+              <p>{{pro.doctor}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label color="medium"  position="stacked">Procedure Type</ion-label>
-        <ion-icon
-        color="tertiary"
-        slot="start"
-        name="fitness-outline"
-      ></ion-icon>
-        <p>{{pro.type}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Place</ion-label>
+              <ion-icon class="yellow" slot="start" name="business"></ion-icon>
+              <p>{{pro.place}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label color="medium"  position="stacked">Description</ion-label>
-            <ion-icon
-            color="tertiary"
-            slot="start"
-            name="chatbubble-ellipses-outline"
-          ></ion-icon>
-            <p>{{pro.description}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked"
+                >Procedure Type</ion-label
+              >
+              <ion-icon class="green" slot="start" name="fitness"></ion-icon>
+              <p>{{pro.type}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label  color="medium" position="stacked">Questions?</ion-label>
-            <ion-icon
-            color="tertiary"
-            slot="start"
-            name="help-circle-outline"
-          ></ion-icon>
-            <p>{{pro.questions}}</p>
-          </ion-item>
-          <ion-button color="light" style="float: right" (click)="removeData(pro.rowid)"
-          ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(pro.rowid)"
-            ><ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card> 
-</ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked"
+                >Description</ion-label
+              >
+              <ion-icon
+                class="teal"
+                slot="start"
+                name="chatbubble-ellipses"
+              ></ion-icon>
+              <p>{{pro.description}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label color="medium" position="stacked"
+                >Questions?</ion-label
+              >
+              <ion-icon
+                class="lightblue"
+                slot="start"
+                name="help-circle"
+              ></ion-icon>
+              <p>{{pro.questions}}</p>
+            </ion-item>
+            <ion-button
+              color="danger"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="removeData(pro.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="editModal(pro.rowid)"
+              ><ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>
-
