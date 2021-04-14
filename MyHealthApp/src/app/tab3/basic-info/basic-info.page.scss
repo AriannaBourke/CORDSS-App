@@ -1,8 +1,18 @@
 .entry-header {
-    // font-weight: bold;
-    font-size: large;
-  }
-  
-  .list {
-    background-color: #96bdc6;
-  }
+  // font-weight: bold;
+  font-size: large;
+}
+
+.hiddencard {
+  margin-top: 5vh;
+}
+
+.arrow {
+  margin-top: 1vh;
+  height: 80px;
+  margin-right: 0px;
+}
+
+ion-card-title {
+  color: #041a97;
+}
