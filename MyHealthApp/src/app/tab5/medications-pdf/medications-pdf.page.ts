@@ -74,7 +74,7 @@ export class MedicationsPdfPage {
           }
         
           public getData() {
-            this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
+            this._db.executeSql('SELECT * FROM medicine ORDER BY activeflag="No"', <any>[])
             .then(res => {
               this.medicines = [];
               for(var i=0; i<res.rows.length; i++) {
