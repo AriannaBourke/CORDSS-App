@@ -100,7 +100,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
       let docDefinition = {
         content: [
         { text: 'Urgent Health Plan', fontSize: 30, alignment: 'center', bold: true, margin: [0, 15, 0, 15] },
-        { text: new Date().toTimeString(), alignment: 'right', margin: [0, 15, 0, 20] }, 
+        { text: new Date().toDateString(), alignment: 'right', margin: [0, 15, 0, 20] }, 
         html, 
       ],
         footer: (currentPage) => {
