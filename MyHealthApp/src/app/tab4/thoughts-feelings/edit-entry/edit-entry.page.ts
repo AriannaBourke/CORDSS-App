@@ -102,6 +102,10 @@ export class EditEntryPage {
                 await alert.present()
               }
 
+              noSubmit(e) {	
+                e.preventDefault();	
+              }
+
             async updateSQL(rowid) {
               if(this.data.note_name != "") {
                 this._db.executeSql('UPDATE thoughtsfeelings SET note_name=? WHERE rowid=?',[this.data.note_name, rowid])
