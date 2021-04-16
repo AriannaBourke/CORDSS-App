@@ -4,6 +4,8 @@ import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 import { NgForm } from '@angular/forms';
+import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
+
 
 @Component({
   selector: 'app-edit-entry',
@@ -11,6 +13,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-entry.page.scss'],
 })
 export class EditEntryPage {
+  photos;
+  base64Image;
+  myProfileImage;
   public testresults : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -25,6 +30,8 @@ export class EditEntryPage {
               private _alertController: AlertController, 
               public _plat: Platform, 
               public _sql: SQLite,
+              private camera : Camera,
+              private alertCtrl: AlertController,
             ) 
             {
               this.rowid=navParams.get('rowid');        
@@ -142,6 +149,55 @@ export class EditEntryPage {
                 })
               }
               this.closeModal();
+          }
+
+          ngOnInit() {
+            this.photos = [];
+          }
+        
+          takePhoto()
+          {
+            const options : CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              targetHeight: 200,
+              correctOrientation: true,
+              sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+              };
+        
+              this.camera.getPicture(options)
+              .then((ImageData)=> {
+                  this.base64Image = "data:image/jpeg;base64," + ImageData;
+                  this.photos.push(this.base64Image);
+                  this.photos.reverse();
+                })
+              }
+            
+          
+            deletePhoto(index) {
+              const alert = this.alertCtrl.create({
+                header: 'Sure you want to delete this photo? There is NO undo!',
+                message: '',
+                buttons: [
+                  {
+                    text: 'No',
+                    handler: () => {
+                      console.log('Disagree clicked');
+                    }
+                  }, 
+                  {
+                    text: 'Yes',
+                    handler: () => {
+                      console.log('Agree clicked');
+                      this.photos.splice(index, 1);
+                    }
+                  }
+                ]
+              }).then(res => {
+                res.present();
+            });
           }
           
 }

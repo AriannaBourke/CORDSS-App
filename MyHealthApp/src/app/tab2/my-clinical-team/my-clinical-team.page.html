@@ -18,12 +18,20 @@
      -->
       <ion-grid>
         <ion-row>
-          <ion-col col-6 *ngFor="let photo of photos; let id = index">
+          <ion-col>
+            <div class="images-wrapper">
+              <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
+                <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                <img [src]="photo" alt="" srcset="">
+              </div>
+            </div>
+          </ion-col>
+          <!-- <ion-col col-6 *ngFor="let photo of photos; let id = index">
             <ion-card class="block">
               <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
               <img [src]="photo" *ngIf="photo" />
             </ion-card>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ion-grid>
 </ion-content>

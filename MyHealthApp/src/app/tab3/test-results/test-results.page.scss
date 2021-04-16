@@ -16,3 +16,50 @@
   height: 80px;
   margin-right: 0px;
 }
+
+.block {
+  // position: relative;
+  .deleteIcon {
+    // position: absolute !important;
+    color: #ffffff;
+    margin-right: 80%;
+  }
+  .deleteIcon:before {
+    font-size: 30px !important;
+  }
+}
+  
+.hiddencard {
+  margin-top: 5vh;
+}
+
+
+.image-container {
+  background-size: cover;
+  min-height: 220px;
+}
+
+@media (min-width: 0px) {
+  .images-wrapper {
+    position: relative;
+    column-count: 2;
+  }
+}
+
+@media (min-width: 420px) {
+  .images-wrapper {
+    position: relative;
+    column-count: 3;
+  }
+}
+
+@media (min-width: 720px) {
+  .images-wrapper {
+    position: relative;
+    column-count: 3;
+  }
+}
+
+.pick-single-image {
+  margin: 4px;
+}

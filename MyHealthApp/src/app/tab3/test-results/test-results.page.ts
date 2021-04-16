@@ -5,6 +5,8 @@ import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
 import {EditEntryPage } from './edit-entry/edit-entry.page';
 import {ViewEntryPage } from './view-entry/view-entry.page';
+import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
+
 
 
 @Component({
@@ -13,6 +15,9 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./test-results.page.scss'],
 })
 export class TestResultsPage {
+  photos;
+  base64Image;
+  myProfileImage;
   public testresults : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -25,7 +30,10 @@ export class TestResultsPage {
   constructor(private _alertController: AlertController,
               public modalController: ModalController,
               public _plat: Platform,
-              public _sql: SQLite)
+              public _sql: SQLite,
+              private camera : Camera,
+              private alertCtrl: AlertController,
+              )
 {
   this.testresults = [];
   this._plat
@@ -185,5 +193,52 @@ export class TestResultsPage {
       });
       return await modal.present();
     }
-
+    ngOnInit() {
+      this.photos = [];
+    }
+  
+    takePhoto()
+    {
+      const options : CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        targetHeight: 200,
+        correctOrientation: true,
+        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+        };
+  
+        this.camera.getPicture(options)
+        .then((ImageData)=> {
+            this.base64Image = "data:image/jpeg;base64," + ImageData;
+            this.photos.push(this.base64Image);
+            this.photos.reverse();
+          })
+        }
+      
+    
+      deletePhoto(index) {
+        const alert = this.alertCtrl.create({
+          header: 'Sure you want to delete this photo? There is NO undo!',
+          message: '',
+          buttons: [
+            {
+              text: 'No',
+              handler: () => {
+                console.log('Disagree clicked');
+              }
+            }, 
+            {
+              text: 'Yes',
+              handler: () => {
+                console.log('Agree clicked');
+                this.photos.splice(index, 1);
+              }
+            }
+          ]
+        }).then(res => {
+          res.present();
+      });
+    }
 }

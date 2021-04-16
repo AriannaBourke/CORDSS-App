@@ -147,17 +147,21 @@ export class Tab1Page {
         this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
         .then(res => {
           this.aboutmepicture = [];
-          if(res.rows.length > 0) {
+          for(var i=0; i<res.rows.length; i++) {
             this.aboutmepicture.push({
-              rowid:res.rows.item(0).rowid,
-              picture:res.rows.item(1).picture,
+              rowid:res.rows.item(i).rowid,
+              picture:res.rows.item(i).picture,
     
             })
           }
+          console.log('hey maria');
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
         })
+       
+      
             .catch(e => alert('get data error' + e));
           }
-    
 
   public saveData() {
     this._db.executeSql('INSERT INTO aboutme VALUES(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
@@ -169,7 +173,7 @@ export class Tab1Page {
     }
 
     public saveDataPicture() {
-      this._db.executeSql('INSERT INTO aboutmepicture VALUES(?)', [this.datapicture.picture])
+      this._db.executeSql('INSERT INTO aboutmepicture VALUES(NULL, ?)', [this.datapicture.picture])
       .then(res => {
           this.getDataPicture();
         })
@@ -291,6 +295,8 @@ export class Tab1Page {
             this._camera.getPicture(galleryOptions)
             .then((ImageData)=> {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
+              this.datapicture.picture = this.myProfileImage.toString(); 
+              this.saveDataPicture();
             })
 
           }
