@@ -22,7 +22,8 @@ export class ConditionsPdfPage {
   private _db   : any;
   pdfObject = null;
   createButtonDisable: boolean = false;
-
+  default: any;
+  isEnabled: any;
   MedicalHistoryTable : string = 'CREATE TABLE IF NOT EXISTS medicalhistory (rowid INTEGER PRIMARY KEY AUTOINCREMENT, diagnosis TEXT, diagnosis_details TEXT, diagnosis_date TEXT, notes TEXT)'
   data = {diagnosis: "", diagnosis_details: "", diagnosis_date: "", notes: ""};           
 
@@ -35,7 +36,8 @@ export class ConditionsPdfPage {
    public modalController: ModalController
 
   ) {  
-  this.medicalhistory = [];
+    this.default = "";
+    this.medicalhistory = [];
       this._plat
       .ready()
       .then(() => 
@@ -72,8 +74,30 @@ export class ConditionsPdfPage {
           ionViewWillEnter() {
             this.getData();
           }
+
+          verifyDatabasePopulated() {
+            this._db.executeSql('SELECT * FROM medicine', <any>[])
+            .then(res => {
+              if(res.rows.length == 0) {
+                this.isEnabled = true;
+              }
+              else {
+                this.isEnabled = false;
+              }
+            })
+        
+          }
+        
+          checkIsEnabled() {
+            return this.isEnabled;
+          }
+        
+          noContent() {
+            return !this.isEnabled;
+          }
         
           public getData() {
+            this.verifyDatabasePopulated();
             this._db.executeSql('SELECT * FROM medicalhistory ORDER BY rowid DESC', <any>[])
             .then(res => {
               this.medicalhistory = [];

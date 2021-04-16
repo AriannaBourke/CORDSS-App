@@ -28,9 +28,14 @@
   <ion-card>
     <ion-item>
       <ion-label>Click To Download PDF</ion-label>
-      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="createButtonDisable"
+      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="checkIsEnabled()"
         ><ion-icon name="download-outline"></ion-icon
       ></ion-fab-button>
+    </ion-item>
+  </ion-card>
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 20px">You have no information in your urgent plan yet. Add an entry before creating a PDF!</p>
     </ion-item>
   </ion-card>
   

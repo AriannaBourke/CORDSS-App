@@ -62,8 +62,14 @@
             <ion-input
               placeholder="Email"
               name="email"
+              type="email"
               [(ngModel)]="data.email"
+              #emailCtrl="ngModel"
+              email
             ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
+            <ion-text color="danger">Email is not valid</ion-text>
           </ion-item>
           <ion-item>
             <ion-icon slot="start" name="call-outline" size="small"></ion-icon>

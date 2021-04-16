@@ -29,3 +29,8 @@
   font-family: "Pangolin";
   src: url("./assets/fonts/Pangolin-Regular.ttf");
 }
+
+// for drop-downs to wrap text over multiple lines
+.sc-ion-label-md-h{
+  white-space: normal !important;
+}

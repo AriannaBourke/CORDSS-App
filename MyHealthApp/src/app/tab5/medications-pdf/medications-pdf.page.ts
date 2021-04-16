@@ -89,7 +89,7 @@ export class MedicationsPdfPage {
           }
         
           checkIsEnabled() {
-            return !this.isEnabled;
+            return this.isEnabled;
           }
         
           noContent() {

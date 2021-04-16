@@ -22,7 +22,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     private _db   : any;
     pdfObject = null;
     createButtonDisable: boolean = false;
-
+    default: any;
+    isEnabled: any;
     UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
     data = {type: "", instructions: "", phone: "", notes: ""};
 
@@ -35,7 +36,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
      public modalController: ModalController
 
     ) {  
-    this.urgentplan = [];
+      this.default = "";
+      this.urgentplan = [];
         this._plat
         .ready()
         .then(() => 
@@ -72,8 +74,30 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
             ionViewWillEnter() {
               this.getData();
             }
+
+            verifyDatabasePopulated() {
+              this._db.executeSql('SELECT * FROM medicine', <any>[])
+              .then(res => {
+                if(res.rows.length == 0) {
+                  this.isEnabled = true;
+                }
+                else {
+                  this.isEnabled = false;
+                }
+              })
+          
+            }
+          
+            checkIsEnabled() {
+              return this.isEnabled;
+            }
+          
+            noContent() {
+              return !this.isEnabled;
+          }
           
         public getData() {
+          this.verifyDatabasePopulated();
           this._db.executeSql('SELECT * FROM urgentplan ORDER BY rowid DESC', <any>[])
           .then(res => {
             this.urgentplan = [];
