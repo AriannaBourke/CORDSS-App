@@ -37,10 +37,10 @@
   <div id="pdfcontent">
 
     <ion-card>
+    <ion-list *ngFor="let plan of urgentplan; let i = index">
       <ion-grid>
         <ion-row>
           <ion-col>
-    <ion-list *ngFor="let plan of urgentplan; let i = index">
       <ion-item>
       <h3>Urgent Plan</h3>
     </ion-item>
@@ -56,11 +56,12 @@
     <ion-item>
       <p>Notes: {{plan.notes}}</p>
     </ion-item>
-    </ion-list>
+    
   </ion-col>
   </ion-row>
   </ion-grid>
-  </ion-card>
 
+</ion-list>
+  </ion-card>
   </div>
 </ion-content>
