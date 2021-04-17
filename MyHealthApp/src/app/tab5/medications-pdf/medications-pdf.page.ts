@@ -1,3 +1,7 @@
+// The functions createPDF() and downloadPDF() are adapted from:
+// https://ionicacademy.com/create-pdf-files-ionic-pdfmake/ 
+// https://github.com/CarlosNassif/pdfmake/tree/master/src/app/pdf-maker 
+
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import pdfMake from 'pdfmake/build/pdfmake';
