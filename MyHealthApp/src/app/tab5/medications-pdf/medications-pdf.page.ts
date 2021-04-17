@@ -1,6 +1,11 @@
 // The functions createPDF() and downloadPDF() are adapted from:
 // https://ionicacademy.com/create-pdf-files-ionic-pdfmake/ 
 // https://github.com/CarlosNassif/pdfmake/tree/master/src/app/pdf-maker 
+//  This file is adapted from:
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
 
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
