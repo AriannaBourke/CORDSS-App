@@ -53,7 +53,13 @@
         name="camera-outline"
         color="tertiary"
       ></ion-icon>
-      <p>{{result.photo}}</p>
+      <div class="images-wrapper">
+        <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
+          <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+          <img [src]="photo" alt="" srcset="">
+        </div>
+      </div>
+      <!-- <p>{{result.photo}}</p> -->
       </ion-item>
     </ion-col>
   </ion-row>
