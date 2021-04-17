@@ -194,7 +194,7 @@
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline"></ion-icon>
       <ion-label>999</ion-label>
-      <ion-button shape="round" size="medium" (click)="callNow(number)">Call</ion-button>
+      <ion-button shape="round" size="medium" ((click)="CallNow('111')">Call 999</ion-button>
     </ion-item>
     <ion-item>
       <ion-label color="primary">NHS Non-Emergency Medical Number</ion-label>
@@ -202,11 +202,11 @@
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline"></ion-icon>
       <ion-label>111</ion-label>
-      <ion-button (click)="launchDialer('00 00 00 00')">Call 00 00 00 00</ion-button>
+      <ion-button (click)="CallNow('111')">Call 111</ion-button>
     </ion-item>
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
       <ion-label>999</ion-label>
-      <ion-button (click)="launchDialer('00 00 00 00')">Call 00 00 00 00</ion-button>
+      <ion-button (click)="CallNow('999')">Call 999</ion-button>
     </ion-item>
 
