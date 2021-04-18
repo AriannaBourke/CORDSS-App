@@ -10,6 +10,8 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
   styleUrls: ['./basic-info.page.scss'],
 })
 export class BasicInfoPage {
+  myProfileImage : string;
+  public aboutmepicture: Array<any> = [];
   public basicinfo : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -54,10 +56,12 @@ export class BasicInfoPage {
 
   ionViewDidLoad() {
         this.getData();
+        this.getDataPicture();
       }
     
       ionViewWillEnter() {
         this.getData();
+        this.getDataPicture();
       }
     
   public getData() {
@@ -123,4 +127,24 @@ export class BasicInfoPage {
       await alert.present();
   
     }
+
+    public getDataPicture() {
+      this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
+      .then(res => {
+        this.aboutmepicture = [];
+        for(var i=0; i<res.rows.length; i++) {
+          this.aboutmepicture.push({
+            rowid:res.rows.item(i).rowid,
+            picture:res.rows.item(i).picture,
+  
+          })
+        }
+        console.log('hey maria');
+        console.log(this.aboutmepicture[0].picture);
+        this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+      })
+     
+    
+          .catch(e => alert('get data error' + e));
+        }
 }

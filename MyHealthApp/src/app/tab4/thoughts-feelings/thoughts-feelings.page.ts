@@ -13,6 +13,8 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./thoughts-feelings.page.scss'],
 })
 export class ThoughtsFeelingsPage {
+  myProfileImage : string;
+  public aboutmepicture: Array<any> = [];
   public thoughtsfeelings : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -63,10 +65,12 @@ export class ThoughtsFeelingsPage {
 
   ionViewDidLoad() {
         this.getData();
+        this.getDataPicture();
       }
 
       ionViewWillEnter() {
         this.getData();
+        this.getDataPicture();
       }
 
   public getData() {
@@ -181,5 +185,26 @@ export class ThoughtsFeelingsPage {
       });
       return await modal.present();
     }
+
+    public getDataPicture() {
+      this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
+      .then(res => {
+        this.aboutmepicture = [];
+        for(var i=0; i<res.rows.length; i++) {
+          this.aboutmepicture.push({
+            rowid:res.rows.item(i).rowid,
+            picture:res.rows.item(i).picture,
+  
+          })
+        }
+        console.log('hey maria');
+        console.log(this.aboutmepicture[0].picture);
+        this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+      })
+     
+    
+          .catch(e => alert('get data error' + e));
+        }
+  
 
   }
