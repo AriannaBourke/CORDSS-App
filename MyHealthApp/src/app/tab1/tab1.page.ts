@@ -146,7 +146,7 @@ export class Tab1Page {
         })
       }
     })
-        .catch(e => alert('get data error' + e));
+        .catch(e => alert('get data error' + JSON.stringify(e)));
       }
 
       public getDataPicture() {
@@ -160,13 +160,12 @@ export class Tab1Page {
     
             })
           }
-          console.log('hey maria');
           console.log(this.aboutmepicture[0].picture);
           this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
         })
        
       
-            .catch(e => alert('get data error' + e));
+            // .catch(e => alert('get data error' + e));
           }
 
   public saveData() {
@@ -289,7 +288,6 @@ export class Tab1Page {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
               this.datapicture.picture = this.myProfileImage.toString(); 
               this.saveDataPicture();
-              console.log('DAME GAMO TO SPITI SAS')
               console.log(this.myProfileImage)
             })
 
