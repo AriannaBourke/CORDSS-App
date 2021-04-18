@@ -10,13 +10,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-avatar (click)="selectImageSource()" class="profile-pic" >
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
-      <p style="font-size: 30px">Click 'Add' to add any Urgent Health Plans!</p>
+      <p style="font-size: 30px">
+        Click 'Add' to add your Urgent Health Plans!
+      </p>
       <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
     </ion-item>
   </ion-card>
@@ -25,19 +27,17 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Plan</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="medkit-outline"
-              ></ion-icon>
+            <ion-item lines="none">
+              <ion-card-title>Urgent Plan Info</ion-card-title>
             </ion-item>
-            <ion-item>
-              <p>{{plan.type}}</p>
+            <ion-item lines="none">
+              <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+              <p>Emergency Type: {{plan.type}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(plan.rowid)"
               ><ion-icon
@@ -47,7 +47,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="editModal(plan.rowid)"
             >
@@ -60,7 +62,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="viewModal(plan.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

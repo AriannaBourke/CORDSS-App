@@ -1,110 +1,130 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Procedure</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>Edit Past Procedure info!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let pro of procedures; let i = index" class="list">
     <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Procedure</ion-label>
-        </ion-col>
-      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Edit Past Procedure</ion-card-title>
+          </ion-col>
+        </ion-row>
 
-      <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
-            <ion-row>
-              <ion-col>
-                <ion-item>
-                  <ion-label color="medium" position="stacked">Date & Time</ion-label>
-                  <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
-                  <ion-datetime
+        <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Date & Time</ion-label
+                >
+                <ion-icon
+                  class="red"
+                  slot="start"
+                  name="calendar-number"
+                ></ion-icon>
+                <ion-datetime
                   placeholder="{{pro.date | date: 'dd MMMM y HH:mm'}}"
                   displayFormat="DD MMMM YYYY"
                   [(ngModel)]="data.date"
                   name="date"
-                  required #dateCtrl="ngModel"
+                  required
+                  #dateCtrl="ngModel"
                 ></ion-datetime>
               </ion-item>
               <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
                 <ion-text color="danger">*Date is required</ion-text>
-                </ion-item>
+              </ion-item>
             </ion-col>
           </ion-row>
-        
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Doctor</ion-label>
-                    <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-                    <ion-input 
-                    type="text"
-                    placeholder="{{pro.doctor}}"
-                    [(ngModel)]="data.doctor"
-                    name="doctor"
-                    ></ion-input>
-                  </ion-item>
-                </ion-col>
-               </ion-row>
-               
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Place</ion-label>
-                    <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
-                    <ion-input 
-                    type="text"
-                    placeholder="{{pro.place}}"
-                    [(ngModel)]="data.place"
-                    name="place"></ion-input>
-                  </ion-item>
-                </ion-col>
-               </ion-row>
 
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Procedure Type</ion-label>
-                   <ion-icon color="tertiary" slot="start" name="fitness-outline"></ion-icon>
-                   <ion-select 
-                  #links ngModel 
-                  name="estate" 
-                  interface="popover" 
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Doctor</ion-label>
+                <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{pro.doctor}}"
+                  [(ngModel)]="data.doctor"
+                  name="doctor"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Place</ion-label>
+                <ion-icon
+                  class="yellow"
+                  slot="start"
+                  name="business"
+                ></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{pro.place}}"
+                  [(ngModel)]="data.place"
+                  name="place"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Procedure Type</ion-label
+                >
+                <ion-icon class="green" slot="start" name="fitness"></ion-icon>
+                <ion-select
+                  #links
+                  ngModel
+                  name="estate"
+                  interface="popover"
                   placeholder="{{pro.type}}"
                   [(ngModel)]="data.type"
                   [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
-                    <ion-select-option value='Cataract surgery'>Cataract surgery</ion-select-option>
-                    <ion-select-option value='Cataract surgery with lens implant'>Cataract surgery with lens implant </ion-select-option>
-                    <ion-select-option value='Glaucoma surgery'>Glaucoma surgery</ion-select-option>
-                    <ion-select-option value='Glaucoma surgery with tube'>Glaucoma surgery with tube</ion-select-option>
-                    <ion-select-option value='Removal of band keratopathy'>Removal of band keratopathy</ion-select-option>
-                    <ion-select-option value='intravitreal steroid'>Injection of steroid inside eye (intravitreal steroid)</ion-select-option>
-                    <ion-select-option value='Ozurdex implant'>Injection of steroid implant into eye (Ozurdex implant)</ion-select-option>
-                    <ion-select-option value='Orbital floor steroid'>Injection of steroids around the eye (Orbital floor steroid)</ion-select-option>
-                    <ion-select-option value='Injection of steroid into joint'>Injection of steroid into joint</ion-select-option>
-                    <ion-select-option value='Biopsy'>Biopsy</ion-select-option>
-                    <ion-select-option value='6'>Other</ion-select-option>
+                  <ion-select-option value='Cataract surgery'>Cataract surgery</ion-select-option>
+                  <ion-select-option value='Cataract surgery with lens implant'>Cataract surgery with lens implant </ion-select-option>
+                  <ion-select-option value='Glaucoma surgery'>Glaucoma surgery</ion-select-option>
+                  <ion-select-option value='Glaucoma surgery with tube'>Glaucoma surgery with tube</ion-select-option>
+                  <ion-select-option value='Removal of band keratopathy'>Removal of band keratopathy</ion-select-option>
+                  <ion-select-option value='Injection of steroid inside eye (intravitreal steroid)'>Injection of steroid inside eye (intravitreal steroid)</ion-select-option>
+                  <ion-select-option value='Injection of steroid implant into eye (Ozurdex implant)'>Injection of steroid implant into eye (Ozurdex implant)</ion-select-option>
+                  <ion-select-option value='Injection of steroids around the eye (Orbital floor steroid)'>Injection of steroids around the eye (Orbital floor steroid)</ion-select-option>
+                  <ion-select-option value='Injection of steroid into joint'>Injection of steroid into joint</ion-select-option>
+                  <ion-select-option value='Endoscopy'>Endoscopy</ion-select-option>
+                  <ion-select-option value='Gastroscopy'>Gastroscopy</ion-select-option>
+                  <ion-select-option value='Kidney transplant'>Kidney transplant</ion-select-option>
+                  <ion-select-option value='Biopsy'>Biopsy</ion-select-option>
+                  <ion-select-option value='Other'>Other Operation</ion-select-option>
                   </ion-select>
                 </ion-item>
-                  <div *ngIf="links.value === '6'">
-                    <ion-item>
-                      <ion-icon color="tertiary" slot="start" name="pencil-outline"></ion-icon>
-                    <ion-input placeholder="Write Prodecure Type" [(ngModel)]="data.type">
-                    </ion-input>
-                  </ion-item>
-                  </div>
                </ion-col>
               </ion-row>
-      
       
                <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-label color="medium" position="stacked">Description</ion-label>
+                    <ion-icon
+                  class="teal"
+                  slot="start"
+                  name="chatbubble-ellipses"
+                ></ion-icon>
                    <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
                    <ion-textarea 
                    type="text"
@@ -120,7 +140,11 @@
                 <ion-col>
                   <ion-item>
                     <ion-label color="medium" position="stacked">Questions?</ion-label>
-                   <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
+                    <ion-icon
+                    class="lightblue"
+                    slot="start"
+                    name="help-circle"
+                  ></ion-icon>
                    <ion-textarea 
                    type="text"
                    placeholder="{{pro.questions}}"
@@ -133,27 +157,29 @@
                   type="button"
                   fill="outline"
                   color="danger"
-                  size="small"
+                  shape="round"
                   (click)="form.reset()"
                 >
-                  <ion-icon slot="start" name="close"></ion-icon>Clear</ion-button>
+                  <ion-icon slot="start" name="close"></ion-icon
+                  >Clear</ion-button
+                >
 
-                  <ion-button
+                <ion-button
                   type="button"
-                  size="small"
+                  shape="round"
                   type="submit"
                   value="submit"
                   id="submit"
                   color="success"
                 >
-                  <ion-icon slot="start" name="add"></ion-icon>Update</ion-button
+                  <ion-icon slot="start" name="add"></ion-icon
+                  >Update</ion-button
                 >
-                </div>
-              </ion-col>
-            </ion-row>
-      </form>
-
-     </ion-grid> 
-  </ion-card> 
-</ion-list>
+              </div>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>

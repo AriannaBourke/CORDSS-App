@@ -1,3 +1,12 @@
+// The functions createPDF() and downloadPDF() are adapted from:
+// https://ionicacademy.com/create-pdf-files-ionic-pdfmake/ 
+// https://github.com/CarlosNassif/pdfmake/tree/master/src/app/pdf-maker 
+//  This file is adapted from:
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -22,7 +31,8 @@ export class MedicationsPdfPage {
   private _db   : any;
   pdfObject = null;
   createButtonDisable: boolean = false;
-
+  default: any;
+  isEnabled: any;
   MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)'
   data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
 
@@ -35,7 +45,8 @@ export class MedicationsPdfPage {
    public modalController: ModalController
 
   ) {  
-  this.medicines = [];
+    this.default = "";
+    this.medicines = [];
       this._plat
       .ready()
       .then(() => 
@@ -72,9 +83,31 @@ export class MedicationsPdfPage {
           ionViewWillEnter() {
             this.getData();
           }
+
+          verifyDatabasePopulated() {
+            this._db.executeSql('SELECT * FROM medicine', <any>[])
+            .then(res => {
+              if(res.rows.length == 0) {
+                this.isEnabled = true;
+              }
+              else {
+                this.isEnabled = false;
+              }
+            })
+        
+          }
+        
+          checkIsEnabled() {
+            return this.isEnabled;
+          }
+        
+          noContent() {
+            return !this.isEnabled;
+          }
         
           public getData() {
-            this._db.executeSql('SELECT * FROM medicine ORDER BY rowid DESC', <any>[])
+            this.verifyDatabasePopulated();
+            this._db.executeSql('SELECT * FROM medicine ORDER BY activeflag="No"', <any>[])
             .then(res => {
               this.medicines = [];
               for(var i=0; i<res.rows.length; i++) {
@@ -101,7 +134,7 @@ export class MedicationsPdfPage {
     let docDefinition = {
       content: [
       { text: 'Medicines', fontSize: 30, alignment: 'center', bold: true, margin: [0, 15, 0, 15] },
-      { text: new Date().toTimeString(), alignment: 'right', margin: [0, 15, 0, 20] }, 
+      { text: new Date().toDateString(), alignment: 'right', margin: [0, 15, 0, 20] }, 
       html, 
     ],
       footer: (currentPage) => {

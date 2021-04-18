@@ -4,200 +4,47 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Basic Info</ion-title>
+    <ion-button
+      color="success"
+      slot="end"
+      (click)="openModal()"
+      [disabled]="checkIsEnabled()"
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+    >
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-avatar (click)="selectImageSource()" class="profile-pic" >
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
-  <form #form="ngForm" (ngSubmit)="saveData(form)">
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">Click 'Add' to add Basic Info!</p>
+      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+    </ion-item>
+  </ion-card>
+  <ion-list *ngFor="let basic of basicInfo; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label class="entry-header">Info</ion-label>
+            <ion-item lines="none">
+              <ion-card-title>Basic Info</ion-card-title>
+            </ion-item>
           </ion-col>
         </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-icon slot="start" name="transgender-outline" size="small"></ion-icon>
-            <ion-input
-            type="text"
-            placeholder="Gender"
-            [(ngModel)]="data.gender"
-            name="gender"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-          <ion-row>
-            <ion-col>
-          <ion-item>
-            <ion-icon slot="start" name="accessibility-outline" size="small"></ion-icon>
-            <ion-input
-            type="text"
-            placeholder="Height"
-            [(ngModel)]="data.height"
-            name="height" ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-          <ion-row>
-            <ion-col>
-          <ion-item>
-            <ion-icon slot="start" name="accessibility-outline" size="small"></ion-icon>
-            <ion-input 
-            type="text"
-            placeholder="Weight"
-            [(ngModel)]="data.weight"
-            name="weight"
-          ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-          <ion-row>
-            <ion-col>
-          <ion-item >
-            <ion-icon slot="start" name="pulse-outline" size="small"></ion-icon>
-            <ion-input 
-            type="text"
-            placeholder="Blood Pressure"
-            [(ngModel)]="data.bloodpressure"
-            name="bloodpressure"
-            ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-          <ion-row>
-            <ion-col>
-          <ion-item>
-            <ion-textarea 
-            type="text"
-            placeholder="Allergies"
-            [(ngModel)]="data.allergies"
-            name="allergies"
-            ></ion-textarea>
-            <ion-icon slot="start" name="sad-outline" size="small"></ion-icon>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-          <ion-row>
-            <ion-col>
-          <ion-item >
-            <ion-textarea 
-            type="text"
-            placeholder="Notes"
-            [(ngModel)]="data.notes"
-            name="notes"
-          ></ion-textarea>
-            <ion-icon slot="start" name="pencil-outline" size="small"></ion-icon>
-          </ion-item>
-          <div class="ion-margin-vertical ion-text-right">
-            <ion-button
-                type="button"
-                size="small"
-                type="submit"
-                value="submit"
-                id="submit"
-              >
-                <ion-icon slot="start" name="add"></ion-icon>Submit</ion-button
-              >
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-  </form>
-
-  <ion-list *ngFor="let info of basicinfo; let i = index" class="list">
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label class="entry-header">Basic Info</ion-label>
-            <ion-icon
-              style="float: right"
-              name="trash-outline"
-              size="large"
-              (click)="removeData(info.rowid)"
-            ></ion-icon>
-            <ion-icon
-              style="float: right"
-              name="paper"
-              size="large"
-              (click)="editData(info.rowid)"
-            ></ion-icon>
-          </ion-col>
-        </ion-row>
-  
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label color="medium" position="stacked">Gender</ion-label>
               <ion-icon
                 slot="start"
                 name="transgender-outline"
-                size="small"
+                class="red"
               ></ion-icon>
-              <p>{{info.gender}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-  
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="accessibility-outline"
-                size="small"
-              ></ion-icon>
-              <p>{{info.height}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-  
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-icon
-                slot="start"
-                name="accessibility-outline"
-                size="small"
-              ></ion-icon>
-              <p>{{info.weight}}</p>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-  
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <p>{{info.bloodpressure}}</p>
-              <ion-icon
-                slot="start"
-                name="pulse-outline"
-                size="small"
-              ></ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-  
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <p>{{info.allergies}}</p>
-              <ion-icon
-                slot="start"
-                name="sad-outline"
-                size="small"
-              ></ion-icon>
+              <p>{{basic.gender}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -205,17 +52,94 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <p>{{info.notes}}</p>
+              <ion-label color="medium" position="stacked">Height</ion-label>
+              <ion-icon
+                slot="start"
+                name="accessibility"
+                class="orange"
+              ></ion-icon>
+              <p>{{basic.height}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Weight</ion-label>
+              <ion-icon
+                slot="start"
+                name="accessibility"
+                class="yellow"
+              ></ion-icon>
+              <p>{{basic.weight}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked"
+                >Blood Pressure</ion-label
+              >
+              <p>{{basic.blood_pressure}}</p>
+              <ion-icon slot="start" name="pulse" class="green"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Allergies</ion-label>
+              <p>{{basic.allergies}}</p>
+              <ion-icon slot="start" name="sad" class="teal"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label color="medium" position="stacked">Notes</ion-label>
+              <p>{{basic.notes}}</p>
               <ion-icon
                 slot="start"
                 name="pencil-outline"
-                size="small"
+                class="lightblue"
               ></ion-icon>
             </ion-item>
+            <ion-button
+              color="danger"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="removeData(basic.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="editModal(basic.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
   </ion-list>
-  </ion-content>
-  
+</ion-content>

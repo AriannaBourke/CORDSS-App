@@ -1,18 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>View Condition</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>View your Condition info!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-list *ngFor="let history of medicalhistory; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label color="tertiary">Condition</ion-label>
+            <ion-card-title>Condition Info</ion-card-title>
           </ion-col>
         </ion-row>
 
@@ -20,63 +26,81 @@
           <ion-col>
             <ion-item>
               <ion-label color="medium" position="stacked">Diagnosis</ion-label>
-              <ion-icon
-              color="tertiary"
-              slot="start"
-              name="medkit-outline"
-            ></ion-icon>
-            <p>{{history.diagnosis}}</p>
+              <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+              <p>{{history.diagnosis}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
-  
+
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Diagnosis Details</ion-label>
+              <ion-label color="medium" position="stacked"
+                >Diagnosis Details</ion-label
+              >
               <ion-icon
-              color="tertiary"
-              slot="start"
-              name="document-text-outline"
-            ></ion-icon>
-            <p>{{history.diagnosis_details}}</p>
+                class="orange"
+                slot="start"
+                name="document-text"
+              ></ion-icon>
+              <p>{{history.diagnosis_details}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
-  
+
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Diagnosis Date</ion-label>
+              <ion-label color="medium" position="stacked"
+                >Diagnosis Date</ion-label
+              >
               <ion-icon
-              color="tertiary"
-              slot="start"
-              name="calendar-number-outline"
-            ></ion-icon>
-            <p>{{history.diagnosis_date | date: 'dd MMMM y'}}</p>
+                class="yellow"
+                slot="start"
+                name="calendar-number"
+              ></ion-icon>
+              <p>{{history.diagnosis_date | date: 'dd MMMM y'}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
-  
+
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Notes</ion-label>
-              <ion-icon
-              color="tertiary"
-              slot="start"
-              name="pencil-outline"
-            ></ion-icon>
+              <ion-label color="medium" position="stacked">Notes</ion-label>
+              <ion-icon class="green" slot="start" name="pencil"></ion-icon>
               <p>{{history.notes}}</p>
             </ion-item>
-            <ion-button color="light" style="float: right" (click)="removeData(history.rowid)"
-            ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(history.rowid)">
-            <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+            <ion-button
+              color="danger"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="removeData(history.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="editModal(history.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
   </ion-list>
-  </ion-content>
-        
+</ion-content>

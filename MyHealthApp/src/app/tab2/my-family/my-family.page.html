@@ -10,90 +10,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- <div class="ion-padding">
-    <ion-button (click)="getPictures()">Pick multiple images</ion-button>
-    <ion-list *ngFor = "let image of images">
-      <ion-item>
-        <img src={{image}}/>
-      </ion-item>
-    </ion-list>
-  </div> -->
-
-
-
-
-
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col text-center>
-        <h3>Image Picker</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="getPictures()">Choose Images</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col> -->
-        <!-- More Pinterest floating gallery style -->
-          <!-- <div class="images">
-          <div class="one-image" *ngFor="let img of imageResponse">
-            <img src="{{img}}" alt="" srcset="">
-          </div>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-  <ion-grid>
-    <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="getPictures()">Select Images</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div class="images-wrapper">
-          <div class="pick-single-image" *ngFor="let image of images">
-            <img src="{{image}}" alt="" srcset="">
-          </div>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  
-  <!-- <ion-button (click)="getPictures()">Choose Images</ion-button>
-  <ion-grid *ngIf="imageResponse.length != 0">
-    <ion-col *ngFor="let image of imageResponse">
-        <ion-img [src]="image" style="height: 150px;width:150px"></ion-img>
-    </ion-col>
-</ion-grid> -->
-  <!-- <ion-list *ngFor="let family of myfamily; let i = index" class="list">
+<ion-content class="ion-padding">
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">Click 'Add' to start adding Family Members!</p>
+      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+    </ion-item>
+  </ion-card>
+  <ion-list *ngFor="let family of myfamily; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
             <ion-item lines="none">
-              <ion-label class="card-header" color="tertiary"
-                >Family Member</ion-label
-              >
-              <ion-icon
-                slot="start"
-                name="person-outline"
-                color="tertiary"
-              ></ion-icon>
+              <ion-card-title>Family Member Info</ion-card-title>
             </ion-item>
             <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                size="medium"
+                name="person"
+                class="red"
+              ></ion-icon>
               <p>{{family.name}}</p>
             </ion-item>
-            <!-- <ion-item>
-  <p>{{family.relation}}</p>
-</ion-item> -->
-            <!-- <ion-button
+            <ion-item>
+             <p>{{family.relation}}</p>
+            </ion-item> 
+            <ion-button
               color="danger"
               fill="outline"
               style="float: right"
+              shape="round"
               (click)="removeData(family.rowid)"
               ><ion-icon
                 size="large"
@@ -104,6 +52,7 @@
             <ion-button
               color="success"
               fill="outline"
+              shape="round"
               style="float: right"
               (click)="editModal(family.rowid)"
             >
@@ -118,6 +67,7 @@
             <ion-button
               color="tertiary"
               fill="outline"
+              shape="round"
               style="float: right"
               (click)="viewModal(family.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon
@@ -127,5 +77,5 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-  </ion-list> -->
+  </ion-list> 
 </ion-content>

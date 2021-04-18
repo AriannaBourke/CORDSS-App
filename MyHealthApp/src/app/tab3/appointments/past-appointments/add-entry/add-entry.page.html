@@ -1,119 +1,137 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Appointment</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>Add Appointment details!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Appointment</ion-label>
-        </ion-col>
-      </ion-row>
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Add Appointment</ion-card-title>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Date & Time</ion-label>
-            <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
-            <ion-datetime
-            placeholder="Date & Time (*Required)"
-            displayFormat="DD MMMM YYYY HH:mm"
-            [(ngModel)]="data.date"
-            name="date"
-            required
-            #dateCtrl="ngModel"
-          ></ion-datetime>
-        </ion-item>
-        <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
-          <ion-text color="danger">*Date & time is required</ion-text>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Date & Time</ion-label>
+              <ion-icon
+                class="red"
+                slot="start"
+                name="calendar-number"
+              ></ion-icon>
+              <ion-datetime
+                placeholder="Date & Time (*Required)"
+                displayFormat="DD MMMM YYYY HH:mm"
+                [(ngModel)]="data.date"
+                name="date"
+                required
+                #dateCtrl="ngModel"
+              ></ion-datetime>
+            </ion-item>
+            <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
+              <ion-text color="danger">*Date & time is required</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Doctor</ion-label>
-              <ion-icon color="tertiary" slot="start" name="medkit-outline"></ion-icon>
-              <ion-input 
-              placeholder="Doctor's Name"
-              type="text"
-              [(ngModel)]="data.doctor"
-              name="doctor"
+              <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
+              <ion-input
+                placeholder="Doctor's Name"
+                type="text"
+                [(ngModel)]="data.doctor"
+                name="doctor"
               ></ion-input>
             </ion-item>
           </ion-col>
-         </ion-row>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Place</ion-label>
-              <ion-icon color="tertiary" slot="start" name="business-outline"></ion-icon>
-              <ion-input 
-              placeholder="Place"
-              type="text"
-              [(ngModel)]="data.place"
-              name="place"></ion-input>
+              <ion-icon class="yellow" slot="start" name="business"></ion-icon>
+              <ion-input
+                placeholder="Place"
+                type="text"
+                [(ngModel)]="data.place"
+                name="place"
+              ></ion-input>
             </ion-item>
           </ion-col>
-         </ion-row>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Description</ion-label>
-             <ion-icon color="tertiary" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
-             <ion-textarea 
-             placeholder="Description"
-             rows="3"
-             type="text"
-             [(ngModel)]="data.description"
-             name="description"
-             ></ion-textarea>
+              <ion-icon
+                class="green"
+                slot="start"
+                name="chatbubble-ellipses"
+              ></ion-icon>
+              <ion-textarea
+                placeholder="Description"
+                rows="3"
+                type="text"
+                [(ngModel)]="data.description"
+                name="description"
+              ></ion-textarea>
             </ion-item>
-         </ion-col>
+          </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Questions?</ion-label>
-             <ion-icon color="tertiary" slot="start" name="help-circle-outline"></ion-icon>
-             <ion-textarea 
-             placeholder="Questions to ask at the appointment"
-             rows="3"
-             type="text"
-             [(ngModel)]="data.questions"
-             name="questions"
-            ></ion-textarea>
+              <ion-icon class="teal" slot="start" name="help-circle"></ion-icon>
+              <ion-textarea
+                placeholder="Questions to ask at the appointment"
+                rows="3"
+                type="text"
+                [(ngModel)]="data.questions"
+                name="questions"
+              ></ion-textarea>
             </ion-item>
-           <div class="ion-margin-vertical ion-text-right">
-            <ion-button
-            type="button"
-            fill="outline"
-            color="danger"
-            (click)="form.reset()"
-          >Clear</ion-button>
-            <ion-button
-              type="button"
-              type="submit"
-              value="submit"
-              id="submit"
-              color="success"
-              [disabled]="!form.valid"
-            >Submit</ion-button
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</form>
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button
+                type="button"
+                fill="outline"
+                shape="round"
+                color="danger"
+                (click)="form.reset()"
+                >Clear</ion-button
+              >
+              <ion-button
+                type="button"
+                type="submit"
+                shape="round"
+                value="submit"
+                id="submit"
+                color="success"
+                [disabled]="!form.valid"
+                >Submit</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
 </ion-content>

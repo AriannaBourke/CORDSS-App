@@ -1,3 +1,10 @@
+//  This file is adapted from:
+// https://edupala.com/ionic-template-driven-form-validation/ 
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
@@ -14,6 +21,7 @@ export class EditEntryPage {
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
+
 
   rowid: any;
   AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone TEXT, address TEXT, nhs_number TEXT, emergency_1_name, emergency_1_number, emergency_2_name, emergency_2_number, emergency_3_name, emergency_3_number)'
@@ -111,12 +119,86 @@ export class EditEntryPage {
               }
 
               async updateSQL(rowid) {
-                this._db.executeSql('UPDATE aboutme SET name=?, birthday=?, about=?, email=?, phone=?, address=?, nhs_number=?, emergency_1_name=?, emergency_1_number=?, emergency_2_name=?, emergency_2_number=?, emergency_3_name=?, emergency_3_number=? WHERE rowid=?', [this.data.name, this.data.birthday, this.data.about, this.data.email, this.data.phone,  this.data.nhs_number,  this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number, rowid])
-                .then(res => {
-                  this.closeModal();
-                })
+                if(this.data.name != "") {
+                  this._db.executeSql('UPDATE aboutme SET name=? WHERE rowid=?',[this.data.name, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
                 .catch(e => alert('update error' + e));
-
+                }
+                if(this.data.birthday != ""){
+                  this._db.executeSql('UPDATE aboutme SET birthday=? WHERE rowid=?', [this.data.birthday, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.about != ""){
+                  this._db.executeSql('UPDATE aboutme SET about=? WHERE rowid=?', [this.data.about, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.email != ""){
+                  this._db.executeSql('UPDATE aboutme SET email=? WHERE rowid=?', [this.data.email, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.phone != ""){
+                  this._db.executeSql('UPDATE aboutme SET phone=? WHERE rowid=?', [this.data.phone, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.address != ""){
+                  this._db.executeSql('UPDATE aboutme SET address=? WHERE rowid=?', [this.data.address, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.nhs_number != ""){
+                  this._db.executeSql('UPDATE aboutme SET nhs_number=? WHERE rowid=?', [this.data.nhs_number, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.emergency_1_name != ""){
+                  this._db.executeSql('UPDATE aboutme SET emergency_1_name=? WHERE rowid=?', [this.data.emergency_1_name, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.emergency_1_number != ""){
+                  this._db.executeSql('UPDATE aboutme SET emergency_1_number=? WHERE rowid=?', [this.data.emergency_1_number, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.emergency_2_name != ""){
+                  this._db.executeSql('UPDATE aboutme SET emergency_2_name=? WHERE rowid=?', [this.data.emergency_2_name, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.emergency_2_number != ""){
+                  this._db.executeSql('UPDATE aboutme SET emergency_2_number=? WHERE rowid=?', [this.data.emergency_2_number, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.emergency_3_name != ""){
+                  this._db.executeSql('UPDATE aboutme SET emergency_3_name=? WHERE rowid=?', [this.data.emergency_3_name, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                if(this.data.emergency_3_number != ""){
+                  this._db.executeSql('UPDATE aboutme SET emergency_3_number=? WHERE rowid=?', [this.data.emergency_3_number, rowid])
+                  .then(res => {
+                    this.closeModal();
+                  })
+                }
+                this.closeModal();
             }
 
 }

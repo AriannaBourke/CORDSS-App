@@ -24,25 +24,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card>
     <ion-item>
       <ion-label>Click To Download PDF</ion-label>
-      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="createButtonDisable"
+      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="checkIsEnabled()"
         ><ion-icon name="download-outline"></ion-icon
       ></ion-fab-button>
+    </ion-item>
+  </ion-card>
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 20px">You have no information in your medicines yet. Add an entry before creating a PDF!</p>
     </ion-item>
   </ion-card>
   
   <div id="pdfcontent">
 
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col>   
-    <ion-list *ngFor="let med of medicines; let i = index">
+    <ion-card>    
+    <ion-list *ngFor="let med of medicines; let i = index" class="list">
+     
+        <ion-grid>
+          <ion-row>
+            <ion-col> 
       <ion-item>
-      <h3>Medication</h3>
+      <h3>Medicine</h3>
     </ion-item>
       <ion-item>
       <p>Medicine Name: {{med.medicinename}}</p>
@@ -56,12 +62,16 @@
     <ion-item>
       <p>Notes: {{med.notes}}</p>
     </ion-item>
-    </ion-list> 
+    <ion-item>
+      <p>Currently taking this medicine: {{med.activeflag}}</p>
+    </ion-item>
+     
 
   </ion-col>
   </ion-row>
   </ion-grid>
-  </ion-card>
-
+  
+</ion-list>
+</ion-card>
   </div>
 </ion-content>

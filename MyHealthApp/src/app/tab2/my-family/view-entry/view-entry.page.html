@@ -1,98 +1,103 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>View Family Member</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>View Family Member's details!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let family of myfamily; let i = index" class="list">
     <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label class="entry-header">Family Member</ion-label>
-        </ion-col>
-      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Family Member Info</ion-card-title>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label  color="medium" position="stacked">Name</ion-label>
-            <ion-icon
-              color="tertiary"
-              slot="start"
-              name="person-outline"
-            ></ion-icon>
-            <p>{{family.name}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Name</ion-label>
+              <ion-icon class="red" slot="start" name="person"></ion-icon>
+              <p>{{family.name}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Birthday</ion-label>
+              <ion-icon class="orange" slot="start" name="gift"></ion-icon>
+              <p>{{family.birthday | date: "dd MMMM YYYY"}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Birthday</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="calendar-number-outline"
-        ></ion-icon>
-        <p>{{family.birthday | date: "dd MMMM YYYY"}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Relation</ion-label>
+              <ion-icon class="yellow" slot="start" name="heart"></ion-icon>
+              <p>{{family.relation}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Relation</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="heart-outline"
-        ></ion-icon>
-        <p>{{family.relation}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label  color="medium" position="stacked">Email</ion-label>
-        <ion-icon
-          color="tertiary"
-          slot="start"
-          name="mail-outline"
-        ></ion-icon>
-        <p>{{family.email}}</p>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Email</ion-label>
+              <ion-icon class="green" slot="start" name="mail"></ion-icon>
+              <p>{{family.email}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label color="medium"  position="stacked">Telephone</ion-label>
-            <ion-icon
-            color="tertiary"
-            slot="start"
-            name="call-outline"
-          ></ion-icon>
-            <p>{{family.phone}}</p>
-          </ion-item>
-          <ion-button color="light" style="float: right" (click)="removeData(family.rowid)"
-          ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(family.rowid)"
-            ><ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card> 
-</ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Telephone</ion-label>
+              <ion-icon class="teal" slot="start" name="call"></ion-icon>
+              <p>{{family.phone}}</p>
+            </ion-item>
+            <ion-button
+              color="danger"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="removeData(family.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="editModal(family.rowid)"
+              ><ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>
-

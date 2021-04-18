@@ -1,3 +1,10 @@
+//  This file is adapted from:
+// https://edupala.com/ionic-template-driven-form-validation/ 
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
 import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
@@ -95,7 +102,7 @@ export class PastAppointmentsPage {
       }
 
       verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM appointments WHERE data < ?', [this.today])
+        this._db.executeSql('SELECT * FROM appointments WHERE date < ?', [this.today])
         .then(res => {
           if(res.rows.length == 0) {
             this.isEnabled = true;

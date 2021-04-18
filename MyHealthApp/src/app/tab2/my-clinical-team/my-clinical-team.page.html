@@ -10,62 +10,76 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-content [fullscreen]="true"> 
-    <ion-button (click)="takePhoto()">Select Images</ion-button>
-    <!-- <button ion-button full (click)="takePhoto()" > -->
-      <!-- <ion-icon name="camera"></ion-icon> &nbsp;&nbsp; Take Photo</button>
-     -->
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div class="images-wrapper">
-              <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
-                <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
-                <img [src]="photo" alt="" srcset="">
-              </div>
-            </div>
-          </ion-col>
-          <!-- <ion-col col-6 *ngFor="let photo of photos; let id = index">
-            <ion-card class="block">
-              <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
-              <img [src]="photo" *ngIf="photo" />
-            </ion-card>
-          </ion-col> -->
-        </ion-row>
-      </ion-grid>
-</ion-content>
-
-<!-- <ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">
+        Click 'Add' to start adding Clinical Team Members!
+      </p>
+      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+    </ion-item>
+  </ion-card>
   <ion-list *ngFor="let team of clinicalteam; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label color="tertiary">Team Member Info</ion-label>
-          <ion-icon
-          color="warning"
-          slot="start"
-          name="person-outline"
-        ></ion-icon>
-        </ion-item>
-            <ion-item>
-          <p>Name: {{team.name}}</p>
-        </ion-item>
-        <ion-item>
-        <p>Clinic Name: {{team.clinic_name}}</p>
-      </ion-item>
-      <ion-button color="light" style="float: right" (click)="removeData(team.rowid)"
-      ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-      <ion-button color="light" style="float: right" (click)="editModal(team.rowid)">
-      <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
-      <ion-button color="light" style="float: right" (click)="viewModal(team.rowid)"
-      ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon>View</ion-button>
-      </ion-col>
-    </ion-row>
-    </ion-grid>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-card-title>Team Member Info</ion-card-title>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                size="medium"
+                name="person"
+                class="red"
+              ></ion-icon>
+              <p>Name: {{team.name}}</p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon slot="start" name="location" class="orange"></ion-icon>
+              <p>Clinic Name: {{team.clinic_name}}</p>
+            </ion-item>
+            <ion-button
+              color="danger"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="removeData(team.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="editModal(team.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+            <ion-button
+              color="tertiary"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="viewModal(team.rowid)"
+              ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon
+              >View</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card>
   </ion-list>
-  </ion-content> -->
+  </ion-content>
   

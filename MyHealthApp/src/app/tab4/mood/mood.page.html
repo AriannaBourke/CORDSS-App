@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-avatar (click)="selectImageSource()" class="profile-pic" >
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
@@ -25,19 +25,17 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Mood</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="calendar-outline"
-              ></ion-icon>
+            <ion-item lines="none">
+              <ion-card-title>Mood Info</ion-card-title>
             </ion-item>
-            <ion-item>
-              <p>{{m.date | date: "dd MMMM YYYY"}}</p>
+            <ion-item lines="none">
+              <ion-icon class="red" slot="start" name="calendar"></ion-icon>
+              <p>My mood entry on {{m.date | date: "dd MMMM YYYY"}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(m.rowid)"
               ><ion-icon
@@ -46,21 +44,10 @@
                 name="trash-outline"
               ></ion-icon
             ></ion-button>
-            <!-- <ion-button
-              color="light"
-              style="float: right"
-              (click)="editModal(m.rowid)"
-            > -->
-              <ion-icon
-                size="large"
-                color="success"
-                slot="start"
-                name="create"
-              ></ion-icon
-              >Edit</ion-button
-            >
             <ion-button
-              color="light"
+              color="tertiary"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="viewModal(m.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

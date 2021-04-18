@@ -1,3 +1,11 @@
+//  This file is adapted from:
+// https://edupala.com/ionic-template-driven-form-validation/ 
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
+
 import { Component } from '@angular/core';
 import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 import { CallNumber } from '@ionic-native/call-number/ngx';
@@ -79,14 +87,20 @@ export class Tab1Page {
 
   ionViewDidLoad() {
         this.getData();
+<<<<<<< HEAD
         this.getDataPicture();
         this.verifyDatabasePopulated();
+=======
+>>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
       }
 
       ionViewWillEnter() {
         this.getData();
+<<<<<<< HEAD
         this.getDataPicture();
         this.verifyDatabasePopulated();
+=======
+>>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
       }
 
   verifyDatabasePopulated() {
@@ -115,6 +129,7 @@ export class Tab1Page {
 
 
   public getData() {
+    this.verifyDatabasePopulated();
     this._db.executeSql('SELECT * FROM aboutme ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.aboutme = [];
@@ -140,7 +155,6 @@ export class Tab1Page {
       }
     })
         .catch(e => alert('get data error' + e));
-        this.verifyDatabasePopulated();
       }
 
       public getDataPicture() {
@@ -164,8 +178,13 @@ export class Tab1Page {
           }
 
   public saveData() {
+<<<<<<< HEAD
     this._db.executeSql('INSERT INTO aboutme VALUES(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
        this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number])
+=======
+    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
+       this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number ])
+>>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
     .then(res => {
         this.getData();
       })

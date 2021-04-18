@@ -1,3 +1,10 @@
+//  This file is adapted from:
+// https://edupala.com/ionic-template-driven-form-validation/ 
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
@@ -102,6 +109,9 @@ export class EditEntryPage {
                 await alert.present()
               }
 
+              noSubmit(e) {	
+                e.preventDefault();	
+              }
 
             async updateSQL(rowid) {
               if(this.data.note_name != "") {

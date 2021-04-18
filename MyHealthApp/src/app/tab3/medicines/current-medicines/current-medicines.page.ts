@@ -1,5 +1,11 @@
+//  This file is adapted from:
+// https://edupala.com/ionic-template-driven-form-validation/ 
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
 import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
@@ -90,7 +96,7 @@ export class CurrentMedicinesPage {
       }
 
       verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="YES"', <any>[])
+        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="Yes"', <any>[])
         .then(res => {
           if(res.rows.length == 0) {
             this.isEnabled = true;

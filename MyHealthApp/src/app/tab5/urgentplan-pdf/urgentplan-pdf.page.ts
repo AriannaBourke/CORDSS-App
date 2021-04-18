@@ -1,3 +1,13 @@
+// The functions createPDF() and downloadPDF() are adapted from:
+// https://ionicacademy.com/create-pdf-files-ionic-pdfmake/ 
+// https://github.com/CarlosNassif/pdfmake/tree/master/src/app/pdf-maker 
+//  This file is adapted from:
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://devdactic.com/ionic-4-sqlite-queries/
+// https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
+
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -22,7 +32,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     private _db   : any;
     pdfObject = null;
     createButtonDisable: boolean = false;
-
+    default: any;
+    isEnabled: any;
     UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
     data = {type: "", instructions: "", phone: "", notes: ""};
 
@@ -35,7 +46,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
      public modalController: ModalController
 
     ) {  
-    this.urgentplan = [];
+      this.default = "";
+      this.urgentplan = [];
         this._plat
         .ready()
         .then(() => 
@@ -72,8 +84,30 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
             ionViewWillEnter() {
               this.getData();
             }
+
+            verifyDatabasePopulated() {
+              this._db.executeSql('SELECT * FROM medicine', <any>[])
+              .then(res => {
+                if(res.rows.length == 0) {
+                  this.isEnabled = true;
+                }
+                else {
+                  this.isEnabled = false;
+                }
+              })
+          
+            }
+          
+            checkIsEnabled() {
+              return this.isEnabled;
+            }
+          
+            noContent() {
+              return !this.isEnabled;
+          }
           
         public getData() {
+          this.verifyDatabasePopulated();
           this._db.executeSql('SELECT * FROM urgentplan ORDER BY rowid DESC', <any>[])
           .then(res => {
             this.urgentplan = [];
@@ -100,7 +134,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
       let docDefinition = {
         content: [
         { text: 'Urgent Health Plan', fontSize: 30, alignment: 'center', bold: true, margin: [0, 15, 0, 15] },
-        { text: new Date().toTimeString(), alignment: 'right', margin: [0, 15, 0, 20] }, 
+        { text: new Date().toDateString(), alignment: 'right', margin: [0, 15, 0, 20] }, 
         html, 
       ],
         footer: (currentPage) => {
