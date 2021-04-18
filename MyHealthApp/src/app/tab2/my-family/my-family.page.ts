@@ -13,6 +13,9 @@ import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
 import {EditEntryPage } from './edit-entry/edit-entry.page';
 import {ViewEntryPage } from './view-entry/view-entry.page';
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx'
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'app-my-family',
@@ -20,6 +23,8 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./my-family.page.scss'],
 })
 export class MyFamilyPage {
+  images: any;
+  options: any;
   public myfamily : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
@@ -30,6 +35,7 @@ export class MyFamilyPage {
   isEnabled: any;
 
   constructor(
+    private imagePicker: ImagePicker,
     private _alertController: AlertController,
     public modalController: ModalController,
     public _plat: Platform,
@@ -189,6 +195,59 @@ export class MyFamilyPage {
           return await modal.present();
         }
 
+        getPictures() {
+          this.options = {
+            targetHeight: 200,
+            correctOrientation: true,
+            width: 200,
+            quality: 100,
+            outputType: 1
+          };
+          
+          this.images = [];
+      
+          this.imagePicker.getPictures(this.options).then((results) => {
+            for (var i = 0; i < results.length; i++) {
+              this.images.push('data:image/jpeg;base64,' + results[i]);
+            }
+          }, (error) => {
+            alert(error);
+          });
+        }
 
-}
+        // getPictures() {
+        //   this.imageResponse = [];
+        //   this.imagePicker.getPictures(this.options).then((results) => {
+        //     for (var i = 0; i < results.length; i++) {
+        //       this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
+        //     }
+        //   }, (err) => {
+        //     alert(err);
+        //   });
+        // }
+          // this.imagePicker.getPictures(this.options).then((results)=>{
+          //   for(var interval = 0;interval<results.length;interval++) 
+          //   {
+          //     let filename = results[interval].substring(results[interval].lastIndexof('/')+1);
+          //     let path = results[interval].substring(0,results[interval].lastIndexof('/')+1)
+          //     this.file.readAsDataURL(path,filename).then((base64string)=>{
+          //       this.images.push(base64string);
+          //     })
+          //   }
+          // }
+          // )
+       
+      
+      
+        //   this.imagePicker.getPictures({
+        //     maximumImagesCount: 5,
+        //     outputType: 1
+        //   }).then(selectedImg => {
+        //     selectedImg.forEach(i => this.images.push("data:image/jpeg;base64," + i));
+        //   })
+        // }
 
+        }
+
+
+      

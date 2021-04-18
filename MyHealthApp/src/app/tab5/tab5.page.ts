@@ -17,11 +17,11 @@ export class Tab5Page {
     public modalController: ModalController,
     ) {}
 
-  callNow(number) {
-    this.callNumber.callNumber(number, true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.log('Error launching dialer', err));
-  }
+    CallNow(n:string){
+      this.callNumber.callNumber(n, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
+    }
 
   async openUPModal() {
     const modal = await this.modalController.create({

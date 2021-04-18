@@ -10,6 +10,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { NgForm } from '@angular/forms';
+import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 
 @Component({
   selector: 'app-add-entry',
@@ -17,23 +18,34 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add-entry.page.scss'],
 })
 export class AddEntryPage {
+  photos;
+  base64Image;
+  myProfileImage;
   public testresults : Array<any> = [];
+  public pictures : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
   isSubmitted = false;
   TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, files TEXT, notes TEXT)'
   data = {date: "", type: "", photo: "", files: "", notes: ""};
+  PicturesTable : string = 'CREATE TABLE IF NOT EXISTS pictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
+  datapicture = {cardid:"", picture: "" };
+
 
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite
+              public _sql: SQLite,
+              private camera : Camera,
+              private alertCtrl: AlertController,
             ) 
 {            
   this.testresults = [];
+  this.pictures =[];
+
   this._plat
   .ready()
   .then(() => 
@@ -60,15 +72,21 @@ export class AddEntryPage {
   
   async _createDatabaseTables() {
     await this._db.executeSql(this.TestResultsTable, []);
+    await this._db.executeSql(this.PicturesTable, []);
+
     this.getData()
+    this.getDataPictures();
+
   }
 
   ionViewDidLoad() {
         this.getData();
+        this.getDataPictures();
       }
     
       ionViewWillEnter() {
         this.getData();
+        this.getDataPictures();
       }
     
   public getData() {
@@ -87,16 +105,49 @@ export class AddEntryPage {
       }
     })
         .catch(e => alert('get data error' + e));
+  }
+  
+  public getDataPictures() {
+    this._db.executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
+    .then(res => {
+      this.pictures = [];
+      for(var i=0; i<res.rows.length; i++) {
+        this.pictures.push({
+          rowid:res.rows.item(i).rowid,
+          cardid:res.rows.item(i).cardid,
+          picture:res.rows.item(i).picture,
+        })
+
+        console.log('doulefkei');
+        console.log(this.pictures[0]);
+        console.log(this.pictures[1]);
+
       }
-    
+    })
+        .catch(e => alert('get data error' + e));
+  }
+
+      
   public saveData() {
     this._db.executeSql('INSERT INTO testresults VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.type, this.data.photo, this.data.files, this.data.notes])
     .then(res => {
-        this.closeModal()
+      this.closeModal();
+      this.saveDataPictures();
       })
       .catch(e => alert("save data error" + e));
     }
-      
+
+  public saveDataPictures() {
+    for(let i = 0; i<this.photos.length;i++) {
+    this._db.executeSql('INSERT INTO pictures VALUES(NULL,?,?)', [this.testresults[0].rowid+1, this.photos[i]])
+    .then(res => {
+        this.getDataPictures();
+      })
+      .catch(e => alert("save data error" + e));
+    }
+  }
+
+
     async submitData() {
       this.isSubmitted = true;
       const alert = await this._alertController.create({
@@ -124,7 +175,58 @@ export class AddEntryPage {
     }
     
   async closeModal() {
-    await this.modalController.dismiss();
     this.getData();
+    await this.modalController.dismiss();
+    
+  }
+
+
+  ngOnInit() {
+    this.photos = [];
+  }
+
+  takePhoto()
+  {
+    const options : CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetHeight: 200,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+      };
+
+      this.camera.getPicture(options)
+      .then((ImageData)=> {
+          this.base64Image = "data:image/jpeg;base64," + ImageData;
+          this.photos.push(this.base64Image);
+          this.photos.reverse();
+        })
+      }
+    
+  
+    deletePhoto(index) {
+      const alert = this.alertCtrl.create({
+        header: 'Sure you want to delete this photo? There is NO undo!',
+        message: '',
+        buttons: [
+          {
+            text: 'No',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          }, 
+          {
+            text: 'Yes',
+            handler: () => {
+              console.log('Agree clicked');
+              this.photos.splice(index, 1);
+            }
+          }
+        ]
+      }).then(res => {
+        res.present();
+    });
   }
 }

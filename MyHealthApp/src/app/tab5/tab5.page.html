@@ -489,9 +489,7 @@ https://plnkr.co/edit/WUTkUnI5Th8XrZJUeBfe?p=preview&preview -->
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline"></ion-icon>
       <ion-label>999</ion-label>
-      <ion-button shape="round" size="medium" (click)="callNow(number)"
-        >Call</ion-button
-      >
+      <ion-button shape="round" size="medium" ((click)="CallNow('111')">Call 999</ion-button>
     </ion-item>
     <ion-item lines="none">
       <ion-label color="primary">NHS Non-Emergency Medical Number</ion-label>
@@ -499,9 +497,7 @@ https://plnkr.co/edit/WUTkUnI5Th8XrZJUeBfe?p=preview&preview -->
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline"></ion-icon>
       <ion-label>111</ion-label>
-      <ion-button shape="round" size="medium" (click)="callNow(number)"
-        >Call</ion-button
-      >
+      <ion-button shape="round" size="medium" (click)="CallNow('111')">Call 111</ion-button>
     </ion-item>
     <ion-item lines="none">
       <ion-label color="primary">Non-Emergency Police Number</ion-label>
@@ -509,9 +505,13 @@ https://plnkr.co/edit/WUTkUnI5Th8XrZJUeBfe?p=preview&preview -->
     <ion-item lines="none">
       <ion-icon slot="start" name="call-outline"></ion-icon>
       <ion-label>101</ion-label>
-      <ion-button shape="round" size="medium" (click)="callNow(number)"
-        >Call</ion-button
+      <ion-button shape="round" size="medium" (click)="CallNow('101')">Call 101</ion-button
       >
+    </ion-item>
+    <ion-item lines="none">
+      <ion-icon slot="start" name="call-outline" size="small"></ion-icon>
+      <ion-label>999</ion-label>
+      <ion-button shape="round" size="medium" (click)="CallNow('999')">Call 999</ion-button>
     </ion-item>
   </ion-card>
 </ion-content>

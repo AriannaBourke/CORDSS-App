@@ -26,8 +26,9 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  myProfileImage;
+  myProfileImage : string;
   public aboutme : Array<any> = [];
+  public aboutmepicture: Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
@@ -35,6 +36,9 @@ export class Tab1Page {
   default: any;
   AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, notes TEXT, emergency_1_name TEXT, emergency_1_number INT, emergency_2_name TEXT, emergency_2_number INT, emergency_3_name TEXT, emergency_3_number INT)'
   data = {name: "", birthday: "", about: "", email: "", phone: "", address: "", nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
+  AboutMeTablePicture : string = 'CREATE TABLE IF NOT EXISTS aboutmepicture (rowid INTEGER PRIMARY KEY AUTOINCREMENT, picture TEXT)'
+  datapicture = { picture: "" };
+  
   isEnabled: any;
 
   constructor(
@@ -48,6 +52,7 @@ export class Tab1Page {
 {
   this.default = "";
   this.aboutme = [];
+  this.aboutmepicture = [];
   this._plat
   .ready()
   .then(() =>
@@ -74,15 +79,28 @@ export class Tab1Page {
 
   async _createDatabaseTables() {
     await this._db.executeSql(this.AboutMeTable, []);
+    await this._db.executeSql(this.AboutMeTablePicture, []);
+
     this.getData()
+    this.getDataPicture();
   }
 
   ionViewDidLoad() {
         this.getData();
+<<<<<<< HEAD
+        this.getDataPicture();
+        this.verifyDatabasePopulated();
+=======
+>>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
       }
 
       ionViewWillEnter() {
         this.getData();
+<<<<<<< HEAD
+        this.getDataPicture();
+        this.verifyDatabasePopulated();
+=======
+>>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
       }
 
   verifyDatabasePopulated() {
@@ -139,14 +157,48 @@ export class Tab1Page {
         .catch(e => alert('get data error' + e));
       }
 
+      public getDataPicture() {
+        this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
+        .then(res => {
+          this.aboutmepicture = [];
+          for(var i=0; i<res.rows.length; i++) {
+            this.aboutmepicture.push({
+              rowid:res.rows.item(i).rowid,
+              picture:res.rows.item(i).picture,
+    
+            })
+          }
+          console.log('hey maria');
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+        })
+       
+      
+            .catch(e => alert('get data error' + e));
+          }
+
   public saveData() {
+<<<<<<< HEAD
+    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
+       this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number])
+=======
     this._db.executeSql('INSERT INTO aboutme VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
        this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number ])
+>>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
     .then(res => {
         this.getData();
       })
       .catch(e => alert("save data error" + e));
     }
+
+    public saveDataPicture() {
+      this._db.executeSql('INSERT INTO aboutmepicture VALUES(NULL, ?)', [this.datapicture.picture])
+      .then(res => {
+          this.getDataPicture();
+        })
+        .catch(e => alert("save data error" + e.message));
+      }
+  
 
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM aboutme WHERE rowid=?', [rowid])
@@ -220,13 +272,13 @@ export class Tab1Page {
 
   async selectImageSource() {
     const cameraOptions: CameraOptions = {
-        quality: 100,
-        destinationType: this._camera.DestinationType.DATA_URL,
-        encodingType: this._camera.EncodingType.JPEG,
-        mediaType: this._camera.MediaType.PICTURE,
-        targetHeight: 200,
-        correctOrientation: true,
-        sourceType: this._camera.PictureSourceType.CAMERA
+      quality: 100,
+      destinationType: this._camera.DestinationType.DATA_URL,
+      encodingType: this._camera.EncodingType.JPEG,
+      mediaType: this._camera.MediaType.PICTURE,
+      targetHeight: 200,
+      correctOrientation: true,
+      sourceType: this._camera.PictureSourceType.CAMERA
     };
 
     const galleryOptions: CameraOptions = {
@@ -248,6 +300,10 @@ export class Tab1Page {
             this._camera.getPicture(cameraOptions)
             .then((ImageData)=> {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
+              this.datapicture.picture = this.myProfileImage.toString(); 
+              this.saveDataPicture();
+              console.log('DAME GAMO TO SPITI SAS')
+              console.log(this.myProfileImage)
             })
 
           }
@@ -258,6 +314,8 @@ export class Tab1Page {
             this._camera.getPicture(galleryOptions)
             .then((ImageData)=> {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
+              this.datapicture.picture = this.myProfileImage.toString(); 
+              this.saveDataPicture();
             })
 
           }

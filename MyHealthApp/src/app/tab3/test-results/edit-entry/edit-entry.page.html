@@ -48,36 +48,39 @@
               </ion-item>
             </ion-col>
           </ion-row>
-
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label color="medium" position="stacked"
-                  >Test Type</ion-label
-                >
-                <ion-icon slot="start" name="medkit" class="orange"></ion-icon>
-                <ion-input
-                  type="text"
-                  placeholder="{{result.type}}"
-                  [(ngModel)]="data.type"
-                  name="type"
-                  required
-                  #typeCtrl="ngModel"
-                ></ion-input>
-                <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
-                  <ion-text color="danger">*Test type is required</ion-text>
-                </ion-item>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label color="medium" position="stacked">Photo</ion-label>
-                <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
-                <ion-input
-                  type="text"
+        
+               <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label color="medium" position="stacked">Test Type</ion-label>
+                    <ion-icon slot="start" name="medkit" class="orange"></ion-icon>
+                    <ion-input 
+                    type="text"
+                    placeholder="{{result.type}}"
+                    [(ngModel)]="data.type"
+                    name="type" required
+                    #typeCtrl="ngModel"
+                    ></ion-input>
+                    <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
+                      <ion-text color="danger">*Test type is required</ion-text>
+                      </ion-item>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+               
+               <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label color="medium" position="stacked">Photo</ion-label>
+                    <ion-icon slot="start" name="camera" class="yellow" (click)="takePhoto()" ></ion-icon>
+                    <div class="images-wrapper">
+                      <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
+                        <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                        <img [src]="photo" alt="" srcset="">
+                      </div>
+                    </div>
+                    <ion-input 
+                    type="text"
                   placeholder="{{result.photo}}"
                   [(ngModel)]="data.photo"
                   name="photo"
