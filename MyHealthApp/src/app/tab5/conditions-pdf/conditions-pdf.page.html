@@ -24,44 +24,49 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card>
     <ion-item>
       <ion-label>Click To Download PDF</ion-label>
-      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="createButtonDisable"
+      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="checkIsEnabled()"
         ><ion-icon name="download-outline"></ion-icon
       ></ion-fab-button>
+    </ion-item>
+  </ion-card>
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 20px">You have no information in your conditions yet. Add an entry before creating a PDF!</p>
     </ion-item>
   </ion-card>
   
   <div id="pdfcontent">
 
     <ion-card>
+    <ion-list *ngFor="let history of medicalhistory; let i = index">
       <ion-grid>
         <ion-row>
           <ion-col>
-    <ion-list *ngFor="let plan of urgentplan; let i = index">
       <ion-item>
-      <h3>Urgent Plan</h3>
+      <h3>Condition</h3>
     </ion-item>
       <ion-item>
-      <p>Plan Type: {{plan.type}}</p>
+      <p>Diagnosis: {{history.diagnosis}}</p>
       </ion-item>
       <ion-item>
-      <p>Instructions: {{plan.instructions}}</p>
+      <p>Diagnosis Details: {{history.diagnosis_details}}</p>
     </ion-item>
     <ion-item>
-      <p>Telephone: {{plan.phone}}</p>
+      <p>Diagnosis Date: {{history.diagnosis_date | date: 'dd MMMM y'}}</p>
     </ion-item>
     <ion-item>
-      <p>Notes: {{plan.notes}}</p>
+      <p>Notes: {{history.notes}}</p>
     </ion-item>
-    </ion-list>
+   
   </ion-col>
   </ion-row>
   </ion-grid>
+</ion-list> 
   </ion-card>
-
   </div>
 </ion-content>
 

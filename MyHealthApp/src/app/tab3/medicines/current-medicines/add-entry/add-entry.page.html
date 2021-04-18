@@ -40,7 +40,7 @@
                   >Medium/long term medications</ion-select-option
                 >
                 <ion-select-option value="2">Eye drops</ion-select-option>
-                <ion-select-option value="3">Creams/Gels</ion-select-option>
+                <ion-select-option value="3">Topical Treatment</ion-select-option>
                 <ion-select-option value="4"
                   >Conventional immunosuppressants</ion-select-option
                 >
@@ -198,7 +198,10 @@
                     >Ciclosporin</ion-select-option
                   >
                   <ion-select-option value="Methotrexate (MTX)"
-                    >Methotrexate (MTX)</ion-select-option
+                  >Methotrexate (MTX)</ion-select-option
+                >
+                  <ion-select-option value="Mycophenolate (aka mycophenolate mofetil, mycophenolic acid, MMF, Cellcept)"
+                    >Mycophenolate (aka mycophenolate mofetil, mycophenolic acid, MMF, Cellcept)</ion-select-option
                   >
                   <ion-select-option value="Leflunomide"
                     >Leflunomide</ion-select-option
@@ -254,49 +257,52 @@
                   #medicinenameCtrl="ngModel"
                   [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
                 >
-                  <ion-select-option value="Etanercept"
+                  <ion-select-option value="Etanercept (eg Enbrel, Benepali, other
+                  biosimilar)"
                     >Etanercept (eg Enbrel, Benepali, other
                     biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Adalimumab"
+                  <ion-select-option value="Adalimumab  (Humira, Amgevita, other
+                  biosimilar)"
                     >Adalimumab (Humira, Amgevita, other
                     biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Infliximab"
+                  <ion-select-option value="Infliximab (Remicade, other biosimilar)"
                     >Infliximab (Remicade, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Golimumab"
+                  <ion-select-option value="Golimumab (Simponi, other biosimilar)"
                     >Golimumab (Simponi, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Certolizumab"
+                  <ion-select-option value="Certolizumab (Cimzia, other biosimilar)"
                     >Certolizumab (Cimzia, other biosimilar)
                   </ion-select-option>
-                  <ion-select-option value="Rituximab Tocilizumab"
+                  <ion-select-option value="Rituximab Tocilizumab (Roactemra, other
+                  biosimilar)"
                     >Rituximab Tocilizumab (Roactemra, other
                     biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Sarilumab"
+                  <ion-select-option value="Sarilumab (Kevzara, other biosimilar)"
                     >Sarilumab (Kevzara, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Abatacept"
+                  <ion-select-option value="Abatacept (Orencia, other biosimilar)"
                     >Abatacept (Orencia, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Belimumab"
+                  <ion-select-option value="Belimumab (Benlysta, other biosimilar)"
                     >Belimumab (Benlysta, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Anakinra"
+                  <ion-select-option value="Anakinra (Kineret, other biosimilar)"
                     >Anakinra (Kineret, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Canakinumab"
+                  <ion-select-option value="Canakinumab (Ilaris, other biosimilar)"
                     >Canakinumab (Ilaris, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Secukinumab"
+                  <ion-select-option value="Secukinumab (Cosentyx, other biosimilar)"
                     >Secukinumab (Cosentyx, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Ixekizumab"
+                  <ion-select-option value="Ixekizumab (Taltz, other biosimilar)"
                     >Ixekizumab (Taltz, other biosimilar)</ion-select-option
                   >
-                  <ion-select-option value="Ustekinumab"
+                  <ion-select-option value="Ustekinumab (Stelara, other biosimilar)"
                     >Ustekinumab (Stelara, other biosimilar)</ion-select-option
                   >
                   <ion-select-option value="Other biological agent"
@@ -398,24 +404,6 @@
 
         <ion-row>
           <ion-col>
-            <!-- <ion-item>
-              <ion-label position="stacked"
-                >Are you currently taking this?</ion-label
-              >
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="checkbox-outline"
-              ></ion-icon>
-              <ion-select
-                interface="popover"
-                [(ngModel)]="data.activeflag"
-                name="activeflag"
-              >
-                <ion-select-option value="Yes">Yes</ion-select-option>
-                <ion-select-option value="No">No</ion-select-option>
-              </ion-select>
-            </ion-item> -->
             <div class="ion-margin-vertical ion-text-right">
               <ion-button
                 type="button"

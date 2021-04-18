@@ -1,3 +1,8 @@
+<!-- The function onclick=window.open is adapted from:
+https://stackoverflow.com/questions/35562745/ionic-application-open-link-in-system-browser
+ion-select-option filtering is adapted from:
+https://plnkr.co/edit/WUTkUnI5Th8XrZJUeBfe?p=preview&preview -->
+
 <ion-header>
   <ion-toolbar>
     <ion-title width-50 style="text-align: center"> More Info </ion-title>
@@ -52,20 +57,139 @@
         ngModel
         name="estate"
         interface="popover"
-        placeholder="Select Option"
+        placeholder="Select an option to view links"
         [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
       >
-        <ion-select-option value="1">Ophthalmology disorders</ion-select-option>
-        <ion-select-option value="2">Rheumatology disorders</ion-select-option>
-        <ion-select-option value="3"
-          >Gastroenterology disorders</ion-select-option
-        >
-        <ion-select-option value="4">Dermatology disorders</ion-select-option>
-        <ion-select-option value="5">Nephrology disorders</ion-select-option>
-        <ion-select-option value="6">Medications</ion-select-option>
+        <ion-select-option value="1">Young Person's Charities</ion-select-option>
+        <ion-select-option value="2">Ophthalmology disorders</ion-select-option>
+        <ion-select-option value="3">Rheumatology disorders</ion-select-option>
+        <ion-select-option value="4">Gastroenterology disorders</ion-select-option>
+        <ion-select-option value="5">Dermatology disorders</ion-select-option>
+        <ion-select-option value="6">Nephrology disorders</ion-select-option>
+        <ion-select-option value="7">Medications</ion-select-option>
       </ion-select>
     </ion-item>
+    
     <div *ngIf="links.value === '1'">
+      <ion-item>
+        <ion-list>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.raredisease.org.uk/',
+     '_system', 'location=yes'); return false;"
+              >Rare disease UK</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://contact.org.uk/',
+        '_system', 'location=yes'); return false;"
+              >Contact – for families with disable children</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://youngminds.org.uk/contact-us/',
+         '_system', 'location=yes'); return false;"
+              >Young Minds – support for mental health</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.brook.org.uk/contact-us/',
+          '_system', 'location=yes'); return false;"
+              >Brook – health minds for young people</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.nspcc.org.uk/',
+           '_system', 'location=yes'); return false;"
+              >NSPCC – the UK children’s charity</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.childline.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >Childline – online support for children</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://healthtalk.org/health-and-weight/overview',
+            '_system', 'location=yes'); return false;"
+              >Health and weight for young people</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.beateatingdisorders.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >BEAT – eating disorder support</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.talktofrank.com/',
+            '_system', 'location=yes'); return false;"
+              >FRANK – honest information about drugs</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.citizensadvice.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >Citizen's Advice – online free advice about your rights</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://nationalcareers.service.gov.uk/',
+            '_system', 'location=yes'); return false;"
+              >National Careers Service - information, advice and guidance to help you make decisions on learning, training and work</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.youthemployment.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >Youth Employment – careers advice</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.themix.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >The Mix – essential support</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.princes-trust.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >Princes Trust</a
+            >
+          </ion-item>
+        </ion-list>
+      </ion-item>
+    </div>
+
+    <div *ngIf="links.value === '2'">
       <ion-item>
         <ion-list>
           <ion-item>
@@ -74,6 +198,14 @@
               onclick="window.open('https://www.nhs.uk/conditions/childhood-cataracts/',
      '_system', 'location=yes'); return false;"
               >Childhood cataract, aphakia and pseudophakia</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.childhoodcataracts.org.uk/personal-stories/',
+     '_system', 'location=yes'); return false;"
+              >Childhood cataracts - personal stories</a
             >
           </ion-item>
           <ion-item>
@@ -90,6 +222,14 @@
               onclick="window.open('https://www.nhs.uk/conditions/lazy-eye/',
          '_system', 'location=yes'); return false;"
               >Amblyopia</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('http://www.oliviasvision.org/',
+          '_system', 'location=yes'); return false;"
+              >Uveitis group - Olivias Vision</a
             >
           </ion-item>
           <ion-item>
@@ -113,13 +253,14 @@
               href="#"
               onclick="window.open('https://www.moorfields.nhs.uk/content/childrens-glaucoma',
             '_system', 'location=yes'); return false;"
-              >Moorfields page on childhood glaucoma</a
+              >Moorfields - childhood glaucoma</a
             >
           </ion-item>
         </ion-list>
       </ion-item>
     </div>
-    <div *ngIf="links.value === '2'">
+
+    <div *ngIf="links.value === '3'">
       <ion-item>
         <ion-list>
           <ion-item>
@@ -186,11 +327,43 @@
               >Behcets</a
             >
           </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.lupusuk.org.uk/medical/nurses-guide/what-is-lupus/',
+            '_system', 'location=yes'); return false;"
+              >Lupus UK</a
+            >
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://www.sruk.co.uk/',
+            '_system', 'location=yes'); return false;"
+              >Scleroderma and Raynaud’s UK</a>
+            
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://jia.org.uk/',
+            '_system', 'location=yes'); return false;"
+              >NRAS JIA</a>
+            
+          </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://arthursplace.co.uk/',
+            '_system', 'location=yes'); return false;"
+              >Arthur’s place</a>
+            
+          </ion-item>
         </ion-list>
       </ion-item>
     </div>
 
-    <div *ngIf="links.value === '3'">
+    <div *ngIf="links.value === '4'">
       <ion-item>
         <ion-list>
           <ion-item>
@@ -220,7 +393,7 @@
         </ion-list>
       </ion-item>
     </div>
-    <div *ngIf="links.value === '4'">
+    <div *ngIf="links.value === '5'">
       <ion-item>
         <ion-list>
           <ion-item>
@@ -267,7 +440,7 @@
       </ion-item>
     </div>
 
-    <div *ngIf="links.value === '5'">
+    <div *ngIf="links.value === '6'">
       <ion-item>
         <ion-list>
           <ion-item>
@@ -278,10 +451,18 @@
               >Infokids</a
             >
           </ion-item>
+          <ion-item>
+            <a
+              href="#"
+              onclick="window.open('https://kidneyresearchuk.org/research/research-networks/clinical-study-groups/glomerulonephritis-clinical-study-group/',
+     '_system', 'location=yes'); return false;"
+              >Kidney research UK</a
+            >
+          </ion-item>
         </ion-list>
       </ion-item>
     </div>
-    <div *ngIf="links.value === '6'">
+    <div *ngIf="links.value === '7'">
       <ion-item>
         <ion-list>
           <ion-item>
