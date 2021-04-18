@@ -10,11 +10,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
-      <p style="font-size: 30px">Click 'Add' to start adding Appointments!</p>
-      <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+      <p style="font-size: 30px">Click 'Add' to add any Past Appointments!</p>
+      <img class="arrow" src="../../../../assets/icon/curly arrow 1.png" />
     </ion-item>
   </ion-card>
   <ion-list *ngFor="let app of appointments; let i = index" class="list">
@@ -22,22 +22,28 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Appointment</ion-label>
+            <ion-item lines="none">
+              <ion-card-title>Past Appointment Info</ion-card-title>
+            </ion-item>
+            <ion-item lines="none">
               <ion-icon
-                color="tertiary"
+                class="red"
                 slot="start"
-                name="calendar-number-outline"
+                name="calendar-number"
               ></ion-icon>
+              <p>
+                I had an appointment on {{app.date | date: "dd MMMM YYYY 'at'
+                HH:mm a"}}
+              </p>
             </ion-item>
-            <ion-item>
-              <p>{{app.date | date: "dd MMMM YYYY 'at' HH:mm a"}}</p>
-            </ion-item>
-            <ion-item>
-              <p>{{app.place}}</p>
+            <ion-item lines="none">
+              <ion-icon class="orange" slot="start" name="business"></ion-icon>
+              <p>This appointment took place at: {{app.place}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="removeData(app.rowid)"
               ><ion-icon
@@ -47,7 +53,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="editModal(app.rowid)"
             >
@@ -60,7 +68,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="viewModal(app.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

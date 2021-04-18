@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">Click 'Add' to start adding Family Members!</p>
@@ -23,16 +23,15 @@
         <ion-row>
           <ion-col>
             <ion-item lines="none">
-              <ion-label class="card-header" color="tertiary"
-                >Family Member</ion-label
-              >
-              <ion-icon
-                slot="start"
-                name="person-outline"
-                color="tertiary"
-              ></ion-icon>
+              <ion-card-title>Family Member Info</ion-card-title>
             </ion-item>
             <ion-item lines="none">
+              <ion-icon
+                slot="start"
+                size="medium"
+                name="person"
+                class="red"
+              ></ion-icon>
               <p>{{family.name}}</p>
             </ion-item>
             <!-- <ion-item>
@@ -42,6 +41,7 @@
               color="danger"
               fill="outline"
               style="float: right"
+              shape="round"
               (click)="removeData(family.rowid)"
               ><ion-icon
                 size="large"
@@ -52,6 +52,7 @@
             <ion-button
               color="success"
               fill="outline"
+              shape="round"
               style="float: right"
               (click)="editModal(family.rowid)"
             >
@@ -66,6 +67,7 @@
             <ion-button
               color="tertiary"
               fill="outline"
+              shape="round"
               style="float: right"
               (click)="viewModal(family.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

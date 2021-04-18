@@ -1,15 +1,4 @@
-.entry-header {
-    // font-weight: bold;
-    font-size: large;
-    color: black;
-  }
-  
-  .list {
-    background-color: #96bdc6;
-  }
-
-  ::ng-deep .mycomponent-wider-popover
-  {
-    --width: 95%;
-    --max-width: 400px;
-  }
+::ng-deep .mycomponent-wider-popover {
+  --width: 95%;
+  --max-width: 400px;
+}

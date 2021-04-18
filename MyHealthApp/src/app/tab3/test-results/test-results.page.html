@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">Click 'Add' to start adding Test Results!</p>
@@ -22,26 +22,29 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Test Result</ion-label>
+            <ion-item lines="none">
               <img
-              class="image1"
-              src="../../assets/icon/unicorn.png"
-            />
+                class="image1"
+                src="../../../assets/icon/unicorn 1[2301].png"
+              />
+              <ion-card-title>Test Result Info</ion-card-title>
+            </ion-item>
+            <ion-item lines="none">
               <ion-icon
-                color="tertiary"
+                class="red"
                 slot="start"
-                name="calendar-number-outline"
+                name="calendar-number"
               ></ion-icon>
+              <p>Date of Test: {{result.date | date: "dd MMMM YYYY"}}</p>
             </ion-item>
-            <ion-item>
-              <p>{{result.date | date: "dd MMMM YYYY"}}</p>
-            </ion-item>
-            <ion-item>
-              <p>{{result.type}}</p>
+            <ion-item lines="none">
+              <ion-icon name="medkit" class="orange" slot="start"></ion-icon>
+              <p>Test Type: {{result.type}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(result.rowid)"
               ><ion-icon
@@ -51,7 +54,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="editModal(result.rowid)"
             >
@@ -64,7 +69,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="viewModal(result.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

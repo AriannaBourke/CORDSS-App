@@ -242,7 +242,7 @@
 
 ion-content {
   // --ion-background-color: rgb(92, 149, 172);
-   --ion-background-color: #72c1e1;
+  --ion-background-color: #a3dbf1;
   // --ion-background-color: linear-gradient(#77bfdb, white);
   --ion-item-background: white;
 }
@@ -262,4 +262,64 @@ ion-content {
 
 ion-button {
   text-transform: none;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: rgb(255, 174, 0);
+}
+
+.yellow {
+  color: rgb(223, 223, 27);
+}
+
+.green {
+  color: rgb(63, 155, 44);
+}
+
+.teal {
+  color: rgb(22, 177, 164);
+}
+
+.lightblue {
+  color: lightskyblue;
+}
+
+.blue {
+  color: rgb(22, 153, 240);
+}
+
+.darkblue {
+  color: blue;
+}
+
+.purple {
+  color: rgb(66, 0, 128);
+}
+
+.magenta {
+  color: purple;
+}
+
+.pink {
+  color: rgb(195, 0, 255);
+}
+
+.brightpink {
+  color: magenta;
+}
+
+.redpink {
+  color: rgb(218, 69, 94);
+}
+
+.list {
+  background-color: #a3dbf1;
+}
+
+ion-card-title {
+  color: #041a97;
 }

@@ -10,11 +10,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">
-        Click 'Add' to add any previous medication you have taken!
+        Click 'Add' to add Past Medicines you have taken!
       </p>
       <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
     </ion-item>
@@ -24,26 +24,26 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Medicine</ion-label>
-              <ion-button
-                color="success"
-                style="float: right"
-                (click)="stillTaking(med.rowid)"
-                ><ion-icon slot="start" name="alert-circle-outline"></ion-icon>I
-                am now taking this</ion-button
-              >
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="medkit-outline"
-              ></ion-icon>
+            <ion-button
+              color="warning"
+              fill="outline"
+              style="float: right"
+              size="small"
+              shape="round"
+              (click)="stillTaking(med.rowid)"
+              ><ion-icon color="warning" name="time-outline"></ion-icon
+            ></ion-button>
+            <ion-item lines="none">
+              <ion-card-title>Past Medicine Info</ion-card-title>
             </ion-item>
-            <ion-item>
-              <p>{{med.medicinename}}</p>
+            <ion-item lines="none">
+              <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+              <p>I have previously taken {{med.medicinename}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(med.rowid)"
               ><ion-icon
@@ -53,7 +53,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="editModal(med.rowid)"
             >
@@ -66,7 +68,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="viewModal(med.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon
