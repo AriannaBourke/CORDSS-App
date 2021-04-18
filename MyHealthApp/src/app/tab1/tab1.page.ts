@@ -87,20 +87,12 @@ export class Tab1Page {
 
   ionViewDidLoad() {
         this.getData();
-<<<<<<< HEAD
         this.getDataPicture();
-        this.verifyDatabasePopulated();
-=======
->>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
       }
 
       ionViewWillEnter() {
         this.getData();
-<<<<<<< HEAD
         this.getDataPicture();
-        this.verifyDatabasePopulated();
-=======
->>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
       }
 
   verifyDatabasePopulated() {
@@ -178,13 +170,8 @@ export class Tab1Page {
           }
 
   public saveData() {
-<<<<<<< HEAD
-    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
-       this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number])
-=======
     this._db.executeSql('INSERT INTO aboutme VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
        this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number ])
->>>>>>> 97633ece16bb4f89e960e0af1ff3ae0ff5b82c8c
     .then(res => {
         this.getData();
       })
