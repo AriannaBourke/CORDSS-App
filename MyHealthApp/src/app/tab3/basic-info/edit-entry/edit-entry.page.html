@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit your Basic Info!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngFor="let basic of basicInfo; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Edit Basic Info</ion-card-title>
+          </ion-col>
+        </ion-row>
+
+        <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Gender</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="transgender-outline"
+                  class="red"
+                ></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{basic.gender}}"
+                  [(ngModel)]="data.gender"
+                  name="gender"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Height</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="accessibility"
+                  class="orange"
+                ></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{basic.height}}"
+                  [(ngModel)]="data.height"
+                  name="height"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Weight</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="accessibility"
+                  class="yellow"
+                ></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{basic.weight}}"
+                  [(ngModel)]="data.weight"
+                  name="height"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Blood Pressure</ion-label>
+                <ion-icon slot="start" name="pulse" class="green"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{basic.blood_pressure}}"
+                  [(ngModel)]="data.blood_pressure"
+                  name="blood_pressure"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Allergies</ion-label>
+                <ion-icon slot="start" name="sad" class="teal"></ion-icon>
+                <ion-textarea
+                  type="text"
+                  placeholder="{{basic.allergies}}"
+                  [(ngModel)]="data.allergies"
+                  name="allergies"
+                ></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Notes</ion-label>
+                <ion-icon slot="start" name="pencil" class="green"></ion-icon>
+                <ion-textarea
+                  type="text"
+                  placeholder="{{basic.notes}}"
+                  [(ngModel)]="data.notes"
+                  name="notes"
+                ></ion-textarea>
+              </ion-item>
+              <div class="ion-margin-vertical ion-text-right">
+                <ion-button
+                  type="button"
+                  fill="outline"
+                  color="danger"
+                  shape="round"
+                  (click)="form.reset()"
+                >
+                  <ion-icon slot="start" name="close"></ion-icon
+                  >Clear</ion-button
+                >
+
+                <ion-button
+                  type="button"
+                  shape="round"
+                  type="submit"
+                  value="submit"
+                  id="submit"
+                  color="success"
+                >
+                  <ion-icon slot="start" name="add"></ion-icon
+                  >Update</ion-button
+                >
+              </div>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+</ion-content>

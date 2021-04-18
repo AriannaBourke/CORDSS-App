@@ -10,11 +10,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">
-        Click 'Add' to start adding Thoughts and Feelings!
+        Click 'Add' to start adding Thoughts & Feelings!
       </p>
       <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
     </ion-item>
@@ -24,19 +24,21 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label color="tertiary">Note</ion-label>
-              <ion-icon
-                color="tertiary"
-                slot="start"
-                name="document-outline"
-              ></ion-icon>
+            <ion-item lines="none">
+              <ion-card-title>Thoughts & Feelings Info</ion-card-title>
             </ion-item>
-            <ion-item>
-              <p>{{note.note_name}}</p>
+            <ion-item lines="none">
+              <ion-icon
+                class="red"
+                slot="start"
+                name="chatbubble-ellipses"
+              ></ion-icon>
+              <p>Note name: {{note.note_name}}</p>
             </ion-item>
             <ion-button
-              color="light"
+              color="danger"
+              shape="round"
+              fill="outline"
               style="float: right"
               (click)="removeData(note.rowid)"
               ><ion-icon
@@ -46,7 +48,9 @@
               ></ion-icon
             ></ion-button>
             <ion-button
-              color="light"
+              color="success"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="editModal(note.rowid)"
             >
@@ -59,7 +63,9 @@
               >Edit</ion-button
             >
             <ion-button
-              color="light"
+              color="tertiary"
+              fill="outline"
+              shape="round"
               style="float: right"
               (click)="viewModal(note.rowid)"
               ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon

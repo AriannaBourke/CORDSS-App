@@ -94,7 +94,7 @@ export class UpcomingAppointmentsPage {
       }
 
       verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM appointments WHERE data > ?', [this.today])
+        this._db.executeSql('SELECT * FROM appointments WHERE date > ?', [this.today])
         .then(res => {
           if(res.rows.length == 0) {
             this.isEnabled = true;

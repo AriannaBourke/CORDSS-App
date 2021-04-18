@@ -1,120 +1,140 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Test Result</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>Add a Test Result!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label color="tertiary">Test Result</ion-label>
-        </ion-col>
-      </ion-row>
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Add Test Result</ion-card-title>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Test Date</ion-label>
-            <ion-icon color="tertiary" slot="start" name="calendar-number-outline"></ion-icon>
-            <ion-datetime
-            displayFormat="DD MMMM YYYY"
-            placeholder="Date (*Required)"
-            [(ngModel)]="data.date"
-            name="date" required
-            #dateCtrl="ngModel"
-          ></ion-datetime>
-        </ion-item>
-        <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
-          <ion-text color="danger">*Date is required</ion-text>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Test Date</ion-label>
+              <ion-icon
+                class="red"
+                slot="start"
+                name="calendar-number"
+              ></ion-icon>
+              <ion-datetime
+                displayFormat="DD MMMM YYYY"
+                placeholder="Date (*Required)"
+                [(ngModel)]="data.date"
+                name="date"
+                required
+                #dateCtrl="ngModel"
+              ></ion-datetime>
+            </ion-item>
+            <ion-item *ngIf="!dateCtrl.valid && dateCtrl.touched">
+              <ion-text color="danger">*Date is required</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Test Type</ion-label>
-              <ion-icon slot="start" name="medkit-outline" color="tertiary"></ion-icon>
+              <ion-icon slot="start" name="medkit" class="orange"></ion-icon>
               <ion-input
-              type="text"
-              placeholder="Test Type (*Required)"
-              [(ngModel)]="data.type"
-              name="type" required
-              #typeCtrl="ngModel"
-            ></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
-            <ion-text color="danger">*Test type is required</ion-text>
+                type="text"
+                placeholder="Test Type (*Required)"
+                [(ngModel)]="data.type"
+                name="type"
+                required
+                #typeCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
+              <ion-text color="danger">*Test type is required</ion-text>
             </ion-item>
           </ion-col>
-         </ion-row>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Photo</ion-label>
-              <ion-icon slot="start" name="camera-outline" color="tertiary"></ion-icon>
-              <ion-input 
-              type="text"
-              placeholder="Upload Photo"
-              [(ngModel)]="data.photo"
-              name="photo"></ion-input>
+              <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
+              <ion-input
+                type="text"
+                placeholder="Upload Photo"
+                [(ngModel)]="data.photo"
+                name="photo"
+              ></ion-input>
             </ion-item>
           </ion-col>
-         </ion-row>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Files</ion-label>
-              <ion-icon slot="start" name="document-outline" color="tertiary"></ion-icon>
-              <ion-textarea 
-              type="text"
-              placeholder="Upload Files"
-              [(ngModel)]="data.files"
-              name="files"
+              <ion-icon slot="start" name="document" class="green"></ion-icon>
+              <ion-textarea
+                type="text"
+                placeholder="Upload Files"
+                [(ngModel)]="data.files"
+                name="files"
               ></ion-textarea>
             </ion-item>
-         </ion-col>
+          </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Notes</ion-label>
-              <ion-icon slot="start" name="pencil-outline" color="tertiary"></ion-icon>
-              <ion-textarea 
-              type="text"
-              placeholder="Notes"
-              [(ngModel)]="data.notes"
-              name="notes"
-             ></ion-textarea>
+              <ion-icon
+                slot="start"
+                name="pencil-outline"
+                class="teal"
+              ></ion-icon>
+              <ion-textarea
+                type="text"
+                placeholder="Notes"
+                [(ngModel)]="data.notes"
+                name="notes"
+              ></ion-textarea>
             </ion-item>
-           <div class="ion-margin-vertical ion-text-right">
-            <ion-button
-            type="button"
-            fill="outline"
-            color="danger"
-            (click)="form.reset()"
-          >Clear</ion-button>
-            <ion-button
-              type="button"
-              type="submit"
-              value="submit"
-              id="submit"
-              color="success"
-              [disabled]="!form.valid"
-            >Submit</ion-button
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</form>
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button
+                type="button"
+                shape="round"
+                fill="outline"
+                color="danger"
+                (click)="form.reset()"
+                >Clear</ion-button
+              >
+              <ion-button
+                type="button"
+                shape="round"
+                type="submit"
+                value="submit"
+                id="submit"
+                color="success"
+                [disabled]="!form.valid"
+                >Submit</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
 </ion-content>

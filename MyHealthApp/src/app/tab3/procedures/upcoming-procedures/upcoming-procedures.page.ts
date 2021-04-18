@@ -18,7 +18,7 @@ export class UpcomingProceduresPage {
   private _db   : any;
 
 
-  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS prodecures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
+  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
   data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
   isEnabled: any;
   now = new Date();
@@ -87,7 +87,7 @@ export class UpcomingProceduresPage {
         })
       }
     })
-        .catch(e => alert('get data error' + e));
+        .catch(e => alert('get data error' + JSON.stringify(e)));
       }
 
       verifyDatabasePopulated() {

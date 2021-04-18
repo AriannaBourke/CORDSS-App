@@ -1,133 +1,143 @@
 <ion-header>
   <ion-toolbar>
     <ion-title style="text-align: center">Add a person to your team!</ion-title>
-    <ion-button color="clear" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button
+      fill="clear"
+      color="dark"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-title color="dark" style="text-align: center">Clinical Team Member</ion-title>
-        </ion-col>
-      </ion-row>
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-title color="dark" style="text-align: center"
+              >Add Clinical Team Member</ion-title
+            >
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-avatar (click)="selectImageSource()" class="profile-pic">
-            <ion-img [src]="myProfileImage"></ion-img>
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-avatar (click)="selectImageSource()" class="profile-pic">
+              <ion-img [src]="myProfileImage"></ion-img>
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Name</ion-label>
-            <ion-icon slot="start" name="person"></ion-icon>
-            <ion-input
-            placeholder="Name (*Required)"
-            type="text"
-            [(ngModel)]="data.name"
-            name="name"
-            required
-            #nameCtrl="ngModel"
-          ></ion-input>
-        </ion-item>
-        <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
-          <ion-text color="danger">*Name is required</ion-text>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Name</ion-label>
+              <ion-icon slot="start" name="person" class="red"></ion-icon>
+              <ion-input
+                placeholder="Name (*Required)"
+                type="text"
+                [(ngModel)]="data.name"
+                name="name"
+                required
+                #nameCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+              <ion-text color="danger">*Name is required</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Role</ion-label>
-              <ion-icon color="tertiary" slot="start" name="medkit"></ion-icon>
+              <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
               <ion-input
-              placeholder="Role"
-              interface="popover"
-              name="clinicalrole"
-              [(ngModel)]="data.role"
-            ></ion-input>
+                placeholder="Role"
+                interface="popover"
+                name="clinicalrole"
+                [(ngModel)]="data.role"
+              ></ion-input>
             </ion-item>
           </ion-col>
-         </ion-row>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Clinic Name</ion-label>
-              <ion-icon color="warning" slot="start" name="location"></ion-icon>
-              <ion-input placeholder="Clinic Name"
-              type="text"
-              [(ngModel)]="data.clinic_name"
-              name="clinic_name"></ion-input>
+              <ion-icon class="yellow" slot="start" name="location"></ion-icon>
+              <ion-input
+                placeholder="Clinic Name"
+                type="text"
+                [(ngModel)]="data.clinic_name"
+                name="clinic_name"
+              ></ion-input>
             </ion-item>
           </ion-col>
-         </ion-row>
+        </ion-row>
 
-         <ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Email</ion-label>
-             <ion-icon  color="danger" slot="start" name="mail"></ion-icon>
-             <ion-input
-             placeholder="Email Address"
-             type="email"
-             [(ngModel)]="data.email"
-             name="email" 
-             #emailCtrl="ngModel"
-             email
-             ></ion-input>
+              <ion-icon class="green" slot="start" name="mail"></ion-icon>
+              <ion-input
+                placeholder="Email Address"
+                type="email"
+                [(ngModel)]="data.email"
+                name="email"
+                #emailCtrl="ngModel"
+                email
+              ></ion-input>
             </ion-item>
             <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
               <ion-text color="danger">Email is not valid</ion-text>
             </ion-item>
-         </ion-col>
+          </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Telephone</ion-label>
-             <ion-icon slot="start" name="call"></ion-icon>
-             <ion-input
-             placeholder="Phone Number"
-             type="text"
-             [(ngModel)]="data.phone"
-             name="phone"
-             ></ion-input>
+              <ion-icon class="teal" slot="start" name="call"></ion-icon>
+              <ion-input
+                placeholder="Phone Number"
+                type="text"
+                [(ngModel)]="data.phone"
+                name="phone"
+              ></ion-input>
             </ion-item>
-            
-           <div class="ion-margin-vertical ion-text-right">
-            <ion-button
-            shape="round"
-            type="button"
-            fill="outline"
-            color="danger"
-            (click)="form.reset()"
-          >Clear</ion-button>
-            <ion-button 
-              shape="round"
-              type="button"
-              type="submit"
-              value="submit"
-              color="success"
-              id="submit"
-              [disabled]="!form.valid"
-            >Submit</ion-button
-            >
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-</form>
-</ion-content>
 
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button
+                shape="round"
+                type="button"
+                fill="outline"
+                color="danger"
+                (click)="form.reset()"
+                >Clear</ion-button
+              >
+              <ion-button
+                shape="round"
+                type="button"
+                type="submit"
+                value="submit"
+                color="success"
+                id="submit"
+                [disabled]="!form.valid"
+                >Submit</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+</ion-content>

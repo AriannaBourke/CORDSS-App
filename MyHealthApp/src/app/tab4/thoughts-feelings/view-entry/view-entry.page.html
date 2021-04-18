@@ -1,82 +1,98 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>View Thoughts & Feelings</ion-title>
-    <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-title>View Thoughts & Feelings notes!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
   <ion-list *ngFor="let note of thoughtsfeelings; let i = index" class="list">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label color="tertiary">Note</ion-label>
+            <ion-card-title>Thoughts & Feelings Info</ion-card-title>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">Note Name</ion-label>
+              <ion-label color="medium" position="stacked">Note Name</ion-label>
               <ion-icon
-              color="tertiary"
+                class="red"
                 slot="start"
-                name="document-outline"
+                name="chatbubble-ellipses"
               ></ion-icon>
               <p>{{note.note_name}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
-  
+
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label color="medium" position="stacked">Photo</ion-label>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="camera-outline"
-              ></ion-icon>
+              <ion-icon class="orange" slot="start" name="camera"></ion-icon>
               <p>{{note.photo}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
-  
+
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label  color="medium" position="stacked">File</ion-label>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="copy-outline"
-              ></ion-icon>
+              <ion-label color="medium" position="stacked">File</ion-label>
+              <ion-icon class="yellow" slot="start" name="copy"></ion-icon>
               <p>{{note.file}}</p>
             </ion-item>
           </ion-col>
         </ion-row>
-  
+
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label  color="medium" position="stacked">Notes</ion-label>
+            <ion-item lines="none">
+              <ion-label color="medium" position="stacked">Notes</ion-label>
               <p>{{med.notes}}</p>
-              <ion-icon
-              color="tertiary"
-                slot="start"
-                name="pencil-outline"
-              ></ion-icon>
+              <ion-icon class="green" slot="start" name="pencil"></ion-icon>
             </ion-item>
-            <ion-button color="light" style="float: right" (click)="removeData(note.rowid)"
-            ><ion-icon size="large" color="danger" name="trash-outline"></ion-icon></ion-button>
-            <ion-button color="light" style="float: right" (click)="editModal(note.rowid)">
-            <ion-icon size="large" color="success" slot="start" name="create"></ion-icon>Edit</ion-button>
+            <ion-button
+              color="danger"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="removeData(note.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="editModal(note.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
   </ion-list>
-  </ion-content>
-        
+</ion-content>
