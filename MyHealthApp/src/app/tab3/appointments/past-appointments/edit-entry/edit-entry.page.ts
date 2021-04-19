@@ -94,7 +94,7 @@ export class EditEntryPage {
                 this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
-                  message: "Would you like to update this entry in your appointments?",
+                  message:  "Would you like to update this entry in your appointments? <br/><br/>Note: if the date is in the future, the appointment will be placed in your upcoming appointments!",
                   buttons: [
                     {
                       text:"Cancel"

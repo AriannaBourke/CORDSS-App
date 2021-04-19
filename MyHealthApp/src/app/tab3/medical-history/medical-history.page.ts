@@ -108,7 +108,6 @@ export class MedicalHistoryPage {
             this.isEnabled = false;
           }
         })
-
       }
 
       noContent() {

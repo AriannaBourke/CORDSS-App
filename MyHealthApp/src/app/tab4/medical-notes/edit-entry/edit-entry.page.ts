@@ -24,8 +24,8 @@ export class EditEntryPage {
   private _db   : any;
   isSubmitted = false;
   rowid: any;
-  MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
-  data = {note_name: "", photo: "", file: "", notes: ""};
+  MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -74,7 +74,6 @@ export class EditEntryPage {
                       rowid:res.rows.item(i).rowid,
                       note_name:res.rows.item(i).note_name,
                       photo:res.rows.item(i).photo,
-                      file:res.rows.item(i).file,
                       notes:res.rows.item(i).notes
                     })
                   }
@@ -123,12 +122,6 @@ export class EditEntryPage {
               }
               if(this.data.photo != ""){
                 this._db.executeSql('UPDATE mednotes SET photo=? WHERE rowid=?', [this.data.photo, rowid])
-                .then(res => {
-                  this.closeModal();
-                })
-              }
-              if(this.data.file != ""){
-                this._db.executeSql('UPDATE mednotes SET file=? WHERE rowid=?', [this.data.file, rowid])
                 .then(res => {
                   this.closeModal();
                 })

@@ -33,8 +33,8 @@
                   name="calendar-number"
                 ></ion-icon>
                 <ion-datetime
-                  placeholder="{{app.date | date: 'dd MMMM y HH:mm'}}"
-                  displayFormat="DD MMMM YYYY"
+                  placeholder="{{app.date | date: 'dd MMMM y HH:mm a'}}"
+                  displayFormat="DD MMMM YYYY HH:mm"
                   [(ngModel)]="data.date"
                   name="date"
                   required

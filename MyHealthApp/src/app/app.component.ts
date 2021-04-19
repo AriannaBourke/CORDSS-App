@@ -30,6 +30,22 @@ export class AppComponent {
     }
   }
 
+
+  /// TRY THIS 
+  // initializeApp(){
+  //   this.platform.ready().then(() => {
+  //     this.statusBar.styleDefault();
+  //     setTimeout(() => {
+  //     this.splashScreen.hide();
+  //   }, 800);
+  //   });
+
+  //   }
+  // }
+
+
+
+  
   // constructor( private _plat: Platform, private splashScreen: SplashScreen) {
     
   //   this._plat.ready().then(() => {

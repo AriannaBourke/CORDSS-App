@@ -24,8 +24,8 @@ export class ViewEntryPage {
   private _db   : any;
 
   rowid: any;
-  MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
-  data = {note_name: "", photo: "", file: "", notes: ""};
+  MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -73,7 +73,6 @@ export class ViewEntryPage {
                       rowid:res.rows.item(i).rowid,
                       note_name:res.rows.item(i).note_name,
                       photo:res.rows.item(i).photo,
-                      file:res.rows.item(i).file,
                       notes:res.rows.item(i).notes
                     })
                   }

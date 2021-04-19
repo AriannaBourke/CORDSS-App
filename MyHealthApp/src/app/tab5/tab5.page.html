@@ -21,21 +21,21 @@ https://plnkr.co/edit/WUTkUnI5Th8XrZJUeBfe?p=preview&preview -->
     </ion-item>
     <ion-item lines="none">
       <ion-label>Urgent Plan</ion-label>
-      <ion-button (click)="openUPModal()" size="medium" shape="round">
+      <ion-button (click)="openUPModal()" size="medium" shape="round" fill="outline">
         <ion-icon color="clear" slot="start" name="download-outline"></ion-icon
         >Urgent Plan</ion-button
       >
     </ion-item>
     <ion-item lines="none">
       <ion-label>Medicines</ion-label>
-      <ion-button (click)="openMedModal()" size="medium" shape="round">
+      <ion-button (click)="openMedModal()" size="medium" shape="round" fill="outline">
         <ion-icon color="clear" slot="start" name="download-outline"></ion-icon
         >Medicines</ion-button
       >
     </ion-item>
     <ion-item lines="none">
       <ion-label>My Conditions</ion-label>
-      <ion-button (click)="openCondModal()" size="medium" shape="round">
+      <ion-button (click)="openCondModal()" size="medium" shape="round" fill="outline">
         <ion-icon color="clear" slot="start" name="download-outline"></ion-icon
         >My Conditions</ion-button
       >
@@ -487,25 +487,25 @@ https://plnkr.co/edit/WUTkUnI5Th8XrZJUeBfe?p=preview&preview -->
       >
     </ion-item>
     <ion-item lines="none">
-      <ion-icon slot="start" name="call-outline"></ion-icon>
+      <ion-icon slot="start" name="call"></ion-icon>
       <ion-label>999</ion-label>
-      <ion-button shape="round" size="medium" ((click)="CallNow('999')">Call 999</ion-button>
+      <ion-button shape="round"  fill="outline" size="medium" ((click)="CallNow('999')">Call 999</ion-button>
     </ion-item>
     <ion-item lines="none">
       <ion-label color="primary">NHS Non-Emergency Medical Number</ion-label>
     </ion-item>
     <ion-item lines="none">
-      <ion-icon slot="start" name="call-outline"></ion-icon>
+      <ion-icon slot="start" name="call"></ion-icon>
       <ion-label>111</ion-label>
-      <ion-button shape="round" size="medium" (click)="CallNow('111')">Call 111</ion-button>
+      <ion-button shape="round"  fill="outline" size="medium" (click)="CallNow('111')">Call 111</ion-button>
     </ion-item>
     <ion-item lines="none">
       <ion-label color="primary">Non-Emergency Police Number</ion-label>
     </ion-item>
     <ion-item lines="none">
-      <ion-icon slot="start" name="call-outline"></ion-icon>
+      <ion-icon slot="start" name="call"></ion-icon>
       <ion-label>101</ion-label>
-      <ion-button shape="round" size="medium" (click)="CallNow('101')">Call 101</ion-button
+      <ion-button shape="round"  fill="outline" size="medium" (click)="CallNow('101')">Call 101</ion-button
       >
     </ion-item>
   </ion-card>

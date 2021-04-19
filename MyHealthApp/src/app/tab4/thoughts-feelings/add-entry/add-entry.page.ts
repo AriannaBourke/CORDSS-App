@@ -24,7 +24,7 @@ export class AddEntryPage {
   data: any;
   isSubmitted = false;
 
-  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
+  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -33,7 +33,7 @@ export class AddEntryPage {
               public _sql: SQLite
             ) 
 {  
-  this.data = {note_name: "", photo: "", file: "", notes: ""};          
+  this.data = {note_name: "", photo: "", notes: ""};          
   this.thoughtsfeelings = [];
   this._plat
   .ready()
@@ -81,7 +81,6 @@ export class AddEntryPage {
               rowid:res.rows.item(i).rowid,
               note_name:res.rows.item(i).note_name,
               photo:res.rows.item(i).photo,
-              file:res.rows.item(i).file,
               notes:res.rows.item(i).notes
             })
           }
@@ -90,7 +89,7 @@ export class AddEntryPage {
           }
     
   public saveData() {
-    this._db.executeSql('INSERT INTO thoughtsfeelings VALUES(NULL,?,?,?,?)', [this.data.note_name, this.data.photo, this.data.file, this.data.notes])
+    this._db.executeSql('INSERT INTO thoughtsfeelings VALUES(NULL,?,?,?)', [this.data.note_name, this.data.photo, this.data.notes])
     .then(res => {
         this.closeModal()
       })

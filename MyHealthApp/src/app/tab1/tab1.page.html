@@ -4,7 +4,7 @@
     <ion-button
       color="success"
       slot="end"
-      [disabled]="checkIsEnabled()"
+      [hidden]="checkIsEnabled()"
       (click)="openModal()"
       ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
     >
@@ -158,7 +158,7 @@
                 size="medium"
               ></ion-icon>
               <p>{{about.emergency_1_number}}</p>
-              <ion-button slot="end">Call</ion-button>
+              <ion-button shape="round"  fill="outline" slot="end">Call</ion-button>
             </ion-item>
             <ion-label color="primary"> Emergency Contact 2 </ion-label>
             <ion-item>
@@ -180,7 +180,7 @@
                 class="pink"
               ></ion-icon>
               <p>{{about.emergency_2_number}}</p>
-              <ion-button slot="end">Call</ion-button>
+              <ion-button shape="round" fill="outline" slot="end">Call</ion-button>
             </ion-item>
             <ion-label color="primary"> Emergency Contact 3 </ion-label>
             <ion-item>
@@ -202,7 +202,7 @@
                 class="redpink"
               ></ion-icon>
               <p>{{about.emergency_3_number}}</p>
-              <ion-button slot="end">Call</ion-button>
+              <ion-button shape="round" fill="outline" slot="end">Call</ion-button>
             </ion-item>
           </ion-col>
         </ion-row>

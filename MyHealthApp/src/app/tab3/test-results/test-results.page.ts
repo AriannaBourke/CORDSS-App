@@ -34,11 +34,10 @@ export class TestResultsPage {
   public storedData      : any            = null;
   private _db   : any;
 
-  TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, files TEXT, notes TEXT)'
-  data = {date: "", type: "", photo: "", files: "", notes: ""};
+  TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, notes TEXT)'
+  data = {date: "", type: "", photo: "", notes: ""};
   PicturesTable : string = 'CREATE TABLE IF NOT EXISTS pictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
   datapicture = {cardid:"", picture: "" };
-
   isEnabled: any;
 
 
@@ -107,7 +106,6 @@ export class TestResultsPage {
           date:res.rows.item(i).date,
           type:res.rows.item(i).type,
           photo:res.rows.item(i).photo,
-          files:res.rows.item(i).files,
           notes:res.rows.item(i).notes,
         })
       }
@@ -144,6 +142,10 @@ export class TestResultsPage {
         })
       }
 
+      noContent() {
+        return !this.isEnabled;
+      }
+
       verifyDatabasePopulatedPictures() {
         this._db.executeSql('SELECT * FROM pictures', <any>[])
         .then(res => {
@@ -156,12 +158,8 @@ export class TestResultsPage {
         })
       }
 
-      noContent() {
-        return !this.isEnabled;
-      }
-
   public saveData() {
-    this._db.executeSql('INSERT INTO testresults VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.type, this.data.photo, this.data.files, this.data.notes])
+    this._db.executeSql('INSERT INTO testresults VALUES(NULL,?,?,?,?)', [this.data.date, this.data.type, this.data.photo, this.data.notes])
     .then(res => {
         this.getData();
         this.saveDataPictures();

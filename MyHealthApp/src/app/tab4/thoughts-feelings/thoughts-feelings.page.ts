@@ -31,8 +31,8 @@ export class ThoughtsFeelingsPage {
   private _db   : any;
 
 
-  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
-  data = {note_name: "", photo: "", file: "", notes: ""};
+  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", notes: ""};
   isEnabled: any;
 
     constructor(
@@ -93,7 +93,6 @@ export class ThoughtsFeelingsPage {
           rowid:res.rows.item(i).rowid,
           note_name:res.rows.item(i).note_name,
           photo:res.rows.item(i).photo,
-          file:res.rows.item(i).file,
           notes:res.rows.item(i).notes
         })
       }
@@ -119,7 +118,7 @@ export class ThoughtsFeelingsPage {
       }
 
   public saveData() {
-    this._db.executeSql('INSERT INTO thoughtsfeelings VALUES(NULL,?,?,?,?)', [this.data.note_name, this.data.photo, this.data.file, this.data.notes])
+    this._db.executeSql('INSERT INTO thoughtsfeelings VALUES(NULL,?,?,?)', [this.data.note_name, this.data.photo, this.data.notes])
     .then(res => {
         this.getData();
       })
@@ -207,7 +206,6 @@ export class ThoughtsFeelingsPage {
   
           })
         }
-        console.log('hey maria');
         console.log(this.aboutmepicture[0].picture);
         this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
       })
