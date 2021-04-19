@@ -18,6 +18,7 @@ import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
   styleUrls: ['./add-entry.page.scss'],
 })
 export class AddEntryPage {
+  row;
   photos;
   base64Image;
   myProfileImage;
@@ -74,7 +75,7 @@ export class AddEntryPage {
     await this._db.executeSql(this.TestResultsTable, []);
     await this._db.executeSql(this.PicturesTable, []);
 
-    this.getData()
+    this.getData();
     this.getDataPictures();
 
   }
@@ -138,8 +139,15 @@ export class AddEntryPage {
     }
 
   public saveDataPictures() {
+if (this.testresults.length>0){
+  this.row = this.testresults[0].rowid+1 ;
+}
+else{
+  this.row = 1 ;
+}
+
     for(let i = 0; i<this.photos.length;i++) {
-    this._db.executeSql('INSERT INTO pictures VALUES(NULL,?,?)', [this.testresults[0].rowid+1, this.photos[i]])
+    this._db.executeSql('INSERT INTO pictures VALUES(NULL,?,?)', [this.row, this.photos[i]])
     .then(res => {
         this.getDataPictures();
       })

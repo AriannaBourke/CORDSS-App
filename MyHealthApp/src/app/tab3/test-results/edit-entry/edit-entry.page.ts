@@ -20,6 +20,7 @@ import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
   styleUrls: ['./edit-entry.page.scss'],
 })
 export class EditEntryPage {
+  addphotos;
   photos;
   base64Image;
   myProfileImage;
@@ -101,6 +102,7 @@ export class EditEntryPage {
               }
 
               public getDataPictures(rowid) {
+                this.photos=[];
                 this._db.executeSql('SELECT * FROM pictures WHERE cardid=?', [rowid])
                 .then(res => {
                   this.pictures = [];
@@ -111,15 +113,22 @@ export class EditEntryPage {
                       picture:res.rows.item(i).picture,
                       
                     })
+                    this.photos[i]= res.rows.item(i).picture;
                   }
                 })
                     .catch(e => alert('get data error' + e));
               }
 
-
-
-                 
-            
+              public saveDataPictures() {
+                for(let i = 0; i<this.addphotos.length;i++) {
+                this._db.executeSql('INSERT INTO pictures VALUES(NULL,?,?)', [this.rowid, this.addphotos[i]])
+                .then(res => {
+                    this.getDataPictures(this.rowid);
+                  })
+                  .catch(e => alert("save data error" + e));
+                }
+              }
+        
               async closeModal() {
                 await this.modalController.dismiss();
               }
@@ -147,31 +156,6 @@ export class EditEntryPage {
               }
 
               noSubmit(e) {
-                e.preventDefault();
-              }
-
-              async updatepictures(rowid) {
-                this.isSubmitted = true;
-                const alert = await this._alertController.create({
-                  header: "Update this entry?",
-                  message: "Would you like to update this entry in your test results?",
-                  buttons: [
-                    {
-                      text:"Cancel"
-                    },
-                    {
-                      text:"Save",
-                      handler: ()=> {
-                        this.updateSQLpictures(rowid);
-            
-                      }
-                    }
-                  ]
-                });
-                await alert.present()
-              }
-
-              noSubmitpictures(e) {
                 e.preventDefault();
               }
 
@@ -212,24 +196,6 @@ export class EditEntryPage {
           }
 
 
-          async updateSQLpictures(rowid) {
-            if(this.datapicture.cardid != "") {
-              this._db.executeSql('UPDATE pictures SET cardid=? WHERE rowid=?',[this.datapicture.cardid, rowid])
-              .then(res => {
-                this.closeModal();
-              })
-            .catch(e => alert('update error' + e));
-            }
-            if(this.datapicture.picture != ""){
-              this._db.executeSql('UPDATE pictures SET picture=? WHERE rowid=?', [this.datapicture.picture, rowid])
-              .then(res => {
-                this.closeModal();
-              })
-            }
-            this.closeModal();
-        }
-
-
           
 
           ngOnInit() {
@@ -250,9 +216,11 @@ export class EditEntryPage {
         
               this.camera.getPicture(options)
               .then((ImageData)=> {
+                  this.addphotos=[];
                   this.base64Image = "data:image/jpeg;base64," + ImageData;
-                  this.photos.push(this.base64Image);
-                  this.photos.reverse();
+                  this.addphotos.push(this.base64Image);
+                  this.addphotos.reverse();
+                  this.saveDataPictures();
                 })
               }
             
@@ -281,4 +249,15 @@ export class EditEntryPage {
             });
           }
           
+
+          deleteAll(){
+            this._db.executeSql('DELETE FROM pictures WHERE cardid=?', [this.rowid])
+                .then(res => {
+                  this.getDataPictures(this.rowid);
+                    
+                })
+                    .catch(e => alert('delete data error' + e.message));
+
+
+          }
 }

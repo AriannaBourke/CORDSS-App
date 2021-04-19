@@ -160,12 +160,15 @@ export class Tab1Page {
     
             })
           }
-          console.log(this.aboutmepicture[0].picture);
-          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+            if (this.aboutmepicture.length>0) {
+            console.log(this.aboutmepicture[0].picture);
+            this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+          }
+         
         })
        
       
-            // .catch(e => alert('get data error' + e));
+            .catch(e => alert('get data error' + e));
           }
 
   public saveData() {
@@ -312,10 +315,25 @@ export class Tab1Page {
 
   };
 
-  callNow(number) {
-    this.callNumber.callNumber(number, true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.log('Error launching dialer', err));
+  call1(){
+    this.callNumber.callNumber(this.aboutme[0].emergency_1_number, true)
+   .then(() => console.log('Launched dialer!'))
+   .catch(e => alert('Error launching dialer' + e));
+
+  }
+
+  call2(){
+    this.callNumber.callNumber(this.aboutme[0].emergency_2_number, true)
+   .then(() => console.log('Launched dialer!'))
+   .catch(() => console.log('Error launching dialer'));
+
+  }
+
+  call3(){
+    this.callNumber.callNumber(this.aboutme[0].emergency_3_number, true)
+   .then(() => console.log('Launched dialer!'))
+   .catch(() => console.log('Error launching dialer'));
+
   }
 
 

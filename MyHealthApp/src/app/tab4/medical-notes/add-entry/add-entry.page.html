@@ -46,13 +46,18 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Photo</ion-label>
-              <ion-input
-                type="text"
-                placeholder="Upload Photo"
-                [(ngModel)]="data.photo"
-                name="photo"
-              ></ion-input>
-              <ion-icon class="orange" slot="start" name="camera"></ion-icon>
+               <ion-button 
+              (click)="takePhoto()"
+              [(ngModel)]="data.photo"
+              name="photo"
+              >Select Images</ion-button>
+              <ion-icon slot="start" name="camera" class="orange"></ion-icon>
+              <div class="images-wrapper">
+                <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
+                  <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                  <img [src]="photo" alt="" srcset="">
+                </div>
+              </div>
             </ion-item>
           </ion-col>
         </ion-row>

@@ -36,7 +36,13 @@
           <ion-col>
             <ion-item>
               <ion-label color="medium" position="stacked">Photo</ion-label>
-              <ion-icon class="orange" slot="start" name="camera"></ion-icon>
+              <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
+              <div class="images-wrapper">
+                <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
+                  <!-- <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon> -->
+                  <img [src]="photo" alt="" srcset="">
+                </div>
+              </div>
               <p>{{note.photo}}</p>
             </ion-item>
           </ion-col>
@@ -55,13 +61,8 @@
         <ion-row>
           <ion-col>
             <ion-item>
-<<<<<<< HEAD
-              <ion-label  color="medium" position="stacked">Notes</ion-label>
-              <p>{{note.notes}}</p>
-=======
               <ion-label color="medium" position="stacked">Notes</ion-label>
               <p>{{med.notes}}</p>
->>>>>>> 7c55e55ed5f7e3e76d4419c2264fafd0f4f1268a
               <ion-icon
                 class="green"
                 slot="start"

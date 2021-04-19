@@ -24,7 +24,7 @@ export class EditEntryPage {
   private _db   : any;
   isSubmitted = false;
   rowid: any;
-  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
+  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone TEXT, notes TEXT)'
   data = {type: "", instructions: "", phone: "", notes: ""};
 
   constructor(private modalController: ModalController,

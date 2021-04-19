@@ -12,6 +12,9 @@ import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
 import {EditEntryPage } from './edit-entry/edit-entry.page';
 import {ViewEntryPage } from './view-entry/view-entry.page';
+import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
+
+
 
 @Component({
   selector: 'app-medical-notes',
@@ -19,16 +22,23 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./medical-notes.page.scss'],
 })
 export class MedicalNotesPage {
+  photos;
+  base64Image;
   myProfileImage : string;
+  nameID : string;
+  public aboutme : Array<any> = [];
   public aboutmepicture: Array<any> = [];
   public mednotes : Array<any> = [];
+  public medpictures : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
-
   MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
   data = {note_name: "", photo: "", file: "", notes: ""};
+  MedPicturesTable : string = 'CREATE TABLE IF NOT EXISTS medpictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
+  datapicture = {cardid:"", picture: "" };
+
   isEnabled: any;
 
     constructor(
@@ -36,10 +46,14 @@ export class MedicalNotesPage {
                 private _alertController: AlertController,
                 public _plat: Platform,
                 public _sql: SQLite,
+                private camera : Camera,
+                private alertCtrl: AlertController,
+  
               )
 
 {
   this.mednotes = [];
+  this.medpictures =[];
   this._plat
   .ready()
   .then(() =>
@@ -66,19 +80,26 @@ export class MedicalNotesPage {
 
   async _createDatabaseTables() {
     await this._db.executeSql(this.MedNotesTable, []);
+    await this._db.executeSql(this.MedPicturesTable, []);
+
     this.getData()
+    this.getData1();
+    this.getDataPicture();
+    this.getDataPictures();
   }
 
   ionViewDidLoad() {
         this.getData();
+        this.getData1();
         this.getDataPicture();
-        this.verifyDatabasePopulated();
+        this.getDataPictures();
       }
 
       ionViewWillEnter() {
         this.getData();
+        this.getData1();
         this.getDataPicture();
-        this.verifyDatabasePopulated();
+        this.getDataPictures();
       }
 
   public getData() {
@@ -100,6 +121,23 @@ export class MedicalNotesPage {
 
       }
 
+      public getDataPictures() {
+        this.verifyDatabasePopulatedPictures()
+        this._db.executeSql('SELECT * FROM medpictures ORDER BY rowid DESC', <any>[])
+        .then(res => {
+          this.medpictures = [];
+          for(var i=0; i<res.rows.length; i++) {
+            this.medpictures.push({
+              rowid:res.rows.item(i).rowid,
+              cardid:res.rows.item(i).cardid,
+              picture:res.rows.item(i).picture,
+              
+            })
+          }
+        })
+            .catch(e => alert('get data error' + e));
+          }
+
       verifyDatabasePopulated() {
         this._db.executeSql('SELECT * FROM mednotes', <any>[])
         .then(res => {
@@ -110,7 +148,18 @@ export class MedicalNotesPage {
             this.isEnabled = false;
           }
         })
+      }
 
+      verifyDatabasePopulatedPictures() {
+        this._db.executeSql('SELECT * FROM medpictures', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
       }
 
       noContent() {
@@ -121,9 +170,27 @@ export class MedicalNotesPage {
     this._db.executeSql('INSERT INTO mednotes VALUES(NULL,?,?,?,?)', [this.data.note_name, this.data.photo, this.data.file, this.data.notes])
     .then(res => {
         this.getData();
+        this.saveDataPictures();
       })
       .catch(e => alert("save data error" + e));
     }
+
+    public saveDataPictures() {
+      for(let i = 0; i<this.photos.length;i++) {
+      this._db.executeSql('INSERT INTO medpictures VALUES(NULL,?,?)', [this.mednotes[this.mednotes.length-1].rowid, this.photos[i]])
+      .then(res => {
+          this.getDataPictures();
+        })
+        .catch(e => alert("save data error" + e));
+      }
+    }
+
+
+  editData(rowid) {
+    console.log("added data"), {
+      rowid: rowid
+    }
+  }
 
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM mednotes WHERE rowid=?', [rowid])
@@ -162,7 +229,7 @@ export class MedicalNotesPage {
         }
       });
 
-      modal.onDidDismiss().then(() => {
+      modal.onDidDismiss().then((dataReturned) => {
         this.getData();
       });
 
@@ -195,6 +262,57 @@ export class MedicalNotesPage {
       return await modal.present();
     }
 
+
+    
+    ngOnInit() {
+      this.photos = [];
+    }
+  
+    takePhoto()
+    {
+      const options : CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        targetHeight: 200,
+        correctOrientation: true,
+        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+        };
+  
+        this.camera.getPicture(options)
+        .then((ImageData)=> {
+            this.base64Image = "data:image/jpeg;base64," + ImageData;
+            this.photos.push(this.base64Image);
+            this.photos.reverse();
+          })
+        }
+      
+    
+      deletePhoto(index) {
+        const alert = this.alertCtrl.create({
+          header: 'Sure you want to delete this photo? There is NO undo!',
+          message: '',
+          buttons: [
+            {
+              text: 'No',
+              handler: () => {
+                console.log('Disagree clicked');
+              }
+            }, 
+            {
+              text: 'Yes',
+              handler: () => {
+                console.log('Agree clicked');
+                this.photos.splice(index, 1);
+              }
+            }
+          ]
+        }).then(res => {
+          res.present();
+      });
+    }
+
     public getDataPicture() {
       this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
       .then(res => {
@@ -206,13 +324,34 @@ export class MedicalNotesPage {
   
           })
         }
-        console.log('hey maria');
-        console.log(this.aboutmepicture[0].picture);
-        this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+          if (this.aboutmepicture.length>0) {
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+        }
+       
       })
      
     
           .catch(e => alert('get data error' + e));
         }
 
+        
+        public getData1() {
+          this.verifyDatabasePopulated();
+          this._db.executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
+          .then(res => {
+            this.aboutme = [];
+            for(var i=0; i<res.rows.length; i++) {
+              this.aboutme.push({
+                rowid:res.rows.item(i).rowid,
+                name:res.rows.item(i).name
+      
+              })
+            }
+            if (this.aboutme.length>0) {
+            this.nameID=this.aboutme[res.rows.length-1].name;
+            }
+          })
+              .catch(e => alert('get data error' + e.message));
+            }
   }

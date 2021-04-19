@@ -23,7 +23,7 @@ export class AddEntryPage {
   private _db   : any;
   data: any;
   isSubmitted = false;
-  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
+  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone TEXT, notes TEXT)'
   
   constructor(private modalController: ModalController,
               private navParams: NavParams,

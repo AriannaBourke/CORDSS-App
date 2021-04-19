@@ -20,6 +20,8 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
 })
 export class UpcomingAppointmentsPage {
   myProfileImage : string;
+  nameID : string;
+  public aboutme : Array<any> = [];
   public aboutmepicture: Array<any> = [];
   public appointments : Array<any> = [];
   public isData          : boolean        = false;
@@ -71,15 +73,19 @@ export class UpcomingAppointmentsPage {
   async _createDatabaseTables() {
     await this._db.executeSql(this.AppointmentsTable, []);
     this.getData()
+    this.getData1();
+    this.getDataPicture();
   }
 
   ionViewDidLoad() {
         this.getData();
+        this.getData1();
         this.getDataPicture();
       }
 
       ionViewWillEnter() {
         this.getData();
+        this.getData1();
         this.getDataPicture();
       }
 
@@ -210,13 +216,34 @@ export class UpcomingAppointmentsPage {
   
           })
         }
-        console.log('hey maria');
-        console.log(this.aboutmepicture[0].picture);
-        this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+          if (this.aboutmepicture.length>0) {
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+        }
+       
       })
      
     
           .catch(e => alert('get data error' + e));
         }
+        public getData1() {
+          this.verifyDatabasePopulated();
+          this._db.executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
+          .then(res => {
+            this.aboutme = [];
+            for(var i=0; i<res.rows.length; i++) {
+              this.aboutme.push({
+                rowid:res.rows.item(i).rowid,
+                name:res.rows.item(i).name
+      
+              })
+            }
+            if (this.aboutme.length>0) {
+            this.nameID=this.aboutme[res.rows.length-1].name;
+            }
+          })
+              .catch(e => alert('get data error' + e.message));
+            }
+
 
   }
