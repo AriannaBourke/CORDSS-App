@@ -1,9 +1,10 @@
 //  This file is adapted from:
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
 import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
@@ -113,7 +114,7 @@ export class TestResultsPage {
       }
 
       public getDataPictures() {
-        this.verifyDatabasePopulatedPictures()
+        // this.verifyDatabasePopulatedPictures()
         this._db.executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.pictures = [];
@@ -122,7 +123,7 @@ export class TestResultsPage {
               rowid:res.rows.item(i).rowid,
               cardid:res.rows.item(i).cardid,
               picture:res.rows.item(i).picture,
-              
+
             })
           }
         })
@@ -141,17 +142,17 @@ export class TestResultsPage {
         })
       }
 
-      verifyDatabasePopulatedPictures() {
-        this._db.executeSql('SELECT * FROM pictures', <any>[])
-        .then(res => {
-          if(res.rows.length == 0) {
-            this.isEnabled = true;
-          }
-          else {
-            this.isEnabled = false;
-          }
-        })
-      }
+      // verifyDatabasePopulatedPictures() {
+      //   this._db.executeSql('SELECT * FROM pictures', <any>[])
+      //   .then(res => {
+      //     if(res.rows.length == 0) {
+      //       this.isEnabled = true;
+      //     }
+      //     else {
+      //       this.isEnabled = false;
+      //     }
+      //   })
+      // }
 
       noContent() {
         return !this.isEnabled;
@@ -258,7 +259,7 @@ export class TestResultsPage {
     ngOnInit() {
       this.photos = [];
     }
-  
+
     takePhoto()
     {
       const options : CameraOptions = {
@@ -270,7 +271,7 @@ export class TestResultsPage {
         correctOrientation: true,
         sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
         };
-  
+
         this.camera.getPicture(options)
         .then((ImageData)=> {
             this.base64Image = "data:image/jpeg;base64," + ImageData;
@@ -278,8 +279,8 @@ export class TestResultsPage {
             this.photos.reverse();
           })
         }
-      
-    
+
+
       deletePhoto(index) {
         const alert = this.alertCtrl.create({
           header: 'Sure you want to delete this photo? There is NO undo!',
@@ -290,7 +291,7 @@ export class TestResultsPage {
               handler: () => {
                 console.log('Disagree clicked');
               }
-            }, 
+            },
             {
               text: 'Yes',
               handler: () => {

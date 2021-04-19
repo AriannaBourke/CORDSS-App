@@ -1,9 +1,10 @@
 //  This file is adapted from:
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
 
 import { Component } from '@angular/core';
@@ -38,7 +39,7 @@ export class Tab1Page {
   data = {name: "", birthday: "", about: "", email: "", phone: "", address: "", nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
   AboutMeTablePicture : string = 'CREATE TABLE IF NOT EXISTS aboutmepicture (rowid INTEGER PRIMARY KEY AUTOINCREMENT, picture TEXT)'
   datapicture = { picture: "" };
-  
+
   isEnabled: any;
 
   constructor(
@@ -157,14 +158,14 @@ export class Tab1Page {
             this.aboutmepicture.push({
               rowid:res.rows.item(i).rowid,
               picture:res.rows.item(i).picture,
-    
+
             })
           }
           console.log(this.aboutmepicture[0].picture);
           this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
         })
-       
-      
+
+
             // .catch(e => alert('get data error' + e));
           }
 
@@ -184,7 +185,7 @@ export class Tab1Page {
         })
         .catch(e => alert("save data error" + e.message));
       }
-  
+
 
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM aboutme WHERE rowid=?', [rowid])
@@ -286,7 +287,7 @@ export class Tab1Page {
             this._camera.getPicture(cameraOptions)
             .then((ImageData)=> {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
-              this.datapicture.picture = this.myProfileImage.toString(); 
+              this.datapicture.picture = this.myProfileImage.toString();
               this.saveDataPicture();
               console.log(this.myProfileImage)
             })
@@ -299,7 +300,7 @@ export class Tab1Page {
             this._camera.getPicture(galleryOptions)
             .then((ImageData)=> {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
-              this.datapicture.picture = this.myProfileImage.toString(); 
+              this.datapicture.picture = this.myProfileImage.toString();
               this.saveDataPicture();
             })
 

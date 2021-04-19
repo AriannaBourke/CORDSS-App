@@ -1,9 +1,10 @@
 //  This file is adapted from:
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
 import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
@@ -205,8 +206,8 @@ export class MoodPage {
       console.log(this.aboutmepicture[0].picture);
       this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
     })
-   
-  
+
+
         .catch(e => alert('get data error' + e));
       }
 

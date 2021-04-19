@@ -1,9 +1,10 @@
 //  This file is adapted from:
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
@@ -271,8 +272,8 @@ export class MyClinicalTeamPage {
           this.photos.reverse();
         })
       }
-    
-  
+
+
     deletePhoto(index) {
       const alert = this.alertCtrl.create({
         header: 'Sure you want to delete this photo? There is NO undo!',
@@ -283,7 +284,7 @@ export class MyClinicalTeamPage {
             handler: () => {
               console.log('Disagree clicked');
             }
-          }, 
+          },
           {
             text: 'Yes',
             handler: () => {
