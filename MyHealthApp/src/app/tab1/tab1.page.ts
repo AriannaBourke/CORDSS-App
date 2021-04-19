@@ -38,7 +38,7 @@ export class Tab1Page {
   private _db   : any;
 
   default: any;
-  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, notes TEXT, emergency_1_name TEXT, emergency_1_number INT, emergency_2_name TEXT, emergency_2_number INT, emergency_3_name TEXT, emergency_3_number INT)'
+  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, emergency_1_name TEXT, emergency_1_number TEXT, emergency_2_name TEXT, emergency_2_number TEXT, emergency_3_name TEXT, emergency_3_number TEXT)'
   data = {name: "", birthday: "", about: "", email: "", phone: "", address: "", nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
   AboutMeTablePicture : string = 'CREATE TABLE IF NOT EXISTS aboutmepicture (rowid INTEGER PRIMARY KEY AUTOINCREMENT, picture TEXT)'
   datapicture = { picture: "" };
@@ -133,13 +133,12 @@ export class Tab1Page {
         this.aboutme.push({
           rowid:res.rows.item(i).rowid,
           name:res.rows.item(i).name,
-          about:res.rows.item(i).about,
           birthday:res.rows.item(i).birthday,
+          about:res.rows.item(i).about,      
           email:res.rows.item(i).email,
           phone:res.rows.item(i).phone,
           address:res.rows.item(i).address,
           nhs_number:res.rows.item(i).nhs_number,
-          notes:res.rows.item(i).notes,
           emergency_1_name:res.rows.item(i).emergency_1_name,
           emergency_1_number:res.rows.item(i).emergency_1_number,
           emergency_2_name:res.rows.item(i).emergency_2_name,
@@ -173,7 +172,7 @@ export class Tab1Page {
           }
 
   public saveData() {
-    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
+    this._db.executeSql('INSERT INTO aboutme VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?)', [this.data.name, this.data.birthday, this.data.about, this.data.email,
        this.data.phone, this.data.address, this.data.nhs_number, this.data.emergency_1_name, this.data.emergency_1_number, this.data.emergency_2_name, this.data.emergency_2_number, this.data.emergency_3_name, this.data.emergency_3_number ])
     .then(res => {
         this.getData();

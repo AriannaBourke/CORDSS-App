@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>About Me</ion-title>
+    <ion-title width-50 style="text-align: center">About Me</ion-title>
     <ion-button
       color="success"
       slot="end"
@@ -15,12 +15,17 @@
   <ion-avatar (click)="selectImageSource()" class="profile-pic">
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
+  <ion-title class="title" width-50 style="text-align: center">Welcome To CORDSS!</ion-title>
+  <ion-list *ngFor="let about of aboutme; let i = index" class="list">
+  <ion-title class="title" width-50 style="text-align: center">Hello {{about.name}}</ion-title>
+  </ion-list>
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">Click 'Add' to add information About Me!</p>
       <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
     </ion-item>
   </ion-card>
+
   <ion-list *ngFor="let about of aboutme; let i = index" class="list">
     <ion-card>
       <ion-grid>

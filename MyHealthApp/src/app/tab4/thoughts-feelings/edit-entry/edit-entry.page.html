@@ -78,12 +78,7 @@
                   placeholder="{{note.notes}}"
                   [(ngModel)]="data.notes"
                   name="notes"
-                  required
-                  #notesCtrl="ngModel"
                 ></ion-textarea>
-              </ion-item>
-              <ion-item *ngIf="!notesCtrl.valid && notesCtrl.touched">
-                <ion-text color="danger">*Notes are required</ion-text>
               </ion-item>
               <div class="ion-margin-vertical ion-text-right">
                 <ion-button

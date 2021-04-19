@@ -22,6 +22,7 @@
           </ion-col>
         </ion-row>
 
+        <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
         <ion-row>
           <ion-col>
             <ion-item>

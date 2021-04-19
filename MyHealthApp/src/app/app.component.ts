@@ -45,7 +45,7 @@ export class AppComponent {
 
 
 
-  
+
   // constructor( private _plat: Platform, private splashScreen: SplashScreen) {
     
   //   this._plat.ready().then(() => {

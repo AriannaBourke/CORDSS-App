@@ -2,6 +2,8 @@ ion-select {
   color: black;
   --placeholder-opacity: 1;
   max-width: 95%;
+  --padding-bottom: 25px;
+  --padding-start: 55px;
 }
 
 ::ng-deep .mycomponent-wider-popover {
@@ -11,11 +13,12 @@ ion-select {
 ion-content {
   --ion-background-color: linear-gradient(#5cb9dd, white);
 }
-ion-icon {
-  color: #e7de56;
-}
 
 ion-card-title {
   color: #041a97;
 }
 
+.image1 {
+  position: absolute;
+  height: 40px;
+}

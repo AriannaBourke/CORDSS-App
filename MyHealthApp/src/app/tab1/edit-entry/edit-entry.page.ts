@@ -24,7 +24,7 @@ export class EditEntryPage {
 
 
   rowid: any;
-  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone TEXT, address TEXT, nhs_number TEXT, emergency_1_name, emergency_1_number, emergency_2_name, emergency_2_number, emergency_3_name, emergency_3_number)'
+  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone TEXT, address TEXT, nhs_number TEXT, emergency_1_name TEXT, emergency_1_number TEXT, emergency_2_name TEXT, emergency_2_number TEXT, emergency_3_name TEXT, emergency_3_number TEXT)'
   data = {name: "", birthday: "", about: "", email: "", phone: "", address:"", nhs_number: "", emergency_1_name:"", emergency_1_number:"", emergency_2_name:"", emergency_2_number:"", emergency_3_name:"", emergency_3_number:""};
 
   constructor(private modalController: ModalController,
