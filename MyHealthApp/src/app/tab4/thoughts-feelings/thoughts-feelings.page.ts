@@ -15,6 +15,8 @@ import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
 import {EditEntryPage } from './edit-entry/edit-entry.page';
 import {ViewEntryPage } from './view-entry/view-entry.page';
+import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
+
 
 
 @Component({
@@ -23,16 +25,24 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./thoughts-feelings.page.scss'],
 })
 export class ThoughtsFeelingsPage {
+  photos;
+  base64Image;
   myProfileImage : string;
+  nameID : string;
+  public aboutme : Array<any> = [];
   public aboutmepicture: Array<any> = [];
   public thoughtsfeelings : Array<any> = [];
+  public tfpictures : Array<any> = [];
   public isData          : boolean        = false;
   public storedData      : any            = null;
   private _db   : any;
 
 
-  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
-  data = {note_name: "", photo: "", notes: ""};
+  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", file: "", notes: ""};
+  tfPicturesTable : string = 'CREATE TABLE IF NOT EXISTS tfpictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
+  datapicture = {cardid:"", picture: "" };
+
   isEnabled: any;
 
     constructor(
@@ -40,10 +50,13 @@ export class ThoughtsFeelingsPage {
                 private _alertController: AlertController,
                 public _plat: Platform,
                 public _sql: SQLite,
+                private camera : Camera,
+                private alertCtrl: AlertController,  
               )
 
 {
   this.thoughtsfeelings = [];
+  this.tfpictures =[];
   this._plat
   .ready()
   .then(() =>
@@ -70,17 +83,27 @@ export class ThoughtsFeelingsPage {
 
   async _createDatabaseTables() {
     await this._db.executeSql(this.ThoughtsFeelingsTable, []);
-    this.getData()
+    await this._db.executeSql(this.tfPicturesTable, []);
+
+    this.getData();
+    this.getData1();
+    this.getDataPicture();
+    this.getDataPictures();
   }
 
   ionViewDidLoad() {
         this.getData();
+        this.getData1();
         this.getDataPicture();
+        this.getDataPictures();
+
       }
 
       ionViewWillEnter() {
         this.getData();
+        this.getData1();
         this.getDataPicture();
+        this.getDataPictures();
       }
 
   public getData() {
@@ -100,6 +123,23 @@ export class ThoughtsFeelingsPage {
         .catch(e => alert('get data error' + e));
       }
 
+      public getDataPictures() {
+        this.verifyDatabasePopulatedPictures()
+        this._db.executeSql('SELECT * FROM tfpictures ORDER BY rowid DESC', <any>[])
+        .then(res => {
+          this.tfpictures = [];
+          for(var i=0; i<res.rows.length; i++) {
+            this.tfpictures.push({
+              rowid:res.rows.item(i).rowid,
+              cardid:res.rows.item(i).cardid,
+              picture:res.rows.item(i).picture,
+              
+            })
+          }
+        })
+            .catch(e => alert('get data error' + e));
+          }
+
       verifyDatabasePopulated() {
         this._db.executeSql('SELECT * FROM thoughtsfeelings', <any>[])
         .then(res => {
@@ -110,7 +150,18 @@ export class ThoughtsFeelingsPage {
             this.isEnabled = false;
           }
         })
+      }
 
+      verifyDatabasePopulatedPictures() {
+        this._db.executeSql('SELECT * FROM tfpictures', <any>[])
+        .then(res => {
+          if(res.rows.length == 0) {
+            this.isEnabled = true;
+          }
+          else {
+            this.isEnabled = false;
+          }
+        })
       }
 
       noContent() {
@@ -121,9 +172,26 @@ export class ThoughtsFeelingsPage {
     this._db.executeSql('INSERT INTO thoughtsfeelings VALUES(NULL,?,?,?)', [this.data.note_name, this.data.photo, this.data.notes])
     .then(res => {
         this.getData();
+        this.saveDataPictures();
       })
       .catch(e => alert("save data error" + e));
     }
+
+    public saveDataPictures() {
+      for(let i = 0; i<this.photos.length;i++) {
+      this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.thoughtsfeelings[this.thoughtsfeelings.length-1].rowid, this.photos[i]])
+      .then(res => {
+          this.getDataPictures();
+        })
+        .catch(e => alert("save data error" + e));
+      }
+    }
+
+  editData(rowid) {
+    console.log("added data"), {
+      rowid: rowid
+    }
+  }
 
   deleteData(rowid) {
       this._db.executeSql('DELETE FROM thoughtsfeelings WHERE rowid=?', [rowid])
@@ -162,7 +230,7 @@ export class ThoughtsFeelingsPage {
         }
       });
 
-      modal.onDidDismiss().then(() => {
+      modal.onDidDismiss().then((dataReturned) => {
         this.getData();
       });
 
@@ -195,6 +263,57 @@ export class ThoughtsFeelingsPage {
       return await modal.present();
     }
 
+
+
+    ngOnInit() {
+      this.photos = [];
+    }
+  
+    takePhoto()
+    {
+      const options : CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        targetHeight: 200,
+        correctOrientation: true,
+        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+        };
+  
+        this.camera.getPicture(options)
+        .then((ImageData)=> {
+            this.base64Image = "data:image/jpeg;base64," + ImageData;
+            this.photos.push(this.base64Image);
+            this.photos.reverse();
+          })
+        }
+      
+    
+      deletePhoto(index) {
+        const alert = this.alertCtrl.create({
+          header: 'Sure you want to delete this photo? There is NO undo!',
+          message: '',
+          buttons: [
+            {
+              text: 'No',
+              handler: () => {
+                console.log('Disagree clicked');
+              }
+            }, 
+            {
+              text: 'Yes',
+              handler: () => {
+                console.log('Agree clicked');
+                this.photos.splice(index, 1);
+              }
+            }
+          ]
+        }).then(res => {
+          res.present();
+      });
+    }
+
     public getDataPicture() {
       this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
       .then(res => {
@@ -206,13 +325,36 @@ export class ThoughtsFeelingsPage {
 
           })
         }
-        console.log(this.aboutmepicture[0].picture);
-        this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+          if (this.aboutmepicture.length>0) {
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+        }
+       
       })
 
 
           .catch(e => alert('get data error' + e));
         }
 
+
+        public getData1() {
+          this.verifyDatabasePopulated();
+          this._db.executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
+          .then(res => {
+            this.aboutme = [];
+            for(var i=0; i<res.rows.length; i++) {
+              this.aboutme.push({
+                rowid:res.rows.item(i).rowid,
+                name:res.rows.item(i).name
+      
+              })
+            }
+            if (this.aboutme.length>0) {
+            this.nameID=this.aboutme[res.rows.length-1].name;
+            }
+          })
+              .catch(e => alert('get data error' + e.message));
+            }
+  
 
   }

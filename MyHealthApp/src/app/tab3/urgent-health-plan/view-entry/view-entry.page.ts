@@ -10,6 +10,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import {EditEntryPage } from '..//edit-entry/edit-entry.page';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 
 @Component({
@@ -24,14 +25,15 @@ export class ViewEntryPage {
   private _db   : any;
 
   rowid: any;
-  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone INT, notes TEXT)'
+  UrgentPlanTable : string = 'CREATE TABLE IF NOT EXISTS urgentplan (rowid INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, instructions TEXT, phone TEXT, notes TEXT)'
   data = {type: "", instructions: "", phone: "", notes: ""};
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
               private _alertController: AlertController, 
               public _plat: Platform, 
-              public _sql: SQLite
+              public _sql: SQLite,
+              private callNumber: CallNumber
             ) 
             {
               this.rowid=navParams.get('rowid')
@@ -124,6 +126,13 @@ export class ViewEntryPage {
                   this.getData(rowid);
                 });
                 return await modal.present();
+              }
+
+              call(){
+                this.callNumber.callNumber(this.urgentplan[0].phone, true)
+               .then(() => console.log('Launched dialer!'))
+               .catch(e => alert('Error launching dialer' + e));
+
               }
               
             }

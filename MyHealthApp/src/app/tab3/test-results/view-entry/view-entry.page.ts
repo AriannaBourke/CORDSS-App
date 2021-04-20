@@ -113,6 +113,7 @@ export class ViewEntryPage {
                     })
                     this.photos[i]= res.rows.item(i).picture;
                   }
+                  
                 })
                     .catch(e => alert('get data error' + e));
               }

@@ -27,7 +27,10 @@ import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 export class TestResultsPage {
   photos;
   base64Image;
-  myProfileImage;
+  myProfileImage : string;
+  nameID : string;
+  public aboutme : Array<any> = [];
+  public aboutmepicture: Array<any> = [];
   public testresults : Array<any> = [];
   public pictures : Array<any> = [];
   public isData          : boolean        = false;
@@ -80,19 +83,24 @@ export class TestResultsPage {
     await this._db.executeSql(this.PicturesTable, []);
 
     this.getData();
+    this.getData1();
+    this.getDataPicture();
     this.getDataPictures();
   }
 
   ionViewDidLoad() {
         this.getData();
+        this.getData1();
+        this.getDataPicture();
         this.getDataPictures();
 
       }
 
       ionViewWillEnter() {
         this.getData();
+        this.getData1();
+        this.getDataPicture();
         this.getDataPictures();
-
       }
 
   public getData() {
@@ -292,4 +300,47 @@ export class TestResultsPage {
           res.present();
       });
     }
+
+    public getDataPicture() {
+      this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
+      .then(res => {
+        this.aboutmepicture = [];
+        for(var i=0; i<res.rows.length; i++) {
+          this.aboutmepicture.push({
+            rowid:res.rows.item(i).rowid,
+            picture:res.rows.item(i).picture,
+  
+          })
+        }
+          if (this.aboutmepicture.length>0) {
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+        }
+       
+      })
+     
+    
+          .catch(e => alert('get data error' + e));
+        }
+
+
+        public getData1() {
+          this.verifyDatabasePopulated();
+          this._db.executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
+          .then(res => {
+            this.aboutme = [];
+            for(var i=0; i<res.rows.length; i++) {
+              this.aboutme.push({
+                rowid:res.rows.item(i).rowid,
+                name:res.rows.item(i).name
+      
+              })
+            }
+            if (this.aboutme.length>0) {
+            this.nameID=this.aboutme[res.rows.length-1].name;
+            }
+          })
+              .catch(e => alert('get data error' + e.message));
+            }
+  
 }
