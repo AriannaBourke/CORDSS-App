@@ -94,7 +94,6 @@ export class AddEntryPage {
   public saveData() {
     this._db.executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions])
     .then(res => {
-      alert(this.data.date)
         this.closeModal()
       })
       .catch(e => alert("save data error" + e));
@@ -104,7 +103,7 @@ export class AddEntryPage {
       this.isSubmitted = true;
       const alert = await this._alertController.create({
         header: "Save this entry?",
-        message: "Would you like to save this entry in your procedures?",
+        message:  "Would you like to save this entry in your procedures? <br/><br/>Note: if the date is in the past, the procedure will be placed in your past procedures!",
         buttons: [
           {
             text:"Cancel"

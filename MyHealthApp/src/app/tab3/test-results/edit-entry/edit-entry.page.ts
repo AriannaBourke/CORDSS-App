@@ -1,9 +1,11 @@
-//  This file is adapted from:
+//  This file is adapted from: Database - 
 // https://edupala.com/ionic-template-driven-form-validation/ 
 // https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
 // https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/ \\
 
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
@@ -30,8 +32,8 @@ export class EditEntryPage {
   private _db   : any;
   isSubmitted = false;
   rowid: any;
-  TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, files TEXT, notes TEXT)'
-  data = {date: "", type: "", photo: "", files: "", notes: ""};
+  TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, notes TEXT)'
+  data = {date: "", type: "", photo: "", notes: ""};
   PicturesTable : string = 'CREATE TABLE IF NOT EXISTS pictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
   datapicture = {cardid:"", picture: "" };
 
@@ -92,7 +94,6 @@ export class EditEntryPage {
                       date:res.rows.item(i).date,
                       type:res.rows.item(i).type,
                       photo:res.rows.item(i).photo,
-                      files:res.rows.item(i).files,
                       notes:res.rows.item(i).notes,
                     })
                   }
@@ -114,11 +115,7 @@ export class EditEntryPage {
                   }
                 })
                     .catch(e => alert('get data error' + e));
-              }
-
-
-
-                 
+              }     
             
               async closeModal() {
                 await this.modalController.dismiss();
@@ -196,12 +193,6 @@ export class EditEntryPage {
                   this.closeModal();
                 })
               }
-              if(this.data.files != ""){
-                this._db.executeSql('UPDATE testresults SET description=? WHERE rowid=?', [this.data.files, rowid])
-                .then(res => {
-                  this.closeModal();
-                })
-              }
               if(this.data.notes != ""){
                 this._db.executeSql('UPDATE testresults SET questions=? WHERE rowid=?', [this.data.notes, rowid])
                 .then(res => {
@@ -227,10 +218,7 @@ export class EditEntryPage {
               })
             }
             this.closeModal();
-        }
-
-
-          
+        }  
 
           ngOnInit() {
             this.photos = [];

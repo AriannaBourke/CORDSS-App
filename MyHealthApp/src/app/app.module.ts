@@ -18,8 +18,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [ Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, File, SplashScreen, FileOpener, StatusBar],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule ],
+  providers: [ Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, File, SplashScreen, FileOpener, StatusBar ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

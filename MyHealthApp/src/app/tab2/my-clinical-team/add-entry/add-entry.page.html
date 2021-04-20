@@ -52,30 +52,42 @@
           </ion-col>
         </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="stacked">Role</ion-label>
-         <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
-         <ion-select 
-        #links ngModel 
-        name="clinicalrole"
-        interface="popover" 
-        placeholder="Select Option"
-        [(ngModel)]="data.role"
-        [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}">
-        <ion-select-option value='Doctor'>Doctor</ion-select-option>
-          <ion-select-option value='Ophthalmologist'>Ophthalmologist</ion-select-option>
-          <ion-select-option value='Optometrist'>Optometrist</ion-select-option>
-          <ion-select-option value='Rheumatologist'>Rheumatologist</ion-select-option>
-          <ion-select-option value='Clinical Nurse specialist'>Clinical Nurse Specialist</ion-select-option>
-          <ion-select-option value='GP'>GP</ion-select-option>
-          <ion-select-option value='Mental Health Specialist'>Mental Health Specialist</ion-select-option>
-          <ion-select-option value='Other'>Other</ion-select-option>
-        </ion-select>
-      </ion-item>
-     </ion-col>
-    </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Role</ion-label>
+              <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
+              <ion-select
+                #links
+                ngModel
+                name="clinicalrole"
+                interface="popover"
+                placeholder="Select Option"
+                [(ngModel)]="data.role"
+                [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+              >
+                <ion-select-option value="Doctor">Doctor</ion-select-option>
+                <ion-select-option value="Ophthalmologist"
+                  >Ophthalmologist</ion-select-option
+                >
+                <ion-select-option value="Optometrist"
+                  >Optometrist</ion-select-option
+                >
+                <ion-select-option value="Rheumatologist"
+                  >Rheumatologist</ion-select-option
+                >
+                <ion-select-option value="Clinical Nurse specialist"
+                  >Clinical Nurse Specialist</ion-select-option
+                >
+                <ion-select-option value="GP">GP</ion-select-option>
+                <ion-select-option value="Mental Health Specialist"
+                  >Mental Health Specialist</ion-select-option
+                >
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
         <ion-row>
           <ion-col>
