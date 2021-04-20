@@ -15,9 +15,13 @@
   <ion-avatar (click)="selectImageSource()" class="profile-pic">
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
-  <ion-title class="title" width-50 style="text-align: center">Welcome To CORDSS!</ion-title>
+  <ion-title class="title" width-50 style="text-align: center"
+    >Welcome To CORDSS!</ion-title
+  >
   <ion-list *ngFor="let about of aboutme; let i = index" class="list">
-  <ion-title class="title" width-50 style="text-align: center">Hello {{about.name}}</ion-title>
+    <ion-title class="title" width-50 style="text-align: center"
+      >Hello {{about.name}}</ion-title
+    >
   </ion-list>
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
@@ -163,7 +167,9 @@
                 size="medium"
               ></ion-icon>
               <p>{{about.emergency_1_number}}</p>
-              <ion-button shape="round"  fill="outline" slot="end">Call</ion-button>
+              <ion-button shape="round" fill="outline" slot="end"
+                >Call</ion-button
+              >
             </ion-item>
             <ion-label color="primary"> Emergency Contact 2 </ion-label>
             <ion-item>
@@ -185,7 +191,9 @@
                 class="pink"
               ></ion-icon>
               <p>{{about.emergency_2_number}}</p>
-              <ion-button shape="round" fill="outline" slot="end">Call</ion-button>
+              <ion-button shape="round" fill="outline" slot="end"
+                >Call</ion-button
+              >
             </ion-item>
             <ion-label color="primary"> Emergency Contact 3 </ion-label>
             <ion-item>
@@ -207,7 +215,9 @@
                 class="redpink"
               ></ion-icon>
               <p>{{about.emergency_3_number}}</p>
-              <ion-button shape="round" fill="outline" slot="end">Call</ion-button>
+              <ion-button shape="round" fill="outline" slot="end"
+                >Call</ion-button
+              >
             </ion-item>
           </ion-col>
         </ion-row>

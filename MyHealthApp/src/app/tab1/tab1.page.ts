@@ -13,15 +13,11 @@
 import { Component } from '@angular/core';
 import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
 import {AddEntryPage } from './add-entry/add-entry.page';
 import {EditEntryPage } from './edit-entry/edit-entry.page';
-import {ViewEntryPage } from './view-entry/view-entry.page';
-
 
 
 @Component({
@@ -119,10 +115,6 @@ export class Tab1Page {
   noContent() {
     return !this.isEnabled;
   }
-
-
-
-
 
   public getData() {
     this.verifyDatabasePopulated();
@@ -234,20 +226,6 @@ export class Tab1Page {
     }
 
 
-    async viewModal(rowid) {
-      const modal = await this.modalController.create({
-        component: ViewEntryPage,
-        componentProps: { 'rowid': rowid
-        }
-      });
-      modal.onDidDismiss().then(() => {
-        this.getData();
-      });
-
-      return await modal.present();
-    }
-
-
     async editModal(rowid) {
       const modal = await this.modalController.create({
         component: EditEntryPage,
@@ -291,7 +269,6 @@ export class Tab1Page {
               this.myProfileImage = "data:image/jpeg;base64," + ImageData;
               this.datapicture.picture = this.myProfileImage.toString(); 
               this.saveDataPicture();
-              console.log(this.myProfileImage)
             })
 
           }
@@ -317,7 +294,6 @@ export class Tab1Page {
 
   callNow(number) {
     this.callNumber.callNumber(number, true)
-    .then(res => console.log('Launched dialer!', res))
     .catch(err => console.log('Error launching dialer', err));
   }
 

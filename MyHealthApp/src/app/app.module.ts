@@ -12,15 +12,14 @@ import { File } from '@ionic-native/file/ngx'
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { NavParams } from '@ionic/angular';
 
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, NavParams],
-  providers: [ Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, File, SplashScreen, FileOpener, StatusBar, NavParams ],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule ],
+  providers: [ Camera, CallNumber, SQLite, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, File, SplashScreen, FileOpener, StatusBar ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

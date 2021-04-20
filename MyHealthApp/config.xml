@@ -117,5 +117,4 @@
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="For review pics." />
     </plugin>
     <allow-navigation href="http://localhost:8100" sessionid="3af41672" />
-    <allow-navigation href="http://localhost:8101" sessionid="4ff318f8" />
 </widget>
