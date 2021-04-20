@@ -8,22 +8,13 @@
 // https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/ \\
 // https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
-import { Component, OnInit } from '@angular/core';
-import {
-  Validators,
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  FormControl,
-} from '@angular/forms';
+import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
 import { AddEntryPage } from './add-entry/add-entry.page';
 import { EditEntryPage } from './edit-entry/edit-entry.page';
 import { ViewEntryPage } from './view-entry/view-entry.page';
-import { File } from '@ionic-native/file/ngx';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'app-my-family',

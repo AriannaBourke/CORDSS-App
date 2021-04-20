@@ -1,11 +1,11 @@
-//  This file is adapted from: Database - 
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+//  This file is adapted from: Database -
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
 // Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
-// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/ 
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/
 // https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
 import { Component } from '@angular/core';
@@ -71,12 +71,12 @@ export class PastMedicinesPage {
 
   ionViewDidLoad() {
         this.getData();
-        this.getDataPicture();
+        // this.getDataPicture();
       }
 
       ionViewWillEnter() {
         this.getData();
-        this.getDataPicture();
+        // this.getDataPicture();
       }
 
   public getData() {
@@ -189,7 +189,8 @@ export class PastMedicinesPage {
       component: AddEntryPage,
       componentProps: {
       }
-    });
+    })
+
 
     modal.onDidDismiss().then(() => {
       this.getData();
@@ -224,25 +225,25 @@ export class PastMedicinesPage {
     return await modal.present();
   }
 
-  public getDataPicture() {
-    this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
-    .then(res => {
-      this.aboutmepicture = [];
-      for(var i=0; i<res.rows.length; i++) {
-        this.aboutmepicture.push({
-          rowid:res.rows.item(i).rowid,
-          picture:res.rows.item(i).picture,
+  // public getDataPicture() {
+  //   this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
+  //   .then(res => {
+  //     this.aboutmepicture = [];
+  //     for(var i=0; i<res.rows.length; i++) {
+  //       this.aboutmepicture.push({
+  //         rowid:res.rows.item(i).rowid,
+  //         picture:res.rows.item(i).picture,
 
-        })
-      }
-      console.log('hey maria');
-      console.log(this.aboutmepicture[0].picture);
-      this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
-    })
-   
-  
-        .catch(e => alert('get data error' + e));
-      }
+  //       })
+  //     }
+  //     console.log('hey maria');
+  //     console.log(this.aboutmepicture[0].picture);
+  //     this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
+  //   })
+
+
+  //       .catch(e => alert('get data error' + e));
+  //     }
 
 
 }
