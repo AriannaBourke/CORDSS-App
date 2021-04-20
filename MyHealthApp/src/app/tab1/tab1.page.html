@@ -27,6 +27,7 @@
     <ion-item lines="none">
       <p style="font-size: 30px">Click 'Add' to add information About Me!</p>
       <img class="arrow" src="../../../assets/icon/curly arrow 1.png" />
+      <img class="image1" src="../../assets/icon/Zebra.png" />
     </ion-item>
   </ion-card>
 
@@ -167,7 +168,13 @@
                 size="medium"
               ></ion-icon>
               <p>{{about.emergency_1_number}}</p>
-              <ion-button shape="round" fill="outline" slot="end" (click)="call1()" >Call</ion-button>
+              <ion-button
+                shape="round"
+                fill="outline"
+                slot="end"
+                (click)="call1()"
+                >Call</ion-button
+              >
             </ion-item>
             <ion-label color="primary"> Emergency Contact 2 </ion-label>
             <ion-item>
@@ -189,7 +196,13 @@
                 class="pink"
               ></ion-icon>
               <p>{{about.emergency_2_number}}</p>
-              <ion-button shape="round" fill="outline" slot="end" (click)="call2()" >Call</ion-button>
+              <ion-button
+                shape="round"
+                fill="outline"
+                slot="end"
+                (click)="call2()"
+                >Call</ion-button
+              >
             </ion-item>
             <ion-label color="primary"> Emergency Contact 3 </ion-label>
             <ion-item>
@@ -211,7 +224,13 @@
                 class="redpink"
               ></ion-icon>
               <p>{{about.emergency_3_number}}</p>
-              <ion-button shape="round" fill="outline" slot="end" (click)="call3()" >Call</ion-button>
+              <ion-button
+                shape="round"
+                fill="outline"
+                slot="end"
+                (click)="call3()"
+                >Call</ion-button
+              >
             </ion-item>
           </ion-col>
         </ion-row>

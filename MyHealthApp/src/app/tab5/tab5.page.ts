@@ -15,6 +15,7 @@ import { ModalController } from '@ionic/angular';
 import { UrgentplanPdfPage } from './urgentplan-pdf/urgentplan-pdf.page';
 import { ConditionsPdfPage } from './conditions-pdf/conditions-pdf.page';
 import { MedicationsPdfPage } from './medications-pdf/medications-pdf.page';
+import { AlertController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab5',
@@ -22,10 +23,13 @@ import { MedicationsPdfPage } from './medications-pdf/medications-pdf.page';
   styleUrls: ['tab5.page.scss'],
 })
 export class Tab5Page {
+  window: any;
+
   constructor(
     private callNumber: CallNumber,
     public modalController: ModalController
-  ) {}
+    ) {}
+
 
   CallNow(n: string) {
     this.callNumber
