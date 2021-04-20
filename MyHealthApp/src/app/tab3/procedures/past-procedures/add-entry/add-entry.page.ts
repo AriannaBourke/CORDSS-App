@@ -103,7 +103,7 @@ export class AddEntryPage {
       this.isSubmitted = true;
       const alert = await this._alertController.create({
         header: "Save this entry?",
-        message: "Would you like to save this entry in your procedures?",
+        message:  "Would you like to save this entry in your procedures? <br/><br/>Note: if the date is in the future, the procedure will be placed in your upcoming procedures!",
         buttons: [
           {
             text:"Cancel"

@@ -1,10 +1,9 @@
+// initializeApp() has been modified from https://ionicacademy.com/ionic-splash-screen-animation
+
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-
-
 
 @Component({
   selector: 'app-root',
@@ -22,24 +21,26 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  // initializeApp(){
+  //   this.platform.ready().then(() => {
+  //     this.statusBar.styleDefault();
+  //     this.splashScreen.hide();
+  //   });
+
+  //   }
+  // }
+
+
+  /// TRY THIS 
   initializeApp(){
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
+      setTimeout(() => {
       this.splashScreen.hide();
+    }, 800);
     });
 
     }
   }
 
-  // constructor( private _plat: Platform, private splashScreen: SplashScreen) {
-    
-  //   this._plat.ready().then(() => {
-  //     setTimeout(() => {
-  //         this.splashScreen.hide();
-  
-  //     }, 800);
-  // });
-    
-  
-  // }}
 

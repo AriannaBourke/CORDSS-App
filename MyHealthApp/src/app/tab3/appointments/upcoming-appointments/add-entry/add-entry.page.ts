@@ -1,4 +1,4 @@
-//  This file is adapted from:
+//  This file is adapted from: Database - 
 // https://edupala.com/ionic-template-driven-form-validation/ 
 // https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
 // https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
@@ -93,7 +93,7 @@ export class AddEntryPage {
   public saveData() {
     this._db.executeSql('INSERT INTO appointments VALUES(NULL,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.description, this.data.questions])
     .then(res => {
-      alert(this.data.date)
+      // alert(this.data.date)
       this.closeModal()
       })
       .catch(e => alert("save data error" + e));
@@ -103,7 +103,7 @@ export class AddEntryPage {
       this.isSubmitted = true;
       const alert = await this._alertController.create({
         header: "Save this entry?",
-        message: "Would you like to save this entry in your appointments?",
+        message: "Would you like to save this entry in your appointments? <br/><br/>Note: if the date is in the past, the appointment will be placed in your past appointments!",
         buttons: [
           {
             text:"Cancel"
@@ -118,7 +118,7 @@ export class AddEntryPage {
         ]
       });
 
-      await alert.present();
+       await alert.present();
     }
 
     noSubmit(e) {
