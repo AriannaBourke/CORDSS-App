@@ -15,14 +15,12 @@
   <ion-avatar (click)="selectImageSource()" class="profile-pic">
     <ion-img [src]="myProfileImage"></ion-img>
   </ion-avatar>
-  <ion-title class="title" width-50 style="text-align: center"
-    >Welcome To CORDSS!</ion-title
-  >
-  <ion-list *ngFor="let about of aboutme; let i = index" class="list">
-    <ion-title class="title" width-50 style="text-align: center"
-      >Hello {{about.name}}</ion-title
-    >
-  </ion-list>
+
+  <!-- <ion-title class="title" width-50 style="text-align: center">Welcome To CORDSS!</ion-title> -->
+  <!-- <ion-list *ngFor="let about of aboutme; let i = index" class="list">
+    <ion-title class="title" width-50 style="text-align: center">Hello {{about.name}}</ion-title>
+  </ion-list> -->
+
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">Click 'Add' to add information About Me!</p>
@@ -31,6 +29,7 @@
   </ion-card>
 
   <ion-list *ngFor="let about of aboutme; let i = index" class="list">
+    <ion-title class="title" width-50 style="text-align: center">Welcome To CORDSS!</ion-title>
     <ion-card>
       <ion-grid>
         <ion-row>
