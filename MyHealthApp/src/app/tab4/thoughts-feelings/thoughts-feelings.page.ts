@@ -124,7 +124,6 @@ export class ThoughtsFeelingsPage {
       }
 
       public getDataPictures() {
-        this.verifyDatabasePopulatedPictures()
         this._db.executeSql('SELECT * FROM tfpictures ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.tfpictures = [];
@@ -142,18 +141,6 @@ export class ThoughtsFeelingsPage {
 
       verifyDatabasePopulated() {
         this._db.executeSql('SELECT * FROM thoughtsfeelings', <any>[])
-        .then(res => {
-          if(res.rows.length == 0) {
-            this.isEnabled = true;
-          }
-          else {
-            this.isEnabled = false;
-          }
-        })
-      }
-
-      verifyDatabasePopulatedPictures() {
-        this._db.executeSql('SELECT * FROM tfpictures', <any>[])
         .then(res => {
           if(res.rows.length == 0) {
             this.isEnabled = true;

@@ -124,7 +124,6 @@ export class MedicalNotesPage {
       }
 
       public getDataPictures() {
-        this.verifyDatabasePopulatedPictures()
         this._db.executeSql('SELECT * FROM medpictures ORDER BY rowid DESC', <any>[])
         .then(res => {
           this.medpictures = [];
@@ -152,17 +151,6 @@ export class MedicalNotesPage {
         })
       }
 
-      verifyDatabasePopulatedPictures() {
-        this._db.executeSql('SELECT * FROM medpictures', <any>[])
-        .then(res => {
-          if(res.rows.length == 0) {
-            this.isEnabled = true;
-          }
-          else {
-            this.isEnabled = false;
-          }
-        })
-      }
 
       noContent() {
         return !this.isEnabled;
