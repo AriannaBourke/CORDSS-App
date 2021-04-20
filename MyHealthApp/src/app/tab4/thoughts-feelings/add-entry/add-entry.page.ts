@@ -27,8 +27,8 @@ export class AddEntryPage {
   public storedData      : any            = null;
   private _db   : any;
   isSubmitted = false;
-  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
-  data = {note_name: "", photo: "", file: "", notes: "" };
+  ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", notes: "" };
   tfPicturesTable : string = 'CREATE TABLE IF NOT EXISTS tfpictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
   datapicture = {cardid:"", picture: "" };
 

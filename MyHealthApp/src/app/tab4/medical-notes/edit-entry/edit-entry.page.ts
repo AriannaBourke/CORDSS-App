@@ -31,8 +31,8 @@ export class EditEntryPage {
   private _db   : any;
   isSubmitted = false;
   rowid: any;
-  MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, file TEXT, notes TEXT)'
-  data = {note_name: "", photo: "", file: "", notes: ""};
+  MedNotesTable : string =  'CREATE TABLE IF NOT EXISTS mednotes (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
+  data = {note_name: "", photo: "", notes: ""};
   MedPicturesTable : string = 'CREATE TABLE IF NOT EXISTS medpictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
   datapicture = {cardid:"", picture: "" };
 
