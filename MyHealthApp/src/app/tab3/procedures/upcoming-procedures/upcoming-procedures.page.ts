@@ -215,10 +215,7 @@ export class UpcomingProceduresPage {
           this.aboutmepicture.push({
             rowid:res.rows.item(i).rowid,
             picture:res.rows.item(i).picture,
-<<<<<<< HEAD
-=======
 
->>>>>>> b0d122827967d28c0a2ee63351cfbc56f4c0cd3d
           })
         }
           if (this.aboutmepicture.length>0) {
@@ -226,11 +223,8 @@ export class UpcomingProceduresPage {
           this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
         }
       })
-<<<<<<< HEAD
-=======
 
 
->>>>>>> b0d122827967d28c0a2ee63351cfbc56f4c0cd3d
           .catch(e => alert('get data error' + e));
         }
   
