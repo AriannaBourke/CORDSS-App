@@ -1,4 +1,4 @@
-//  This file is adapted from:
+//  This file is adapted from: Database - 
 // https://edupala.com/ionic-template-driven-form-validation/ 
 // https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
 // https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
@@ -94,7 +94,7 @@ export class EditEntryPage {
                 this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
-                  message: "Would you like to update this entry in your appointments?",
+                  message:  "Would you like to update this entry in your appointments? <br/><br/>Note: if the date is in the future, the appointment will be placed in your upcoming appointments!",
                   buttons: [
                     {
                       text:"Cancel"

@@ -1,9 +1,10 @@
-//  This file is adapted from:
+//  This file is adapted from: Database - 
 // https://edupala.com/ionic-template-driven-form-validation/ 
 // https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
 // https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+
 
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';

@@ -94,7 +94,6 @@ export class EditEntryPage {
                       rowid:res.rows.item(i).rowid,
                       note_name:res.rows.item(i).note_name,
                       photo:res.rows.item(i).photo,
-                      file:res.rows.item(i).file,
                       notes:res.rows.item(i).notes
                     })
                   }
@@ -170,12 +169,6 @@ export class EditEntryPage {
               }
               if(this.data.photo != ""){
                 this._db.executeSql('UPDATE thoughtsfeelings SET photo=? WHERE rowid=?', [this.data.photo, rowid])
-                .then(res => {
-                  this.closeModal();
-                })
-              }
-              if(this.data.file != ""){
-                this._db.executeSql('UPDATE thoughtsfeelings SET file=? WHERE rowid=?', [this.data.file, rowid])
                 .then(res => {
                   this.closeModal();
                 })

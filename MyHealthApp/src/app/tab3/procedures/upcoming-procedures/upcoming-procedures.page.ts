@@ -1,9 +1,14 @@
-//  This file is adapted from:
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+//  This file is adapted from: Database -
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/ \\
+// https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
+// Date(), toISOString():
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
 
 import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
@@ -210,6 +215,10 @@ export class UpcomingProceduresPage {
           this.aboutmepicture.push({
             rowid:res.rows.item(i).rowid,
             picture:res.rows.item(i).picture,
+<<<<<<< HEAD
+=======
+
+>>>>>>> b0d122827967d28c0a2ee63351cfbc56f4c0cd3d
           })
         }
           if (this.aboutmepicture.length>0) {
@@ -217,6 +226,11 @@ export class UpcomingProceduresPage {
           this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
         }
       })
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b0d122827967d28c0a2ee63351cfbc56f4c0cd3d
           .catch(e => alert('get data error' + e));
         }
   

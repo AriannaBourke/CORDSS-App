@@ -95,7 +95,7 @@ export class EditEntryPage {
                 this.isSubmitted = true;
                 const alert = await this._alertController.create({
                   header: "Update this entry?",
-                  message: "Would you like to update this entry in your procedures?",
+                  message:  "Would you like to update this entry in your procedures? <br/><br/>Note: if the date is in the future, the procedure will be placed in your upcoming procedures!",
                   buttons: [
                     {
                       text:"Cancel"

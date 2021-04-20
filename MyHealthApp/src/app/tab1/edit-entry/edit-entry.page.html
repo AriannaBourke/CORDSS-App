@@ -99,17 +99,17 @@
                   size="medium"
                 ></ion-icon>
                 <ion-input
-                placeholder="{{about.email}}"
-                name="email"
-                type="email"
-                [(ngModel)]="data.email"
-                #emailCtrl="ngModel"
-                email
-              ></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
-              <ion-text color="danger">Email is not valid</ion-text>
-            </ion-item>
+                  placeholder="{{about.email}}"
+                  name="email"
+                  type="email"
+                  [(ngModel)]="data.email"
+                  #emailCtrl="ngModel"
+                  email
+                ></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
+                <ion-text color="danger">Email is not valid</ion-text>
+              </ion-item>
             </ion-col>
           </ion-row>
 

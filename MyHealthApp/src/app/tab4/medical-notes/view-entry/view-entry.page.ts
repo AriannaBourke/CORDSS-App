@@ -90,7 +90,6 @@ export class ViewEntryPage {
                       rowid:res.rows.item(i).rowid,
                       note_name:res.rows.item(i).note_name,
                       photo:res.rows.item(i).photo,
-                      file:res.rows.item(i).file,
                       notes:res.rows.item(i).notes
                     })
                   }

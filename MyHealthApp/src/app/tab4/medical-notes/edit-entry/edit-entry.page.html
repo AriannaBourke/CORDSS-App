@@ -72,21 +72,6 @@
           <ion-row>
             <ion-col>
               <ion-item>
-                <ion-label color="medium" position="stacked">Files</ion-label>
-                <ion-input
-                  type="text"
-                  placeholder="{{note.file}}"
-                  [(ngModel)]="data.file"
-                  name="file"
-                ></ion-input>
-                <ion-icon class="yellow" slot="start" name="copy"></ion-icon>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col>
-              <ion-item>
                 <ion-label color="medium" position="stacked">Notes</ion-label>
                 <ion-icon
                   class="green"
@@ -98,12 +83,7 @@
                   placeholder="{{note.notes}}"
                   [(ngModel)]="data.notes"
                   name="notes"
-                  required
-                  #notesCtrl="ngModel"
                 ></ion-textarea>
-              </ion-item>
-              <ion-item *ngIf="!notesCtrl.valid && notesCtrl.touched">
-                <ion-text color="danger">*Notes are required</ion-text>
               </ion-item>
               <div class="ion-margin-vertical ion-text-right">
                 <ion-button

@@ -14,11 +14,11 @@
     <preference name="ScrollEnabled" value="false" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="FadeSplashScreenDuration" value="800" />
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="50000" />
     <preference name="auto-hide-splash-screen" value="false" />
     <preference name="AutoHideSplashScreen" value="false" />
     <feature name="StatusBar">
@@ -117,5 +117,4 @@
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="For review pics." />
     </plugin>
     <allow-navigation href="http://localhost:8100" sessionid="3af41672" />
-    <allow-navigation href="http://localhost:8101" sessionid="4ff318f8" />
 </widget>

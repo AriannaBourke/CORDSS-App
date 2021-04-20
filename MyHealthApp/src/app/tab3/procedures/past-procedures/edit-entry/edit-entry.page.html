@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Past Procedure info!</ion-title>
+    <ion-title>Edit Procedure info!</ion-title>
     <ion-button
       color="dark"
       fill="clear"
@@ -26,7 +26,7 @@
           <ion-row>
             <ion-col>
               <ion-item>
-                <ion-label color="medium" position="stacked"
+                <ion-label color="medium" position="stacked"S
                   >Date & Time</ion-label
                 >
                 <ion-icon
@@ -35,8 +35,8 @@
                   name="calendar-number"
                 ></ion-icon>
                 <ion-datetime
-                  placeholder="{{pro.date | date: 'dd MMMM y HH:mm'}}"
-                  displayFormat="DD MMMM YYYY"
+                  placeholder="{{pro.date | date: 'dd MMMM y HH:mm a'}}"
+                  displayFormat="DD MMMM YYYY HH:mm"
                   [(ngModel)]="data.date"
                   name="date"
                   required

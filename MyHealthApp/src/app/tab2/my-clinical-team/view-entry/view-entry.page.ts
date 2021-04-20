@@ -1,11 +1,15 @@
-//  This file is adapted from:
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+//  This file is adapted from: Database -
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/ \\
+// https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
+// callNow(): https://www.techiediaries.com/ionic-cordova-phone-call/
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
@@ -21,14 +25,24 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 })
 export class ViewEntryPage {
   myProfileImage;
-  public clinicalteam : Array<any> = [];
-  public isData          : boolean        = false;
-  public storedData      : any            = null;
-  private _db   : any;
+  public clinicalteam: Array<any> = [];
+  public isData: boolean = false;
+  public storedData: any = null;
+  private _db: any;
 
   rowid: any;
-  ClinicalTeamTable : string = 'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)'
-  data = {name: "", role: "", clinic_name: "", email: "", phone: "", photo: ""};
+  ClinicalTeamTable: string =
+    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)';
+  data = {
+    name: '',
+    role: '',
+    clinic_name: '',
+    email: '',
+    phone: '',
+    photo: '',
+  };
+
+
 
   constructor(private modalController: ModalController,
               private navParams: NavParams,
@@ -91,45 +105,47 @@ export class ViewEntryPage {
                 await this.modalController.dismiss();
               }
 
-              deleteData(rowid) {
-                this._db.executeSql('DELETE FROM clinicalteam WHERE rowid=?', [rowid])
-                .then(res => {
-                  this.closeModal();
-                })
-                .catch(e => alert('delete data error' + e));
-              }
-          
-              async removeData(rowid) {
-                const alert = await this._alertController.create({
-                  header: "Delete this entry?",
-                  message: "Would you like to delete this entry from your clinical team?",
-                  buttons: [
-                    {
-                      text:"Cancel"
-                    },
-                    {
-                      text:"Delete",
-                      handler: ()=> {
-                        this.deleteData(rowid);
-                      }
-                    }
-                  ]
-                });
-            
-                await alert.present();
-            
-              }
+              
+  deleteData(rowid) {
+    this._db
+      .executeSql('DELETE FROM clinicalteam WHERE rowid=?', [rowid])
+      .then((res) => {
+        this.closeModal();
+      })
+      .catch((e) => alert('delete data error' + e));
+  }
 
-              async editModal(rowid) {
-                const modal = await this.modalController.create({
-                  component: EditEntryPage,
-                  componentProps: { 'rowid': rowid}
-                });
-                modal.onDidDismiss().then(()=>{
-                  this.getData(rowid);
-                });
-                return await modal.present();
-              }
+  async removeData(rowid) {
+    const alert = await this._alertController.create({
+      header: 'Delete this entry?',
+      message: 'Would you like to delete this entry from your clinical team?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.deleteData(rowid);
+          },
+        },
+      ],
+    });
+  }
+
+
+    async editModal(rowid) {
+      const modal = await this.modalController.create({
+        component: EditEntryPage,
+        componentProps: { rowid: rowid },
+      });
+      modal.onDidDismiss().then(() => {
+        this.getData(rowid);
+      });
+      return await modal.present();
+    }
+
+             
 
               call(){
                 this.callNumber.callNumber(this.clinicalteam[0].phone, true)
@@ -138,5 +154,6 @@ export class ViewEntryPage {
                
               }
               
-            }
-
+         
+ 
+}
