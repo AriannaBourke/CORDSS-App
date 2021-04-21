@@ -18,9 +18,10 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title >Create PDF</ion-title>
+    <ion-title>Create PDF</ion-title>
     <ion-button color="light" slot="start" size="small" (click)="closeModal()"
-    ><ion-icon size="large" name="arrow-back-outline"></ion-icon></ion-button>
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -28,45 +29,49 @@
   <ion-card>
     <ion-item>
       <ion-label>Click To Download PDF</ion-label>
-      <ion-fab-button color="success" slot="end" (click)="createPDF()" [disabled]="checkIsEnabled()"
+      <ion-fab-button
+        color="success"
+        slot="end"
+        (click)="createPDF()"
+        [disabled]="checkIsEnabled()"
         ><ion-icon name="download-outline"></ion-icon
       ></ion-fab-button>
     </ion-item>
   </ion-card>
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
-      <p style="font-size: 20px">You have no information in your urgent plan yet. Add an entry before creating a PDF!</p>
+      <p style="font-size: 20px">
+        You have no information in your urgent plan yet. Add an entry before
+        creating a PDF!
+      </p>
     </ion-item>
   </ion-card>
-  
+
   <div id="pdfcontent">
-
     <ion-card>
-    <ion-list *ngFor="let plan of urgentplan; let i = index">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-      <ion-item>
-      <h3>Urgent Plan</h3>
-    </ion-item>
-      <ion-item>
-      <p>Plan Type: {{plan.type}}</p>
-      </ion-item>
-      <ion-item>
-      <p>Instructions: {{plan.instructions}}</p>
-    </ion-item>
-    <ion-item>
-      <p>Telephone: {{plan.phone}}</p>
-    </ion-item>
-    <ion-item>
-      <p>Notes: {{plan.notes}}</p>
-    </ion-item>
-    
-  </ion-col>
-  </ion-row>
-  </ion-grid>
-
-</ion-list>
-  </ion-card>
+      <ion-list *ngFor="let plan of urgentplan; let i = index">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <h3>Urgent Plan</h3>
+              </ion-item>
+              <ion-item>
+                <p>Plan Type: {{plan.type}}</p>
+              </ion-item>
+              <ion-item>
+                <p>Instructions: {{plan.instructions}}</p>
+              </ion-item>
+              <ion-item>
+                <p>Telephone: {{plan.phone}}</p>
+              </ion-item>
+              <ion-item>
+                <p>Notes: {{plan.notes}}</p>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-card>
   </div>
 </ion-content>

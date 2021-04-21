@@ -27,14 +27,13 @@ export class EditEntryPage {
   isSubmitted = false;
   rowid: any;
   ClinicalTeamTable: string =
-    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)';
+    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT)';
   data = {
     name: '',
     role: '',
     clinic_name: '',
     email: '',
     phone: '',
-    photo: '',
   };
 
   constructor(
@@ -85,7 +84,6 @@ export class EditEntryPage {
             clinic_name: res.rows.item(i).clinic_name,
             email: res.rows.item(i).email,
             phone: res.rows.item(i).phone,
-            photo: res.rows.item(i).photo,
           });
         }
       })
@@ -168,16 +166,5 @@ export class EditEntryPage {
           this.closeModal();
         });
     }
-    if (this.data.photo != '') {
-      this._db
-        .executeSql('UPDATE clinicalteam SET photo=? WHERE rowid=?', [
-          this.data.photo,
-          rowid,
-        ])
-        .then((res) => {
-          this.closeModal();
-        });
-    }
-    this.closeModal();
   }
 }

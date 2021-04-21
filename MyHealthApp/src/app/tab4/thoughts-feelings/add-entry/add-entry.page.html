@@ -50,16 +50,24 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Photo</ion-label>
-              <ion-button 
-              (click)="takePhoto()"
-              [(ngModel)]="data.photo"
-              name="photo"
-              >Select Images</ion-button>
+              <ion-button
+                (click)="takePhoto()"
+                [(ngModel)]="data.photo"
+                name="photo"
+                >Select Images</ion-button
+              >
               <ion-icon class="orange" slot="start" name="camera"></ion-icon>
               <div class="images-wrapper">
-                <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
-                  <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
-                  <img [src]="photo" alt="" srcset="">
+                <div
+                  class="pick-single-image"
+                  *ngFor="let photo of photos; let id = index"
+                >
+                  <ion-icon
+                    name="trash"
+                    class="deleteIcon"
+                    (click)="deletePhoto(id)"
+                  ></ion-icon>
+                  <img [src]="photo" alt="" srcset="" />
                 </div>
               </div>
             </ion-item>
@@ -71,7 +79,7 @@
             <ion-item>
               <ion-label position="stacked">Notes</ion-label>
               <ion-icon
-                class="green"
+                class="yellow"
                 slot="start"
                 name="pencil-outline"
               ></ion-icon>

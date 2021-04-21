@@ -38,9 +38,12 @@
               <ion-label color="medium" position="stacked">Photo</ion-label>
               <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
               <div class="images-wrapper">
-                <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
+                <div
+                  class="pick-single-image"
+                  *ngFor="let photo of photos; let id = index"
+                >
                   <!-- <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon> -->
-                  <img [src]="photo" alt="" srcset="">
+                  <img [src]="photo" alt="" srcset="" />
                 </div>
               </div>
               <p>{{note.photo}}</p>
