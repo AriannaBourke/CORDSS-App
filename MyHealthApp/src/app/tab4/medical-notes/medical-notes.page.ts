@@ -85,7 +85,7 @@ export class MedicalNotesPage {
     await this._db.executeSql(this.MedNotesTable, []);
     await this._db.executeSql(this.MedPicturesTable, []);
 
-    this.getData()
+    this.getData();
     this.getData1();
     this.getDataPicture();
     this.getDataPictures();

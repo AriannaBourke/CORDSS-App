@@ -37,7 +37,6 @@ export class ThoughtsFeelingsPage {
   public storedData      : any            = null;
   private _db   : any;
 
-
   ThoughtsFeelingsTable : string =  'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, photo TEXT, notes TEXT)'
   data = {note_name: "", photo: "", notes: ""};
   tfPicturesTable : string = 'CREATE TABLE IF NOT EXISTS tfpictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
@@ -51,7 +50,8 @@ export class ThoughtsFeelingsPage {
                 public _plat: Platform,
                 public _sql: SQLite,
                 private camera : Camera,
-                private alertCtrl: AlertController,  
+                private alertCtrl: AlertController, 
+
               )
 
 {
@@ -96,7 +96,6 @@ export class ThoughtsFeelingsPage {
         this.getData1();
         this.getDataPicture();
         this.getDataPictures();
-
       }
 
       ionViewWillEnter() {
@@ -107,7 +106,7 @@ export class ThoughtsFeelingsPage {
       }
 
   public getData() {
-    this.verifyDatabasePopulated()
+    this.verifyDatabasePopulated();
     this._db.executeSql('SELECT * FROM thoughtsfeelings ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.thoughtsfeelings = [];
@@ -151,6 +150,7 @@ export class ThoughtsFeelingsPage {
         })
       }
 
+      
       noContent() {
         return !this.isEnabled;
       }

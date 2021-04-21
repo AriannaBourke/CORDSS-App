@@ -34,7 +34,7 @@ export class Tab1Page {
   private _db   : any;
 
   default: any;
-  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone INT, address TEXT, nhs_number INT, emergency_1_name TEXT, emergency_1_number TEXT, emergency_2_name TEXT, emergency_2_number TEXT, emergency_3_name TEXT, emergency_3_number TEXT)'
+  AboutMeTable : string = 'CREATE TABLE IF NOT EXISTS aboutme (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birthday TEXT, about TEXT, email TEXT, phone TEXT, address TEXT, nhs_number INT, emergency_1_name TEXT, emergency_1_number TEXT, emergency_2_name TEXT, emergency_2_number TEXT, emergency_3_name TEXT, emergency_3_number TEXT)'
   data = {name: "", birthday: "", about: "", email: "", phone: "", address: "", nhs_number: "", emergency_1_name: "", emergency_1_number: "",  emergency_2_name: "", emergency_2_number: "",  emergency_3_name: "", emergency_3_number: ""};
   AboutMeTablePicture : string = 'CREATE TABLE IF NOT EXISTS aboutmepicture (rowid INTEGER PRIMARY KEY AUTOINCREMENT, picture TEXT)'
   datapicture = { picture: "" };

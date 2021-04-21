@@ -33,7 +33,7 @@ export class MyClinicalTeamPage {
   private _db: any;
 
   ClinicalTeamTable: string =
-    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)';
+    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone TEXT, photo TEXT)';
   data = {
     name: '',
     role: '',

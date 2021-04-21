@@ -97,28 +97,29 @@ export class ViewEntryPage {
                     .catch(e => alert('get data error' + e));
               }
                 
-                  public getDataPictures(rowid) {
-                    this._db.executeSql('SELECT * FROM tfpictures WHERE cardid=?', [rowid])
-                    .then(res => {
-                      this.tfpictures = [];
-                      for(var i=0; i<res.rows.length; i++) {
-                        this.tfpictures.push({
-                          rowid:res.rows.item(i).rowid,
-                          cardid:res.rows.item(i).cardid,
-                          picture:res.rows.item(i).picture,
-                          
-                        })
-                        this.photos[i]= res.rows.item(i).picture;
-                      }
+              public getDataPictures(rowid) {
+                this._db.executeSql('SELECT * FROM tfpictures WHERE cardid=?', [rowid])
+                .then(res => {
+                  this.tfpictures = [];
+                  for(var i=0; i<res.rows.length; i++) {
+                    this.tfpictures.push({
+                      rowid:res.rows.item(i).rowid,
+                      cardid:res.rows.item(i).cardid,
+                      picture:res.rows.item(i).picture,
+                      
                     })
-                        .catch(e => alert('get data error' + e));
+                    this.photos[i]= res.rows.item(i).picture;
                   }
+                })
+                    .catch(e => alert('get data error' + e));
+              }
                  
             
               async closeModal() {
                 await this.modalController.dismiss();
               }
 
+              
               deleteData(rowid) {
                 this._db.executeSql('DELETE FROM thoughtsfeelings WHERE rowid=?', [rowid])
                 .then(res => {

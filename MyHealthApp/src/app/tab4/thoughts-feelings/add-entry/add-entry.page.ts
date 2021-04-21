@@ -12,12 +12,14 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { NgForm } from '@angular/forms';
 import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 
+
 @Component({
   selector: 'app-add-entry',
   templateUrl: './add-entry.page.html',
   styleUrls: ['./add-entry.page.scss'],
 })
 export class AddEntryPage {
+  row;
   photos;
   base64Image;
   myProfileImage;
@@ -43,7 +45,7 @@ export class AddEntryPage {
             ) 
 {           
   this.thoughtsfeelings = [];
-  this.tfpictures =[];
+  this.tfpictures = [];
 
   this._plat
   .ready()
@@ -75,19 +77,16 @@ export class AddEntryPage {
 
     this.getData();
     this.getDataPictures();
-
   }
 
   ionViewDidLoad() {
         this.getData();
         this.getDataPictures();
-
       }
     
       ionViewWillEnter() {
         this.getData();
         this.getDataPictures();
-
       }
     
       public getData() {
@@ -104,39 +103,46 @@ export class AddEntryPage {
           }
         })
             .catch(e => alert('get data error' + e));
-          }
+    }
 
-          public getDataPictures() {
-            this._db.executeSql('SELECT * FROM tfpictures ORDER BY rowid DESC', <any>[])
-            .then(res => {
-              this.tfpictures = [];
-              for(var i=0; i<res.rows.length; i++) {
-                this.tfpictures.push({
-                  rowid:res.rows.item(i).rowid,
-                  cardid:res.rows.item(i).cardid,
-                  picture:res.rows.item(i).picture,
-                })
-        
-                console.log('doulefkei');
-                console.log(this.tfpictures[0]);
-                console.log(this.tfpictures[1]);
-        
-              }
-            })
-                .catch(e => alert('get data error' + e));
-          }
+    public getDataPictures() {
+      this._db.executeSql('SELECT * FROM tfpictures ORDER BY rowid DESC', <any>[])
+      .then(res => {
+        this.tfpictures = [];
+        for(var i=0; i<res.rows.length; i++) {
+          this.tfpictures.push({
+            rowid:res.rows.item(i).rowid,
+            cardid:res.rows.item(i).cardid,
+            picture:res.rows.item(i).picture,
+          })
+  
+          console.log('doulefkei');
+          console.log(this.tfpictures[0]);
+          console.log(this.tfpictures[1]);
+  
+        }
+      })
+          .catch(e => alert('get data error' + e));
+    }
     
   public saveData() {
     this._db.executeSql('INSERT INTO thoughtsfeelings VALUES(NULL,?,?,?)', [this.data.note_name, this.data.photo, this.data.notes])
     .then(res => {
         this.closeModal()
+        this.saveDataPictures();
       })
       .catch(e => alert("save data error" + e));
     }
 
     public saveDataPictures() {
+      if (this.thoughtsfeelings.length>0){
+        this.row = this.thoughtsfeelings[0].rowid+1 ;
+      }
+      else{
+        this.row = 1 ;
+      }
       for(let i = 0; i<this.photos.length;i++) {
-      this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.thoughtsfeelings[0].rowid+1, this.photos[i]])
+      this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.row, this.photos[i]])
       .then(res => {
           this.getDataPictures();
         })

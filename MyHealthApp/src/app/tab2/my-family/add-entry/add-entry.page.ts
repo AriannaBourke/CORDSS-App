@@ -24,7 +24,7 @@ export class AddEntryPage {
   data: any;
   isSubmitted = false;
   MyFamilyTable: string =
-    'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)';
+    'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone TEXT)';
 
   constructor(
     private modalController: ModalController,

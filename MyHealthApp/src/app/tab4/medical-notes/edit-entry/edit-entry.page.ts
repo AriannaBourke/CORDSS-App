@@ -233,17 +233,35 @@ export class EditEntryPage {
                 res.present();
             });
           }
-          
+
 
           deleteAll(){
-            this._db.executeSql('DELETE FROM medpictures WHERE cardid=?', [this.rowid])
+            const alert = this.alertCtrl.create({
+              header: 'Sure you want to delete this photo? There is NO undo!',
+              message: '',
+              buttons: [
+                {
+                  text: 'No',
+                  handler: () => {
+                    console.log('Disagree clicked');
+                  }
+                }, 
+                {
+                  text: 'Yes',
+                  handler: () => {
+                    console.log('Agree clicked');
+                    this._db.executeSql('DELETE FROM medpictures WHERE cardid=?', [this.rowid])
                 .then(res => {
                   this.getDataPictures(this.rowid);
-                    
-                })
-                    .catch(e => alert('delete data error' + e.message));
+                  })
+                }
+                }
+              ]
+            }).then(res => {
+              res.present();
+          });
+        }
+          
 
-
-          }
           
 }

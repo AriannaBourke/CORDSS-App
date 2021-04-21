@@ -1,10 +1,14 @@
+ion-item.background {
+  --background: #a3dbf1;
+  color: #041a97;
+}
+
 .profile-pic {
   margin-top: 1vh;
-  width: 50px;
-  height: 50px;
-  border: white solid 1px;
+  width: 60px;
+  height: 60px;
+  border: white solid 3px;
   margin-right: 5px;
-  // margin-left: 0px;
 }
 
 .hiddencard {
@@ -15,34 +19,4 @@
   margin-top: 1vh;
   height: 80px;
   margin-right: 0px;
-}
-
-.image-container {
-  background-size: cover;
-  min-height: 220px;
-}
-
-@media (min-width: 0px) {
-  .images-wrapper {
-    position: relative;
-    column-count: 2;
-  }
-}
-
-@media (min-width: 420px) {
-  .images-wrapper {
-    position: relative;
-    column-count: 3;
-  }
-}
-
-@media (min-width: 720px) {
-  .images-wrapper {
-    position: relative;
-    column-count: 3;
-  }
-}
-
-.pick-single-image {
-  margin: 4px;
 }

@@ -118,7 +118,7 @@ export class TestResultsPage {
         })
       }
     })
-        .catch(e => alert('get data error' + e));
+        .catch(e => alert('get data error1' + e.message));
       }
 
       public getDataPictures() {
@@ -135,8 +135,10 @@ export class TestResultsPage {
             })
           }
         })
-            .catch(e => alert('get data error' + e));
+            .catch(e => alert('get data error2' + e.message));
           }
+
+          
 
       verifyDatabasePopulated() {
         this._db.executeSql('SELECT * FROM testresults', <any>[])
@@ -320,7 +322,7 @@ export class TestResultsPage {
       })
      
     
-          .catch(e => alert('get data error' + e));
+          .catch(e => alert('get data error3' + e.message));
         }
 
 
@@ -340,7 +342,7 @@ export class TestResultsPage {
             this.nameID=this.aboutme[res.rows.length-1].name;
             }
           })
-              .catch(e => alert('get data error' + e.message));
+              .catch(e => alert('get data error4' + e.message));
             }
   
 }
