@@ -27,7 +27,7 @@ export class AddEntryPage {
   data: any;
   isSubmitted = false;
   ClinicalTeamTable: string =
-    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT, photo TEXT)';
+    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT)';
 
   constructor(
     private modalController: ModalController,
@@ -42,7 +42,6 @@ export class AddEntryPage {
       clinic_name: '',
       email: '',
       phone: '',
-      photo: '',
     };
     this.clinicalteam = [];
     this._plat
@@ -101,13 +100,12 @@ export class AddEntryPage {
 
   public saveData() {
     this._db
-      .executeSql('INSERT INTO clinicalteam VALUES(NULL,?,?,?,?,?,?)', [
+      .executeSql('INSERT INTO clinicalteam VALUES(NULL,?,?,?,?,?)', [
         this.data.name,
         this.data.role,
         this.data.clinic_name,
         this.data.email,
-        this.data.phone,
-        this.data.photo,
+        this.data.phone
       ])
       .then((res) => {
         this.closeModal();

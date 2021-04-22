@@ -12,9 +12,9 @@ import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
-import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page';
-import {ViewEntryPage } from './view-entry/view-entry.page';
+import { AddEntryPage } from './add-entry/add-entry.page';
+import { EditEntryPage } from './edit-entry/edit-entry.page';
+import { ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-past-medicines',
@@ -22,181 +22,184 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./past-medicines.page.scss'],
 })
 export class PastMedicinesPage {
-  myProfileImage : string;
-  nameID : string;
-  public aboutme : Array<any> = [];
+  myProfileImage: string;
+  nameID: string;
+  public aboutme: Array<any> = [];
   public aboutmepicture: Array<any> = [];
-  public medicines : Array<any> = [];
-  public isData          : boolean        = false;
-  public storedData      : any            = null;
-  private _db   : any;
+  public medicines: Array<any> = [];
+  public isData: boolean = false;
+  public storedData: any = null;
+  private _db: any;
 
-  MedicinesTable : string = 'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)'
-  data = {medicinename: "", instructions: "", sideeffects: "", notes: ""};
+  MedicinesTable: string =
+    'CREATE TABLE IF NOT EXISTS medicine (rowid INTEGER PRIMARY KEY AUTOINCREMENT, medicinename TEXT, instructions TEXT, sideeffects TEXT, notes TEXT, activeflag TEXT)';
+  data = { medicinename: '', instructions: '', sideeffects: '', notes: '' };
   isEnabled: any;
 
   constructor(
-              public modalController: ModalController,
-              private _alertController: AlertController,
-              public _plat: Platform,
-              public _sql: SQLite)
-{
-  this.medicines = [];
-  this._plat
-  .ready()
-  .then(() =>
-
-    {
-      this._createDatabase();
-    })
-    .catch(e => alert('create database error' + e));
+    public modalController: ModalController,
+    private _alertController: AlertController,
+    public _plat: Platform,
+    public _sql: SQLite
+  ) {
+    this.medicines = [];
+    this._plat
+      .ready()
+      .then(() => {
+        this._createDatabase();
+      })
+      .catch((e) => alert('create database error' + e));
   }
 
-  public _createDatabase()
-  {
-    this._sql.create({
-      name: "database.db",
-      location: 'default'
-    })
-    .then((db: SQLiteObject) =>
-    {
-      this._db = db;
-      this._createDatabaseTables();
-    })
-    .catch(e => alert('create tables error' + e));
+  public _createDatabase() {
+    this._sql
+      .create({
+        name: 'database.db',
+        location: 'default',
+      })
+      .then((db: SQLiteObject) => {
+        this._db = db;
+        this._createDatabaseTables();
+      })
+      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
     await this._db.executeSql(this.MedicinesTable, []);
-    this.getData()
+    this.getData();
     this.getData1();
     this.getDataPicture();
   }
 
   ionViewDidLoad() {
-        this.getData();
-        this.getData1();
-        this.getDataPicture();
-      }
+    this.getData();
+    this.getData1();
+    this.getDataPicture();
+  }
 
-      ionViewWillEnter() {
-        this.getData();
-        this.getData1();
-        this.getDataPicture();
-      }
+  ionViewWillEnter() {
+    this.getData();
+    this.getData1();
+    this.getDataPicture();
+  }
 
   public getData() {
-    this.verifyDatabasePopulated()
-    this._db.executeSql('SELECT * FROM medicine WHERE activeflag="No" ORDER BY rowid DESC', <any>[])
-    .then(res => {
-      this.medicines = [];
-      for(var i=0; i<res.rows.length; i++) {
-        this.medicines.push({
-          rowid:res.rows.item(i).rowid,
-          medicinename:res.rows.item(i).medicinename,
-          instructions:res.rows.item(i).instructions,
-          sideeffects:res.rows.item(i).sideeffects,
-          notes:res.rows.item(i).notes,
-          activeflag:res.rows.item(i).activeflag
-        })
-      }
-    })
-        .catch(e => alert('get data error' + e));
-      }
+    this.verifyDatabasePopulated();
+    this._db
+      .executeSql(
+        'SELECT * FROM medicine WHERE activeflag="No" ORDER BY rowid DESC',
+        <any>[]
+      )
+      .then((res) => {
+        this.medicines = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.medicines.push({
+            rowid: res.rows.item(i).rowid,
+            medicinename: res.rows.item(i).medicinename,
+            instructions: res.rows.item(i).instructions,
+            sideeffects: res.rows.item(i).sideeffects,
+            notes: res.rows.item(i).notes,
+            activeflag: res.rows.item(i).activeflag,
+          });
+        }
+      })
+      .catch((e) => alert('get data error' + e));
+  }
 
-      verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM medicine WHERE activeflag="No"', <any>[])
-        .then(res => {
-          if(res.rows.length == 0) {
-            this.isEnabled = true;
-          }
-          else {
-            this.isEnabled = false;
-          }
-        })
+  verifyDatabasePopulated() {
+    this._db
+      .executeSql('SELECT * FROM medicine WHERE activeflag="No"', <any>[])
+      .then((res) => {
+        if (res.rows.length == 0) {
+          this.isEnabled = true;
+        } else {
+          this.isEnabled = false;
+        }
+      });
+  }
 
-      }
-
-      noContent() {
-        return !this.isEnabled;
-      }
+  noContent() {
+    return !this.isEnabled;
+  }
 
   public saveData() {
-    this._db.executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?,?)', [this.data.medicinename, this.data.instructions, this.data.sideeffects, this.data.notes, "No"])
-    .then(res => {
+    this._db
+      .executeSql('INSERT INTO medicine VALUES(NULL,?,?,?,?,?)', [
+        this.data.medicinename,
+        this.data.instructions,
+        this.data.sideeffects,
+        this.data.notes,
+        'No',
+      ])
+      .then((res) => {
         this.getData();
       })
-      .catch(e => alert("save data error" + e));
-    }
-
+      .catch((e) => alert('save data error' + e));
+  }
 
   deleteData(rowid) {
-      this._db.executeSql('DELETE FROM medicine WHERE rowid=?', [rowid])
-      .then(res => {
+    this._db
+      .executeSql('DELETE FROM medicine WHERE rowid=?', [rowid])
+      .then((res) => {
         this.getData();
       })
-      .catch(e => alert('delete data error' + e));
-    }
+      .catch((e) => alert('delete data error' + e));
+  }
 
-    async removeData(rowid) {
-      const alert = await this._alertController.create({
-        header: "Delete this entry?",
-        message: "Would you like to delete this entry from your medicines?",
-        buttons: [
-          {
-            text:"Cancel"
-          },
-          {
-            text:"Delete",
-            handler: ()=> {
-              this.deleteData(rowid);
-
-            }
-          }
-        ]
-      });
-
-      await alert.present();
-
-    }
-
-
-  async stillTaking(rowid) {
+  async removeData(rowid) {
     const alert = await this._alertController.create({
-      header: "Are you now taking this medicine?",
-      message: "Would you like to move this medicine into your current medicines page?",
+      header: 'Delete this entry?',
+      message: 'Would you like to delete this entry from your medicines?',
       buttons: [
         {
-          text:"No"
+          text: 'Cancel',
         },
         {
-          text:"Yes",
-          handler: ()=> {
-           this.moveToCurrent(rowid)
-          }
-        }
-      ]
+          text: 'Delete',
+          handler: () => {
+            this.deleteData(rowid);
+          },
+        },
+      ],
     });
 
     await alert.present();
+  }
 
+  async stillTaking(rowid) {
+    const alert = await this._alertController.create({
+      header: 'Are you now taking this medicine?',
+      message:
+        'Would you like to move this medicine into your current medicines page?',
+      buttons: [
+        {
+          text: 'No',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.moveToCurrent(rowid);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   public moveToCurrent(rowid) {
-    this._db.executeSql('UPDATE medicine SET activeflag=? where rowid=?', ["Yes", rowid])
+    this._db.executeSql('UPDATE medicine SET activeflag=? where rowid=?', [
+      'Yes',
+      rowid,
+    ]);
     this.getData();
   }
-
-
-
 
   async openModal() {
     const modal = await this.modalController.create({
       component: AddEntryPage,
-      componentProps: {
-      }
-    })
-
+      componentProps: {},
+    });
 
     modal.onDidDismiss().then(() => {
       this.getData();
@@ -204,13 +207,11 @@ export class PastMedicinesPage {
 
     return await modal.present();
   }
-
 
   async viewModal(rowid) {
     const modal = await this.modalController.create({
       component: ViewEntryPage,
-      componentProps: { 'rowid': rowid
-      }
+      componentProps: { rowid: rowid },
     });
     modal.onDidDismiss().then(() => {
       this.getData();
@@ -219,55 +220,54 @@ export class PastMedicinesPage {
     return await modal.present();
   }
 
-
   async editModal(rowid) {
     const modal = await this.modalController.create({
       component: EditEntryPage,
-      componentProps: { 'rowid': rowid}
+      componentProps: { rowid: rowid },
     });
-    modal.onDidDismiss().then(()=>{
+    modal.onDidDismiss().then(() => {
       this.getData();
     });
     return await modal.present();
   }
 
   public getDataPicture() {
-    this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
-    .then(res => {
-      this.aboutmepicture = [];
-      for(var i=0; i<res.rows.length; i++) {
-        this.aboutmepicture.push({
-          rowid:res.rows.item(i).rowid,
-          picture:res.rows.item(i).picture,
-        })
-      }
-        if (this.aboutmepicture.length>0) {
-        console.log(this.aboutmepicture[0].picture);
-        this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
-      }
-    })
-        .catch(e => alert('get data error' + e));
-      }
+    this._db
+      .executeSql('SELECT * FROM aboutmepicture', <any>[])
+      .then((res) => {
+        this.aboutmepicture = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.aboutmepicture.push({
+            rowid: res.rows.item(i).rowid,
+            picture: res.rows.item(i).picture,
+          });
+        }
+        if (this.aboutmepicture.length > 0) {
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage = this.aboutmepicture[
+            res.rows.length - 1
+          ].picture;
+        }
+      })
+      .catch((e) => alert('get data error' + e));
+  }
 
-
-      public getData1() {
-        this.verifyDatabasePopulated();
-        this._db.executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
-        .then(res => {
-          this.aboutme = [];
-          for(var i=0; i<res.rows.length; i++) {
-            this.aboutme.push({
-              rowid:res.rows.item(i).rowid,
-              name:res.rows.item(i).name
-            })
-          }
-           if (this.aboutme.length>0) {
-           this.nameID=this.aboutme[res.rows.length-1].name;
-          }
-        })
-            .catch(e => alert('get data error' + e.message));
-          }
-
-
-
+  public getData1() {
+    this.verifyDatabasePopulated();
+    this._db
+      .executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
+      .then((res) => {
+        this.aboutme = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.aboutme.push({
+            rowid: res.rows.item(i).rowid,
+            name: res.rows.item(i).name,
+          });
+        }
+        if (this.aboutme.length > 0) {
+          this.nameID = this.aboutme[res.rows.length - 1].name;
+        }
+      })
+      .catch((e) => alert('get data error' + e.message));
+  }
 }

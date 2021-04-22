@@ -14,9 +14,9 @@ import { Component } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { ModalController } from '@ionic/angular';
-import {AddEntryPage } from './add-entry/add-entry.page';
-import {EditEntryPage } from './edit-entry/edit-entry.page';
-import {ViewEntryPage } from './view-entry/view-entry.page';
+import { AddEntryPage } from './add-entry/add-entry.page';
+import { EditEntryPage } from './edit-entry/edit-entry.page';
+import { ViewEntryPage } from './view-entry/view-entry.page';
 
 @Component({
   selector: 'app-upcoming-procedures',
@@ -24,228 +24,235 @@ import {ViewEntryPage } from './view-entry/view-entry.page';
   styleUrls: ['./upcoming-procedures.page.scss'],
 })
 export class UpcomingProceduresPage {
-  myProfileImage : string;
-  nameID : string;
-  public aboutme : Array<any> = [];
+  myProfileImage: string;
+  nameID: string;
+  public aboutme: Array<any> = [];
   public aboutmepicture: Array<any> = [];
-  public procedures : Array<any> = [];
-  public isData          : boolean        = false;
-  public storedData      : any            = null;
-  private _db   : any;
+  public procedures: Array<any> = [];
+  public isData: boolean = false;
+  public storedData: any = null;
+  private _db: any;
 
-
-  ProceduresTable : string =  'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)'
-  data = {date: "", doctor: "", place: "", type: "", description: "", questions: ""};
+  ProceduresTable: string =
+    'CREATE TABLE IF NOT EXISTS procedures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, doctor TEXT, place TEXT, type TEXT, description TEXT, questions TEXT)';
+  data = {
+    date: '',
+    doctor: '',
+    place: '',
+    type: '',
+    description: '',
+    questions: '',
+  };
   isEnabled: any;
   now = new Date();
   today = this.now.toISOString();
 
-    constructor(
-                public modalController: ModalController,
-                private _alertController: AlertController,
-                public _plat: Platform,
-                public _sql: SQLite,
-              )
-
-{
-  this.procedures = [];
-  this._plat
-  .ready()
-  .then(() =>
-
-    {
-      this._createDatabase();
-    })
-    .catch(e => alert('create database error' + e));
+  constructor(
+    public modalController: ModalController,
+    private _alertController: AlertController,
+    public _plat: Platform,
+    public _sql: SQLite
+  ) {
+    this.procedures = [];
+    this._plat
+      .ready()
+      .then(() => {
+        this._createDatabase();
+      })
+      .catch((e) => alert('create database error' + e));
   }
 
-  public _createDatabase()
-  {
-    this._sql.create({
-      name: "database.db",
-      location: 'default'
-    })
-    .then((db: SQLiteObject) =>
-    {
-      this._db = db;
-      this._createDatabaseTables();
-    })
-    .catch(e => alert('create tables error' + e));
+  public _createDatabase() {
+    this._sql
+      .create({
+        name: 'database.db',
+        location: 'default',
+      })
+      .then((db: SQLiteObject) => {
+        this._db = db;
+        this._createDatabaseTables();
+      })
+      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
     await this._db.executeSql(this.ProceduresTable, []);
-    this.getData()
+    this.getData();
     this.getData1();
     this.getDataPicture();
   }
 
   ionViewDidLoad() {
-        this.getData();
-        this.getData1();
-        this.getDataPicture();
-      }
+    this.getData();
+    this.getData1();
+    this.getDataPicture();
+  }
 
-      ionViewWillEnter() {
-        this.getData();
-        this.getData1();
-        this.getDataPicture();
-      }
+  ionViewWillEnter() {
+    this.getData();
+    this.getData1();
+    this.getDataPicture();
+  }
 
   public getData() {
-    this.verifyDatabasePopulated()
-    this._db.executeSql('SELECT * FROM procedures WHERE date > ? ORDER BY date DESC', [this.today])
-    .then(res => {
-      this.procedures = [];
-      for(var i=0; i<res.rows.length; i++) {
-        this.procedures.push({
-          rowid:res.rows.item(i).rowid,
-          date:res.rows.item(i).date,
-          doctor:res.rows.item(i).doctor,
-          place:res.rows.item(i).place,
-          type:res.rows.item(i).type,
-          description:res.rows.item(i).description,
-          questions:res.rows.item(i).questions,
-        })
-      }
-    })
-        .catch(e => alert('get data error' + JSON.stringify(e)));
-      }
+    this.verifyDatabasePopulated();
+    this._db
+      .executeSql(
+        'SELECT * FROM procedures WHERE date > ? ORDER BY date DESC',
+        [this.today]
+      )
+      .then((res) => {
+        this.procedures = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.procedures.push({
+            rowid: res.rows.item(i).rowid,
+            date: res.rows.item(i).date,
+            doctor: res.rows.item(i).doctor,
+            place: res.rows.item(i).place,
+            type: res.rows.item(i).type,
+            description: res.rows.item(i).description,
+            questions: res.rows.item(i).questions,
+          });
+        }
+      })
+      .catch((e) => alert('get data error' + JSON.stringify(e)));
+  }
 
-      verifyDatabasePopulated() {
-        this._db.executeSql('SELECT * FROM procedures WHERE date > ?', [this.today])
-        .then(res => {
-          if(res.rows.length == 0) {
-            this.isEnabled = true;
-          }
-          else {
-            this.isEnabled = false;
-          }
-        })
+  verifyDatabasePopulated() {
+    this._db
+      .executeSql('SELECT * FROM procedures WHERE date > ?', [this.today])
+      .then((res) => {
+        if (res.rows.length == 0) {
+          this.isEnabled = true;
+        } else {
+          this.isEnabled = false;
+        }
+      });
+  }
 
-      }
-
-      noContent() {
-        return !this.isEnabled;
-      }
+  noContent() {
+    return !this.isEnabled;
+  }
 
   public saveData() {
-    this._db.executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?,?)', [this.data.date, this.data.doctor, this.data.place, this.data.type, this.data.description, this.data.questions])
-    .then(res => {
+    this._db
+      .executeSql('INSERT INTO procedures VALUES(NULL,?,?,?,?,?,?)', [
+        this.data.date,
+        this.data.doctor,
+        this.data.place,
+        this.data.type,
+        this.data.description,
+        this.data.questions,
+      ])
+      .then((res) => {
         this.getData();
       })
-      .catch(e => alert("save data error" + e));
-    }
+      .catch((e) => alert('save data error' + e));
+  }
 
   deleteData(rowid) {
-      this._db.executeSql('DELETE FROM procedures WHERE rowid=?', [rowid])
-      .then(res => {
+    this._db
+      .executeSql('DELETE FROM procedures WHERE rowid=?', [rowid])
+      .then((res) => {
         this.getData();
       })
-      .catch(e => alert('delete data error' + e));
-    }
-
-    async removeData(rowid) {
-      const alert = await this._alertController.create({
-        header: "Delete this entry?",
-        message: "Would you like to delete this entry from your procedures?",
-        buttons: [
-          {
-            text:"Cancel"
-          },
-          {
-            text:"Delete",
-            handler: ()=> {
-              this.deleteData(rowid);
-
-            }
-          }
-        ]
-      });
-
-      await alert.present();
-
-    }
-
-    async openModal() {
-      const modal = await this.modalController.create({
-        component: AddEntryPage,
-        componentProps: {
-        }
-      });
-
-      modal.onDidDismiss().then(() => {
-        this.getData();
-      });
-
-      return await modal.present();
-    }
-
-
-    async viewModal(rowid) {
-      const modal = await this.modalController.create({
-        component: ViewEntryPage,
-        componentProps: { 'rowid': rowid
-        }
-      });
-      modal.onDidDismiss().then(() => {
-        this.getData();
-      });
-
-      return await modal.present();
-    }
-
-
-    async editModal(rowid) {
-      const modal = await this.modalController.create({
-        component: EditEntryPage,
-        componentProps: { 'rowid': rowid}
-      });
-      modal.onDidDismiss().then(()=>{
-        this.getData();
-      });
-      return await modal.present();
-    }
-
-    public getDataPicture() {
-      this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
-      .then(res => {
-        this.aboutmepicture = [];
-        for(var i=0; i<res.rows.length; i++) {
-          this.aboutmepicture.push({
-            rowid:res.rows.item(i).rowid,
-            picture:res.rows.item(i).picture,
-
-          })
-        }
-          if (this.aboutmepicture.length>0) {
-          console.log(this.aboutmepicture[0].picture);
-          this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
-        }
-      })
-
-
-          .catch(e => alert('get data error' + e));
-        }
-  
-  
-        public getData1() {
-          this.verifyDatabasePopulated();
-          this._db.executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
-          .then(res => {
-            this.aboutme = [];
-            for(var i=0; i<res.rows.length; i++) {
-              this.aboutme.push({
-                rowid:res.rows.item(i).rowid,
-                name:res.rows.item(i).name
-              })
-            }
-             if (this.aboutme.length>0) {
-             this.nameID=this.aboutme[res.rows.length-1].name;
-            }
-          })
-              .catch(e => alert('get data error' + e.message));
-            }
-  
-
+      .catch((e) => alert('delete data error' + e));
   }
+
+  async removeData(rowid) {
+    const alert = await this._alertController.create({
+      header: 'Delete this entry?',
+      message: 'Would you like to delete this entry from your procedures?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.deleteData(rowid);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: AddEntryPage,
+      componentProps: {},
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.getData();
+    });
+
+    return await modal.present();
+  }
+
+  async viewModal(rowid) {
+    const modal = await this.modalController.create({
+      component: ViewEntryPage,
+      componentProps: { rowid: rowid },
+    });
+    modal.onDidDismiss().then(() => {
+      this.getData();
+    });
+
+    return await modal.present();
+  }
+
+  async editModal(rowid) {
+    const modal = await this.modalController.create({
+      component: EditEntryPage,
+      componentProps: { rowid: rowid },
+    });
+    modal.onDidDismiss().then(() => {
+      this.getData();
+    });
+    return await modal.present();
+  }
+
+  public getDataPicture() {
+    this._db
+      .executeSql('SELECT * FROM aboutmepicture', <any>[])
+      .then((res) => {
+        this.aboutmepicture = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.aboutmepicture.push({
+            rowid: res.rows.item(i).rowid,
+            picture: res.rows.item(i).picture,
+          });
+        }
+        if (this.aboutmepicture.length > 0) {
+          console.log(this.aboutmepicture[0].picture);
+          this.myProfileImage = this.aboutmepicture[
+            res.rows.length - 1
+          ].picture;
+        }
+      })
+
+      .catch((e) => alert('get data error' + e));
+  }
+
+  public getData1() {
+    this.verifyDatabasePopulated();
+    this._db
+      .executeSql('SELECT name FROM aboutme ORDER BY rowid DESC', <any>[])
+      .then((res) => {
+        this.aboutme = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.aboutme.push({
+            rowid: res.rows.item(i).rowid,
+            name: res.rows.item(i).name,
+          });
+        }
+        if (this.aboutme.length > 0) {
+          this.nameID = this.aboutme[res.rows.length - 1].name;
+        }
+      })
+      .catch((e) => alert('get data error' + e.message));
+  }
+}

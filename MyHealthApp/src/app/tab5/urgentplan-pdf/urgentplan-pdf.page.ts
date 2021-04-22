@@ -82,7 +82,7 @@ export class UrgentplanPdfPage {
   }
 
   verifyDatabasePopulated() {
-    this._db.executeSql('SELECT * FROM medicine', <any>[]).then((res) => {
+    this._db.executeSql('SELECT * FROM urgentplan', <any>[]).then((res) => {
       if (res.rows.length == 0) {
         this.isEnabled = true;
       } else {
@@ -119,11 +119,9 @@ export class UrgentplanPdfPage {
   }
 
   async createPDF() {
-    this.createButtonDisable = true;
     const html = await htmlToPdfmake(
       document.getElementById('pdfcontent').innerHTML
     );
-    console.log('html:', html);
     let docDefinition = {
       content: [
         {
@@ -152,12 +150,8 @@ export class UrgentplanPdfPage {
       },
     };
     this.pdfObject = pdfMake.createPdf(docDefinition);
-    this.pdfObject.getBase64((pdf) => {
-    });
-
-    setTimeout(() => {
-      this.createButtonDisable = false;
-    }, 1000);
+    this.pdfObject.getBase64((pdf) => {});
+    setTimeout(() => {}, 1000);
     this.downloadPdf();
   }
 

@@ -1,19 +1,18 @@
-//  This file is adapted from: Database - 
-// https://edupala.com/ionic-template-driven-form-validation/ 
-// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/ 
-// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app 
+//  This file is adapted from: Database -
+// https://edupala.com/ionic-template-driven-form-validation/
+// https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
+// https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
 // Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
-// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/ 
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/
 
-
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { NgForm } from '@angular/forms';
-import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
+import { CameraOptions, Camera } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-add-entry',
@@ -25,199 +24,195 @@ export class AddEntryPage {
   photos;
   base64Image;
   myProfileImage;
-  public testresults : Array<any> = [];
-  public pictures : Array<any> = [];
-  public isData          : boolean        = false;
-  public storedData      : any            = null;
-  private _db   : any;
+  public testresults: Array<any> = [];
+  public pictures: Array<any> = [];
+  public isData: boolean = false;
+  public storedData: any = null;
+  private _db: any;
   isSubmitted = false;
-  TestResultsTable : string = 'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, photo TEXT, notes TEXT)'
-  data = {date: "", type: "", photo: "", notes: ""};
-  PicturesTable : string = 'CREATE TABLE IF NOT EXISTS pictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)'
-  datapicture = {cardid:"", picture: "" };
+  TestResultsTable: string =
+    'CREATE TABLE IF NOT EXISTS testresults (rowid INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, type TEXT, notes TEXT)';
+  data = { date: '', type: '',  notes: '' };
+  PicturesTable: string =
+    'CREATE TABLE IF NOT EXISTS pictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)';
+  datapicture = { cardid: '', picture: '' };
 
+  constructor(
+    private modalController: ModalController,
+    private navParams: NavParams,
+    private _alertController: AlertController,
+    public _plat: Platform,
+    public _sql: SQLite,
+    private camera: Camera
+  ) {
+    this.testresults = [];
+    this.pictures = [];
 
-
-  constructor(private modalController: ModalController,
-              private navParams: NavParams,
-              private _alertController: AlertController, 
-              public _plat: Platform, 
-              public _sql: SQLite,
-              private camera : Camera,
-              private alertCtrl: AlertController,
-            ) 
-{            
-  this.testresults = [];
-  this.pictures =[];
-
-  this._plat
-  .ready()
-  .then(() => 
-
-    {
-      this._createDatabase();
-    })
-    .catch(e => alert('create database error' + e));
+    this._plat
+      .ready()
+      .then(() => {
+        this._createDatabase();
+      })
+      .catch((e) => alert('create database error' + e));
   }
 
-  public _createDatabase()
-  {
-    this._sql.create({
-      name: "database.db",
-      location: 'default'
-    })
-    .then((db: SQLiteObject) =>
-    {
-      this._db = db;
-      this._createDatabaseTables();
-    })
-    .catch(e => alert('create tables error' + e));
+  public _createDatabase() {
+    this._sql
+      .create({
+        name: 'database.db',
+        location: 'default',
+      })
+      .then((db: SQLiteObject) => {
+        this._db = db;
+        this._createDatabaseTables();
+      })
+      .catch((e) => alert('create tables error' + e));
   }
-  
+
   async _createDatabaseTables() {
     await this._db.executeSql(this.TestResultsTable, []);
     await this._db.executeSql(this.PicturesTable, []);
 
     this.getData();
     this.getDataPictures();
-
   }
 
   ionViewDidLoad() {
-        this.getData();
-        this.getDataPictures();
-      }
-    
-      ionViewWillEnter() {
-        this.getData();
-        this.getDataPictures();
-      }
-    
+    this.getData();
+    this.getDataPictures();
+  }
+
+  ionViewWillEnter() {
+    this.getData();
+    this.getDataPictures();
+  }
+
   public getData() {
-    this._db.executeSql('SELECT * FROM testresults ORDER BY rowid DESC', <any>[])
-    .then(res => {
-      this.testresults = [];
-      for(var i=0; i<res.rows.length; i++) {
-        this.testresults.push({
-          rowid:res.rows.item(i).rowid,
-          date:res.rows.item(i).date,
-          type:res.rows.item(i).type,
-          photo:res.rows.item(i).photo,
-          notes:res.rows.item(i).notes,
-        })
-      }
-    })
-        .catch(e => alert('get data error' + e));
-  }
-  
-  public getDataPictures() {
-    this._db.executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
-    .then(res => {
-      this.pictures = [];
-      for(var i=0; i<res.rows.length; i++) {
-        this.pictures.push({
-          rowid:res.rows.item(i).rowid,
-          cardid:res.rows.item(i).cardid,
-          picture:res.rows.item(i).picture,
-        })
-
-        console.log('doulefkei');
-        console.log(this.pictures[0]);
-        console.log(this.pictures[1]);
-
-      }
-    })
-        .catch(e => alert('get data error' + e));
-  }
-
-      
-  public saveData() {
-    this._db.executeSql('INSERT INTO testresults VALUES(NULL,?,?,?,?)', [this.data.date, this.data.type, this.data.photo, this.data.notes])
-    .then(res => {
-      this.closeModal();
-      this.saveDataPictures();
+    this._db
+      .executeSql('SELECT * FROM testresults ORDER BY rowid DESC', <any>[])
+      .then((res) => {
+        this.testresults = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.testresults.push({
+            rowid: res.rows.item(i).rowid,
+            date: res.rows.item(i).date,
+            type: res.rows.item(i).type,
+            notes: res.rows.item(i).notes,
+          });
+        }
       })
-      .catch(e => alert("save data error" + e));
-    }
+      .catch((e) => alert('get data error' + e));
+  }
+
+  public getDataPictures() {
+    this._db
+      .executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
+      .then((res) => {
+        this.pictures = [];
+        for (var i = 0; i < res.rows.length; i++) {
+          this.pictures.push({
+            rowid: res.rows.item(i).rowid,
+            cardid: res.rows.item(i).cardid,
+            picture: res.rows.item(i).picture,
+          });
+
+          console.log('doulefkei');
+          console.log(this.pictures[0]);
+          console.log(this.pictures[1]);
+        }
+      })
+      .catch((e) => alert('get data error' + e));
+  }
+
+  public saveData() {
+    this._db
+      .executeSql('INSERT INTO testresults VALUES(NULL,?,?,?)', [
+        this.data.date,
+        this.data.type,
+        this.data.notes,
+      ])
+      .then((res) => {
+        this.closeModal();
+        this.saveDataPictures();
+      })
+      .catch((e) => alert('save data error' + e));
+  }
 
   public saveDataPictures() {
-if (this.testresults.length>0){
-  this.row = this.testresults[0].rowid+1 ;
-}
-else{
-  this.row = 1 ;
-}
+    if (this.testresults.length > 0) {
+      this.row = this.testresults[0].rowid + 1;
+    } else {
+      this.row = 1;
+    }
 
-    for(let i = 0; i<this.photos.length;i++) {
-    this._db.executeSql('INSERT INTO pictures VALUES(NULL,?,?)', [this.row, this.photos[i]])
-    .then(res => {
-        this.getDataPictures();
-      })
-      .catch(e => alert("save data error" + e));
+    for (let i = 0; i < this.photos.length; i++) {
+      this._db
+        .executeSql('INSERT INTO pictures VALUES(NULL,?,?)', [
+          this.row,
+          this.photos[i],
+        ])
+        .then((res) => {
+          this.getDataPictures();
+        })
+        .catch((e) => alert('save data error' + e));
     }
   }
 
-
-    async submitData() {
-      this.isSubmitted = true;
-      const alert = await this._alertController.create({
-        header: "Save this entry?",
-        message: "Would you like to save this entry in your test results?",
-        buttons: [
-          {
-            text:"Cancel"
+  async submitData() {
+    this.isSubmitted = true;
+    const alert = await this._alertController.create({
+      header: 'Save this entry?',
+      message: 'Would you like to save this entry in your test results?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'save',
+          handler: () => {
+            this.saveData();
           },
-          {
-            text:"save",
-            handler: ()=> {
-              this.saveData();
-  
-            }
-          }
-        ]
-      });
-  
-      await alert.present();
-    }
+        },
+      ],
+    });
 
-    noSubmit(e) {
-      e.preventDefault();
-    }
-    
+    await alert.present();
+  }
+
+  noSubmit(e) {
+    e.preventDefault();
+  }
+
   async closeModal() {
     this.getData();
     await this.modalController.dismiss();
-    
   }
-
 
   ngOnInit() {
     this.photos = [];
   }
 
-  takePhoto()
-  {
-    const options : CameraOptions = {
+  takePhoto() {
+    const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       targetHeight: 200,
       correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
-      };
+      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+    };
 
-      this.camera.getPicture(options)
-      .then((ImageData)=> {
-          this.base64Image = "data:image/jpeg;base64," + ImageData;
-          this.photos.push(this.base64Image);
-          this.photos.reverse();
-        })
-      }
-    
-  
-    deletePhoto(index) {
-      const alert = this.alertCtrl.create({
+    this.camera.getPicture(options).then((ImageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + ImageData;
+      this.photos.push(this.base64Image);
+      this.photos.reverse();
+    });
+  }
+
+  deletePhoto(index) {
+    const alert = this._alertController
+      .create({
         header: 'Sure you want to delete this photo? There is NO undo!',
         message: '',
         buttons: [
@@ -225,18 +220,19 @@ else{
             text: 'No',
             handler: () => {
               console.log('Disagree clicked');
-            }
-          }, 
+            },
+          },
           {
             text: 'Yes',
             handler: () => {
               console.log('Agree clicked');
               this.photos.splice(index, 1);
-            }
-          }
-        ]
-      }).then(res => {
+            },
+          },
+        ],
+      })
+      .then((res) => {
         res.present();
-    });
+      });
   }
 }

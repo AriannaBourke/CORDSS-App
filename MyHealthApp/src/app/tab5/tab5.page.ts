@@ -22,6 +22,8 @@ import { MedicationsPdfPage } from './medications-pdf/medications-pdf.page';
   styleUrls: ['tab5.page.scss'],
 })
 export class Tab5Page {
+  window: any;
+
   constructor(
     private callNumber: CallNumber,
     public modalController: ModalController
