@@ -27,8 +27,6 @@ export class MyClinicalTeamPage {
   myProfileImage : string;
   public aboutme : Array<any> = [];
   public aboutmepicture: Array<any> = [];
-  photos;
-  base64Image;
   public clinicalteam: Array<any> = [];
   public isData: boolean = false;
   public storedData: any = null;
@@ -79,14 +77,20 @@ export class MyClinicalTeamPage {
   async _createDatabaseTables() {
     await this._db.executeSql(this.ClinicalTeamTable, []);
     this.getData();
+    this.getData1();
+    this.getDataPicture();
   }
 
   ionViewDidLoad() {
     this.getData();
+    this.getData1();
+    this.getDataPicture();
   }
 
   ionViewWillEnter() {
     this.getData();
+    this.getData1();
+    this.getDataPicture();
   }
 
   public getData() {
@@ -201,97 +205,6 @@ export class MyClinicalTeamPage {
       this.getData();
     });
     return await modal.present();
-  }
-
-  async selectImageSource() {
-    const cameraOptions: CameraOptions = {
-      quality: 100,
-      destinationType: this._camera.DestinationType.DATA_URL,
-      encodingType: this._camera.EncodingType.JPEG,
-      mediaType: this._camera.MediaType.PICTURE,
-      targetHeight: 200,
-      correctOrientation: true,
-      sourceType: this._camera.PictureSourceType.CAMERA,
-    };
-
-    const galleryOptions: CameraOptions = {
-      quality: 100,
-      destinationType: this._camera.DestinationType.DATA_URL,
-      encodingType: this._camera.EncodingType.JPEG,
-      mediaType: this._camera.MediaType.PICTURE,
-      targetHeight: 200,
-      correctOrientation: true,
-      sourceType: this._camera.PictureSourceType.SAVEDPHOTOALBUM,
-    };
-    const alert = await this._alertController.create({
-      header: 'Select Source',
-      message: 'Pick a source for the picture of your clinical team member',
-      buttons: [
-        {
-          text: 'Camera',
-          handler: () => {
-            this._camera.getPicture(cameraOptions).then((ImageData) => {
-              this.myProfileImage = 'data:image/jpeg;base64,' + ImageData;
-            });
-          },
-        },
-        {
-          text: 'Gallery',
-          handler: () => {
-            this._camera.getPicture(galleryOptions).then((ImageData) => {
-              this.myProfileImage = 'data:image/jpeg;base64,' + ImageData;
-            });
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-  ngOnInit() {
-    this.photos = [];
-  }
-
-  takePhoto() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      targetHeight: 200,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-    };
-
-    this.camera.getPicture(options).then((ImageData) => {
-      this.base64Image = 'data:image/jpeg;base64,' + ImageData;
-      this.photos.push(this.base64Image);
-      this.photos.reverse();
-    });
-  }
-
-  deletePhoto(index) {
-    const alert = this.alertCtrl
-      .create({
-        header: 'Sure you want to delete this photo? There is NO undo!',
-        message: '',
-        buttons: [
-          {
-            text: 'No',
-            handler: () => {
-            },
-          },
-          {
-            text: 'Yes',
-            handler: () => {
-              this.photos.splice(index, 1);
-            },
-          },
-        ],
-      })
-      .then((res) => {
-        res.present();
-      });
   }
 
   public getDataPicture() {

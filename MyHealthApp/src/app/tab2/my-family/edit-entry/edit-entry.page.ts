@@ -25,7 +25,7 @@ export class EditEntryPage {
   isSubmitted = false;
   rowid: any;
   MyFamilyTable: string =
-    'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)';
+    'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone TEXT)';
   data = { name: '', birthday: '', relation: '', email: '', phone: '' };
 
   constructor(

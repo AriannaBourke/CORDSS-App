@@ -13,16 +13,26 @@
 
 <ion-content class="ion-padding">
   <ion-avatar (click)="selectImageSource()" class="profile-pic">
-    <ion-img [src]="myProfileImage"></ion-img>
+    <img [src]="myProfileImage" alt="Missing image" onerror="this.onerror=null;this.src='assets/delete.png';" />
+
   </ion-avatar>
-  <ion-title class="title" width-50 style="text-align: center"
-    >Welcome To CORDSS!</ion-title
-  >
-  <ion-list *ngFor="let about of aboutme; let i = index" class="list">
-    <ion-title class="title" width-50 style="text-align: center"
-      >Hello {{about.name}}</ion-title
-    >
-  </ion-list>
+
+  <ion-card >
+    <ion-item lines="none">
+      <p class="title" width-50 style="text-align: center">Welcome To CORDSS!</p>
+        <ion-list *ngFor="let about of aboutme; let i = index" class="list">
+          <p class="title" width-50 style="text-align: center">Hello {{about.name}}</p>  
+        </ion-list>
+    </ion-item>
+  </ion-card>
+
+  <!-- <ion-card>
+   <ion-title class="title" width-50 style="text-align: center">Welcome To CORDSS!</ion-title>
+   <ion-list *ngFor="let about of aboutme; let i = index" class="list">
+     <ion-title class="title" width-50 style="text-align: center">Hello {{about.name}}</ion-title>
+   </ion-list>
+  </ion-card>
+   -->
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">Click 'Add' to add information About Me!</p>

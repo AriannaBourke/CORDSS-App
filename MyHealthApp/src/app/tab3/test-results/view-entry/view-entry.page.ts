@@ -152,6 +152,7 @@ export class ViewEntryPage {
     });
     modal.onDidDismiss().then(() => {
       this.getData(rowid);
+      this.getDataPictures(rowid);
     });
     return await modal.present();
   }

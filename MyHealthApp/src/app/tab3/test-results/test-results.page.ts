@@ -116,20 +116,21 @@ export class TestResultsPage {
   }
 
   public getDataPictures() {
-    this._db
-      .executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
-      .then((res) => {
-        this.pictures = [];
-        for (var i = 0; i < res.rows.length; i++) {
-          this.pictures.push({
-            rowid: res.rows.item(i).rowid,
-            cardid: res.rows.item(i).cardid,
-            picture: res.rows.item(i).picture,
-          });
-        }
-      })
-      .catch((e) => alert('get data error' + e));
-  }
+    // this.verifyDatabasePopulatedPictures()
+    this._db.executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
+    .then(res => {
+      this.pictures = [];
+      for(var i=0; i<res.rows.length; i++) {
+        this.pictures.push({
+          rowid:res.rows.item(i).rowid,
+          cardid:res.rows.item(i).cardid,
+          picture:res.rows.item(i).picture,
+
+        })
+      }
+    })
+        .catch(e => alert('get data error2' + e.message));
+      }
 
   verifyDatabasePopulated() {
     this._db.executeSql('SELECT * FROM testresults', <any>[]).then((res) => {
@@ -217,6 +218,7 @@ export class TestResultsPage {
 
     modal.onDidDismiss().then((dataReturned) => {
       this.getData();
+      this.getDataPictures();
     });
 
     return await modal.present();
@@ -229,6 +231,7 @@ export class TestResultsPage {
     });
     modal.onDidDismiss().then(() => {
       this.getData();
+      this.getDataPictures();
     });
 
     return await modal.present();
@@ -241,6 +244,7 @@ export class TestResultsPage {
     });
     modal.onDidDismiss().then(() => {
       this.getData();
+      this.getDataPictures();
     });
     return await modal.present();
   }

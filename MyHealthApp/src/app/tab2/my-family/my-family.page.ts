@@ -26,15 +26,13 @@ export class MyFamilyPage {
   myProfileImage : string;
   public aboutme : Array<any> = [];
   public aboutmepicture: Array<any> = [];
-  images: any;
-  options: any;
   public myfamily: Array<any> = [];
   public isData: boolean = false;
   public storedData: any = null;
   private _db: any;
 
   MyFamilyTable: string =
-    'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone INT)';
+    'CREATE TABLE IF NOT EXISTS myfamily (rowid INTEGER PRIMARY KEY, name TEXT, birthday INTEGER, relation TEXT, email TEXT, phone TEXT)';
   data = { name: '', birthday: '', relation: '', email: '', phone: '' };
   isEnabled: any;
 
@@ -69,14 +67,20 @@ export class MyFamilyPage {
   async _createDatabaseTables() {
     await this._db.executeSql(this.MyFamilyTable, []);
     this.getData();
+    this.getData1();
+    this.getDataPicture();
   }
 
   ionViewDidLoad() {
     this.getData();
+    this.getData1();
+    this.getDataPicture();
   }
 
   ionViewWillEnter() {
     this.getData();
+    this.getData1();
+    this.getDataPicture();
   }
 
   public getData() {
@@ -192,6 +196,7 @@ export class MyFamilyPage {
     });
     return await modal.present();
   }
+
   public getDataPicture() {
     this._db.executeSql('SELECT * FROM aboutmepicture', <any>[])
     .then(res => {

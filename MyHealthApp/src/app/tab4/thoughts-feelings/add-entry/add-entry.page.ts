@@ -12,12 +12,14 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { NgForm } from '@angular/forms';
 import { CameraOptions, Camera } from '@ionic-native/camera/ngx';
 
+
 @Component({
   selector: 'app-add-entry',
   templateUrl: './add-entry.page.html',
   styleUrls: ['./add-entry.page.scss'],
 })
 export class AddEntryPage {
+  row;
   photos;
   base64Image;
   myProfileImage;
@@ -132,14 +134,16 @@ export class AddEntryPage {
       .catch((e) => alert('save data error' + e));
   }
 
-  public saveDataPictures() {
-    for (let i = 0; i < this.photos.length; i++) {
-      this._db
-        .executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [
-          this.thoughtsfeelings[0].rowid + 1,
-          this.photos[i],
-        ])
-        .then((res) => {
+    public saveDataPictures() {
+      if (this.thoughtsfeelings.length>0){
+        this.row = this.thoughtsfeelings[0].rowid+1 ;
+      }
+      else{
+        this.row = 1 ;
+      }
+      for(let i = 0; i<this.photos.length;i++) {
+      this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.row, this.photos[i]])
+      .then(res => {
           this.getDataPictures();
         })
         .catch((e) => alert('save data error' + e));

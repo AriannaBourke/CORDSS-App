@@ -228,12 +228,30 @@ export class EditEntryPage {
       });
   }
 
-  deleteAll() {
-    this._db
-      .executeSql('DELETE FROM tfpictures WHERE cardid=?', [this.rowid])
-      .then((res) => {
-        this.getDataPictures(this.rowid);
-      })
-      .catch((e) => alert('delete data error' + e.message));
-  }
+  deleteAll(){
+    const alert = this._alertController.create({
+      header: 'Sure you want to delete this photo? There is NO undo!',
+      message: '',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        }, 
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Agree clicked');
+            this._db.executeSql('DELETE FROM tfpictures WHERE cardid=?', [this.rowid])
+        .then(res => {
+          this.getDataPictures(this.rowid);
+          })
+        }
+        }
+      ]
+    }).then(res => {
+      res.present();
+  });
+}
 }
