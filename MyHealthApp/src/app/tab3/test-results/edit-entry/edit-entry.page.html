@@ -75,13 +75,32 @@
             <ion-col>
               <ion-item>
                 <ion-label color="medium" position="stacked">Photo</ion-label>
-                <ion-button (click)="deleteAll()"
+                <ion-button
+                  (click)="deleteAll()"
+                  shape="round"
+                  fill="outline"
+                  color="tertiary"
+                  size="medium"
+                  ><ion-icon
+                    slot="start"
+                    name="trash"
+                    color="tertiary"
+                  ></ion-icon
                   >Delete All Images
                 </ion-button>
                 <ion-button
                   (click)="takePhoto()"
                   [(ngModel)]="data.photo"
                   name="photo"
+                  shape="round"
+                  fill="outline"
+                  color="tertiary"
+                  size="medium"
+                  ><ion-icon
+                    slot="start"
+                    name="arrow-up-circle"
+                    color="tertiary"
+                  ></ion-icon
                   >Add Images</ion-button
                 >
                 <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
