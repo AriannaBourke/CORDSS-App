@@ -70,21 +70,33 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Photo</ion-label>
-              <ion-button 
-              (click)="takePhoto()"
-              [(ngModel)]="data.photo"
-              name="photo"
-              shape="round"
-              fill="outline"
-              color="tertiary"
-              size="medium"
-              ><ion-icon slot="start" name="arrow-up-circle" color="tertiary"></ion-icon>
-              Select Images</ion-button>
-              <ion-icon slot="start" name="camera" class="green"></ion-icon>
-               <div class="images-wrapper">
-                <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
-                  <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
-                  <img [src]="photo" alt="" srcset="">
+              <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
+              <ion-button
+                (click)="takePhoto()"
+                [(ngModel)]="data.photo"
+                name="photo"
+                shape="round"
+                fill="outline"
+                color="tertiary"
+                size="medium"
+                ><ion-icon
+                  slot="start"
+                  name="arrow-up-circle"
+                  color="tertiary"
+                ></ion-icon>
+                Select Images</ion-button
+              >
+              <div class="images-wrapper">
+                <div
+                  class="pick-single-image"
+                  *ngFor="let photo of photos; let id = index"
+                >
+                  <ion-icon
+                    name="trash"
+                    class="deleteIcon"
+                    (click)="deletePhoto(id)"
+                  ></ion-icon>
+                  <img [src]="photo" alt="" srcset="" />
                 </div>
               </div>
             </ion-item>

@@ -48,56 +48,51 @@
               </ion-item>
             </ion-col>
           </ion-row>
-        
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Test Type</ion-label>
-                    <ion-icon slot="start" name="medkit" class="orange"></ion-icon>
-                    <ion-input 
-                    type="text"
-                    placeholder="{{result.type}}"
-                    [(ngModel)]="data.type"
-                    name="type" required
-                    #typeCtrl="ngModel"
-                    ></ion-input>
-                    <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
-                      <ion-text color="danger">*Test type is required</ion-text>
-                      </ion-item>
-                  </ion-item>
-                </ion-col>
-               </ion-row>
-               
-               <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label color="medium" position="stacked">Photo</ion-label>
-                    <ion-button 
-                      (click)="deleteAll()"
-                      shape="round"
-                      fill="outline"
-                      color="tertiary"
-                      size="medium"
-                      ><ion-icon slot="start" name="trash" color="tertiary"></ion-icon>
-                      >Delete All Images
-                    </ion-button>
-                    <ion-button 
-                    (click)="takePhoto()"
-                    [(ngModel)]="data.photo"
-                    name="photo"
-                    shape="round"
-                    fill="outline"
-                    color="tertiary"
-                    size="medium"
-                    ><ion-icon slot="start" name="arrow-up-circle" color="tertiary"></ion-icon>
-                    >Add Images</ion-button>
-                    <ion-icon slot="start" name="camera" class="yellow" ></ion-icon>
-                    <div class="images-wrapper">
-                      <div class="pick-single-image" *ngFor="let photo of photos; let id = index">
-                        <!-- <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon> -->
-                        <img [src]="photo" alt="" srcset="">
-                      </div>
-                    </div>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Test Type</ion-label
+                >
+                <ion-icon slot="start" name="medkit" class="orange"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="{{result.type}}"
+                  [(ngModel)]="data.type"
+                  name="type"
+                  required
+                  #typeCtrl="ngModel"
+                ></ion-input>
+                <ion-item *ngIf="!typeCtrl.valid && typeCtrl.touched">
+                  <ion-text color="danger">*Test type is required</ion-text>
+                </ion-item>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Photo</ion-label>
+                <ion-button (click)="deleteAll()"
+                  >Delete All Images
+                </ion-button>
+                <ion-button
+                  (click)="takePhoto()"
+                  [(ngModel)]="data.photo"
+                  name="photo"
+                  >Add Images</ion-button
+                >
+                <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
+                <div class="images-wrapper">
+                  <div
+                    class="pick-single-image"
+                    *ngFor="let photo of photos; let id = index"
+                  >
+                    <img [src]="photo" alt="" srcset="" />
+                  </div>
+                </div>
               </ion-item>
             </ion-col>
           </ion-row>

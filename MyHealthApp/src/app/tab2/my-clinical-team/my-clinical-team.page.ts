@@ -33,14 +33,13 @@ export class MyClinicalTeamPage {
   private _db: any;
 
   ClinicalTeamTable: string =
-    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone TEXT, photo TEXT)';
+    'CREATE TABLE IF NOT EXISTS clinicalteam (rowid INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, role TEXT, clinic_name TEXT, email TEXT, phone INT)';
   data = {
     name: '',
     role: '',
     clinic_name: '',
     email: '',
     phone: '',
-    photo: '',
   };
   isEnabled: any;
 
@@ -107,8 +106,7 @@ export class MyClinicalTeamPage {
             role: res.rows.item(i).role,
             clinic_name: res.rows.item(i).clinic_name,
             email: res.rows.item(i).email,
-            phone: res.rows.item(i).phone,
-            photo: res.rows.item(i).photo,
+            phone: res.rows.item(i).phone
           });
         }
       })
@@ -131,13 +129,12 @@ export class MyClinicalTeamPage {
 
   public saveData() {
     this._db
-      .executeSql('INSERT INTO clinicalteam VALUES(NULL,?,?,?,?,?,?)', [
+      .executeSql('INSERT INTO clinicalteam VALUES(NULL,?,?,?,?,?)', [
         this.data.name,
         this.data.role,
         this.data.clinic_name,
         this.data.email,
-        this.data.phone,
-        this.data.photo,
+        this.data.phone
       ])
       .then((res) => {
         this.getData();
@@ -225,10 +222,7 @@ export class MyClinicalTeamPage {
         console.log(this.aboutmepicture[0].picture);
         this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
       }
-     
     })
-   
-  
         .catch(e => alert('get data error' + e));
       }
 
@@ -242,7 +236,6 @@ export class MyClinicalTeamPage {
             this.aboutme.push({
               rowid:res.rows.item(i).rowid,
               name:res.rows.item(i).name
-    
             })
           }
           if (this.aboutme.length>0) {

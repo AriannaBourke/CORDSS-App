@@ -3,11 +3,14 @@
     font-size: large;
   }
 
-
-
-
-
-  
+  // **adjusted this** ///
+  .profile-pic {
+    margin-top: 1vh;
+    width: 60px;
+    height: 60px;
+    border: white solid 3px;
+    margin-right: 5px;
+  }
 .hiddencard {
   margin-top: 5vh;
 }
@@ -18,15 +21,8 @@
   margin-right: 0px;
 }
 
+// add this
 ion-item.background {
   --background: #a3dbf1;
   color: #041a97;
-}
-
-.profile-pic {
-  margin-top: 1vh;
-  width: 60px;
-  height: 60px;
-  border: white solid 3px;
-  margin-right: 5px;
 }

@@ -11,12 +11,19 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+<<<<<<< HEAD
   <ion-item class="background" lines="none">
     <ion-avatar (click)="selectImageSource()" class="profile-pic" >
       <img [src]="myProfileImage" alt="Missing image" onerror="this.onerror=null;this.src='assets/delete.png';" />
     </ion-avatar>
     <ion-text><h4>Hi {{nameID}}</h4></ion-text>
   </ion-item>
+=======
+  <ion-avatar (click)="selectImageSource()" class="profile-pic">
+    <ion-img [src]="myProfileImage"></ion-img>
+  </ion-avatar>
+  <p>{{nameID}}</p>
+>>>>>>> 66aafd546dc44e25724dbaa4859712e4a25f4435
   <ion-card class="hiddencard" [hidden]="noContent()">
     <ion-item lines="none">
       <p style="font-size: 30px">
