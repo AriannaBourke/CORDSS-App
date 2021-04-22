@@ -221,6 +221,7 @@ export class TestResultsPage {
 
       modal.onDidDismiss().then((dataReturned) => {
         this.getData();
+        this.getDataPictures();
       });
 
       return await modal.present();
@@ -235,6 +236,7 @@ export class TestResultsPage {
       });
       modal.onDidDismiss().then(() => {
         this.getData();
+        this.getDataPictures();
       });
 
       return await modal.present();
@@ -248,6 +250,7 @@ export class TestResultsPage {
       });
       modal.onDidDismiss().then(()=>{
         this.getData();
+        this.getDataPictures();
       });
       return await modal.present();
     }

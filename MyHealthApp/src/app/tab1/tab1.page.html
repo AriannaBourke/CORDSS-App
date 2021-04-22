@@ -13,18 +13,16 @@
 
 <ion-content class="ion-padding">
   <ion-avatar (click)="selectImageSource()" class="profile-pic">
-    <img [src]="myProfileImage" alt="Missing image" onerror="this.onerror=null;this.src='assets/camera-default.jpeg';" />
+    <img [src]="myProfileImage" alt="Missing image" onerror="this.onerror=null;this.src='assets/delete.png';" />
 
   </ion-avatar>
 
   <ion-card >
     <ion-item lines="none">
       <p class="title" width-50 style="text-align: center">Welcome To CORDSS!</p>
-      <!-- <p>
         <ion-list *ngFor="let about of aboutme; let i = index" class="list">
-          <class="title" width-50 style="text-align: center">Hello {{about.name}}
+          <p class="title" width-50 style="text-align: center">Hello {{about.name}}</p>  
         </ion-list>
-      </p> -->
     </ion-item>
   </ion-card>
 

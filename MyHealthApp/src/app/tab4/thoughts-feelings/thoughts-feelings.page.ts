@@ -219,6 +219,7 @@ export class ThoughtsFeelingsPage {
 
       modal.onDidDismiss().then((dataReturned) => {
         this.getData();
+        this.getDataPictures();
       });
 
       return await modal.present();
@@ -233,6 +234,7 @@ export class ThoughtsFeelingsPage {
       });
       modal.onDidDismiss().then(() => {
         this.getData();
+        this.getDataPictures();
       });
 
       return await modal.present();
@@ -246,6 +248,7 @@ export class ThoughtsFeelingsPage {
       });
       modal.onDidDismiss().then(()=>{
         this.getData();
+        this.getDataPictures();
       });
       return await modal.present();
     }

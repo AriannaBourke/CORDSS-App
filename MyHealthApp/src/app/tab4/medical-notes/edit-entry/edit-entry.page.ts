@@ -9,8 +9,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms'
-import { NgForm } from '@angular/forms';
 import { CameraOptions, Camera } from "@ionic-native/camera/ngx";
 
 
@@ -145,8 +143,7 @@ export class EditEntryPage {
                     {
                       text:"Save",
                       handler: ()=> {
-                        this.updateSQL(rowid);
-            
+                        this.updateSQL(rowid);            
                       }
                     }
                   ]
@@ -180,8 +177,6 @@ export class EditEntryPage {
               }
               this.closeModal();
           }
-
-
           
           ngOnInit() {
             this.photos = [];

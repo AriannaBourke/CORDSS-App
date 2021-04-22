@@ -117,10 +117,6 @@ export class AddEntryPage {
           picture:res.rows.item(i).picture,
         })
 
-        console.log('doulefkei');
-        console.log(this.medpictures[0]);
-        console.log(this.medpictures[1]);
-
       }
     })
         .catch(e => alert('get data error' + e));
