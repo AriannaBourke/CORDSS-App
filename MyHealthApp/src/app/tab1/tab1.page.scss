@@ -17,10 +17,16 @@
 
 .title {
   color: #041a97;
+  text-indent:100px;
 }
 .image1 {
   position: absolute;
   height: 60px;
   left: 170px;
   margin-top: 5vh;
+}
+
+ion-item.background {
+  --background: #a3dbf1;
+  color: #041a97;
 }
