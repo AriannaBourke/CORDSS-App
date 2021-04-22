@@ -124,7 +124,6 @@ export class ConditionsPdfPage {
   }
 
   async createPDF() {
-    this.createButtonDisable = true;
     const html = await htmlToPdfmake(
       document.getElementById('pdfcontent').innerHTML
     );
