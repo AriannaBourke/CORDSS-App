@@ -132,7 +132,8 @@ export class AddEntryPage {
   public saveDataPictures() {
     if (this.testresults.length > 0) {
       this.row = this.testresults[0].rowid + 1;
-    } else {
+    } 
+    else {
       this.row = 1;
     }
 

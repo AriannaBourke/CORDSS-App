@@ -1,9 +1,11 @@
-//  This file is adapted from:
+//  This file is adapted from: Database -
 // https://edupala.com/ionic-template-driven-form-validation/
 // https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
 // https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/
 
 import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
@@ -109,10 +111,6 @@ export class AddEntryPage {
             cardid: res.rows.item(i).cardid,
             picture: res.rows.item(i).picture,
           });
-
-          console.log('doulefkei');
-          console.log(this.tfpictures[0]);
-          console.log(this.tfpictures[1]);
         }
       })
   }
@@ -129,17 +127,22 @@ export class AddEntryPage {
   }
 
   public saveDataPictures() {
-    if (this.thoughtsfeelings.length>0){
-      this.row = this.thoughtsfeelings[0].rowid+1 ;
+    if (this.thoughtsfeelings.length > 0) {
+      this.row = this.thoughtsfeelings[0].rowid + 1;
+    } 
+    else {
+      this.row = 1;
     }
-    else{
-      this.row = 1 ;
-    }
-    for(let i = 0; i<this.photos.length;i++) {
-    this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.row, this.photos[i],])
-    .then(res => {
-        this.getDataPictures();
-      })
+
+    for (let i = 0; i < this.photos.length; i++) {
+      this._db
+        .executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [
+          this.row,
+          this.photos[i],
+        ])
+        .then((res) => {
+          this.getDataPictures();
+        })
     }
   }
 

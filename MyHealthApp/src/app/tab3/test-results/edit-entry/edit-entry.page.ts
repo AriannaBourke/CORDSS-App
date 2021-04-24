@@ -119,7 +119,6 @@ export class EditEntryPage {
         .then((res) => {
           this.getDataPictures(this.rowid);
         })
-
       }
   }
 

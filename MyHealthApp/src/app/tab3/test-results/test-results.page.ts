@@ -207,12 +207,10 @@ export class TestResultsPage {
       component: AddEntryPage,
       componentProps: {},
     });
-
     modal.onDidDismiss().then((dataReturned) => {
       this.getData();
       this.getDataPictures();
     });
-
     return await modal.present();
   }
 
@@ -225,7 +223,6 @@ export class TestResultsPage {
       this.getData();
       this.getDataPictures();
     });
-
     return await modal.present();
   }
 

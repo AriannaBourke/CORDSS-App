@@ -1,9 +1,11 @@
-//  This file is adapted from:
+//  This file is adapted from: Database -
 // https://edupala.com/ionic-template-driven-form-validation/
 // https://www.freakyjolly.com/ionic-sqlite-tutorial-using-crud-operations/
 // https://www.djamware.com/post/59c53a1280aca768e4d2b143/ionic-3-angular-4-and-sqlite-crud-offline-mobile-app
 // https://devdactic.com/ionic-4-sqlite-queries/
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
+// Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
+// https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/
 
 import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
@@ -26,7 +28,6 @@ export class ViewEntryPage {
   public isData: boolean = false;
   public storedData: any = null;
   private _db: any;
-
   rowid: any;
   ThoughtsFeelingsTable: string =
     'CREATE TABLE IF NOT EXISTS thoughtsfeelings (rowid INTEGER PRIMARY KEY AUTOINCREMENT, note_name TEXT, notes TEXT)';
@@ -41,7 +42,7 @@ export class ViewEntryPage {
     private _alertController: AlertController,
     public _plat: Platform,
     public _sql: SQLite,
-    private camera: Camera,
+    private camera: Camera
   ) {
     this.rowid = navParams.get('rowid');
     this.thoughtsfeelings = [];
@@ -100,9 +101,8 @@ export class ViewEntryPage {
             cardid: res.rows.item(i).cardid,
             picture: res.rows.item(i).picture,
           });
-          console.log('empike' + i);
           this.photos[i] = res.rows.item(i).picture;
-          console.log(this.photos[i]);        }
+        }
       })
   }
 

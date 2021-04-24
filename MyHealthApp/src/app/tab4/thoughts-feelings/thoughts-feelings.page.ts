@@ -121,7 +121,7 @@ export class ThoughtsFeelingsPage {
             rowid: res.rows.item(i).rowid,
             cardid: res.rows.item(i).cardid,
             picture: res.rows.item(i).picture,
-          })
+          });
         }
       })
   }
@@ -206,12 +206,10 @@ export class ThoughtsFeelingsPage {
       component: AddEntryPage,
       componentProps: {},
     });
-
     modal.onDidDismiss().then((dataReturned) => {
       this.getData();
       this.getDataPictures();
     });
-
     return await modal.present();
   }
 
@@ -224,7 +222,6 @@ export class ThoughtsFeelingsPage {
       this.getData();
       this.getDataPictures();
     });
-
     return await modal.present();
   }
 
