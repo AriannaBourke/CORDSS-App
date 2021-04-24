@@ -7,7 +7,7 @@
 // Camera: https://www.remotestack.io/ionic-image-picker-and-multiple-image-preview-tutorial/
 // https://www.freakyjolly.com/ionic-native-camera-tutorial-example-application/
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';

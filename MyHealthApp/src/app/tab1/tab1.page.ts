@@ -71,7 +71,6 @@ export class Tab1Page {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -84,7 +83,6 @@ export class Tab1Page {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -148,7 +146,6 @@ export class Tab1Page {
           });
         }
       })
-      .catch((e) => alert('get data error' + JSON.stringify(e)));
   }
 
   public getDataPicture() {
@@ -165,8 +162,6 @@ export class Tab1Page {
         this.myProfileImage = this.aboutmepicture[res.rows.length - 1].picture;
       }
     });
-
-    // .catch(e => alert('get data error' + e));
   }
 
   public saveData() {
@@ -192,7 +187,6 @@ export class Tab1Page {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   public saveDataPicture() {
@@ -203,7 +197,6 @@ export class Tab1Page {
       .then((res) => {
         this.getDataPicture();
       })
-      .catch((e) => alert('save data error' + e.message));
   }
 
   deleteData(rowid) {
@@ -212,7 +205,6 @@ export class Tab1Page {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -231,7 +223,6 @@ export class Tab1Page {
         },
       ],
     });
-
     await alert.present();
   }
 
@@ -313,20 +304,17 @@ export class Tab1Page {
     this.callNumber
       .callNumber(this.aboutme[0].emergency_1_number, true)
       .then(() => console.log('Launched dialer!'))
-      .catch((e) => alert('Error launching dialer' + e));
   }
 
   call2() {
     this.callNumber
       .callNumber(this.aboutme[0].emergency_2_number, true)
       .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
   }
 
   call3() {
     this.callNumber
       .callNumber(this.aboutme[0].emergency_3_number, true)
       .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
   }
 }
