@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { EditEntryPage } from '..//edit-entry/edit-entry.page';
 
 @Component({
   selector: 'app-view-entry',
@@ -120,16 +119,5 @@ export class ViewEntryPage {
     });
 
     await alert.present();
-  }
-
-  async editModal(rowid) {
-    const modal = await this.modalController.create({
-      component: EditEntryPage,
-      componentProps: { rowid: rowid },
-    });
-    modal.onDidDismiss().then(() => {
-      this.getData(rowid);
-    });
-    return await modal.present();
   }
 }
