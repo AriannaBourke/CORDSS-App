@@ -24,14 +24,6 @@
 
         <ion-row>
           <ion-col>
-            <ion-avatar (click)="selectImageSource()" class="profile-pic">
-              <ion-img [src]="myProfileImage"></ion-img>
-            </ion-avatar>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
             <ion-item>
               <ion-label color="medium" position="stacked">Name</ion-label>
               <ion-icon class="red" slot="start" name="person"></ion-icon>
@@ -77,7 +69,13 @@
             <ion-item>
               <ion-label color="medium" position="stacked">Telephone</ion-label>
               <ion-icon class="teal" slot="start" name="call"></ion-icon>
-              <ion-button shape="round" fill="outline" slot="end" (click)="call()" >Call</ion-button>
+              <ion-button
+                shape="round"
+                fill="outline"
+                slot="end"
+                (click)="call()"
+                >Call</ion-button
+              >
               <p>{{team.phone}}</p>
             </ion-item>
             <ion-button

@@ -12,8 +12,12 @@
 
 <ion-content class="ion-padding">
   <ion-item class="background" lines="none">
-    <ion-avatar (click)="selectImageSource()" class="profile-pic" >
-      <img [src]="myProfileImage" alt="Missing image" onerror="this.onerror=null;this.src='assets/delete.png';" />
+    <ion-avatar (click)="selectImageSource()" class="profile-pic">
+      <img
+        [src]="myProfileImage"
+        alt="Missing image"
+        onerror="this.onerror=null;this.src='assets/delete.png';"
+      />
     </ion-avatar>
     <ion-text><h4>Hi {{nameID}}</h4></ion-text>
   </ion-item>
@@ -41,6 +45,12 @@
               <p>{{family.name}}</p>
             </ion-item>
             <ion-item>
+              <ion-icon
+                slot="start"
+                size="medium"
+                name="heart"
+                class="orange"
+              ></ion-icon>
               <p>{{family.relation}}</p>
             </ion-item>
             <ion-button
