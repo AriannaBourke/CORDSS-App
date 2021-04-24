@@ -52,7 +52,6 @@ export class MedicationsPdfPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -65,7 +64,6 @@ export class MedicationsPdfPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -116,7 +114,6 @@ export class MedicationsPdfPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   async createPDF() {
@@ -124,7 +121,6 @@ export class MedicationsPdfPage {
     const html = await htmlToPdfmake(
       document.getElementById('pdfcontent').innerHTML
     );
-    console.log('html:', html);
     let docDefinition = {
       content: [
         {
@@ -154,7 +150,6 @@ export class MedicationsPdfPage {
     };
     this.pdfObject = pdfMake.createPdf(docDefinition);
     this.pdfObject.getBase64((pdf) => {});
-
     setTimeout(() => {}, 1000);
     this.downloadPdf();
   }
