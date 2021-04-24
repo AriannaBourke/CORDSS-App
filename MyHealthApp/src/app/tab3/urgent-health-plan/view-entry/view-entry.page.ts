@@ -43,7 +43,6 @@ export class ViewEntryPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -56,7 +55,6 @@ export class ViewEntryPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -79,7 +77,6 @@ export class ViewEntryPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   async closeModal() {
@@ -92,7 +89,6 @@ export class ViewEntryPage {
       .then((res) => {
         this.closeModal();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -131,6 +127,5 @@ export class ViewEntryPage {
     this.callNumber
       .callNumber(this.urgentplan[0].phone, true)
       .then(() => console.log('Launched dialer!'))
-      .catch((e) => alert('Error launching dialer' + e));
   }
 }

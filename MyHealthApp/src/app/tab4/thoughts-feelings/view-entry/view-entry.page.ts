@@ -52,7 +52,6 @@ export class ViewEntryPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -65,7 +64,6 @@ export class ViewEntryPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -89,7 +87,6 @@ export class ViewEntryPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public getDataPictures(rowid) {
@@ -103,10 +100,10 @@ export class ViewEntryPage {
             cardid: res.rows.item(i).cardid,
             picture: res.rows.item(i).picture,
           });
+          console.log('empike' + i);
           this.photos[i] = res.rows.item(i).picture;
-        }
+          console.log(this.photos[i]);        }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   async closeModal() {
@@ -119,7 +116,6 @@ export class ViewEntryPage {
       .then((res) => {
         this.closeModal();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {

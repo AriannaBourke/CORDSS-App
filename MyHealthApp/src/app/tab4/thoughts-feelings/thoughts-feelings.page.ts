@@ -41,7 +41,6 @@ export class ThoughtsFeelingsPage {
   tfPicturesTable: string =
     'CREATE TABLE IF NOT EXISTS tfpictures (rowid INTEGER PRIMARY KEY AUTOINCREMENT, cardid INTEGER, picture TEXT)';
   datapicture = { cardid: '', picture: '' };
-
   isEnabled: any;
 
   constructor(
@@ -58,7 +57,6 @@ export class ThoughtsFeelingsPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -71,7 +69,6 @@ export class ThoughtsFeelingsPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -112,7 +109,6 @@ export class ThoughtsFeelingsPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public getDataPictures() {
@@ -125,15 +121,13 @@ export class ThoughtsFeelingsPage {
             rowid: res.rows.item(i).rowid,
             cardid: res.rows.item(i).cardid,
             picture: res.rows.item(i).picture,
-          });
+          })
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   verifyDatabasePopulated() {
-    this._db
-      .executeSql('SELECT * FROM thoughtsfeelings', <any>[])
+    this._db.executeSql('SELECT * FROM thoughtsfeelings', <any>[])
       .then((res) => {
         if (res.rows.length == 0) {
           this.isEnabled = true;
@@ -157,7 +151,6 @@ export class ThoughtsFeelingsPage {
         this.getData();
         this.saveDataPictures();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   public saveDataPictures() {
@@ -170,7 +163,6 @@ export class ThoughtsFeelingsPage {
         .then((res) => {
           this.getDataPictures();
         })
-        .catch((e) => alert('save data error' + e));
     }
   }
 
@@ -187,7 +179,6 @@ export class ThoughtsFeelingsPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -316,7 +307,6 @@ export class ThoughtsFeelingsPage {
         }
       })
 
-      .catch((e) => alert('get data error' + e));
   }
 
   public getData1() {
@@ -335,6 +325,5 @@ export class ThoughtsFeelingsPage {
           this.nameID = this.aboutme[res.rows.length - 1].name;
         }
       })
-      .catch((e) => alert('get data error' + e.message));
   }
 }

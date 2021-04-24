@@ -12,7 +12,6 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { NgForm } from '@angular/forms';
 import { CameraOptions, Camera } from '@ionic-native/camera/ngx';
 
-
 @Component({
   selector: 'app-add-entry',
   templateUrl: './add-entry.page.html',
@@ -52,7 +51,6 @@ export class AddEntryPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -65,7 +63,6 @@ export class AddEntryPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -99,7 +96,6 @@ export class AddEntryPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public getDataPictures() {
@@ -119,7 +115,6 @@ export class AddEntryPage {
           console.log(this.tfpictures[1]);
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public saveData() {
@@ -131,22 +126,20 @@ export class AddEntryPage {
       .then((res) => {
         this.closeModal();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
-    public saveDataPictures() {
-      if (this.thoughtsfeelings.length>0){
-        this.row = this.thoughtsfeelings[0].rowid+1 ;
-      }
-      else{
-        this.row = 1 ;
-      }
-      for(let i = 0; i<this.photos.length;i++) {
-      this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.row, this.photos[i]])
-      .then(res => {
-          this.getDataPictures();
-        })
-        .catch((e) => alert('save data error' + e));
+  public saveDataPictures() {
+    if (this.thoughtsfeelings.length>0){
+      this.row = this.thoughtsfeelings[0].rowid+1 ;
+    }
+    else{
+      this.row = 1 ;
+    }
+    for(let i = 0; i<this.photos.length;i++) {
+    this._db.executeSql('INSERT INTO tfpictures VALUES(NULL,?,?)', [this.row, this.photos[i],])
+    .then(res => {
+        this.getDataPictures();
+      })
     }
   }
 

@@ -32,7 +32,6 @@ export class Tab5Page {
   CallNow(n: string) {
     this.callNumber
       .callNumber(n, true)
-      .catch(() => console.log('Error launching dialer'));
   }
 
   async openUPModal() {

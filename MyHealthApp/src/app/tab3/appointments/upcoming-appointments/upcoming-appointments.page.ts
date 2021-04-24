@@ -52,7 +52,6 @@ export class UpcomingAppointmentsPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -65,7 +64,6 @@ export class UpcomingAppointmentsPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -107,7 +105,6 @@ export class UpcomingAppointmentsPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   verifyDatabasePopulated() {
@@ -138,7 +135,6 @@ export class UpcomingAppointmentsPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   deleteData(rowid) {
@@ -147,7 +143,6 @@ export class UpcomingAppointmentsPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -225,7 +220,6 @@ export class UpcomingAppointmentsPage {
         }
       })
 
-      .catch((e) => alert('get data error' + e));
   }
   public getData1() {
     this.verifyDatabasePopulated();
@@ -243,6 +237,5 @@ export class UpcomingAppointmentsPage {
           this.nameID = this.aboutme[res.rows.length - 1].name;
         }
       })
-      .catch((e) => alert('get data error' + e.message));
   }
 }

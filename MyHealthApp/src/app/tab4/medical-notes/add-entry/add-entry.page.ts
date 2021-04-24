@@ -51,7 +51,6 @@ export class AddEntryPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -64,7 +63,6 @@ export class AddEntryPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -98,7 +96,6 @@ export class AddEntryPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public getDataPictures() {
@@ -118,7 +115,6 @@ export class AddEntryPage {
           console.log(this.medpictures[1]);
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public saveData() {
@@ -131,7 +127,6 @@ export class AddEntryPage {
         this.closeModal();
         this.saveDataPictures();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   public saveDataPictures() {
@@ -146,7 +141,6 @@ export class AddEntryPage {
     .then(res => {
         this.getDataPictures();
       })
-      .catch(e => alert("save data error" + e));
     }
   }
 

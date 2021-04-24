@@ -54,7 +54,6 @@ export class BasicInfoPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -67,7 +66,6 @@ export class BasicInfoPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -107,7 +105,6 @@ export class BasicInfoPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   verifyDatabasePopulated() {
@@ -141,7 +138,6 @@ export class BasicInfoPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   deleteData(rowid) {
@@ -150,7 +146,6 @@ export class BasicInfoPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -216,7 +211,6 @@ export class BasicInfoPage {
         }
       })
 
-      .catch((e) => alert('get data error' + e));
   }
 
   public getData1() {
@@ -235,6 +229,5 @@ export class BasicInfoPage {
           this.nameID = this.aboutme[res.rows.length - 1].name;
         }
       })
-      .catch((e) => alert('get data error' + e.message));
   }
 }

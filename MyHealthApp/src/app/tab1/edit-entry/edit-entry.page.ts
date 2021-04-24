@@ -132,7 +132,6 @@ export class EditEntryPage {
         .then((res) => {
           this.closeModal();
         })
-        .catch((e) => alert('update error' + e));
     }
     if (this.data.birthday != '') {
       this._db

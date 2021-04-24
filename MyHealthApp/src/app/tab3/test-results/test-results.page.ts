@@ -57,7 +57,6 @@ export class TestResultsPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -70,7 +69,6 @@ export class TestResultsPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -112,11 +110,9 @@ export class TestResultsPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public getDataPictures() {
-    // this.verifyDatabasePopulatedPictures()
     this._db.executeSql('SELECT * FROM pictures ORDER BY rowid DESC', <any>[])
     .then(res => {
       this.pictures = [];
@@ -129,7 +125,6 @@ export class TestResultsPage {
         })
       }
     })
-        .catch(e => alert('get data error2' + e.message));
       }
 
   verifyDatabasePopulated() {
@@ -157,7 +152,6 @@ export class TestResultsPage {
         this.getData();
         this.saveDataPictures();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   public saveDataPictures() {
@@ -170,7 +164,6 @@ export class TestResultsPage {
         .then((res) => {
           this.getDataPictures();
         })
-        .catch((e) => alert('save data error' + e));
     }
   }
 
@@ -187,7 +180,6 @@ export class TestResultsPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -316,7 +308,6 @@ export class TestResultsPage {
         }
       })
 
-      .catch((e) => alert('get data error' + e));
   }
 
   public getData1() {
@@ -335,6 +326,5 @@ export class TestResultsPage {
           this.nameID = this.aboutme[res.rows.length - 1].name;
         }
       })
-      .catch((e) => alert('get data error' + e.message));
   }
 }

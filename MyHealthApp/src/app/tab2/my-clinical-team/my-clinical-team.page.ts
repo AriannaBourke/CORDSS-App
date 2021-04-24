@@ -58,7 +58,6 @@ export class MyClinicalTeamPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -71,7 +70,6 @@ export class MyClinicalTeamPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -110,7 +108,6 @@ export class MyClinicalTeamPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   verifyDatabasePopulated() {
@@ -139,7 +136,6 @@ export class MyClinicalTeamPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   deleteData(rowid) {
@@ -148,7 +144,6 @@ export class MyClinicalTeamPage {
       .then((res) => {
         this.getData();
       })
-      .catch((e) => alert('delete data error' + e));
   }
 
   async removeData(rowid) {
@@ -223,7 +218,6 @@ export class MyClinicalTeamPage {
         this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
       }
     })
-        .catch(e => alert('get data error' + e));
       }
 
 
@@ -242,7 +236,6 @@ export class MyClinicalTeamPage {
           this.nameID=this.aboutme[res.rows.length-1].name;
           }
         })
-            .catch(e => alert('get data error' + e.message));
           }
 
 }

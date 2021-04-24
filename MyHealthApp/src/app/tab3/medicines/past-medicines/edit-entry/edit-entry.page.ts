@@ -41,7 +41,6 @@ export class EditEntryPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -54,7 +53,6 @@ export class EditEntryPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -78,7 +76,6 @@ export class EditEntryPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   async closeModal() {
@@ -119,7 +116,6 @@ export class EditEntryPage {
         .then((res) => {
           this.closeModal();
         })
-        .catch((e) => alert('update error' + e));
     }
     if (this.data.instructions != '') {
       this._db
