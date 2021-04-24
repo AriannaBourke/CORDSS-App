@@ -6,7 +6,7 @@
 // https://www.positronx.io/ionic-angular-modals-tutorial-passing-receiving-data/
 // https://forum.ionicframework.com/t/how-to-disable-a-button-on-a-condition/39140/17
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AlertController, Platform } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';

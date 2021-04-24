@@ -57,7 +57,6 @@ export class ConditionsPdfPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -70,7 +69,6 @@ export class ConditionsPdfPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -120,7 +118,6 @@ export class ConditionsPdfPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   async createPDF() {

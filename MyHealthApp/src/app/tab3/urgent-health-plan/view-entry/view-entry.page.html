@@ -50,7 +50,13 @@
             <ion-item>
               <ion-label color="medium" position="stacked">Telephone</ion-label>
               <ion-icon class="yellow" slot="start" name="call"></ion-icon>
-              <ion-button shape="round" fill="outline" slot="end" (click)="call()" >Call</ion-button>
+              <ion-button
+                shape="round"
+                fill="outline"
+                slot="end"
+                (click)="call()"
+                >Call</ion-button
+              >
               <p>{{plan.phone}}</p>
             </ion-item>
           </ion-col>

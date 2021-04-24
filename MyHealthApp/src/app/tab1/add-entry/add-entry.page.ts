@@ -56,7 +56,6 @@ export class AddEntryPage {
       .then(() => {
         this._createDatabase();
       })
-      .catch((e) => alert('create database error' + e));
   }
 
   public _createDatabase() {
@@ -69,7 +68,6 @@ export class AddEntryPage {
         this._db = db;
         this._createDatabaseTables();
       })
-      .catch((e) => alert('create tables error' + e));
   }
 
   async _createDatabaseTables() {
@@ -109,7 +107,6 @@ export class AddEntryPage {
           });
         }
       })
-      .catch((e) => alert('get data error' + e));
   }
 
   public saveData() {
@@ -135,7 +132,6 @@ export class AddEntryPage {
       .then((res) => {
         this.closeModal();
       })
-      .catch((e) => alert('save data error' + e));
   }
 
   async submitData(myForm: NgForm) {
@@ -154,7 +150,6 @@ export class AddEntryPage {
         },
       ],
     });
-
     await alert.present();
   }
 
