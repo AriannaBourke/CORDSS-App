@@ -1,7 +1,0 @@
-{
-  "name": "MyHealthApp",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
