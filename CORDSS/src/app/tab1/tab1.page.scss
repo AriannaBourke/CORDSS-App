@@ -1,0 +1,32 @@
+.profile-pic {
+  width: 220px;
+  height: 220px;
+  border: white solid 4px;
+  margin: 10px auto;
+}
+
+.hiddencard {
+  margin-top: 5vh;
+}
+
+.arrow {
+  margin-top: 1vh;
+  height: 80px;
+  margin-right: 0px;
+}
+
+.title {
+  color: #041a97;
+  text-indent:100px;
+}
+.image1 {
+  position: absolute;
+  height: 60px;
+  left: 170px;
+  margin-top: 5vh;
+}
+
+ion-item.background {
+  --background: #a3dbf1;
+  color: #041a97;
+}

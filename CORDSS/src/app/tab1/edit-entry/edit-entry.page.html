@@ -1,0 +1,312 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit your information!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngFor="let about of aboutme; let i=index" class="list">
+    <form #form="ngForm" (ngSubmit)="update(rowid)">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Basic Info </ion-card-title>
+        </ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Name</ion-label>
+                <ion-icon
+                  class="red"
+                  slot="start"
+                  name="person"
+                  size="medium"
+                ></ion-icon>
+                <ion-input
+                  placeholder="{{about.name}}"
+                  name="name"
+                  required
+                  [(ngModel)]="data.name"
+                  #nameCtrl="ngModel"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Date of Birth</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="gift"
+                  class="orange"
+                  size="medium"
+                ></ion-icon>
+                <ion-datetime
+                  displayFormat="DD MMMM YYYY"
+                  placeholder="{{about.birthday | date: 'dd MMMM YYYY'}}"
+                  name="birthday"
+                  [(ngModel)]="data.birthday"
+                ></ion-datetime>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label position="stacked">A little bit about me</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="information-circle"
+                  size="medium"
+                  class="yellow"
+                ></ion-icon>
+                <ion-textarea
+                  rows="2"
+                  placeholder="{{about.about}}"
+                  name="about"
+                  [(ngModel)]="data.about"
+                ></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Private Info</ion-card-title>
+        </ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-icon
+                  slot="start"
+                  class="green"
+                  name="mail"
+                  size="medium"
+                ></ion-icon>
+                <ion-input
+                  placeholder="{{about.email}}"
+                  name="email"
+                  type="email"
+                  [(ngModel)]="data.email"
+                  #emailCtrl="ngModel"
+                  email
+                ></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
+                <ion-text color="danger">Email is not valid</ion-text>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Phone Number</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="call"
+                  size="medium"
+                  class="teal"
+                ></ion-icon>
+                <ion-input
+                  placeholder="{{about.phone}}"
+                  name="phone"
+                  [(ngModel)]="data.phone"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Address</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="home"
+                  size="medium"
+                  class="lightblue"
+                ></ion-icon>
+                <ion-textarea
+                  placeholder="{{about.address}}"
+                  name="address"
+                  [(ngModel)]="data.address"
+                ></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label position="stacked">NHS Number</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="newspaper"
+                  size="medium"
+                  class="blue"
+                ></ion-icon>
+                <ion-input
+                  placeholder="{{about.nhs_number}}"
+                  name="nhs_number"
+                  [(ngModel)]="data.nhs_number"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Emergency Contacts</ion-card-title>
+        </ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label color="primary"> Emergency Contact 1 </ion-label>
+              <ion-item>
+                <ion-label position="stacked">Name</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="person"
+                  size="medium"
+                  class="darkblue"
+                ></ion-icon>
+                <ion-input
+                  [(ngModel)]="data.emergency_1_name"
+                  name="emergency_1_name"
+                  placeholder="{{about.emergency_1_name}}"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Phone Number</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="call"
+                  size="medium"
+                  class="purple"
+                ></ion-icon>
+                <ion-input
+                  [(ngModel)]="data.emergency_1_number"
+                  name="emergency_1_number"
+                  placeholder="{{about.emergency_1_number}}"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-label color="primary"> Emergency Contact 2 </ion-label>
+              <ion-item>
+                <ion-label position="stacked">Name</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="person"
+                  size="medium"
+                  class="magenta"
+                ></ion-icon>
+                <ion-input
+                  [(ngModel)]="data.emergency_2_name"
+                  name="emergency_2_name"
+                  placeholder="{{about.emergency_2_name}}"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Phone Number</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="call"
+                  size="medium"
+                  class="pink"
+                ></ion-icon>
+                <ion-input
+                  [(ngModel)]="data.emergency_2_number"
+                  name="emergency_2_number"
+                  placeholder="{{about.emergency_2_number}}"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-label color="primary"> Emergency Contact 3 </ion-label>
+              <ion-item>
+                <ion-label position="stacked">Name</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="person"
+                  class="brightpink"
+                  size="medium"
+                ></ion-icon>
+                <ion-input
+                  [(ngModel)]="data.emergency_3_name"
+                  name="emergency_3_name"
+                  placeholder="{{about.emergency_3_name}}"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Phone Number</ion-label>
+                <ion-icon
+                  slot="start"
+                  name="call"
+                  size="medium"
+                  class="redpink"
+                ></ion-icon>
+                <ion-input
+                  [(ngModel)]="data.emergency_3_number"
+                  name="emergency_3_number"
+                  placeholder="{{about.emergency_3_number}}"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <div class="ion-margin-vertical ion-text-right">
+            <ion-button
+              type="button"
+              shape="round"
+              type="submit"
+              value="submit"
+              id="submit"
+              color="success"
+              >Update</ion-button
+            >
+          </div>
+        </ion-grid>
+      </ion-card>
+    </form>
+  </ion-list>
+</ion-content>

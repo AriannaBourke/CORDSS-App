@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center">Add a person to your team!</ion-title>
+    <ion-button
+      fill="clear"
+      color="dark"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-title>Add Clinical Team Member</ion-title>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Name</ion-label>
+              <ion-icon slot="start" name="person" class="red"></ion-icon>
+              <ion-input
+                placeholder="Name (*Required)"
+                type="text"
+                [(ngModel)]="data.name"
+                name="name"
+                required
+                #nameCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+              <ion-text color="danger">*Name is required</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Role</ion-label>
+              <ion-icon class="orange" slot="start" name="medkit"></ion-icon>
+              <ion-select
+                #links
+                ngModel
+                name="clinicalrole"
+                interface="popover"
+                placeholder="Select Option"
+                [(ngModel)]="data.role"
+                [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+              >
+                <ion-select-option value="Doctor">Doctor</ion-select-option>
+                <ion-select-option value="Ophthalmologist"
+                  >Ophthalmologist</ion-select-option
+                >
+                <ion-select-option value="Optometrist"
+                  >Optometrist</ion-select-option
+                >
+                <ion-select-option value="Rheumatologist"
+                  >Rheumatologist</ion-select-option
+                >
+                <ion-select-option value="Clinical Nurse specialist"
+                  >Clinical Nurse Specialist</ion-select-option
+                >
+                <ion-select-option value="GP">GP</ion-select-option>
+                <ion-select-option value="Mental Health Specialist"
+                  >Mental Health Specialist</ion-select-option
+                >
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Clinic Name</ion-label>
+              <ion-icon class="yellow" slot="start" name="location"></ion-icon>
+              <ion-input
+                placeholder="Clinic Name"
+                type="text"
+                [(ngModel)]="data.clinic_name"
+                name="clinic_name"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Email</ion-label>
+              <ion-icon class="green" slot="start" name="mail"></ion-icon>
+              <ion-input
+                placeholder="Email Address"
+                type="email"
+                [(ngModel)]="data.email"
+                name="email"
+                #emailCtrl="ngModel"
+                email
+              ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched">
+              <ion-text color="danger">Email is not valid</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Telephone</ion-label>
+              <ion-icon class="teal" slot="start" name="call"></ion-icon>
+              <ion-input
+                placeholder="Phone Number"
+                type="text"
+                [(ngModel)]="data.phone"
+                name="phone"
+              ></ion-input>
+            </ion-item>
+
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button
+                shape="round"
+                type="button"
+                fill="outline"
+                color="danger"
+                (click)="form.reset()"
+                >Clear</ion-button
+              >
+              <ion-button
+                shape="round"
+                type="button"
+                type="submit"
+                value="submit"
+                color="success"
+                id="submit"
+                [disabled]="!form.valid"
+                >Submit</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+</ion-content>

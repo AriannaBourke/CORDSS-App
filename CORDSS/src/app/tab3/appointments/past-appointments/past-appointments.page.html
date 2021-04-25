@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Past Appointments</ion-title>
+    <ion-button color="success" slot="end" (click)="openModal()"
+      ><ion-icon slot="start" name="add"></ion-icon>Add</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item class="background" lines="none">
+    <ion-avatar class="profile-pic">
+      <img
+        [src]="myProfileImage"
+        alt="Missing image"
+        onerror="this.onerror=null;this.src='assets/delete.png';"
+      />
+    </ion-avatar>
+    <ion-text><h4>Hi {{nameID}}</h4></ion-text>
+  </ion-item>
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 30px">Click 'Add' to add any Past Appointments!</p>
+      <img class="arrow" src="../../../../assets/icon/curly arrow 1.png" />
+    </ion-item>
+  </ion-card>
+  <ion-list *ngFor="let app of appointments; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-card-title>Past Appointment Info</ion-card-title>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon
+                class="red"
+                slot="start"
+                name="calendar-number"
+              ></ion-icon>
+              <p>
+                I had an appointment on {{app.date | date: "dd MMMM YYYY 'at'
+                HH:mm a"}}
+              </p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon class="orange" slot="start" name="business"></ion-icon>
+              <p>This appointment took place at: {{app.place}}</p>
+            </ion-item>
+            <ion-button
+              color="danger"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="removeData(app.rowid)"
+              ><ion-icon
+                size="large"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon
+            ></ion-button>
+            <ion-button
+              color="success"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="editModal(app.rowid)"
+            >
+              <ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+            <ion-button
+              color="tertiary"
+              shape="round"
+              fill="outline"
+              style="float: right"
+              (click)="viewModal(app.rowid)"
+              ><ion-icon color="tertiary" slot="start" name="eye"></ion-icon
+              >View</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+</ion-content>

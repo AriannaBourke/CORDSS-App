@@ -1,0 +1,24 @@
+ion-select {
+  color: black;
+  --placeholder-opacity: 1;
+  max-width: 95%;
+}
+
+::ng-deep .mycomponent-wider-popover {
+  --width: 95%;
+  --max-width: 400px;
+}
+
+ion-input {
+  color: black;
+  --placeholder-opacity: 1;
+}
+
+ion-textarea {
+  color: black;
+  --placeholder-opacity: 1;
+}
+ion-datetime {
+  color: black;
+  --placeholder-opacity: 1;
+}

@@ -1,0 +1,467 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Past Medicine details!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngFor="let med of medicines; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Edit Past Medicine</ion-card-title>
+          </ion-col>
+        </ion-row>
+
+        <form #form="ngForm" novalidate (ngSubmit)="update(rowid)">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Medicine Name</ion-label
+                >
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-select
+                  #links
+                  ngModel
+                  name="estate"
+                  interface="popover"
+                  placeholder="{{med.medicinename}}"
+                  required
+                  #medicinenameCtrl="ngModel"
+                  [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                >
+                  <ion-select-option value="1"
+                    >Medium/long term medications</ion-select-option
+                  >
+                  <ion-select-option value="2">Eye drops</ion-select-option>
+                  <ion-select-option value="3"
+                    >Topical Treatment</ion-select-option
+                  >
+                  <ion-select-option value="4"
+                    >Conventional immunosuppressants</ion-select-option
+                  >
+                  <ion-select-option value="5"
+                    >Biologic/targeted synthetic</ion-select-option
+                  >
+                  <ion-select-option value="6">Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item
+                *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+              >
+                <ion-text color="danger">*Medicine is required</ion-text>
+              </ion-item>
+              <div *ngIf="links.value === '1'">
+                <ion-item>
+                  <ion-label color="medium" position="stacked"
+                    >Medicine Name</ion-label
+                  >
+                  <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                  <ion-select
+                    [(ngModel)]="data.medicinename"
+                    name="medicinename"
+                    interface="popover"
+                    placeholder="Select Option  (*Required)"
+                    required
+                    #medicinenameCtrl="ngModel"
+                    [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                  >
+                    <ion-select-option value="Prednisolone tablets"
+                      >Prednisolone tablets</ion-select-option
+                    >
+                    <ion-select-option value="Folic acid"
+                      >Folic acid</ion-select-option
+                    >
+                    <ion-select-option value="Naproxen"
+                      >Naproxen</ion-select-option
+                    >
+                  </ion-select>
+                </ion-item>
+                <ion-item
+                  *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+                >
+                  <ion-text color="danger">*Medicine is required</ion-text>
+                </ion-item>
+              </div>
+              <div *ngIf="links.value === '2'">
+                <ion-item>
+                  <ion-label color="medium" position="stacked"
+                    >Medicine Name</ion-label
+                  >
+                  <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                  <ion-select
+                    [(ngModel)]="data.medicinename"
+                    name="medicinename"
+                    interface="popover"
+                    placeholder="Select Option  (*Required)"
+                    required
+                    #medicinenameCtrl="ngModel"
+                    [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                  >
+                    <ion-select-option value="Prednisolone eye drops"
+                      >Prednisolone</ion-select-option
+                    >
+                    <ion-select-option value="Dexamethasone eye drops"
+                      >Dexamethasone</ion-select-option
+                    >
+                    <ion-select-option value="Timolol eye drops"
+                      >Timolol</ion-select-option
+                    >
+                    <ion-select-option value="Brinzolamide eye drops"
+                      >Brinzolamide</ion-select-option
+                    >
+                    <ion-select-option value="Dorzolamide eye drops"
+                      >Dorzolamide</ion-select-option
+                    >
+                    <ion-select-option value="Apraclonidine eye drops"
+                      >Apraclonidine</ion-select-option
+                    >
+                    <ion-select-option value="Betaxolol eye drops"
+                      >Betaxolol</ion-select-option
+                    >
+                    <ion-select-option value="Levobunolol eye drops"
+                      >Levobunolol</ion-select-option
+                    >
+                    <ion-select-option value="Latanoprost eye drops"
+                      >Latanoprost</ion-select-option
+                    >
+                    <ion-select-option value="Bimatoprost eye drops"
+                      >Bimatoprost</ion-select-option
+                    >
+                    <ion-select-option value="Tafluprost eye drops"
+                      >Tafluprost</ion-select-option
+                    >
+                    <ion-select-option value="Travaprost eye drops"
+                      >Travaprost</ion-select-option
+                    >
+                    <ion-select-option value="Brimonidine eye drops"
+                      >Brimonidine</ion-select-option
+                    >
+                    <ion-select-option value="Cyclopentolate eye drops"
+                      >Cyclopentolate</ion-select-option
+                    >
+                  </ion-select>
+                </ion-item>
+                <ion-item
+                  *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+                >
+                  <ion-text color="danger">*Medicine is required</ion-text>
+                </ion-item>
+              </div>
+              <div *ngIf="links.value === '3'">
+                <ion-item>
+                  <ion-label color="medium" position="stacked"
+                    >Medicine Name</ion-label
+                  >
+                  <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                  <ion-select
+                    [(ngModel)]="data.medicinename"
+                    name="medicinename"
+                    interface="popover"
+                    placeholder="Select Option"
+                    required
+                    #medicinenameCtrl="ngModel"
+                    [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                  >
+                    <ion-select-option value="Dexamethasone gel"
+                      >Dexamethasone gel</ion-select-option
+                    >
+                    <ion-select-option value="Dexamethasone cream"
+                      >Dexamethasone cream</ion-select-option
+                    >
+                    <ion-select-option value="Betamethasone cream"
+                      >Betamethasone cream</ion-select-option
+                    >
+                  </ion-select>
+                </ion-item>
+                <ion-item
+                  *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+                >
+                  <ion-text color="danger">*Medicine is required</ion-text>
+                </ion-item>
+              </div>
+              <div *ngIf="links.value === '4'">
+                <ion-item>
+                  <ion-label color="medium" position="stacked"
+                    >Medicine Name</ion-label
+                  >
+                  <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                  <ion-select
+                    [(ngModel)]="data.medicinename"
+                    name="medicinename"
+                    interface="popover"
+                    placeholder="Select Option (*Required)"
+                    required
+                    #medicinenameCtrl="ngModel"
+                    [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                  >
+                    <ion-select-option value="Azathioprine (AZA)"
+                      >Azathioprine (AZA)</ion-select-option
+                    >
+                    <ion-select-option value="Ciclosporin"
+                      >Ciclosporin</ion-select-option
+                    >
+                    <ion-select-option value="Methotrexate (MTX)"
+                      >Methotrexate (MTX)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Mycophenolate (aka mycophenolate mofetil, mycophenolic acid, MMF, Cellcept)"
+                      >Mycophenolate (aka mycophenolate mofetil, mycophenolic
+                      acid, MMF, Cellcept)</ion-select-option
+                    >
+                    <ion-select-option value="Leflunomide"
+                      >Leflunomide</ion-select-option
+                    >
+                    <ion-select-option value="Sirolimus"
+                      >Sirolimus</ion-select-option
+                    >
+                    <ion-select-option value="Tacrolimus"
+                      >Tacrolimus</ion-select-option
+                    >
+                    <ion-select-option value="Cyclophosphamide"
+                      >Cyclophosphamide</ion-select-option
+                    >
+                    <ion-select-option value="Chloroquine"
+                      >Chloroquine</ion-select-option
+                    >
+                    <ion-select-option value="Hydroxychloroquine"
+                      >Hydroxychloroquine</ion-select-option
+                    >
+                    <ion-select-option value="Sulphasalazine"
+                      >Sulphasalazine</ion-select-option
+                    >
+                    <ion-select-option value="Balsalazide sodium"
+                      >Balsalazide sodium</ion-select-option
+                    >
+                    <ion-select-option value="Mesalazine"
+                      >Mesalazine</ion-select-option
+                    >
+                    <ion-select-option value="Olsalazine sodium"
+                      >Olsalazine sodium</ion-select-option
+                    >
+                    <ion-select-option value="Pencillamine"
+                      >Pencillamine</ion-select-option
+                    >
+                  </ion-select>
+                </ion-item>
+                <ion-item
+                  *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+                >
+                  <ion-text color="danger">*Medicine is required</ion-text>
+                </ion-item>
+              </div>
+              <div *ngIf="links.value === '5'">
+                <ion-item>
+                  <ion-label color="medium" position="stacked"
+                    >Medicine Name</ion-label
+                  >
+                  <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                  <ion-select
+                    [(ngModel)]="data.medicinename"
+                    name="medicinename"
+                    interface="popover"
+                    placeholder="Select Option (*Required)"
+                    required
+                    #medicinenameCtrl="ngModel"
+                    [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                  >
+                    <ion-select-option
+                      value="Etanercept (eg Enbrel, Benepali, other
+                  biosimilar)"
+                      >Etanercept (eg Enbrel, Benepali, other
+                      biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Adalimumab  (Humira, Amgevita, other
+                  biosimilar)"
+                      >Adalimumab (Humira, Amgevita, other
+                      biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Infliximab (Remicade, other biosimilar)"
+                      >Infliximab (Remicade, other
+                      biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Golimumab (Simponi, other biosimilar)"
+                      >Golimumab (Simponi, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Certolizumab (Cimzia, other biosimilar)"
+                      >Certolizumab (Cimzia, other biosimilar)
+                    </ion-select-option>
+                    <ion-select-option
+                      value="Rituximab Tocilizumab (Roactemra, other
+                  biosimilar)"
+                      >Rituximab Tocilizumab (Roactemra, other
+                      biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Sarilumab (Kevzara, other biosimilar)"
+                      >Sarilumab (Kevzara, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Abatacept (Orencia, other biosimilar)"
+                      >Abatacept (Orencia, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Belimumab (Benlysta, other biosimilar)"
+                      >Belimumab (Benlysta, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Anakinra (Kineret, other biosimilar)"
+                      >Anakinra (Kineret, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Canakinumab (Ilaris, other biosimilar)"
+                      >Canakinumab (Ilaris, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Secukinumab (Cosentyx, other biosimilar)"
+                      >Secukinumab (Cosentyx, other
+                      biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Ixekizumab (Taltz, other biosimilar)"
+                      >Ixekizumab (Taltz, other biosimilar)</ion-select-option
+                    >
+                    <ion-select-option
+                      value="Ustekinumab (Stelara, other biosimilar)"
+                      >Ustekinumab (Stelara, other
+                      biosimilar)</ion-select-option
+                    >
+                    <ion-select-option value="Other biological agent"
+                      >Other biological agent
+                    </ion-select-option>
+                    <ion-select-option value="Other synthetic medication"
+                      >Other synthetic medication</ion-select-option
+                    >
+                    <ion-select-option value="Baricitinib"
+                      >Baricitinib</ion-select-option
+                    >
+                    <ion-select-option value="Tofacitinib"
+                      >Tofacitinib</ion-select-option
+                    >
+                    <ion-select-option value="JAK inhibitor"
+                      >JAK inhibitor</ion-select-option
+                    >
+                  </ion-select>
+                </ion-item>
+                <ion-item
+                  *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+                >
+                  <ion-text color="danger">*Medicine is required</ion-text>
+                </ion-item>
+              </div>
+              <div *ngIf="links.value === '6'">
+                <ion-item>
+                  <ion-label color="medium" position="stacked"
+                    >Medicine Name</ion-label
+                  >
+                  <ion-icon class="red" slot="start" name="pencil"></ion-icon>
+                  <ion-input
+                    placeholder="Write medication name (*Required)"
+                    [(ngModel)]="data.medicinename"
+                    name="medicinename"
+                    required
+                    #medicinenameCtrl="ngModel"
+                  ></ion-input>
+                </ion-item>
+                <ion-item
+                  *ngIf="!medicinenameCtrl.valid && medicinenameCtrl.touched"
+                >
+                  <ion-text color="danger">*Medicine is required</ion-text>
+                </ion-item>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Instructions</ion-label
+                >
+                <ion-textarea
+                  type="text"
+                  placeholder="{{med.instructions}}"
+                  [(ngModel)]="data.instructions"
+                  name="instructions"
+                ></ion-textarea>
+                <ion-icon
+                  class="orange"
+                  slot="start"
+                  name="information-outline"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked"
+                  >Side Effects</ion-label
+                >
+                <ion-input
+                  type="text"
+                  placeholder="{{med.sideeffects}}"
+                  [(ngModel)]="data.sideeffects"
+                  name="sideeffects"
+                ></ion-input>
+                <ion-icon class="yellow" slot="start" name="sad"></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="medium" position="stacked">Notes</ion-label>
+                <ion-icon
+                  class="green"
+                  slot="start"
+                  name="chatbox-ellipses"
+                ></ion-icon>
+                <ion-textarea
+                  type="text"
+                  placeholder="{{med.notes}}"
+                  [(ngModel)]="data.notes"
+                  name="notes"
+                ></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div class="ion-margin-vertical ion-text-right">
+                <ion-button
+                  type="button"
+                  shape="round"
+                  type="submit"
+                  value="submit"
+                  id="submit"
+                  color="success"
+                >
+                  <ion-icon slot="start" name="add"></ion-icon
+                  >Update</ion-button
+                >
+              </div>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+</ion-content>

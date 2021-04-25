@@ -1,0 +1,479 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add a Condition!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #form="ngForm" novalidate (ngSubmit)="submitData(form)">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Add Condition</ion-card-title>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Diagnosis</ion-label>
+              <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+              <ion-select
+                #links
+                ngModel
+                name="estate"
+                interface="popover"
+                placeholder="Select Option (*Required)"
+                required
+                #diagnosisCtrl="ngModel"
+                [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+              >
+                <ion-select-option value="1"
+                  >Ophthalmology disorders</ion-select-option
+                >
+                <ion-select-option value="2"
+                  >Rheumatology disorders</ion-select-option
+                >
+                <ion-select-option value="3"
+                  >Gastroenterology disorders</ion-select-option
+                >
+                <ion-select-option value="4"
+                  >Dermatology disorders</ion-select-option
+                >
+                <ion-select-option value="5"
+                  >Nephrology disorders</ion-select-option
+                >
+                <ion-select-option value="6">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+              <ion-text color="danger">*Diagnosis is required</ion-text>
+            </ion-item>
+            <div *ngIf="links.value === '1'">
+              <ion-item>
+                <ion-label position="stacked">Diagnosis Name</ion-label>
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-select
+                  [(ngModel)]="data.diagnosis"
+                  name="diagnosis"
+                  interface="popover"
+                  placeholder="Select Option (*Required)"
+                  required
+                  #diagnosisCtrl="ngModel"
+                  [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                >
+                  <ion-select-option value="Uveitis">Uveitis</ion-select-option>
+                  <ion-select-option value="Anterior Uveitis"
+                    >Anterior Uveitis</ion-select-option
+                  >
+                  <ion-select-option value="Intermediate Uveitis"
+                    >Intermediate Uveitis
+                  </ion-select-option>
+                  <ion-select-option value="Posterior Uveitis"
+                    >Posterior Uveitis</ion-select-option
+                  >
+                  <ion-select-option value="Panuveitis"
+                    >Panuveitis</ion-select-option
+                  >
+                  <ion-select-option value="Scleritis"
+                    >Scleritis</ion-select-option
+                  >
+                  <ion-select-option value="Orbital Inflammation"
+                    >Orbital Inflammation</ion-select-option
+                  >
+                  <ion-select-option value="Ocular sarcoidosis"
+                    >Ocular sarcoidosis</ion-select-option
+                  >
+                  <ion-select-option value="Inflammatory eye condition"
+                    >Inflammatory eye condition
+                  </ion-select-option>
+                  <ion-select-option value="Cataract"
+                    >Cataract</ion-select-option
+                  >
+                  <ion-select-option value="Aphakia (removed cataract)"
+                    >Aphakia (removed cataract)</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Pseudophakia (removed cataract and artificial lens in place"
+                    >Pseudophakia (removed cataract and artificial lens in
+                    place)</ion-select-option
+                  >
+                  <ion-select-option value="Amblyopia"
+                    >Amblyopia</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+                <ion-text color="danger">*Diagnosis is required</ion-text>
+              </ion-item>
+            </div>
+            <div *ngIf="links.value === '2'">
+              <ion-item>
+                <ion-label position="stacked">Diagnosis Name</ion-label>
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-select
+                  [(ngModel)]="data.diagnosis"
+                  name="diagnosis"
+                  interface="popover"
+                  placeholder="Select Option (*Required)"
+                  required
+                  #diagnosisCtrl="ngModel"
+                  [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                >
+                  <ion-select-option value="Juvenile idiopathic arthritis (JIA)"
+                    >Juvenile idiopathic arthritis (JIA)</ion-select-option
+                  >
+                  <ion-select-option value="Systemic JIA"
+                    >Systemic JIA</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Polyarticular JIA, rheumatoid factor negative"
+                    >Polyarticular JIA, rheumatoid factor
+                    negative</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Polyarticular JIA: rheumatoid factor positive "
+                    >Polyarticular JIA: rheumatoid factor positive
+                  </ion-select-option>
+                  <ion-select-option value="Oligoarticular arthritis"
+                    >Oligoarticular arthritis</ion-select-option
+                  >
+                  <ion-select-option value="Enthesitis-related arthritis"
+                    >Enthesitis-related arthritis</ion-select-option
+                  >
+                  <ion-select-option value="Psoriatic arthritis"
+                    >Psoriatic arthritis</ion-select-option
+                  >
+                  <ion-select-option value="JIA (type not known)"
+                    >JIA (type not known)</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Arthritis associated with chronic disease"
+                    >Arthritis associated with chronic
+                    disease</ion-select-option
+                  >
+                  <ion-select-option value="Behçet’s"
+                    >Behçet’s</ion-select-option
+                  >
+                  <ion-select-option value="Scleroderma"
+                    >Scleroderma</ion-select-option
+                  >
+                  <ion-select-option value="Systemic sclerosis"
+                    >Systemic sclerosis
+                  </ion-select-option>
+                  <ion-select-option value="Localised scleroderma"
+                    >Localised scleroderma
+                  </ion-select-option>
+                  <ion-select-option value="Juvenile dermatomyositis"
+                    >Juvenile dermatomyositis</ion-select-option
+                  >
+                  <ion-select-option value="Vasculitis"
+                    >Vasculitis</ion-select-option
+                  >
+                  <ion-select-option value="Kawasaki disease"
+                    >Kawasaki disease</ion-select-option
+                  >
+                  <ion-select-option value="Polyarteritis nodosa"
+                    >Polyarteritis nodosa</ion-select-option
+                  >
+                  <ion-select-option value="Other vasculitis"
+                    >Other vasculitis</ion-select-option
+                  >
+                  <ion-select-option value="Systemic lupus erythematosus"
+                    >Systemic lupus erythematosus</ion-select-option
+                  >
+                  <ion-select-option value="Sarcoidosis"
+                    >Sarcoidosis</ion-select-option
+                  >
+                  <ion-select-option value="Blau syndrome"
+                    >Blau syndrome</ion-select-option
+                  >
+                  <ion-select-option value="Overlap connective tissue disease"
+                    >Overlap connective tissue disease</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Chronic infantile neurological cutaneous and articular syndrome (CINCA)"
+                    >Chronic infantile neurological cutaneous and articular
+                    syndrome (CINCA)</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Chronic recurrent multifocal osteomyelitis (CRMO)"
+                    >Chronic recurrent multifocal osteomyelitis (CRMO)
+                  </ion-select-option>
+                  <ion-select-option value="Periodic fever syndrome"
+                    >Periodic fever syndrome</ion-select-option
+                  >
+                  <ion-select-option value="Familial mediterranean fever (FMF)"
+                    >Familial mediterranean fever (FMF)</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Cryopyrin-Associated Periodic Syndrome (CAPS)"
+                    >Cryopyrin-Associated Periodic Syndrome
+                    (CAPS)</ion-select-option
+                  >
+                  <ion-select-option value="Other periodic fever syndrome"
+                    >Other periodic fever syndrome</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+                <ion-text color="danger">*Diagnosis is required</ion-text>
+              </ion-item>
+            </div>
+            <div *ngIf="links.value === '3'">
+              <ion-item>
+                <ion-label position="stacked">Diagnosis Name</ion-label>
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-select
+                  [(ngModel)]="data.diagnosis"
+                  name="diagnosis"
+                  interface="popover"
+                  placeholder="Select Option (*Required)"
+                  required
+                  #diagnosisCtrl="ngModel"
+                  [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                >
+                  <ion-select-option value="Autoimmune bowel disorder"
+                    >Autoimmune bowel disorder</ion-select-option
+                  >
+                  <ion-select-option value="Coeliac disease "
+                    >Coeliac disease
+                  </ion-select-option>
+                  <ion-select-option value="Crohn’s">Crohn’s</ion-select-option>
+                  <ion-select-option value="Colitis">Colitis</ion-select-option>
+                  <ion-select-option value="Eosinophilic GI disorder"
+                    >Eosinophilic GI disorder</ion-select-option
+                  >
+                  <ion-select-option value="Oesophagitis"
+                    >Oesophagitis</ion-select-option
+                  >
+                  <ion-select-option value="Pancreatitis"
+                    >Pancreatitis</ion-select-option
+                  >
+                  <ion-select-option value="Inflammatory bowel disease"
+                    >Inflammatory bowel disease</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+                <ion-text color="danger">*Diagnosis is required</ion-text>
+              </ion-item>
+            </div>
+            <div *ngIf="links.value === '4'">
+              <ion-item>
+                <ion-label position="stacked">Diagnosis Name</ion-label>
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-select
+                  [(ngModel)]="data.diagnosis"
+                  name="diagnosis"
+                  interface="popover"
+                  placeholder="Select Option (*Required)"
+                  required
+                  #diagnosisCtrl="ngModel"
+                  [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                >
+                  <ion-select-option value="Eczema">Eczema</ion-select-option>
+                  <ion-select-option value="Psoriasis"
+                    >Psoriasis</ion-select-option
+                  >
+                  <ion-select-option value="Scleroderma"
+                    >Scleroderma</ion-select-option
+                  >
+                  <ion-select-option value="Behçet’s disease"
+                    >Behçet’s disease</ion-select-option
+                  >
+                  <ion-select-option value="Connective tissue disorders"
+                    >Connective tissue disorders</ion-select-option
+                  >
+                  <ion-select-option value="Dermatomyositis"
+                    >Dermatomyositis</ion-select-option
+                  >
+                  <ion-select-option value="Systemic lupus erythematosus"
+                    >Systemic lupus erythematosus</ion-select-option
+                  >
+                  <ion-select-option value="Inflammatory skin condition "
+                    >Inflammatory skin condition</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+                <ion-text color="danger">*Diagnosis is required</ion-text>
+              </ion-item>
+            </div>
+            <div *ngIf="links.value === '5'">
+              <ion-item>
+                <ion-label position="stacked">Diagnosis Name</ion-label>
+                <ion-icon class="red" slot="start" name="medkit"></ion-icon>
+                <ion-select
+                  [(ngModel)]="data.diagnosis"
+                  name="diagnosis"
+                  interface="popover"
+                  placeholder="Select Option (*Required)"
+                  required
+                  #diagnosisCtrl="ngModel"
+                  [interfaceOptions]="{'cssClass': 'mycomponent-wider-popover'}"
+                >
+                  <ion-select-option value="Chronic renal failure"
+                    >Chronic renal failure</ion-select-option
+                  >
+                  <ion-select-option value="Lupus nephritis"
+                    >Lupus nephritis</ion-select-option
+                  >
+                  <ion-select-option value="Polycystic kidney disease"
+                    >Polycystic kidney disease</ion-select-option
+                  >
+                  <ion-select-option value="Nephritis"
+                    >Nephritis</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Focal segmental glomerulosclerosis (FSGS)"
+                    >Focal segmental glomerulosclerosis
+                    (FSGS)</ion-select-option
+                  >
+                  <ion-select-option value="IgA nephropathy"
+                    >IgA nephropathy
+                  </ion-select-option>
+                  <ion-select-option value="Kidney transplant patient"
+                    >Kidney transplant patient</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Membranoproliferative glomerulonephritis (MPGN)"
+                    >Membranoproliferative glomerulonephritis
+                    (MPGN)</ion-select-option
+                  >
+                  <ion-select-option value="Chronic kidney disease"
+                    >Chronic kidney disease</ion-select-option
+                  >
+                  <ion-select-option value="Glomerulonephritis"
+                    >Glomerulonephritis</ion-select-option
+                  >
+                  <ion-select-option value="Nephrotic syndrome"
+                    >Nephrotic syndrome</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Focal segmental glomerulosclerosis (FSGS)"
+                    >Focal segmental glomerulosclerosis
+                    (FSGS)</ion-select-option
+                  >
+                  <ion-select-option value="Atypical HUS"
+                    >Atypical HUS</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Kidney replacement therapy: kidney transplant recipients"
+                    >Kidney replacement therapy: kidney transplant
+                    recipients</ion-select-option
+                  >
+                  <ion-select-option
+                    value="Kidney replacement therapy: dialysis "
+                    >Kidney replacement therapy: dialysis
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+                <ion-text color="danger">*Diagnosis is required</ion-text>
+              </ion-item>
+            </div>
+            <div *ngIf="links.value === '6'">
+              <ion-item>
+                <ion-label position="stacked">diagnosis Name</ion-label>
+                <ion-icon class="red" slot="start" name="pencil"></ion-icon>
+                <ion-input
+                  placeholder="Write diagnosis name"
+                  [(ngModel)]="data.diagnosis"
+                  name="diagnosis"
+                  required
+                  #diagnosisCtrl="ngModel"
+                ></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!diagnosisCtrl.valid && diagnosisCtrl.touched">
+                <ion-text color="danger">*Diagnosis is required</ion-text>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Diagnosis Details</ion-label>
+              <ion-icon
+                slot="start"
+                name="document-text"
+                class="orange"
+              ></ion-icon>
+              <ion-textarea
+                type="text"
+                placeholder="Details about diagnosis"
+                [(ngModel)]="data.diagnosis_details"
+                name="diagnosis_details"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Diagnosis Date</ion-label>
+              <ion-icon
+                slot="start"
+                name="calendar-number"
+                class="yellow"
+              ></ion-icon>
+              <ion-datetime
+                displayFormat="DD MMMM YYYY"
+                placeholder="Date of Diagnosis"
+                [(ngModel)]="data.diagnosis_date"
+                name="diagnosis_date"
+              ></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Notes</ion-label>
+              <ion-icon slot="start" name="pencil" class="green"></ion-icon>
+              <ion-textarea
+                type="text"
+                placeholder="Notes"
+                [(ngModel)]="data.notes"
+                name="notes"
+              ></ion-textarea>
+            </ion-item>
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button
+                type="button"
+                fill="outline"
+                color="danger"
+                shape="round"
+                (click)="form.reset()"
+                >Clear</ion-button
+              >
+              <ion-button
+                type="button"
+                type="submit"
+                value="submit"
+                id="submit"
+                shape="round"
+                color="success"
+                [disabled]="!form.valid"
+                >Submit</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </form>
+</ion-content>

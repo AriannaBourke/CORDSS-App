@@ -1,0 +1,84 @@
+<style>
+  #pdfcontent p {
+    margin-left: 15px;
+    margin-right: 00px;
+  }
+
+  #pdfcontent > h2,
+  #pdfcontent > h3 {
+    margin-top: 20px;
+    margin-left: 50px;
+  }
+
+  #pdfcontent {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+</style>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create PDF</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-item>
+      <ion-label>Click To Download PDF</ion-label>
+      <ion-fab-button
+        color="success"
+        slot="end"
+        (click)="createPDF()"
+        [disabled]="checkIsEnabled()"
+        ><ion-icon name="download-outline"></ion-icon
+      ></ion-fab-button>
+    </ion-item>
+  </ion-card>
+  <ion-card class="hiddencard" [hidden]="noContent()">
+    <ion-item lines="none">
+      <p style="font-size: 20px">
+        You have no information in your conditions yet. Add an entry before
+        creating a PDF!
+      </p>
+    </ion-item>
+  </ion-card>
+
+  <div id="pdfcontent">
+    <ion-card>
+      <ion-list *ngFor="let history of medicalhistory; let i = index">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <h3>Condition</h3>
+              </ion-item>
+              <ion-item>
+                <p>Diagnosis: {{history.diagnosis}}</p>
+              </ion-item>
+              <ion-item>
+                <p>Diagnosis Details: {{history.diagnosis_details}}</p>
+              </ion-item>
+              <ion-item>
+                <p>
+                  Diagnosis Date: {{history.diagnosis_date | date: 'dd MMMM y'}}
+                </p>
+              </ion-item>
+              <ion-item>
+                <p>Notes: {{history.notes}}</p>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>View Test Result details!</ion-title>
+    <ion-button
+      color="dark"
+      fill="clear"
+      slot="start"
+      size="small"
+      (click)="closeModal()"
+      ><ion-icon size="large" name="arrow-back-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngFor="let result of testresults; let i = index" class="list">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>Test Result Info</ion-card-title>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked"
+                >Result Date</ion-label
+              >
+              <ion-icon
+                slot="start"
+                name="calendar-number"
+                class="red"
+              ></ion-icon>
+              <p>{{result.date | date: 'dd MMMM y'}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Test Type</ion-label>
+              <ion-icon slot="start" name="medkit" class="orange"></ion-icon>
+              <p>{{result.type}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="medium" position="stacked">Photo</ion-label>
+              <ion-icon slot="start" name="camera" class="yellow"></ion-icon>
+              <div class="images-wrapper">
+                <div
+                  class="pick-single-image"
+                  *ngFor="let photo of photos; let id = index"
+                >
+                  <img [src]="photo" alt="" srcset="" />
+                </div>
+              </div>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label color="medium" position="stacked">Notes</ion-label>
+              <ion-icon
+                slot="start"
+                name="pencil-outline"
+                class="teal"
+              ></ion-icon>
+              <p>{{result.notes}}</p>
+            </ion-item>
+            <ion-button
+              color="success"
+              fill="outline"
+              shape="round"
+              style="float: right"
+              (click)="editModal(result.rowid)"
+              ><ion-icon
+                size="large"
+                color="success"
+                slot="start"
+                name="create"
+              ></ion-icon
+              >Edit</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+</ion-content>
