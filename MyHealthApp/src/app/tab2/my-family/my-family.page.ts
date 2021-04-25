@@ -204,13 +204,12 @@ export class MyFamilyPage {
         })
       }
         if (this.aboutmepicture.length>0) {
-        console.log(this.aboutmepicture[0].picture);
         this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
       }
-     
+
     })
-   
-  
+
+
       }
 
 
@@ -223,7 +222,7 @@ export class MyFamilyPage {
             this.aboutme.push({
               rowid:res.rows.item(i).rowid,
               name:res.rows.item(i).name
-    
+
             })
           }
           if (this.aboutme.length>0) {

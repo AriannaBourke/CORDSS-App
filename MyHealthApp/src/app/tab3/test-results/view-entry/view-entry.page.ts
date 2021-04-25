@@ -183,13 +183,11 @@ export class ViewEntryPage {
           {
             text: 'No',
             handler: () => {
-              console.log('Disagree clicked');
             },
           },
           {
             text: 'Yes',
             handler: () => {
-              console.log('Agree clicked');
               this.photos.splice(index, 1);
             },
           },

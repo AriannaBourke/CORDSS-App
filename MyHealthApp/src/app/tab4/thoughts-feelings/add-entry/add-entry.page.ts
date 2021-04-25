@@ -129,7 +129,7 @@ export class AddEntryPage {
   public saveDataPictures() {
     if (this.thoughtsfeelings.length > 0) {
       this.row = this.thoughtsfeelings[0].rowid + 1;
-    } 
+    }
     else {
       this.row = 1;
     }
@@ -207,13 +207,11 @@ export class AddEntryPage {
           {
             text: 'No',
             handler: () => {
-              console.log('Disagree clicked');
             },
           },
           {
             text: 'Yes',
             handler: () => {
-              console.log('Agree clicked');
               this.photos.splice(index, 1);
             },
           },

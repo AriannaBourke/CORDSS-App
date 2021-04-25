@@ -166,12 +166,6 @@ export class ThoughtsFeelingsPage {
     }
   }
 
-  editData(rowid) {
-    console.log('added data'),
-      {
-        rowid: rowid,
-      };
-  }
 
   deleteData(rowid) {
     this._db

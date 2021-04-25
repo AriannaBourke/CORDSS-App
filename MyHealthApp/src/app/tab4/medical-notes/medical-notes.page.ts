@@ -165,12 +165,6 @@ export class MedicalNotesPage {
     }
   }
 
-  editData(rowid) {
-    console.log('added data'),
-      {
-        rowid: rowid,
-      };
-  }
 
   deleteData(rowid) {
     this._db
@@ -267,13 +261,11 @@ export class MedicalNotesPage {
           {
             text: 'No',
             handler: () => {
-              console.log('Disagree clicked');
             },
           },
           {
             text: 'Yes',
             handler: () => {
-              console.log('Agree clicked');
               this.photos.splice(index, 1);
             },
           },
@@ -296,7 +288,6 @@ export class MedicalNotesPage {
           });
         }
         if (this.aboutmepicture.length > 0) {
-          console.log(this.aboutmepicture[0].picture);
           this.myProfileImage = this.aboutmepicture[
             res.rows.length - 1
           ].picture;

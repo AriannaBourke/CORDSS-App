@@ -134,11 +134,11 @@ export class AddEntryPage {
     else{
       this.row = 1 ;
     }
-    
+
     for(let i = 0; i<this.photos.length;i++) {
     this._db
     .executeSql('INSERT INTO medpictures VALUES(NULL,?,?)', [
-      this.row, 
+      this.row,
       this.photos[i],
     ])
     .then(res => {
@@ -208,13 +208,11 @@ export class AddEntryPage {
           {
             text: 'No',
             handler: () => {
-              console.log('Disagree clicked');
             },
           },
           {
             text: 'Yes',
             handler: () => {
-              console.log('Agree clicked');
               this.photos.splice(index, 1);
             },
           },

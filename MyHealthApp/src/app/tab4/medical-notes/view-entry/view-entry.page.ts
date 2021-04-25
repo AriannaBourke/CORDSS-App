@@ -102,9 +102,7 @@ export class ViewEntryPage {
             cardid: res.rows.item(i).cardid,
             picture: res.rows.item(i).picture,
           });
-          console.log('empike' + i);
           this.photos[i] = res.rows.item(i).picture;
-          console.log(this.photos[i]);
         }
       })
   }
@@ -184,13 +182,11 @@ export class ViewEntryPage {
           {
             text: 'No',
             handler: () => {
-              console.log('Disagree clicked');
             },
           },
           {
             text: 'Yes',
             handler: () => {
-              console.log('Agree clicked');
               this.photos.splice(index, 1);
             },
           },
