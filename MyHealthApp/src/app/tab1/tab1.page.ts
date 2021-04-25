@@ -302,18 +302,15 @@ export class Tab1Page {
   call1() {
     this.callNumber
       .callNumber(this.aboutme[0].emergency_1_number, true)
-      .then(() => console.log('Launched dialer!'))
   }
 
   call2() {
     this.callNumber
       .callNumber(this.aboutme[0].emergency_2_number, true)
-      .then(() => console.log('Launched dialer!'))
   }
 
   call3() {
     this.callNumber
       .callNumber(this.aboutme[0].emergency_3_number, true)
-      .then(() => console.log('Launched dialer!'))
   }
 }

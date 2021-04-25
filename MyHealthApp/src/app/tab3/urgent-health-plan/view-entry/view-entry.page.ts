@@ -126,6 +126,5 @@ export class ViewEntryPage {
   call() {
     this.callNumber
       .callNumber(this.urgentplan[0].phone, true)
-      .then(() => console.log('Launched dialer!'))
   }
 }

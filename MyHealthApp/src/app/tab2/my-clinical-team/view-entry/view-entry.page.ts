@@ -135,6 +135,5 @@ export class ViewEntryPage {
   call() {
     this.callNumber
       .callNumber(this.clinicalteam[0].phone, true)
-      .then(() => console.log('Launched dialer!'))
   }
 }

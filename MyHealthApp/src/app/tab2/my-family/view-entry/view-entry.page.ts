@@ -122,12 +122,11 @@ export class ViewEntryPage {
                 });
                 return await modal.present();
               }
-            
+
 
               call(){
                 this.callNumber.callNumber(this.myfamily[0].phone, true)
-               .then(() => console.log('Launched dialer!'))
 
               }
-              
+
             }
