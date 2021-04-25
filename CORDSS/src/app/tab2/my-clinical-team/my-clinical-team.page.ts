@@ -214,6 +214,7 @@ export class MyClinicalTeamPage {
         })
       }
         if (this.aboutmepicture.length>0) {
+        console.log(this.aboutmepicture[0].picture);
         this.myProfileImage=this.aboutmepicture[res.rows.length-1].picture;
       }
     })
