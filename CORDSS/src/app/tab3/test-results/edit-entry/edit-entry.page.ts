@@ -216,13 +216,11 @@ export class EditEntryPage {
         {
           text: 'No',
           handler: () => {
-            console.log('Disagree clicked');
           }
-        }, 
+        },
         {
           text: 'Yes',
           handler: () => {
-            console.log('Agree clicked');
             this.photos.splice(index, 1);
           }
         }
@@ -240,13 +238,11 @@ deleteAll(){
       {
         text: 'No',
         handler: () => {
-          console.log('Disagree clicked');
         }
-      }, 
+      },
       {
         text: 'Yes',
         handler: () => {
-          console.log('Agree clicked');
           this._db.executeSql('DELETE FROM pictures WHERE cardid=?', [this.rowid])
       .then(res => {
         this.getDataPictures(this.rowid);
