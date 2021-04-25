@@ -92,7 +92,8 @@
       "cordova-plugin-file": {},
       "cordova-plugin-camera": {},
       "mx.ferreyra.callnumber": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-splashscreen": {},
+      "call-number": {}
     },
     "platforms": [
       "ios"
