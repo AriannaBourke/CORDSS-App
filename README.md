@@ -1,23 +1,51 @@
-# COMP0067_2021_Team12
-
-CORDSS
-
-Childhood Onset Rare Diseae Selfcare Support App
+# CORDSS (Childhood Onset Rare Disease Selfcare Support) App
 
 Helping children with chronic health conditions manage their medicial notes as they transition into adulthood.
 
+Young patients with chronic medical conditions require regular  appointments and treatments. As care teams can be situated across the  country, the current method of carrying extensive documentation between  appointments is inefficient and unmanageable for many patients. As patients  grow up and transition into an age of self-care, it is important that they gain  independence in managing their own health conditions. As such, the goal of  this project is to produce a cross-platform mobile application for GOSH  DRIVE that provides a way for patients to easily store, view and manage  aspects of their health conditions, allowing them to keep track of medical  records and build confidence in managing their own health, and inform themselves and others about their conditions. 
 
-Developed as part of the COMP0067 module, for GOSH DRIVE
+Developed for [GOSH DRIVE](https://www.goshdrive.com/)
 
-Developers: Eleni Rotsidou, Megan Gallagher, Arianna Bourke
+Features include: 
+* Record personal information and  emergency contacts. 
+* Record key medical information such as conditions, medicines, appointments and test results.
+* Be guided to external links for medical advice and support. 
+* Document key information through  uploading pictures. 
+* Download key information into  printable PDF format.
+* Child-friendly, accessible and  intuitive user interface. 
 
-Technologies used: Ionic Angular, with Cordova, TypeScript, HTML and CSS. With a SQLite3 database.
+## Built With
 
-Requirements: Node.js and ionic CLI
+* Ionic Angular
+* Cordova
+* TypeScript
+* HTML and CSS
+* SQLite3 database
+* Cordova Plugins used: Camera, SQLite, Call number, file opener, file opener2, in-app browser, PDFmake
 
+## Authors
 
-To run the app, navigate to the MyHealthApp folder and type the following commands:
+* Arianna Bourke
+* Megan Gallagher
+* Eleni Rotsidou
 
+## Getting started
+
+To run the project on your local machine please use the following instructions:
+
+### Prerequisites
+
+* Node.js 
+* Ionic CLI
+
+### Installation 
+
+1. Clone the repo
+   ```bash
+   git clone https://github.com/AriannaBourke/CORDSS-App.git
+   ```
+ 2. Navigate to the MyHealthApp folder and type the following commands:
+ ```bash
 	npm i
 
 	ionic cordova plugin add cordova-plugin-file-opener2
@@ -33,8 +61,7 @@ To run the app, navigate to the MyHealthApp folder and type the following comman
 	Ionic cordova platform add android
 
 	Ionic cordova platform add ios
-
-
+ ```
 
 For Android (Requirements: Android Studio developer kit):
 1.  Connect the device to the computer and unlock the screen
@@ -55,4 +82,4 @@ For iOS (Requirements: XCode):
 7.  The application will be installed on the phone
 
 
-Cordova Plugins used: Camera, SQLite, Call number, file opener, file opener2, in-app browser, PDFmake
+
