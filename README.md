@@ -1,4 +1,4 @@
-# CORDSS (Childhood Onset Rare Disease Selfcare Support) App
+# Childhood Onset Rare Disease Selfcare Support (CORDSS) App
 
 Helping children with chronic health conditions manage their medicial notes as they transition into adulthood.
 
